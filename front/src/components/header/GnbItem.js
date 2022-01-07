@@ -15,8 +15,8 @@ const GnbItem = ({boardCollectionName,boardCollectionId, boards, selectedBoardCo
           }
         }}
       >
-        <Link to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}</Link>
-                    
+        <p to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}</p>
+        
         <div>
           <ul>
             {boards.map(board=>(

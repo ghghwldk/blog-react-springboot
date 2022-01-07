@@ -22,7 +22,7 @@ const Item = ({componentName, board, posting})=>{
         componentName==='board' ? (
           <div>
         <div className="posting-link">
-          <Link to={`/postingViewer/${posting.boardCollectionId}/${posting.boardId}/${posting.postingId}`}>
+          <Link to={`/postingEditor/${posting.boardCollectionId}/${posting.boardId}/${posting.postingId}`}>
             <div>
                 {posting.title}
             </div>

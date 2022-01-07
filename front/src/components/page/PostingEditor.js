@@ -11,12 +11,17 @@ import { useHistory, useParams } from 'react-router-dom';
 const Posting = ()=>{
   const {boardCollectionId, boardId, postingId} = useParams()
   const [isEditMode, setIsEditMode] = useState(false)
-  const [html, setHtml] = useState('');
+  const [viewerHtml, setViewerHtml] = useState('');
+  const [savedData, setSavedData] = useState(undefined);
+  const [title, setTitle] = useState(undefined);
+  const history = useHistory()
 
   const editorRef = useRef();
   // 1. load Html from database
+
+  const isExisting = postingId!=undefined ? true : false 
   useEffect(()=>{
-    if(postingId!=undefined){
+    if(isExisting){
       setIsEditMode(false)
       axios({
         url: `/posting/data?boardCollectionId=${boardCollectionId}&boardId=${boardId}&id=${postingId}`,
@@ -24,8 +29,10 @@ const Posting = ()=>{
         async: true
       }).then((res) => {
         // 초깃값 세팅
+        setSavedData(res.data)
         const content = res.data.content 
-        setHtml(content)
+        setTitle(res.data.title)
+        setViewerHtml(content)
         const editorInstance = editorRef.current.getInstance()
         editorInstance.setHtml(content);
       })
@@ -71,28 +78,58 @@ const Posting = ()=>{
   const processToggle = ()=>{
     if(isEditMode){
       const editorInstance = editorRef.current.getInstance()
-      setHtml(editorInstance.getHtml())
+      setViewerHtml(editorInstance.getHtml())
     }
     
     setIsEditMode(!isEditMode)
   }
 
+  
+  const changeDateTimeFormat=(before)=>{
+    const date= before.date
+    const time= before.time
+    const after = date.year + '/' + date.month + '/' + date.day + ' ' +
+        time.hour + ':' + time.minute
+    return after
+  }
+
+  const onTitleChange = (e) => {
+    setTitle(e.target.value)
+  }
+
   const save = () => {
     //const str= boardCollectionId+boardId+postingId
     // 신규 저장
-    if(postingId===undefined){
-      
+    const editorInstance = editorRef.current.getInstance()
+    const markup = editorInstance.getHtml()
+    setViewerHtml(markup)
+    const isPost = postingId === undefined ? true : false  
+    if(isPost){
+      const parameter = {
+        'boardCollectionId': boardCollectionId,
+        'boardId': boardId,
+        'title': title,
+        'content': markup,
+      }
+
+      axios({
+        url: `/posting/data/insert/posting`,
+        method: 'POST',
+        data:JSON.stringify(parameter),
+        headers: { 'content-type': 'application/json' },
+        async: true
+      }).then((res) => {
+        // to show the board including new posting
+        history.push(`/board/${boardCollectionId}/${boardId}`)
+      })
     }else{
-      // 글 수정
-      const editorInstance = editorRef.current.getInstance()
-      const markup = editorInstance.getHtml()
-      setHtml(markup)
-      debugger
+      // modification of the posting.
       const parameter = {
         'markup': markup,
         'boardCollectionId': boardCollectionId,
         'boardId': boardId,
         'postingId': postingId,
+        'title': title,
       }
 
       axios({
@@ -106,13 +143,42 @@ const Posting = ()=>{
         console.log(res)
       })
     }
-    const editorInstance = editorRef.current.getInstance()
-    const getContent_html = editorInstance.getHtml();
-    //editorInstance.setHtml("<p>스터디에 대한 정보를 간략히 작성해asdf주세요 '-'</p>");
   }
   return (
-    <div>
-      <div className={!isEditMode? 'tui-editor-contents':'editor-off'}  dangerouslySetInnerHTML={{__html: html}}></div>
+    <div className="Posting">
+      <div id="info">
+      <div>
+          {postingId!==undefined?(
+              <button style={{marginTop:'10px'}} onClick={processToggle}>{!isEditMode? 'edit' : 'preview' }</button>
+            ):(
+            ''
+            )
+          }
+          <button style={{marginLeft: '10px', marginTop:'10px'}} onClick={save}>save</button>
+        </div>
+        {!isEditMode?(
+          <h1>
+            {savedData == undefined ? '': savedData.title}
+          </h1>
+        ):(
+          <>
+            <input
+              value={title}
+              onChange={onTitleChange}
+            />
+          </>
+        )
+        }
+        
+        
+        <h6 className={!isEditMode? '': 'editor-off'}>
+          {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)}
+        </h6>
+        
+      </div>
+
+      {/* down-side is for content */}
+      <div className={!isEditMode? 'tui-editor-contents':'editor-off'}  dangerouslySetInnerHTML={{__html: viewerHtml}}></div>
       <div className={isEditMode? '': 'editor-off'}>
         <Editor
           
@@ -127,15 +193,9 @@ const Posting = ()=>{
           ref={editorRef}
         />
       </div>
-      {postingId!==undefined?(
-        <div>
-          <button style={{marginTop:'10px'}} onClick={processToggle}>{!isEditMode? '수정' : '미리보기' }</button>
-        </div>
-        ):(
-        ''
-        )
-      }
-      <button style={{marginTop:'10px'}} onClick={save}>저장</button>
+      
+
+      <div id="background"></div>
     </div>
   )
 }

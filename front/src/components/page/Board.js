@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Item from '../Item'
 import '../Pagination.css';
 import Pagination from 'react-js-pagination';
+import { Link, Route, Switch } from 'react-router-dom';
 
 const Board = ()=>{
   const { boardCollectionId, boardId } = useParams();
@@ -18,24 +19,35 @@ const Board = ()=>{
   };
   
   const changeItemDatas = (page)=>{
+    // board일 경우
+    let url= null
+    if(boardCollectionId === undefined
+        && boardId === undefined
+      ){
+      url = `/posting/list/latest?page=${page-1}&size=10`
+    }
+    else{
+      url = `/posting/list?size=10&page=${page-1}&boardId=${boardId}&boardCollectionId=${boardCollectionId}`
+    }
+    
     axios({
-      url: `/posting/list?size=10&page=${page-1}&boardId=${boardId}&boardCollectionId=${boardCollectionId}`,
-      method: 'GET',
-      async: true
-    }).then((res) => {
-      setItemDatas(itemDatas.filter(i => false));
-      
-      res.data.content.forEach(e=>{
-          setItemDatas(itemData=> itemData.concat(e))
+        url: url,
+        method: 'GET',
+        async: true
+      }).then((res) => {
+        setItemDatas(itemDatas.filter(i => false));
+        
+        res.data.content.forEach(e=>{
+            setItemDatas(itemData=> itemData.concat(e))
+        })
+        setTotalPage(res.data.totalPage)
       })
-      setTotalPage(res.data.totalPage)
-    })
   }
 
   useEffect(
     () => {
       changeItemDatas(page)  
-    }, []
+    }, [boardCollectionId, boardId]
   )
   return (
     <div id="Board">
@@ -61,9 +73,19 @@ const Board = ()=>{
             />
           ))}
         </ul>
-
+      {/* if this component is for the specific board, then the button must be setted to change the page. 
+      destination is the component to make the new posting */}
+      {!(boardCollectionId ===undefined && boardId === undefined) ?(
+        <div>
+          <Link to={`/postingEditor/${boardCollectionId}/${boardId}`}>add posting</Link>
+        </div>
+        ):(
+          <></>
+        )
+      }
     </div>
   )
+  
 }
 
 export default Board;

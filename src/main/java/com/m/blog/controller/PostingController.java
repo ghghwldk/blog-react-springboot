@@ -52,12 +52,28 @@ public class PostingController {
     @PutMapping("/data/update")
     public HashMap<String, String> update(@RequestBody HashMap<String, String> requestBody){
         String content=requestBody.get("markup");
+        String title=requestBody.get("title");
         int boardCollectionId= Integer.parseInt(requestBody.get("boardCollectionId"));
         int boardId= Integer.parseInt(requestBody.get("boardId"));
         int postingId= Integer.parseInt(requestBody.get("postingId"));
 
         Posting posting = postingJpaRepository.findByBoardCollectionIdAndBoardIdAndId(boardCollectionId, boardId, postingId);
         posting.setContent(content);
+        posting.setTitle(title);
+
+        return new HashMap<String, String>();
+    }
+
+
+    @PostMapping("/data/insert/posting")
+    @ResponseBody
+    public HashMap<String, String> dataInsertPosting(@RequestBody HashMap<String, String> requestBody){
+        int boardCollectionId= Integer.parseInt(requestBody.get("boardCollectionId"));
+        int boardId= Integer.parseInt(requestBody.get("boardId"));
+        String title= requestBody.get("title");
+        String content= requestBody.get("content");
+
+        postingService.insertPosting(boardCollectionId, boardId, title, content);
 
         return new HashMap<String, String>();
     }

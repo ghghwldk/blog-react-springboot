@@ -27,6 +27,7 @@ public class Posting extends TimeComponent {
     public void setContent(String content) {
         this.content = content;
     }
+    public void setTitle(String title) { this.title = title; }
 
     @Builder
     public Posting(int id, int boardId, int boardCollectionId, String title, String content) {

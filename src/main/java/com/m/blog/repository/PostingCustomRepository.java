@@ -23,6 +23,16 @@ public class PostingCustomRepository {
 
     @Autowired
     JPAQueryFactory query;
+
+
+    @Transactional
+    public int findNewId(int boardCollectionId, int boardId){
+        int count= (int) query.selectFrom(posting)
+                .fetchCount();
+
+        return count+1;
+    }
+
     public Page<LatestPostingDto> getPageOfLatestPosting(String condition, Pageable pageable){
         List<LatestPostingDto> fetch=
                 query.select(

@@ -1,13 +1,12 @@
-
 @media(max-width:980px){
   .Header{height:4rem;}
   body {overflow-x: hidden;}
-  header > div {width: 100%; box-sizing: border-box; height: 4rem;}
+  header > div {width: 100%; box-sizing: border-box; height: 4rem; position: relative;}
   header nav {display: none;}
 
 
-  header h1 {position: absolute; left: 50%; transform: translateX(-50%);}
-  header h1 a {position: relative; display: block; height: 2.05rem; text-align: center; font-size:2.05rem; font-family: "Franklin Gothic Medium"; color: blueviolet;}
+  header h1 {position: absolute; }
+  header a h1 {position: relative; top: 50%; transform: translateY(-50%); display: block; height: 2.05rem; text-align: center; font-size:2.05rem; font-family: "Franklin Gothic Medium"; color: blueviolet;}
 
   header .btn_nav {right: 0; }
   header .btn_login:before {content: ""; display: block; margin: 0 auto; width: 1.35rem; height: 1.35rem; }
@@ -15,7 +14,8 @@
 
   header nav a {display: block; line-height: 2.05rem; font-size: .9rem; color: #333; text-align: center; font-weight: bold;}
   header .btn_nav,
-  header .btn_login {position: absolute; width: 2.05rem; height: 2.05rem; line-height: 1; text-align: center;}
+  header .btn_login {position: absolute; top: 1rem; width: 2rem; height: 2rem; line-height: 1; text-align: center;}
+  
   header .btn_login {display:none;}
   header .btn_nav{
       margin-right: 10px;
@@ -36,14 +36,14 @@
   .total_nav .txt_login:before { margin: 0 .85rem 0 0;}
   .total_nav nav {width: 100%;}
 
-  .total_nav nav > ul > li > a {display: block; text-align: center; font-size: .85rem; color: #333; line-height: 1.2rem;}
+  .total_nav nav > ul > li > p {display: block; text-align: center; font-size: .85rem; color: #333; line-height: 1.2rem;}
   .total_nav nav > ul {display: block; border-top: 1px solid #ebebeb;}
   .total_nav nav > ul > li {border-bottom: 1px solid #ebebeb;}
   .total_nav nav > ul > li ~ li {border-left: none;}
-  .total_nav nav > ul > li > a {position: relative; text-align: left; line-height: 3.1rem; margin-left: 2rem;}
-  .total_nav nav > ul > li > a:before {margin: 0 .5rem 0 1.5rem;}
-  .total_nav nav > ul > li > a:after {content: url(../../images/ico_arrow_down2.png); position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%) rotate(180deg); font-size: 0; line-height: 1; transition: transform .4s;}
-  .total_nav nav > ul > li.on > a:after {transform: translateY(-50%) rotate(0deg);}
+  .total_nav nav > ul > li > p {position: relative; text-align: left; line-height: 3.1rem; margin-left: 2rem;}
+  .total_nav nav > ul > li > p:before {margin: 0 .5rem 0 1.5rem;}
+  .total_nav nav > ul > li > p:after {content: url(../../images/ico_arrow_down2.png); position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%) rotate(180deg); font-size: 0; line-height: 1; transition: transform .4s;}
+  .total_nav nav > ul > li.on > p:after {transform: translateY(-50%) rotate(0deg);}
   .total_nav nav > ul > li > div {display: none;}
   .total_nav nav > ul > li.on > div {display: block;}
   .total_nav nav > ul > li ul {display: flex; flex-wrap: wrap; padding: 1.15rem 0; border-top: 1px solid #ebebeb; background: #f7f8f9;}
@@ -64,7 +64,7 @@
       border-bottom: black solid 2px;
   }
 
-  header>div>h1,  .btn_nav{
+  header>div>h1{
       margin-top: 12px;
   }
 
@@ -79,10 +79,11 @@
   header > div {position: relative; margin: 0 auto; padding: 0 2.05rem; width: 52rem; height:2rem;}
   header h1 {position: fixed; left: 50%; top: 1.2rem; transform: translateX(-50%);}
   /*로고가 다른 UI에 영향을 주지 않도록 position:absolute로 설정한다.*/
-  header h1 a {position: relative; display: block; height: 2.05rem; text-align: center; font-size:2.05rem; font-family: "Franklin Gothic Medium"; color: blueviolet;}
+  header a h1 {position: relative; top: 50%; transform: translateZ(-50%); display: block; height: 2.05rem; text-align: center; font-size:2.05rem; font-family: "Franklin Gothic Medium"; color: blueviolet;}
 
   header nav ul {display: flex;}
   header nav li {flex: 1;}
+  header div a {display: block;}
   header nav a {display: block; line-height: 2.05rem; font-size: .9rem; color: #333; text-align: center; font-weight: bold;}
   header .btn_nav,
   header .btn_login {position: fixed; top: 1.2rem; width: 2.05rem; height: 2.05rem; line-height: 1; text-align: center;}
@@ -102,7 +103,7 @@
   .total_nav nav > ul > li ~ li {border-left: 1px solid #ebebeb;}
   /*~는 형제 선택자로 li 태그의 형제를 모두 선택하고 해당 요소의 왼쪽에 선을 표현한다. */
   /*이때, 모든 요소의 높이가 형제 요소 중에서 ㅈ가장 큰 높이에 맞춰지는 flex 레이아웃에 의해 li 요소에 높이를 제공하지 않아도 모두 같은 길이로 선이 그려진다. 즉, 가장 높이가 큰 메뉴의 높이에 맞춰 다른 li 태그도 그 높이만큼 선이 그려진다.*/
-  .total_nav nav > ul > li > a {display: block; text-align: center; font-size: .85rem; color: #333; line-height: 1.2rem;}
+  .total_nav nav > ul > li > p {display: block; text-align: center; font-size: .85rem; color: #333; line-height: 1.2rem;}
   .total_nav nav > ul > li ul {padding: .65rem 0 0;}
   .total_nav nav > ul > li ul a {display: block; text-align: center; font-size: .8rem; color: #a2a2a2; line-height: 2.2rem; font-weight: normal;}
   .total_nav nav > ul > li ul a span {position: relative; padding: 0 .2rem;}
