@@ -12,7 +12,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
-.gradle/
 
 ### IntelliJ IDEA ###
 .idea
@@ -20,6 +19,7 @@ target/
 *.iml
 *.ipr
 *.yml
+.gradle
 
 ### NetBeans ###
 /nbproject/private/
