@@ -37,8 +37,8 @@
 }
 
 
-#info{
-  
+#info  svg:hover{
+  cursor: pointer;
 }
 
 

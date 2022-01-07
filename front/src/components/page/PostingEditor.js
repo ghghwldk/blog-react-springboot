@@ -191,11 +191,12 @@ const Posting = ()=>{
             
           }}
           ref={editorRef}
+
+          height='800px'
         />
       </div>
       
 
-      <div id="background"></div>
     </div>
   )
 }
