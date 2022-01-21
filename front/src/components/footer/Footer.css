@@ -1,0 +1,35 @@
+.Footer{
+  background-color: #efefef;
+  padding: 1rem 0 1rem 0;
+}
+
+.Footer > p {
+  text-align: center;
+}
+
+.Footer > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.history  svg:hover{
+  cursor: pointer;
+}
+
+.history-icon{
+  font-size: 1.3rem;
+  margin: 1rem auto 0 auto;
+  display: block;
+}
+
+@media(max-width:980px){
+
+}
+@media(min-width:981px){
+  .Footer {
+    width: 52rem;
+    margin: 0 auto;
+  }  
+}
