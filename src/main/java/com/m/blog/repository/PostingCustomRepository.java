@@ -28,6 +28,8 @@ public class PostingCustomRepository {
     @Transactional
     public int findNewId(int boardCollectionId, int boardId){
         int count= (int) query.selectFrom(posting)
+                .where(posting.boardCollectionId.eq(boardCollectionId),
+                        posting.boardId.eq(boardId))
                 .fetchCount();
 
         return count+1;
