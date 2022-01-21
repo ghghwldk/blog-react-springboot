@@ -1,7 +1,7 @@
 package com.m.blog.controller;
 
 import com.google.gson.JsonObject;
-import com.m.blog.repository.FileJpaRepository;
+import com.m.blog.repository.jpa.FileJpaRepository;
 import com.m.blog.service.FileDownloadService;
 import com.m.blog.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
