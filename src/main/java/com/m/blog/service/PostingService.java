@@ -3,12 +3,11 @@ package com.m.blog.service;
 import com.m.blog.dto.LatestPostingDto;
 import com.m.blog.entity.Posting;
 import com.m.blog.repository.PostingCustomRepository;
-import com.m.blog.repository.PostingJpaRepository;
+import com.m.blog.repository.jpa.PostingJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
 
 @Service

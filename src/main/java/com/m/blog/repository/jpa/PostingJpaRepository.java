@@ -1,4 +1,4 @@
-package com.m.blog.repository;
+package com.m.blog.repository.jpa;
 
 import com.m.blog.entity.File;
 import com.m.blog.entity.Posting;
