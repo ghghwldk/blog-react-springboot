@@ -8,12 +8,14 @@
 }
 @media(min-width:981px){
   .Posting {
-    width:90rem;
+    width:52rem;
     margin: 0 auto;
   }
 }
 
-
+#info{
+  background-color: #efefef;
+}
 
 #info > h1{
   font-size: 2rem;
@@ -24,12 +26,14 @@
   width: 100%;
   font-size: 2rem;
   color: black;
+  background-color: #efefef;
+
+  box-sizing: border-box;
   border: 1px solid black;
 }
 #info > h6{
   font-size: 0.8rem;
   font-weight:100;
-  border-bottom: 0.1rem solid black;
 }
 
 #info > h6.editor-off{
@@ -44,4 +48,12 @@
 
 .editor-off{
   display:none
+}
+
+.te-mode-switch {
+  display: none;
+}
+
+.svg-inline--fa.fa-w-14 {
+  width: 1em;
 }

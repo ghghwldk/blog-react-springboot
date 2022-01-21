@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import GnbItem from "./GnbItem"
-import "./Header.css";
+import "./Header.scss";
 import { Link, Route, Switch } from 'react-router-dom';
 
 //import "./HeaderMobile.css";
@@ -36,6 +36,9 @@ const Header = ()=>{
                   
                   <h2 className="hide">메뉴</h2>
                   <nav className="gnb"></nav>
+
+                  <Link to="/login" className="btn_login">login</Link>
+
                   <button className="btn_nav"
                     onClick={()=>{
                       setIsMenuOpened(isMenuOpend=> !isMenuOpend)
@@ -46,7 +49,6 @@ const Header = ()=>{
           <div className={`total_nav ${isMenuOpend ? 'opened' : ''}`}>
               <h2 className="hide">전체 메뉴</h2>
               <p className="logo"><span className="hide">리베하얀</span></p>
-              <a href="" className="txt_login"><span>로그인</span>을 해주세요.</a>
               <div>
                   <nav>
                       <ul className="megamenu">

@@ -6,9 +6,13 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from "@toast-ui/react-editor";
 import { Link, Route, Switch } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
-
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faPencilAlt, faSave } from '@fortawesome/free-solid-svg-icons'
+import {useSelector, connect, useDispatch} from 'react-redux'
 
 const Posting = ()=>{
+  let state = useSelector((state) => state )
   const {boardCollectionId, boardId, postingId} = useParams()
   const [isEditMode, setIsEditMode] = useState(false)
   const [viewerHtml, setViewerHtml] = useState('');
@@ -148,13 +152,36 @@ const Posting = ()=>{
     <div className="Posting">
       <div id="info">
       <div>
-          {postingId!==undefined?(
-              <button style={{marginTop:'10px'}} onClick={processToggle}>{!isEditMode? 'edit' : 'preview' }</button>
+          {postingId!==undefined && state.role === 'master' && !isEditMode?(
+              <FontAwesomeIcon 
+                icon={faPencilAlt} 
+                onClick={processToggle}
+              />
             ):(
-            ''
+              <></>
             )
           }
-          <button style={{marginLeft: '10px', marginTop:'10px'}} onClick={save}>save</button>
+          {postingId!==undefined && state.role === 'master' && isEditMode?(
+              <FontAwesomeIcon 
+                icon={faSearch} 
+                onClick={processToggle}
+              />
+            ):(
+              <></>
+            )
+          }
+          {state.role === 'master' ? (
+            <FontAwesomeIcon 
+              icon={faSave} 
+              onClick={save}
+            />
+            ):(
+              <></>
+            )
+            
+          }
+
+          
         </div>
         {!isEditMode?(
           <h1>
@@ -169,8 +196,6 @@ const Posting = ()=>{
           </>
         )
         }
-        
-        
         <h6 className={!isEditMode? '': 'editor-off'}>
           {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)}
         </h6>
@@ -186,15 +211,16 @@ const Posting = ()=>{
           
           previewStyle='vertical'
           initialEditType="wysiwyg"
-          useCommandShortcut={true}
           onChange={() => {
             
           }}
           ref={editorRef}
+          
 
-          height='800px'
+          height='400px'
         />
       </div>
+      
       
 
     </div>

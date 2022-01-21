@@ -12,9 +12,6 @@
   }
 }
 
-#Latest, #Board, #BoardCollection{
-  padding-bottom: 1.5rem;
-}
 #Latest> ul >li, #Board> ul >li, #BoardCollection > ul >li{
   border-bottom: 2px solid #efefef;
 }
@@ -29,24 +26,26 @@
   border-bottom: 2px solid #efefef;
 }
 
-.posting-info>div>a, .posting-info>div>span{
+.posting-info>a, .posting-info>span{
   line-height:1.8;
-  font-size:0.5rem;
+  font-size:0.7rem;
   vertical-align: bottom;
 }
 
-.posting-info>div>a{
+.posting-info>a{
   color:blue;
-  border: 2px solid rgba(0,0,255,0);
+  border-left: 2px solid rgba(0,0,255,0);
+  border-right: 2px solid rgba(0,0,255,0);
 }
 
-.posting-info>div>a:hover{
+.posting-info>a:hover{
 }
 
 .posting-link{
   border: 2px solid rgba(0,0,255,0);
 }
 .posting-link:hover{
+  cursor: pointer;
   border: 2px solid blue;
 }
 
@@ -68,3 +67,8 @@
   font-size:0.8rem;
 }
 
+.add-posting{
+  font-size: 1.3rem;
+  margin: 1rem auto 1rem auto;
+  display: block;
+}

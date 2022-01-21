@@ -39,9 +39,7 @@ const BoardCollection = ()=>{
   )
   return (
     <div id="BoardCollection">
-      <div>
-        boardCollection Id는 {boardCollectionId} 입니다.
-      </div>
+      
       <div>
         <Pagination
           activePage={page} 

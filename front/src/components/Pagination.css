@@ -10,8 +10,8 @@ ul {
 } 
 ul.pagination li { 
   display: inline-block;
-  width: 30px; 
-  height: 30px;
+  width: 1.5rem; 
+  height: 1.5rem;
   display: flex; 
   justify-content: center; 
   align-items: center; 

@@ -23,7 +23,7 @@ const GnbItem = ({boardCollectionName,boardCollectionId, boards, selectedBoardCo
               <li key={board.boardCollectionId, board.id}>
                 <Link 
                   to={`/board/${boardCollectionId}/${board.id}`}
-                >{board.name}</Link>
+                ><span>{board.name}</span></Link>
                 
               </li>
             ))}

@@ -6,8 +6,12 @@ import Item from '../Item'
 import '../Pagination.css';
 import Pagination from 'react-js-pagination';
 import { Link, Route, Switch } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+import {useSelector, connect, useDispatch} from 'react-redux'
 
 const Board = ()=>{
+  let state = useSelector((state) => state )
   const { boardCollectionId, boardId } = useParams();
   const [itemDatas, setItemDatas] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
@@ -51,17 +55,22 @@ const Board = ()=>{
   )
   return (
     <div id="Board">
-      <div>
-        <Pagination
-          activePage={page} 
-          itemsCountPerPage={10} 
-          totalItemsCount={totalPage*10} 
-          pageRangeDisplayed={5} 
-          prevPageText={"‹"} 
-          nextPageText={"›"} 
-          onChange={handlePageChange} 
-        />
-      </div>
+      {totalPage!==0?(
+        <div>
+          <Pagination
+            activePage={page} 
+            itemsCountPerPage={10} 
+            totalItemsCount={totalPage*10} 
+            pageRangeDisplayed={5} 
+            prevPageText={"‹"} 
+            nextPageText={"›"} 
+            onChange={handlePageChange} 
+          />
+        </div>
+      ):(
+        <></>
+      )
+      }
       
       <ul>
           {itemDatas.map((posting, i)=>(
@@ -75,9 +84,15 @@ const Board = ()=>{
         </ul>
       {/* if this component is for the specific board, then the button must be setted to change the page. 
       destination is the component to make the new posting */}
-      {!(boardCollectionId ===undefined && boardId === undefined) ?(
+      {!(boardCollectionId ===undefined && boardId === undefined) && state.role === 'master' ?(
         <div>
-          <Link to={`/postingEditor/${boardCollectionId}/${boardId}`}>add posting</Link>
+          
+          <Link to={`/postingEditor/${boardCollectionId}/${boardId}`}>
+            <FontAwesomeIcon 
+              className='add-posting'
+              icon={faPlusCircle}
+            />
+          </Link>
         </div>
         ):(
           <></>
