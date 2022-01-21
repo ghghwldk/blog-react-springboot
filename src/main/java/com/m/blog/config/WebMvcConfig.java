@@ -1,6 +1,7 @@
 package com.m.blog.config;
 
 import com.m.blog.interceptor.LogInterceptor;
+import com.m.blog.interceptor.SecurityInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,14 +26,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/*.ico", "/error","/js/**","/images/**");
 
-//        registry.addInterceptor(new SecurityInterceptor())
-//                .order(2)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/user/login/**", "/user/logout/**",
-//                        "/css/**", "/*.ico", "/error","/js/**","/images/**","/file");
+        registry.addInterceptor(new SecurityInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/user/login/**", "/user/logout/**",
+                        "/css/**", "/*.ico", "/error","/js/**","/images/**","/file");
     }
-//    @Bean
-//    public SecurityInterceptor loginCheckInterceptor() {
-//        return new SecurityInterceptor();
-//    }
+
+    @Bean
+    public SecurityInterceptor loginCheckInterceptor() {
+        return new SecurityInterceptor();
+    }
 }
