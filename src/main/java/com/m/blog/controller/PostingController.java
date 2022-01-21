@@ -4,7 +4,7 @@ import com.m.blog.dto.LatestPostingDto;
 import com.m.blog.entity.Posting;
 import com.m.blog.paging.PagingResponse;
 import com.m.blog.repository.PostingCustomRepository;
-import com.m.blog.repository.PostingJpaRepository;
+import com.m.blog.repository.jpa.PostingJpaRepository;
 import com.m.blog.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,7 +72,6 @@ public class PostingController {
         int boardId= Integer.parseInt(requestBody.get("boardId"));
         String title= requestBody.get("title");
         String content= requestBody.get("content");
-
         postingService.insertPosting(boardCollectionId, boardId, title, content);
 
         return new HashMap<String, String>();
