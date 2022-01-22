@@ -5,7 +5,7 @@ FROM adoptopenjdk/openjdk11:ubi
 VOLUME /tmp
 
 # 컨테이너가 열어줄 포트 번호를 지정합니다.
-EXPOSE 8080
+EXPOSE 8081
 
 # jar file 결정
 ARG JAR_FILE=build/libs/*.jar
