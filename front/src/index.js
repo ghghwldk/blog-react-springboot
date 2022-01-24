@@ -13,6 +13,7 @@ function reducer1(state = initialUserInformation, action){
   if (action.type === 'register') {
     let copied = {...state};
     copied.role = action.payload.role
+    copied.id = action.payload.id
 
     return copied;
   } else {
