@@ -18,15 +18,12 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Route exact path="/"> <Board/> </Route>  
-
-      <Route exact path="/boardCollection/:boardCollectionId"> <BoardCollection/> </Route>
-      <Route exact path="/board/:boardCollectionId/:boardId"> <Board/> </Route> 
+        <Route exact path="/board/:boardCollectionId/:boardId"> <Board/> </Route> 
       
-      <Route exact path="/postingEditor/:boardCollectionId/:boardId/:postingId" > <PostingEditor/> </Route> 
-      <Route exact path="/postingEditor/:boardCollectionId/:boardId" > <PostingEditor/> </Route> 
-      <Route exact path="/login" > <Login/> </Route>
-      
+        <Route exact path="/postingEditor/:boardCollectionId/:boardId/:postingId" > <PostingEditor/> </Route> 
+        <Route exact path="/postingEditor/:boardCollectionId/:boardId" > <PostingEditor/> </Route> 
+        <Route exact path="/login" > <Login/> </Route>
+        <Route exact path="/"> <Board/> </Route>  
       <Footer/>
     </div>
   );
