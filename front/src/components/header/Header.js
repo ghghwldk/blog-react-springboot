@@ -3,9 +3,14 @@ import axios from 'axios'
 import GnbItem from "./GnbItem"
 import "./Header.scss";
 import { Link, Route, Switch } from 'react-router-dom';
+import {useSelector, connect, useDispatch} from 'react-redux'
 
+import { useHistory, useParams } from 'react-router-dom';
 //import "./HeaderMobile.css";
 const Header = ()=>{
+  const history= useHistory();
+  
+  let state = useSelector((state) => state )
   const [isMenuOpend, setIsMenuOpened] = useState(false);
   const [menuData, setMenuData] = useState([]);
   const [selectedBoardCollectionId, setSelectedBoardCollectionId] = useState(undefined)
@@ -25,19 +30,37 @@ const Header = ()=>{
       setMenu()
     }, []
   )
-
+  const authenticate =(condition)=>{
+    if(condition === 'login'){
+      history.push(`/login`)
+    }else{
+      //history.push(`/login`)
+    }
+  }
 
   return (
       <div className="Header">
           <header>
               <div>
-                
-                  <Link to="/"><h1>M's Blog</h1></Link>
+                  <Link to="/" className="logo"><font>M</font></Link>
                   
                   <h2 className="hide">메뉴</h2>
                   <nav className="gnb"></nav>
 
-                  <Link to="/login" className="btn_login">login</Link>
+                  {
+                    state.id===''?
+                    <button className= "custom-button"
+                      onClick={()=>{
+                        authenticate('login')
+                      }}
+                    >login</button>:
+                    <button className= "custom-button"
+                      onClick={()=>{
+                        authenticate('logout')
+                      }}
+                    >logout</button>
+                  }
+                  {/* <Link to={state.id===''?'/login':'/logout'} className="btn_login">{state.id===''?'login':'logout'}</Link> */}
 
                   <button className="btn_nav"
                     onClick={()=>{
@@ -81,6 +104,7 @@ const Header = ()=>{
           >
 
           </div>
+          <div>{JSON.stringify(state)}</div>
       </div>
     )
 }
