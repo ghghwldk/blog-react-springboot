@@ -13,17 +13,20 @@
 }
 
 #Latest> ul >li, #Board> ul >li, #BoardCollection > ul >li{
-  border-bottom: 2px solid #efefef;
+  border-bottom: 1px solid #efefef;
 }
 
 
 #Latest >ul> li:first-child, #Board >ul> li:first-child, #BoardCollection>ul> li:first-child
 {
-  border-top: 2px solid #efefef;
+  border-top: 1px solid #efefef;
 }
 #Latest>ul> li:last-child, #Board>ul> li:last-child, #BoardCollection>ul> li:last-child
 {
-  border-bottom: 2px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+.posting-info{
+  padding-left: 1rem;
 }
 
 .posting-info>a, .posting-info>span{
@@ -37,16 +40,10 @@
   border-left: 2px solid rgba(0,0,255,0);
   border-right: 2px solid rgba(0,0,255,0);
 }
-
-.posting-info>a:hover{
-}
-
-.posting-link{
-  border: 2px solid rgba(0,0,255,0);
-}
 .posting-link:hover{
+  font-size:1rem;
+  color: black;
   cursor: pointer;
-  border: 2px solid blue;
 }
 
 .posting-link> a> div
@@ -55,16 +52,16 @@
   text-overflow:ellipsis;
   white-space:nowrap;
   line-height: 1.4rem;
-}
-.posting-link> a> div:first-child
-{
-  font-size:1rem;
   color: black;
+}
+.posting-link> a> div:hover
+{
+  color: blue;
 }
 .posting-link> a> div:last-child{
   padding-left:1rem;
   padding-right:1rem;
-  font-size:0.8rem;
+  font-size:1rem;
 }
 
 .add-posting{
