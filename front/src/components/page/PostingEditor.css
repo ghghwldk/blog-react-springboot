@@ -1,7 +1,8 @@
 
 @media(max-width:980px){
   .Posting {
-    width: 100%
+    width: 90%;
+    margin: 0 auto;
   }
   
   
