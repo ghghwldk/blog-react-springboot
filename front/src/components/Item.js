@@ -42,12 +42,8 @@ const Item = ({componentName, board, posting})=>{
         <div>
           <div className="posting-info">
             
-            <Link to={`/boardCollection/${posting.boardCollectionId}`}>
-              {posting.boardCollectionName}
-            </Link>
-            <span>|</span>
             <Link to={`/board/${posting.boardCollectionId}/${posting.boardId}`}>
-              {posting.boardName}
+              {posting.boardCollectionName+' > '+posting.boardName}
             </Link>
             <span>|&nbsp;</span>
             <span>{changeDateTimeFormat(posting.createdTime)}</span>
