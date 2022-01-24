@@ -3,6 +3,7 @@ import axios from 'axios'
 import "./Login.css";
 import { Link, Route, Switch, useLocation} from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 import {useSelector, connect, useDispatch} from 'react-redux'
 
 function useQuery() {
@@ -39,7 +40,7 @@ const Login = ()=>{
         const redirectUrl = query.get("redirectUrl")
         const role = res.data.role
         // set redux.
-        dispatch({type:'register', payload : {role : role} }) 
+        dispatch({type:'register', payload : {role : role, id: id} }) 
 
         if(redirectUrl=== null){
           history.push(`/`)
@@ -67,7 +68,7 @@ const Login = ()=>{
         <input id="password" name="password" type="password"
           ref= {passwordRef}
         ></input>
-        <button id="submit"
+        <button className="custom-button" id="submit"
           onClick={()=>{
             processLogin()
           }}
