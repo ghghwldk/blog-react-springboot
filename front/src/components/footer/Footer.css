@@ -1,10 +1,18 @@
 .Footer{
-  background-color: #efefef;
-  padding: 1rem 0 1rem 0;
+  background-color: #222e3d;
+  height: 2rem;
+  position: relative;
 }
 
-.Footer > p {
+.Footer > font {
+  font-family: cursive;
   text-align: center;
+  top:0.5rem;
+  left: 0.5rem;
+  color: rgb(255,153,0);
+  position: absolute;
+  font-size:1rem;
+  line-height: 1;
 }
 
 .Footer > img {
@@ -22,14 +30,4 @@
   font-size: 1.3rem;
   margin: 1rem auto 0 auto;
   display: block;
-}
-
-@media(max-width:980px){
-
-}
-@media(min-width:981px){
-  .Footer {
-    width: 52rem;
-    margin: 0 auto;
-  }  
 }
