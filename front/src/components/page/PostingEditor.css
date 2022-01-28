@@ -9,13 +9,14 @@
 }
 @media(min-width:981px){
   .Posting {
-    width:52rem;
+    width:60%;
     margin: 0 auto;
   }
 }
 
 #info{
-  background-color: #efefef;
+  background-color: #f9f2f4;
+  border-bottom: 1px solid #c1798b;
 }
 
 #info > h1{
@@ -57,4 +58,8 @@
 
 .svg-inline--fa.fa-w-14 {
   width: 1em;
+}
+
+.tui-editor-contents p{
+  margin: 10px 0 10px 10px;
 }

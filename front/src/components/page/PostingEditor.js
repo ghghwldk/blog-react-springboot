@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios'
+import '@toast-ui/editor/dist/toastui-editor.css';
 import './PostingEditor.css';
 import 'codemirror/lib/codemirror.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from "@toast-ui/react-editor";
 import { Link, Route, Switch } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faPencilAlt, faSave } from '@fortawesome/free-solid-svg-icons'
 import {useSelector, connect, useDispatch} from 'react-redux'
