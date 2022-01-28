@@ -8,7 +8,7 @@ const Footer = ()=>{
 
   return (
     <div className='Footer'>
-        <font>ghghwldk@gmail.com2</font>
+        <font>ghghwldk@gmail.com</font>
     </div>
   )
 }

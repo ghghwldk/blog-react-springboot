@@ -8,7 +8,9 @@
   font-family: cursive;
   text-align: center;
   top:0.5rem;
-  left: 0.5rem;
+  left: 50%;
+  font-weight: bold;
+  transform: translateX(-50%);
   color: rgb(255,153,0);
   position: absolute;
   font-size:1rem;
