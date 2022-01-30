@@ -1,6 +1,6 @@
 package com.m.blog.controller;
 
-import com.m.blog.dto.LatestPostingDto;
+import com.m.blog.dto.PostingDto;
 import com.m.blog.entity.Posting;
 import com.m.blog.paging.PagingResponse;
 import com.m.blog.repository.PostingCustomRepository;
@@ -27,24 +27,24 @@ public class PostingController {
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
-        Page<LatestPostingDto> page = postingCustomRepository.getPageOfLatestPosting("",pageable);
-        List<LatestPostingDto> latestPostingDtos=page.getContent();
+        Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting("",pageable);
+        List<PostingDto> postingDtos =page.getContent();
         Integer totalPages= page.getTotalPages();
-        return new PagingResponse(totalPages, postingService.removeImg(latestPostingDtos));
+        return new PagingResponse(totalPages, postingService.removeImg(postingDtos));
     }
     @ResponseBody
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
-        Page<LatestPostingDto> page = postingCustomRepository.getPageOfPosting(boardCollectionId, boardId,"",pageable);
-        List<LatestPostingDto> latestPostingDtos = page.getContent();
+        Page<PostingDto> page = postingCustomRepository.getPageOfPosting(boardCollectionId, boardId,"",pageable);
+        List<PostingDto> postingDtos = page.getContent();
         Integer totalPage= page.getTotalPages();
-        return new PagingResponse(totalPage, postingService.removeImg(latestPostingDtos));
+        return new PagingResponse(totalPage, postingService.removeImg(postingDtos));
     }
 
     @ResponseBody
     @GetMapping("/data")
-    public Posting data(@RequestParam int boardCollectionId, @RequestParam int boardId, @RequestParam int id){
-        return postingJpaRepository.findByBoardCollectionIdAndBoardIdAndId(boardCollectionId, boardId, id);
+    public PostingDto data(@RequestParam int boardCollectionId, @RequestParam int boardId, @RequestParam int id){
+        return postingCustomRepository.getPosting(boardCollectionId, boardId, id);
     }
 
     @Transactional

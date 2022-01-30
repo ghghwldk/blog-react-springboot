@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class LatestPostingDto {
+public class PostingDto {
     private int postingId;
     private String title;
     private String content;
@@ -23,7 +23,7 @@ public class LatestPostingDto {
     }
 
     @QueryProjection
-    public LatestPostingDto(int postingId, String title, String content, int boardId, String boardName, int boardCollectionId, String boardCollectionName, LocalDateTime createdTime) {
+    public PostingDto(int postingId, String title, String content, int boardId, String boardName, int boardCollectionId, String boardCollectionName, LocalDateTime createdTime) {
         this.postingId = postingId;
         this.title = title;
         this.content = content;

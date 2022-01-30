@@ -1,9 +1,7 @@
 package com.m.blog.repository;
 
 import com.m.blog.dto.BoardDto;
-import com.m.blog.dto.LatestPostingDto;
 import com.m.blog.dto.QBoardDto;
-import com.m.blog.dto.QLatestPostingDto;
 import com.m.blog.entity.Board;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,7 +15,6 @@ import java.util.List;
 
 import static com.m.blog.entity.QBoard.board;
 import static com.m.blog.entity.QBoardCollection.boardCollection;
-import static com.m.blog.entity.QPosting.posting;
 
 @Repository
 public class BoardCustomRepository {

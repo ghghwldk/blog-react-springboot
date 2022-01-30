@@ -1,6 +1,6 @@
 package com.m.blog.service;
 
-import com.m.blog.dto.LatestPostingDto;
+import com.m.blog.dto.PostingDto;
 import com.m.blog.entity.Posting;
 import com.m.blog.repository.PostingCustomRepository;
 import com.m.blog.repository.jpa.PostingJpaRepository;
@@ -31,14 +31,14 @@ public class PostingService {
         );
         return;
     }
-    public List<LatestPostingDto> removeImg(List<LatestPostingDto> latestPostingDtos){
+    public List<PostingDto> removeImg(List<PostingDto> postingDtos){
         //String pattern="\\< ?img(.*?)\\>";
         String pattern="<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>";
-        for(LatestPostingDto l:latestPostingDtos){
+        for(PostingDto l: postingDtos){
             String content= l.getContent();
             String converted=content.replaceAll(pattern,"");
             l.setContent(converted);
         }
-        return latestPostingDtos;
+        return postingDtos;
     }
 }

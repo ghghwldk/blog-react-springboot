@@ -1,8 +1,11 @@
 package com.m.blog.repository;
 
 
-import com.m.blog.dto.LatestPostingDto;
-import com.m.blog.dto.QLatestPostingDto;
+import com.m.blog.dto.PostingDto;
+import com.m.blog.dto.QPostingDto;
+import com.m.blog.entity.QBoard;
+import com.m.blog.entity.QBoardCollection;
+import com.m.blog.entity.QPosting;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +38,10 @@ public class PostingCustomRepository {
         return count+1;
     }
 
-    public Page<LatestPostingDto> getPageOfLatestPosting(String condition, Pageable pageable){
-        List<LatestPostingDto> fetch=
+    public Page<PostingDto> getPageOfLatestPosting(String condition, Pageable pageable){
+        List<PostingDto> fetch=
                 query.select(
-                        new QLatestPostingDto(
+                        new QPostingDto(
                                 posting.id,
                                 posting.title,
                                 posting.content,
@@ -57,9 +60,9 @@ public class PostingCustomRepository {
                         .limit(pageable.getPageSize())
                         .fetch();
 
-        JPAQuery<LatestPostingDto> count=
+        JPAQuery<PostingDto> count=
                 query.select(
-                        new QLatestPostingDto(
+                        new QPostingDto(
                                 posting.id,
                                 posting.title,
                                 posting.content,
@@ -80,11 +83,35 @@ public class PostingCustomRepository {
         return PageableExecutionUtils.getPage(fetch, pageable, count::fetchCount);
     }
 
-
-    public Page<LatestPostingDto> getPageOfPosting(int boardCollectionId, int boardId,String condition, Pageable pageable){
-        List<LatestPostingDto> fetch=
+    public PostingDto getPosting(int boardCollectionId, int boardId, int postingId){
+        QPosting p = new QPosting("p");
+        QBoardCollection bc = new QBoardCollection("bc");
+        QBoard b = new QBoard("b");
+        PostingDto fetch=
                 query.select(
-                        new QLatestPostingDto(
+                        new QPostingDto(
+                                p.id,
+                                p.title,
+                                p.content,
+                                b.id,
+                                b.name,
+                                bc.id,
+                                bc.name,
+                                p.createdTime
+                        ))
+                        .from(p)
+                        .join(b).on(p.boardId.eq(b.id),
+                        p.boardCollectionId.eq(b.boardCollectionId))
+                        .join(bc).on(p.boardCollectionId.eq(bc.id))
+                        .where(bc.id.eq(boardCollectionId), b.id.eq(boardId), p.id.eq(postingId))
+                        .fetchOne();
+        return fetch;
+    }
+
+    public Page<PostingDto> getPageOfPosting(int boardCollectionId, int boardId, String condition, Pageable pageable){
+        List<PostingDto> fetch=
+                query.select(
+                        new QPostingDto(
                                 posting.id,
                                 posting.title,
                                 posting.content,
@@ -104,9 +131,9 @@ public class PostingCustomRepository {
                         .limit(pageable.getPageSize())
                         .fetch();
 
-        JPAQuery<LatestPostingDto> count=
+        JPAQuery<PostingDto> count=
                 query.select(
-                        new QLatestPostingDto(
+                        new QPostingDto(
                                 posting.id,
                                 posting.title,
                                 posting.content,
