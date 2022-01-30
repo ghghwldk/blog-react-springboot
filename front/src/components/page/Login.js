@@ -73,7 +73,7 @@ const Login = ()=>{
             processLogin()
           }}
         >
-          login
+          로그인
         </button>
       </div>
     )

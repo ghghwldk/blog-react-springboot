@@ -31,7 +31,7 @@ const Header = ()=>{
     }, []
   )
   const authenticate =(condition)=>{
-    if(condition === 'login'){
+    if(condition === 'sign-in'){
       history.push(`/login`)
     }else{
       //history.push(`/login`)
@@ -42,7 +42,7 @@ const Header = ()=>{
       <div className="Header">
           <header>
               <div>
-                  <Link to="/" className="logo"><font>M</font></Link>
+                  <Link to="/" className="logo"><font>m</font></Link>
                   
                   <h2 className="hide">메뉴</h2>
                   <nav className="gnb"></nav>
@@ -51,14 +51,14 @@ const Header = ()=>{
                     state.id===''?
                     <button className= "custom-button"
                       onClick={()=>{
-                        authenticate('login')
+                        authenticate('sign-in')
                       }}
-                    >login</button>:
+                    >로그인</button>:
                     <button className= "custom-button"
                       onClick={()=>{
-                        authenticate('logout')
+                        authenticate('sign-out')
                       }}
-                    >logout</button>
+                    >로그아웃</button>
                   }
                   {/* <Link to={state.id===''?'/login':'/logout'} className="btn_login">{state.id===''?'login':'logout'}</Link> */}
 
