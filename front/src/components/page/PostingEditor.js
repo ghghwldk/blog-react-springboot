@@ -158,6 +158,13 @@ const Posting = ()=>{
     <div className="Posting">
       <div id="info">
       <div>
+          {savedData == undefined ? '':
+            <Link to={`/board/${savedData.boardCollectionId}/${savedData.boardId}`}>
+              <FontAwesomeIcon 
+                icon={faMapMarkerAlt} 
+              />&nbsp;{savedData.boardCollectionName+' | '+ savedData.boardName}
+            </Link>  
+          }
           {postingId!==undefined && state.role === 'master' && !isEditMode?(
               <FontAwesomeIcon 
                 icon={faPencilAlt} 
@@ -205,14 +212,6 @@ const Posting = ()=>{
         <p className={!isEditMode? '': 'editor-off'}>
           {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)}
         </p>
-        {/* 여기에 링크 넣어주기 */}
-        {savedData == undefined ? '':
-          <Link to={`/board/${savedData.boardCollectionId}/${savedData.boardId}`}>
-            <FontAwesomeIcon 
-              icon={faMapMarkerAlt} 
-            />&nbsp;{savedData.boardCollectionName+' | '+ savedData.boardName}
-          </Link>  
-        }
         
       </div>
 
