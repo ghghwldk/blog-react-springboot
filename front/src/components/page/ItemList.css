@@ -25,24 +25,21 @@
   padding-left: 1rem;
 }
 
-.posting-info>a, .posting-info>span{
+.posting-info a, .posting-info p{
   line-height:1.8;
   font-size:0.7rem;
   vertical-align: bottom;
 }
 
-.posting-info>a{
-  color:blue;
-  border-left: 2px solid rgba(0,0,255,0);
-  border-right: 2px solid rgba(0,0,255,0);
+.posting-info a:hover{
+  color: blue;
 }
-.posting-link:hover{
+.posting-title a:hover{
   font-size:1rem;
-  color: black;
   cursor: pointer;
 }
 
-.posting-link> a> div
+.posting-title font
 {
   overflow:hidden;
   text-overflow:ellipsis;
@@ -50,14 +47,9 @@
   line-height: 1.4rem;
   color: black;
 }
-.posting-link> a> div:hover
+.posting-title font:hover
 {
   color: blue;
-}
-.posting-link> a> div:last-child{
-  padding-left:1rem;
-  padding-right:1rem;
-  font-size:1rem;
 }
 
 .add-posting{
