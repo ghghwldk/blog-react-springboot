@@ -24,7 +24,8 @@ ul.pagination li a {
   font-size: 1rem; 
 } 
 ul.pagination li.active a {
-  color: white; 
+  color: rgb(255,153,0);
+  font-weight: bold;
 } 
 ul.pagination li.active {
   background-color: rgb(34,46,61);
