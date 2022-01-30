@@ -17,6 +17,7 @@
 #info{
   background-color: #f9f2f4;
   border-bottom: 1px solid #c1798b;
+  padding: 0 1rem 0 1rem;
 }
 
 #info > h1{
@@ -33,9 +34,16 @@
   box-sizing: border-box;
   border: 1px solid black;
 }
-#info > h6{
+#info  p{
   font-size: 0.8rem;
   font-weight:100;
+}
+#info  a{
+  color:black;
+  font-size: 0.8rem;
+}
+#info  a:hover{
+  color:blue;
 }
 
 #info > h6.editor-off{
@@ -62,4 +70,11 @@
 
 .tui-editor-contents p{
   margin: 10px 0 10px 10px;
+}
+.tui-editor-contents{
+  padding: 0 1rem 0 1rem;
+}
+
+pre {
+  overflow: auto;
 }

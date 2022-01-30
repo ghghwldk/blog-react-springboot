@@ -7,8 +7,25 @@ import { Editor } from "@toast-ui/react-editor";
 import { Link, Route, Switch } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faPencilAlt, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faPencilAlt, faSave, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import {useSelector, connect, useDispatch} from 'react-redux'
+
+const addZeroForOneDigit = (num)=>{
+  if (num.toString().length == 1) {
+    num = "0" + num;
+  }
+  return num
+}
+
+const changeDateTimeFormat=(before)=>{
+  const date= before.date
+  const time= before.time
+  
+  const after = date.year + '/' + addZeroForOneDigit(date.month) + '/' + addZeroForOneDigit(date.day) + ' ' +
+  addZeroForOneDigit(time.hour) + ':' + addZeroForOneDigit(time.minute)
+  
+  return after
+}
 
 const Posting = ()=>{
   let state = useSelector((state) => state )
@@ -31,7 +48,6 @@ const Posting = ()=>{
         method: 'GET',
         async: true
       }).then((res) => {
-        // 초깃값 세팅
         setSavedData(res.data)
         const content = res.data.content 
         setTitle(res.data.title)
@@ -85,15 +101,6 @@ const Posting = ()=>{
     }
     
     setIsEditMode(!isEditMode)
-  }
-
-  
-  const changeDateTimeFormat=(before)=>{
-    const date= before.date
-    const time= before.time
-    const after = date.year + '/' + date.month + '/' + date.day + ' ' +
-        time.hour + ':' + time.minute
-    return after
   }
 
   const onTitleChange = (e) => {
@@ -195,9 +202,17 @@ const Posting = ()=>{
           </>
         )
         }
-        <h6 className={!isEditMode? '': 'editor-off'}>
+        <p className={!isEditMode? '': 'editor-off'}>
           {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)}
-        </h6>
+        </p>
+        {/* 여기에 링크 넣어주기 */}
+        {savedData == undefined ? '':
+          <Link to={`/board/${savedData.boardCollectionId}/${savedData.boardId}`}>
+            <FontAwesomeIcon 
+              icon={faMapMarkerAlt} 
+            />&nbsp;{savedData.boardCollectionName+' | '+ savedData.boardName}
+          </Link>  
+        }
         
       </div>
 
