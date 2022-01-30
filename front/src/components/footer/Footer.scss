@@ -1,0 +1,42 @@
+.Footer{background-color: #222e3d; height: 2rem;position: relative;
+  > font {
+    font-family: cursive;
+    text-align: center;
+    top:0.5rem;
+    left: 50%;
+    font-weight: bold;
+    transform: translateX(-50%);
+    color: rgb(255,153,0);
+    position: absolute;
+    font-size:1rem;
+    line-height: 1;
+  }
+  > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .history  svg:hover{
+    cursor: pointer;
+  }
+  .history-icon{
+    font-size: 1.3rem;
+    margin: 1rem auto 0 auto;
+    display: block;
+  }
+  .custom-button {
+    height: 1.8rem;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 0.1rem;
+    left: 0.5rem;
+  }
+}
+
+  
+
+
+
+
+
+
