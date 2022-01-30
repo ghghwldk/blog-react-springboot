@@ -3,7 +3,6 @@ import Header from './components/header/Header'
 import Footer from './components/footer/Footer'
 
 import PostingEditor from './components/page/PostingEditor'
-import BoardCollection from './components/page/BoardCollection'
 import Board from './components/page/Board'
 import Login from './components/page/Login'
 import './common.js';
