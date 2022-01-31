@@ -3,7 +3,7 @@ import "./GnbItem.css";
 import { Link, Route, Switch } from 'react-router-dom';
 import ico_arrow_down2 from '../../images/ico_arrow_down2.png'
 
-const GnbItem = ({boardCollectionName,boardCollectionId, boards, selectedBoardCollectionId, setSelectedBoardCollectionId})=>{
+const GnbItem = ({boardCollectionName,boardCollectionId, postingCount, boards, selectedBoardCollectionId, setSelectedBoardCollectionId})=>{
     return (
       <li 
         className={`${boardCollectionName} ${selectedBoardCollectionId==boardCollectionId?'on':''}`}
@@ -15,15 +15,15 @@ const GnbItem = ({boardCollectionName,boardCollectionId, boards, selectedBoardCo
           }
         }}
       >
-        <p to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}</p>
+        <p to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}{' ('+postingCount+')'}</p>
         
         <div>
           <ul>
             {boards.map(board=>(
-              <li key={board.boardCollectionId, board.id}>
+              <li key={board.boardCollectionId, board.boardId}>
                 <Link 
-                  to={`/board/${boardCollectionId}/${board.id}`}
-                ><span>{board.name}</span></Link>
+                  to={`/board/${boardCollectionId}/${board.boardId}`}
+                ><span>{board.boardName}{' ('+board.postingCount+')'}</span></Link>
                 
               </li>
             ))}

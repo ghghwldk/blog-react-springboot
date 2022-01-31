@@ -20,7 +20,8 @@
 }
 .Board{min-height: calc(100vh - 4rem);
   > .location{
-    font-size:1.3rem;
+    font-size:1.2rem;
+    padding-bottom: 0.3rem;
   }
   > .location a:hover{
     color:blue;
@@ -53,7 +54,7 @@
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: black;
   }
 }

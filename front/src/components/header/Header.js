@@ -80,7 +80,8 @@ const Header = ()=>{
                             key = {gnbData.boardCollectionName}
                             boardCollectionName={gnbData.boardCollectionName}
                             boardCollectionId={gnbData.boardCollectionId}
-                            boards={gnbData.boards}
+                            postingCount = {gnbData.postingCount}
+                            boards={gnbData.boardInformationInMenuDtos}
                             selectedBoardCollectionId = {selectedBoardCollectionId}
                             setSelectedBoardCollectionId = {setSelectedBoardCollectionId}
                           />

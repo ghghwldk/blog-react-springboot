@@ -9,16 +9,10 @@ import java.util.List;
 
 import static com.m.blog.entity.QBoard.board;
 
+
 @Repository
-public class BoardCollectionCustomRepository {
+public class BoardCollectionRepositoryImpl implements BoardCollectionRepository{
     @Autowired
     JPAQueryFactory query;
 
-    public List<Board> findBoards(int boardCollectionId){
-        return query.selectFrom(board)
-                .orderBy(board.boardCollectionId.asc(),
-                        board.id.desc())
-                .where(board.boardCollectionId.eq(boardCollectionId))
-                .fetch();
-    }
 }

@@ -1,8 +1,10 @@
 package com.m.blog.controller;
 
+import com.m.blog.dto.BoardDto;
 import com.m.blog.dto.PostingDto;
 import com.m.blog.entity.Posting;
 import com.m.blog.paging.PagingResponse;
+import com.m.blog.repository.BoardCustomRepository;
 import com.m.blog.repository.PostingCustomRepository;
 import com.m.blog.repository.jpa.PostingJpaRepository;
 import com.m.blog.service.PostingService;
@@ -24,21 +26,26 @@ public class PostingController {
     PostingCustomRepository postingCustomRepository;
     @Autowired
     PostingJpaRepository postingJpaRepository;
+    @Autowired
+    BoardCustomRepository boardCustomRepository;
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
         Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting("",pageable);
         List<PostingDto> postingDtos =page.getContent();
         Integer totalPages= page.getTotalPages();
-        return new PagingResponse(totalPages, postingService.removeImg(postingDtos));
+        Integer totalElements = (int) page.getTotalElements();
+        return new PagingResponse(postingService.removeImg(postingDtos), totalPages, totalElements, "Home");
     }
     @ResponseBody
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
         Page<PostingDto> page = postingCustomRepository.getPageOfPosting(boardCollectionId, boardId,"",pageable);
+        BoardDto boardDto = boardCustomRepository.findBoardDto(boardCollectionId, boardId);
         List<PostingDto> postingDtos = page.getContent();
         Integer totalPage= page.getTotalPages();
-        return new PagingResponse(totalPage, postingService.removeImg(postingDtos));
+        Integer totalElements = (int) page.getTotalElements();
+        return new PagingResponse(postingService.removeImg(postingDtos), totalPage, totalElements, boardDto.getBoardName()+" | "+boardDto.getBoardCollectionName());
     }
 
     @ResponseBody

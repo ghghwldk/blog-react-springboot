@@ -1,6 +1,7 @@
 package com.m.blog.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,24 +12,19 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class BoardDto {
+@AllArgsConstructor
+public class BoardInformationInMenuDto {
     int boardCollectionId;
     String boardCollectionName;
     int boardId;
     String boardName;
-    String description;
-    LocalDateTime createdTime;
-    LocalDateTime updatedTime;
-
+    int postingCount;
 
     @QueryProjection
-    public BoardDto(int boardCollectionId, String boardCollectionName, int boardId, String boardName, String description, LocalDateTime createdTime, LocalDateTime updatedTime) {
+    public BoardInformationInMenuDto(int boardCollectionId, String boardCollectionName, int boardId, String boardName, String description, LocalDateTime createdTime, LocalDateTime updatedTime) {
         this.boardCollectionId = boardCollectionId;
         this.boardCollectionName = boardCollectionName;
         this.boardId = boardId;
         this.boardName = boardName;
-        this.description = description;
-        this.createdTime = createdTime;
-        this.updatedTime = updatedTime;
     }
 }

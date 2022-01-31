@@ -33,12 +33,13 @@ public class BoardController {
     }
 
 
-    @ResponseBody
-    @GetMapping("/list/{board_collection_id}")
-    public PagingResponse list(@PathVariable("board_collection_id")int boardCollectionId, Pageable pageable){
-        Page<BoardDto> page= boardCustomRepository.findBoardPage(boardCollectionId, pageable);
-        List<BoardDto> boards = page.getContent();
-        Integer totalPage= page.getTotalPages();
-        return new PagingResponse(totalPage, boards);
-    }
+//    @ResponseBody
+//    @GetMapping("/list/{board_collection_id}")
+//    public PagingResponse list(@PathVariable("board_collection_id")int boardCollectionId, Pageable pageable){
+//        Page<BoardDto> page= boardCustomRepository.findBoardPage(boardCollectionId, pageable);
+//        List<BoardDto> boards = page.getContent();
+//        Integer totalPage= page.getTotalPages();
+//
+//        return new PagingResponse(boards, totalPage, );
+//    }
 }

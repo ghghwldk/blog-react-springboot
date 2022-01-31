@@ -26,7 +26,32 @@ public class BoardCustomRepository {
                         board.id.desc())
                 .fetch();
     }
-
+    public BoardDto findBoardDto(int boardCollectionId, int boardId){
+        BoardDto fetch=
+                query.select(
+                        new QBoardDto(
+                                board.boardCollectionId,
+                                boardCollection.name,
+                                board.id,
+                                board.name,
+                                board.description,
+                                board.createdTime,
+                                board.updatedTime
+                        ))
+                        .from(boardCollection)
+                        .join(board).on(boardCollection.id.eq(board.boardCollectionId))
+                        .where(board.boardCollectionId.eq(boardCollectionId), board.id.eq(boardId))
+                        .orderBy(board.createdTime.desc())
+                        .fetchOne();
+        return fetch;
+    }
+    public List<Board> findBoards(int boardCollectionId){
+        return query.selectFrom(board)
+                .orderBy(board.boardCollectionId.asc(),
+                        board.id.desc())
+                .where(board.boardCollectionId.eq(boardCollectionId))
+                .fetch();
+    }
     public Page<BoardDto> findBoardPage(int boardCollectionId, Pageable pageable){
         List<BoardDto> fetch=
                 query.select(

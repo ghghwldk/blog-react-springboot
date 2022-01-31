@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class PagingResponse {
 
     Object content= null;
-    Integer totalPage= null;
-    public PagingResponse(Integer totalPage, Object content) {
-        this.totalPage = totalPage;
-        this.content= content;
+    Integer totalPages= null;
+    Integer totalElements = null;
+    String location = "";
+
+    public PagingResponse(Object content, Integer totalPages, Integer totalElements, String location) {
+        this.content = content;
+        this.totalPages = totalPages;
+        this.totalElements = totalElements;
+        this.location = location;
     }
 }
