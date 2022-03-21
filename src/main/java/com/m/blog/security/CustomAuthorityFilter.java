@@ -16,16 +16,11 @@ public class CustomAuthorityFilter {
     public boolean doFilter(String requestURI, String queryString, String method, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(!filterService.hasSession(httpSession)) {
             if(method.equals("GET")){
-
-            }else{
-//                // fileUpload는 인증 성공한 유저만 통과
-//                if(requestURI.equals("/file/upload")){
-//                    return false;
-//                }else{
-//                    // get 이외의 요청은 redirect 하지 않는다.
-//                    // 요청도 보내지 못하도록 버튼을 막아버릴 것이기 때문!
-//                    return false;
-//                }
+              // get은 모두 통과
+            }else if(method.equals("POST")){
+               if(requestURI.equals("/file/upload")){
+                   return false;
+               }
             }
         }
         // 있으면, 인증은 무조건 통과
