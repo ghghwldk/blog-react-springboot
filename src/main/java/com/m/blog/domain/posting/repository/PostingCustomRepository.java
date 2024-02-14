@@ -3,8 +3,8 @@ package com.m.blog.domain.posting.repository;
 
 import com.m.blog.domain.board.entity.QBoard;
 import com.m.blog.domain.boardCollection.entity.QBoardCollection;
-import com.m.blog.domain.posting.PostingDto;
-import com.m.blog.domain.posting.QPostingDto;
+import com.m.blog.domain.posting.dto.PostingDto;
+import com.m.blog.domain.posting.dto.QPostingDto;
 import com.m.blog.domain.posting.entity.QPosting;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;

@@ -1,6 +1,6 @@
 package com.m.blog.domain.posting.service;
 
-import com.m.blog.domain.posting.PostingDto;
+import com.m.blog.domain.posting.dto.PostingDto;
 import com.m.blog.domain.posting.entity.Posting;
 import com.m.blog.domain.posting.repository.PostingCustomRepository;
 import com.m.blog.domain.posting.repository.PostingJpaRepository;
