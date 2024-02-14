@@ -1,5 +1,6 @@
 package com.m.blog.domain.auth.entity;
 
+import com.m.blog.global.entity.TimeComponent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +13,10 @@ import java.time.LocalDateTime;
 @Table(name="member")
 @Getter
 @NoArgsConstructor
-public class Member {
+public class Member extends TimeComponent {
     @Id
     String id;
     String name;
     String password;
     String role;
-    LocalDateTime createdTime;
-    LocalDateTime updatedTime;
 }

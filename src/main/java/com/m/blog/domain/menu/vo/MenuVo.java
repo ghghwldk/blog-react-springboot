@@ -1,6 +1,6 @@
 package com.m.blog.domain.menu.vo;
 
-import com.m.blog.domain.boardCollection.BoardInformationInMenuDto;
+import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 
 import java.util.List;
 

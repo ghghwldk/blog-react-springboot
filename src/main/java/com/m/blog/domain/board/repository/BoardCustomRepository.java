@@ -1,6 +1,6 @@
 package com.m.blog.domain.board.repository;
 
-import com.m.blog.domain.board.BoardDto;
+import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.QBoardDto;
 import com.m.blog.domain.board.entity.Board;
 import com.querydsl.jpa.impl.JPAQuery;

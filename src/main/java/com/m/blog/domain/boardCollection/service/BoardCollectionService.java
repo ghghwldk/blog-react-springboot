@@ -1,6 +1,6 @@
 package com.m.blog.domain.boardCollection.service;
 
-import com.m.blog.domain.boardCollection.BoardInformationInMenuDto;
+import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 import com.m.blog.domain.boardCollection.entity.BoardCollection;
 import com.m.blog.domain.boardCollection.repository.BoardCollectionRepository;
 import com.m.blog.domain.board.repository.BoardCustomRepository;

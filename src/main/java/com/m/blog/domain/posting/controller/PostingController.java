@@ -1,6 +1,6 @@
 package com.m.blog.domain.posting.controller;
 
-import com.m.blog.domain.board.BoardDto;
+import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.posting.dto.PostingDto;
 import com.m.blog.domain.posting.entity.Posting;
 import com.m.blog.global.paging.PagingResponse;

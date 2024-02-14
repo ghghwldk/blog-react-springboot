@@ -1,4 +1,4 @@
-package com.m.blog.domain.boardCollection;
+package com.m.blog.domain.boardCollection.controller;
 
 import com.m.blog.domain.boardCollection.service.BoardCollectionService;
 import com.m.blog.domain.menu.vo.MenuVo;

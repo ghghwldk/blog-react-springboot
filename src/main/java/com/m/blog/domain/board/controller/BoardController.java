@@ -1,4 +1,4 @@
-package com.m.blog.domain.board;
+package com.m.blog.domain.board.controller;
 
 import com.m.blog.domain.board.entity.Board;
 import com.m.blog.domain.board.repository.BoardCustomRepository;
@@ -26,15 +26,4 @@ public class BoardController {
         List<List<Board>> response= boardService.processGroupBy(boards);
         return response;
     }
-
-
-//    @ResponseBody
-//    @GetMapping("/list/{board_collection_id}")
-//    public PagingResponse list(@PathVariable("board_collection_id")int boardCollectionId, Pageable pageable){
-//        Page<BoardDto> page= boardCustomRepository.findBoardPage(boardCollectionId, pageable);
-//        List<BoardDto> boards = page.getContent();
-//        Integer totalPage= page.getTotalPages();
-//
-//        return new PagingResponse(boards, totalPage, );
-//    }
 }
