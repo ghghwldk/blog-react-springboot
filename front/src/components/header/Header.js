@@ -17,7 +17,7 @@ const Header = ()=>{
 
   const setMenu = ()=> {
     axios({
-      url: `/board_collection/list/group_by_board_collection_id`,
+      url: `/menu`,
       method: 'GET',
       async: false
     }).then((res) => {

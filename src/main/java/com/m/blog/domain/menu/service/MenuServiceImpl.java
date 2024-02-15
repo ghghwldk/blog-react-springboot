@@ -1,0 +1,58 @@
+package com.m.blog.domain.menu.service;
+
+import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
+import com.m.blog.domain.boardCollection.entity.BoardCollection;
+import com.m.blog.domain.boardCollection.service.BoardCollectionService;
+import com.m.blog.domain.boardCollection.service.BoardCollectionServiceImpl;
+import com.m.blog.domain.menu.dto.MenuResponseDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class MenuServiceImpl implements MenuService{
+    private final BoardCollectionService boardCollectionService;
+
+
+    private MenuResponseDto get(List<BoardCollection> boardCollections,
+                            List<BoardInformationInMenuDto> boardInformationInMenuDtos){
+        List<MenuResponseDto.Nested> nesteds = new LinkedList<>();
+
+        for(BoardCollection bc: boardCollections){
+            int postingCount = 0;
+            String boardCollectionName= bc.getName();
+            int boardCollectionId= bc.getId();
+            List<BoardInformationInMenuDto> InSpecificBoardCollection = new LinkedList<>();
+            for(BoardInformationInMenuDto b: boardInformationInMenuDtos){
+                if(b.getBoardCollectionId() == boardCollectionId){
+                    InSpecificBoardCollection.add(b);
+                    postingCount += b.getPostingCount();
+                }
+            }
+            nesteds.add(MenuResponseDto.Nested.builder()
+                    .boardCollectionName(boardCollectionName)
+                    .boardCollectionId(boardCollectionId)
+                    .postingCount(postingCount)
+                    .boardInformationInMenuDtos(InSpecificBoardCollection)
+                    .build());
+        }
+
+        return MenuResponseDto.builder()
+                .nesteds(nesteds)
+                .build();
+    }
+
+    @Transactional
+    @Override
+    public MenuResponseDto getMenuResponseDto(){
+        List<BoardCollection> boardCollections = boardCollectionService.findAll();
+        List<BoardInformationInMenuDto> all = boardCollectionService.getAllBoardInformationInMenuDtos();
+
+        return get(boardCollections, all);
+    }
+}
