@@ -8,16 +8,16 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class FileUploadResponseDto {
+public class FileUploadResponse {
     private String originalFileName;
     private String fileName;
     private String url;
     private String downloadUrl;
 
-    public static FileUploadResponseDto of(UploadFileVo vo){
+    public static FileUploadResponse of(UploadFileVo vo){
         final String url = "/file/download/"+ vo.getSavedFileName();
 
-        return FileUploadResponseDto.builder()
+        return FileUploadResponse.builder()
                 .originalFileName(vo.getOriginalFileName())
                 .fileName(vo.getSavedFileName())
                 .url(url)

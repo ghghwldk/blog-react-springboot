@@ -3,9 +3,9 @@ package com.m.blog.domain.posting.repository;
 
 import com.m.blog.domain.board.entity.QBoard;
 import com.m.blog.domain.boardCollection.entity.QBoardCollection;
-import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequestDto;
-import com.m.blog.domain.posting.dto.PostingReadPagingRequestDto;
-import com.m.blog.domain.posting.dto.PostingReadRequestDto;
+import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequest;
+import com.m.blog.domain.posting.dto.PostingReadPagingRequest;
+import com.m.blog.domain.posting.dto.PostingReadRequest;
 import com.m.blog.domain.posting.dto.dsl.PostingDto;
 import com.m.blog.domain.posting.dto.dsl.QPostingDto;
 import com.m.blog.domain.posting.entity.QPosting;
@@ -42,7 +42,7 @@ public class PostingDslRepositoryImpl implements PostingDslRepository{
     }
 
     @Override
-    public Page<PostingDto> get(PostingReadPagingRequestDto requestDto){
+    public Page<PostingDto> get(PostingReadPagingRequest requestDto){
         return this.getPageOfLatestPosting(requestDto.getPageable());
     }
 
@@ -90,7 +90,7 @@ public class PostingDslRepositoryImpl implements PostingDslRepository{
 
         return PageableExecutionUtils.getPage(fetch, pageable, count::fetchCount);
     }
-    public PostingDto get(PostingReadRequestDto requestDto){
+    public PostingDto get(PostingReadRequest requestDto){
         return this.getPosting(requestDto.getBoardCollectionId(),
                 requestDto.getBoardId(),
                 requestDto.getId());
@@ -122,7 +122,7 @@ public class PostingDslRepositoryImpl implements PostingDslRepository{
     }
 
 
-    public Page<PostingDto> get(PostingReadFilteredPagingRequestDto requestDto){
+    public Page<PostingDto> get(PostingReadFilteredPagingRequest requestDto){
         return this.getPageOfPosting(requestDto.getBoardCollectionId(),
                 requestDto.getBoardId(),
                 requestDto.getPageable());

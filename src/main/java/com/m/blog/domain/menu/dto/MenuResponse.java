@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 @AllArgsConstructor
-public class MenuResponseDto {
+public class MenuResponse {
     List<Nested> nesteds;
 
     @Data
@@ -26,16 +26,16 @@ public class MenuResponseDto {
         List<BoardAggregationDto> boardInformationInMenuDtos;
     }
 
-    public static MenuResponseDto of(List<BoardCollection> boardCollections,
-                                List<BoardAggregationDto> boardAggregationDtos){
+    public static MenuResponse of(List<BoardCollection> boardCollections,
+                                  List<BoardAggregationDto> boardAggregationDtos){
         Map<Integer, List<BoardAggregationDto>> dtoPerBoardCollections = boardAggregationDtos.stream()
                 .collect(Collectors.groupingBy(BoardAggregationDto::getBoardCollectionId,
                         Collectors.toList()));
 
-        List<MenuResponseDto.Nested> nesteds = boardCollections.stream()
+        List<MenuResponse.Nested> nesteds = boardCollections.stream()
                 .map(bc -> {
                     List<BoardAggregationDto> filtered = dtoPerBoardCollections.get(bc.getId());
-                    return MenuResponseDto.Nested.builder()
+                    return MenuResponse.Nested.builder()
                             .boardCollectionName(bc.getName())
                             .boardCollectionId(bc.getId())
                             .postingCount(filtered != null ? filtered.size() : 0)
@@ -44,7 +44,7 @@ public class MenuResponseDto {
                 })
                 .collect(Collectors.toList());
 
-        return MenuResponseDto.builder()
+        return MenuResponse.builder()
                 .nesteds(nesteds)
                 .build();
     }

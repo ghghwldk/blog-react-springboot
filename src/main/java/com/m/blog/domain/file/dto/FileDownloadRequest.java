@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-
-public class FileDownloadResponseDto {
-
+@Data
+@AllArgsConstructor
+@Builder
+public class FileDownloadRequest {
+    private String fileName;
 }

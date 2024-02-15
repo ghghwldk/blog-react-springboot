@@ -8,6 +8,6 @@ import org.springframework.data.domain.Pageable;
 @Data
 @AllArgsConstructor
 @Builder
-public class PostingReadPagingRequestDto {
+public class PostingReadPagingRequest {
     private Pageable pageable;
 }

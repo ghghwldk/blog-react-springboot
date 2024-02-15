@@ -1,13 +1,10 @@
 package com.m.blog.domain.file;
 
-import com.google.gson.JsonObject;
-import com.m.blog.domain.file.dto.FileDownloadRequestDto;
-import com.m.blog.domain.file.dto.FileUploadRequestDto;
-import com.m.blog.domain.file.dto.FileUploadResponseDto;
+import com.m.blog.domain.file.dto.FileDownloadRequest;
+import com.m.blog.domain.file.dto.FileUploadRequest;
+import com.m.blog.domain.file.dto.FileUploadResponse;
 import com.m.blog.domain.file.service.FileDownloadService;
-import com.m.blog.domain.file.service.FileDownloadServiceImpl;
 import com.m.blog.domain.file.service.FileUploadService;
-import com.m.blog.domain.file.service.FileUploadServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +24,15 @@ public class FileController {
 
     @PostMapping(value="/upload", produces = "application/json")
     @ResponseBody
-    public FileUploadResponseDto upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        return fileUploadService.upload(FileUploadRequestDto.builder()
+    public FileUploadResponse upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+        return fileUploadService.upload(FileUploadRequest.builder()
                 .multipartFile(multipartFile)
                 .build());
     }
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) throws IOException{
-        return fileDownloadService.get(FileDownloadRequestDto.builder()
+        return fileDownloadService.get(FileDownloadRequest.builder()
                 .fileName(fileName)
                 .build());
     }

@@ -19,7 +19,7 @@ public class PostingController {
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
-        return postingService.getPagingResponse(PostingReadPagingRequestDto.builder()
+        return postingService.getPagingResponse(PostingReadPagingRequest.builder()
                         .pageable(pageable)
                 .build());
     }
@@ -27,7 +27,7 @@ public class PostingController {
     @ResponseBody
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
-        return postingService.getPagingResponse(PostingReadFilteredPagingRequestDto.builder()
+        return postingService.getPagingResponse(PostingReadFilteredPagingRequest.builder()
                         .boardCollectionId(boardCollectionId)
                         .boardId(boardId)
                         .pageable(pageable)
@@ -36,8 +36,8 @@ public class PostingController {
 
     @ResponseBody
     @GetMapping("/data")
-    public PostingReadResponseDto data(@RequestParam int boardCollectionId, @RequestParam int boardId, @RequestParam int id){
-        return postingService.get(PostingReadRequestDto.builder()
+    public PostingReadResponse data(@RequestParam int boardCollectionId, @RequestParam int boardId, @RequestParam int id){
+        return postingService.get(PostingReadRequest.builder()
                         .boardCollectionId(boardCollectionId)
                         .boardId(boardId)
                         .id(id)
@@ -47,13 +47,13 @@ public class PostingController {
     @Transactional
     @ResponseBody
     @PutMapping("/data/update")
-    public void update(@RequestBody PostingUpdateRequestDto requestDto){
+    public void update(@RequestBody PostingUpdateRequest requestDto){
         postingService.update(requestDto);
     }
 
     @PostMapping("/data/insert/posting")
     @ResponseBody
-    public void create(@RequestBody PostingCreateRequestDto requestDto){
+    public void create(@RequestBody PostingCreateRequest requestDto){
         postingService.create(requestDto);
     }
 }

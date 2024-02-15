@@ -1,6 +1,5 @@
 package com.m.blog.domain.posting.service;
 
-import com.amazonaws.services.kms.model.NotFoundException;
 import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.repository.BoardDslRepository;
 import com.m.blog.domain.posting.dto.*;
@@ -21,7 +20,7 @@ public class PostingServiceImpl implements PostingService{
     private final BoardDslRepository boardDslRepository;
 
     @Override
-    public PagingResponse getPagingResponse(PostingReadFilteredPagingRequestDto requestDto){
+    public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest requestDto){
         BoardDto found = boardDslRepository
                 .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
@@ -30,7 +29,7 @@ public class PostingServiceImpl implements PostingService{
 
 
     @Override
-    public PagingResponse getPagingResponse(PostingReadPagingRequestDto requestDto) {
+    public PagingResponse getPagingResponse(PostingReadPagingRequest requestDto) {
         BoardDto found = null;
 
         return PagingResponse.get(postingDslRepository.get(requestDto), found);
@@ -38,7 +37,7 @@ public class PostingServiceImpl implements PostingService{
 
     @Transactional
     @Override
-    public void update(PostingUpdateRequestDto requestDto){
+    public void update(PostingUpdateRequest requestDto){
         Posting found = postingJpaRepository
                 .findByBoardCollectionIdAndBoardIdAndId(
                         requestDto.getBoardCollectionId(),
@@ -51,13 +50,13 @@ public class PostingServiceImpl implements PostingService{
     }
 
     @Override
-    public PostingReadResponseDto get(PostingReadRequestDto requestDto){
-        return PostingReadResponseDto.of(postingDslRepository.get(requestDto));
+    public PostingReadResponse get(PostingReadRequest requestDto){
+        return PostingReadResponse.of(postingDslRepository.get(requestDto));
     }
 
     @Transactional
     @Override
-    public void create(PostingCreateRequestDto requestDto){
+    public void create(PostingCreateRequest requestDto){
         int newId = postingDslRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
         postingJpaRepository.save(

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @AllArgsConstructor
-public class PostingReadResponseDto {
+public class PostingReadResponse {
     private int postingId;
     private String title;
     private String content;
@@ -21,8 +21,8 @@ public class PostingReadResponseDto {
     private String boardCollectionName;
     private LocalDateTime createdTime;
 
-    public static PostingReadResponseDto of(PostingDto postingDto){
-        return PostingReadResponseDto.builder()
+    public static PostingReadResponse of(PostingDto postingDto){
+        return PostingReadResponse.builder()
                 .postingId(postingDto.getPostingId())
                 .title(postingDto.getTitle())
                 .content(postingDto.getContent())

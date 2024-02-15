@@ -1,8 +1,7 @@
 package com.m.blog.domain.menu.service;
 
-import com.m.blog.domain.menu.dto.MenuResponseDto;
-import org.springframework.transaction.annotation.Transactional;
+import com.m.blog.domain.menu.dto.MenuResponse;
 
 public interface MenuService {
-    MenuResponseDto get();
+    MenuResponse get();
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class PostingReadRequestDto {
+public class PostingReadRequest {
     private int boardCollectionId;
     private int boardId;
     private int id;
