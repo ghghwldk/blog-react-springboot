@@ -1,23 +1,16 @@
 package com.m.blog.domain.posting.controller;
 
-import com.m.blog.domain.posting.dto.PostingCreateRequestDto;
-import com.m.blog.domain.posting.dto.PostingReadRequestDto;
-import com.m.blog.domain.posting.dto.PostingReadResponseDto;
-import com.m.blog.domain.posting.dto.PostingUpdateRequestDto;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
-import com.m.blog.domain.posting.entity.Posting;
+import com.m.blog.domain.posting.dto.*;
+import com.m.blog.domain.posting.service.PostingService;
 import com.m.blog.global.paging.PagingResponse;
 import com.m.blog.domain.posting.repository.PostingCustomRepository;
-import com.m.blog.domain.posting.repository.PostingJpaRepository;
-import com.m.blog.domain.posting.service.PostingService;
+import com.m.blog.domain.posting.service.PostingServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/posting")
@@ -29,13 +22,19 @@ public class PostingController {
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
-        return postingService.getPagingResponse(pageable);
+        return postingService.getPagingResponse(PostingReadPagingRequestDto.builder()
+                        .pageable(pageable)
+                .build());
     }
 
     @ResponseBody
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
-        return postingService.getPagingResponse(boardId, boardCollectionId, pageable);
+        return postingService.getPagingResponse(PostingReadFilteredPagingRequestDto.builder()
+                        .boardCollectionId(boardCollectionId)
+                        .boardId(boardId)
+                        .pageable(pageable)
+                .build());
     }
 
     @ResponseBody
