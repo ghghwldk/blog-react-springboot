@@ -1,11 +1,14 @@
 package com.m.blog.domain.posting.repository;
 
 
+import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.entity.QBoard;
 import com.m.blog.domain.boardCollection.entity.QBoardCollection;
+import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequestDto;
 import com.m.blog.domain.posting.dto.dsl.PostingDto;
 import com.m.blog.domain.posting.dto.dsl.QPostingDto;
 import com.m.blog.domain.posting.entity.QPosting;
+import com.m.blog.global.paging.PagingResponse;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +112,15 @@ public class PostingCustomRepository {
         return fetch;
     }
 
-    public Page<PostingDto> getPageOfPosting(int boardCollectionId, int boardId, Pageable pageable){
+
+    public Page<PostingDto> get(PostingReadFilteredPagingRequestDto requestDto){
+        return this.getPageOfPosting(requestDto.getBoardCollectionId(),
+                requestDto.getBoardId(),
+                requestDto.getPageable());
+    }
+
+
+    private Page<PostingDto> getPageOfPosting(int boardCollectionId, int boardId, Pageable pageable){
         List<PostingDto> fetch=
                 query.select(
                         new QPostingDto(

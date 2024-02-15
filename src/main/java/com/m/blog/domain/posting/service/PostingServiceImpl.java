@@ -23,16 +23,25 @@ public class PostingServiceImpl implements PostingService{
     private final PostingJpaRepository postingJpaRepository;
     private final PostingCustomRepository postingCustomRepository;
     private final BoardDslRepository boardDslRepository;
+    private final String homeLocation = "Home";
+
+    private String getBoardLocation(BoardDto found) {
+        if (found != null) {
+            return found.getBoardName() + " | " + found.getBoardCollectionName();
+        } else {
+            return this.homeLocation;
+        }
+    }
 
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequestDto requestDto){
-        Page<PostingDto> page = postingCustomRepository
-                .getPageOfPosting(requestDto.getBoardCollectionId(), requestDto.getBoardId(), requestDto.getPageable());
-
         BoardDto found = boardDslRepository
                 .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
-        final String location = found.getBoardName() + " | " + found.getBoardCollectionName();
 
+        return get(postingCustomRepository.get(requestDto), getBoardLocation(found));
+    }
+
+    private PagingResponse get(Page<PostingDto> page, String location){
         return PagingResponse.builder()
                 .content(removeImg(page.getContent()))
                 .totalPages(page.getTotalPages())
@@ -43,14 +52,7 @@ public class PostingServiceImpl implements PostingService{
 
     @Override
     public PagingResponse getPagingResponse(PostingReadPagingRequestDto requestDto) {
-        Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting(requestDto.getPageable());
-
-        return PagingResponse.builder()
-                .content(removeImg(page.getContent()))
-                .totalPages(page.getTotalPages())
-                .totalElements((int) page.getTotalElements())
-                .location("Home")
-                .build();
+        return get(postingCustomRepository.getPageOfLatestPosting(requestDto.getPageable()), getBoardLocation(null));
     }
 
     @Transactional
