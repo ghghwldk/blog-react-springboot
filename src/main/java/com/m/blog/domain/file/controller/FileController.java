@@ -1,7 +1,9 @@
 package com.m.blog.domain.file;
 
 import com.google.gson.JsonObject;
+import com.m.blog.domain.file.dto.FileDownloadRequestDto;
 import com.m.blog.domain.file.dto.FileUploadRequestDto;
+import com.m.blog.domain.file.dto.FileUploadResponseDto;
 import com.m.blog.domain.file.service.FileDownloadService;
 import com.m.blog.domain.file.service.FileDownloadServiceImpl;
 import com.m.blog.domain.file.service.FileUploadService;
@@ -25,7 +27,7 @@ public class FileController {
 
     @PostMapping(value="/upload", produces = "application/json")
     @ResponseBody
-    public JsonObject upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public FileUploadResponseDto upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         return fileUploadService.upload(FileUploadRequestDto.builder()
                 .multipartFile(multipartFile)
                 .build());
@@ -33,6 +35,8 @@ public class FileController {
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) throws IOException{
-        return fileDownloadService.getObject(fileName);
+        return fileDownloadService.get(FileDownloadRequestDto.builder()
+                .fileName(fileName)
+                .build());
     }
 }

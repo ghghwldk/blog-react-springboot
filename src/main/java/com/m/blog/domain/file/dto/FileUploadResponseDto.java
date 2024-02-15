@@ -1,14 +1,9 @@
 package com.m.blog.domain.file.dto;
 
-import com.google.gson.JsonObject;
-import com.m.blog.domain.file.vo.FileVo;
+import com.m.blog.domain.file.vo.UploadFileVo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +14,7 @@ public class FileUploadResponseDto {
     private String url;
     private String downloadUrl;
 
-    public static FileUploadResponseDto of(FileVo vo){
+    public static FileUploadResponseDto of(UploadFileVo vo){
         final String url = "/file/download/"+ vo.getSavedFileName();
 
         return FileUploadResponseDto.builder()

@@ -7,16 +7,14 @@ import com.m.blog.domain.file.dto.FileUploadRequestDto;
 import com.m.blog.domain.file.dto.FileUploadResponseDto;
 import com.m.blog.domain.file.repository.FileJpaRepository;
 import com.m.blog.domain.file.util.FileUtil;
-import com.m.blog.domain.file.vo.FileVo;
+import com.m.blog.domain.file.vo.UploadFileVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,7 +29,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 
     @Override
     public FileUploadResponseDto upload(FileUploadRequestDto requestDto) throws IOException{
-        FileVo fileVo = FileVo.of(requestDto.getMultipartFile());
+        UploadFileVo fileVo = UploadFileVo.of(requestDto.getMultipartFile());
 
         this.upload(fileVo);
 
@@ -39,7 +37,7 @@ public class FileUploadServiceImpl implements FileUploadService{
         return FileUploadResponseDto.of(fileVo);
     }
 
-    private String upload(FileVo fileVo) throws IOException {
+    private String upload(UploadFileVo fileVo) throws IOException {
         File converted = fileUtil.convert(fileVo.getMultipartFile())
                 .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
@@ -50,10 +48,13 @@ public class FileUploadServiceImpl implements FileUploadService{
         return uploadImageUrl;
     }
 
-    private String putS3(File uploadFile, FileVo fileVo) {
+    private String putS3(File uploadFile, UploadFileVo fileVo) {
         String key= this.directoryName + "/" + fileVo.getSavedFileName();
 
-        amazonS3Client.putObject(new PutObjectRequest(bucket, key, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        amazonS3Client
+                .putObject(new PutObjectRequest(bucket, key, uploadFile)
+                        .withCannedAcl(CannedAccessControlList.PublicRead));
+
         return amazonS3Client.getUrl(bucket, key).toString();
     }
 }
