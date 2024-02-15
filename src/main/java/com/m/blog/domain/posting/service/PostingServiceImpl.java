@@ -4,55 +4,36 @@ import com.amazonaws.services.kms.model.NotFoundException;
 import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.repository.BoardDslRepository;
 import com.m.blog.domain.posting.dto.*;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
 import com.m.blog.domain.posting.entity.Posting;
-import com.m.blog.domain.posting.repository.PostingCustomRepository;
+import com.m.blog.domain.posting.repository.PostingDslRepository;
 import com.m.blog.domain.posting.repository.PostingJpaRepository;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostingServiceImpl implements PostingService{
     private final PostingJpaRepository postingJpaRepository;
-    private final PostingCustomRepository postingCustomRepository;
+    private final PostingDslRepository postingDslRepository;
     private final BoardDslRepository boardDslRepository;
-    private final String homeLocation = "Home";
-
-    private String getBoardLocation(BoardDto found) {
-        if (found != null) {
-            return found.getBoardName() + " | " + found.getBoardCollectionName();
-        } else {
-            return this.homeLocation;
-        }
-    }
 
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequestDto requestDto){
         BoardDto found = boardDslRepository
                 .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
-        return get(postingCustomRepository.get(requestDto), getBoardLocation(found));
+        return PagingResponse.get(postingDslRepository.get(requestDto), found);
     }
 
-    private PagingResponse get(Page<PostingDto> page, String location){
-        return PagingResponse.builder()
-                .content(removeImg(page.getContent()))
-                .totalPages(page.getTotalPages())
-                .totalElements((int) page.getTotalElements())
-                .location(location)
-                .build();
-    }
 
     @Override
     public PagingResponse getPagingResponse(PostingReadPagingRequestDto requestDto) {
-        return get(postingCustomRepository.getPageOfLatestPosting(requestDto.getPageable()), getBoardLocation(null));
+        BoardDto found = null;
+
+        return PagingResponse.get(postingDslRepository.get(requestDto), found);
     }
 
     @Transactional
@@ -76,21 +57,15 @@ public class PostingServiceImpl implements PostingService{
                 );
     }
 
-
     @Override
     public PostingReadResponseDto get(PostingReadRequestDto requestDto){
-        return PostingReadResponseDto.of(
-                postingCustomRepository.getPosting(requestDto.getBoardCollectionId(),
-                        requestDto.getBoardId(),
-                        requestDto.getId())
-        );
+        return PostingReadResponseDto.of(postingDslRepository.get(requestDto));
     }
-
 
     @Transactional
     @Override
     public void create(PostingCreateRequestDto requestDto){
-        int newId = postingCustomRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
+        int newId = postingDslRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
         postingJpaRepository.save(
                 Posting.builder()
@@ -101,16 +76,5 @@ public class PostingServiceImpl implements PostingService{
                         .content(requestDto.getTitle())
                         .build()
         );
-    }
-
-    private List<PostingDto> removeImg(List<PostingDto> postingDtos){
-        //String pattern="\\< ?img(.*?)\\>";
-        String pattern="<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>";
-        for(PostingDto l: postingDtos){
-            String content= l.getContent();
-            String converted=content.replaceAll(pattern,"");
-            l.setContent(converted);
-        }
-        return postingDtos;
     }
 }

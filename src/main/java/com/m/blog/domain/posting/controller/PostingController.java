@@ -3,8 +3,6 @@ package com.m.blog.domain.posting.controller;
 import com.m.blog.domain.posting.dto.*;
 import com.m.blog.domain.posting.service.PostingService;
 import com.m.blog.global.paging.PagingResponse;
-import com.m.blog.domain.posting.repository.PostingCustomRepository;
-import com.m.blog.domain.posting.service.PostingServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class PostingController {
     private final PostingService postingService;
-    private final PostingCustomRepository postingCustomRepository;
 
     @ResponseBody
     @GetMapping("/list/latest")

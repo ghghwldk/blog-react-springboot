@@ -1,17 +1,17 @@
 package com.m.blog.domain.posting.repository;
 
 
-import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.entity.QBoard;
 import com.m.blog.domain.boardCollection.entity.QBoardCollection;
 import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequestDto;
+import com.m.blog.domain.posting.dto.PostingReadPagingRequestDto;
+import com.m.blog.domain.posting.dto.PostingReadRequestDto;
 import com.m.blog.domain.posting.dto.dsl.PostingDto;
 import com.m.blog.domain.posting.dto.dsl.QPostingDto;
 import com.m.blog.domain.posting.entity.QPosting;
-import com.m.blog.global.paging.PagingResponse;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
@@ -26,13 +26,12 @@ import static com.m.blog.domain.posting.entity.QPosting.posting;
 
 
 @Repository
-public class PostingCustomRepository {
-
-    @Autowired
-    JPAQueryFactory query;
-
+@RequiredArgsConstructor
+public class PostingDslRepositoryImpl implements PostingDslRepository{
+    private final JPAQueryFactory query;
 
     @Transactional
+    @Override
     public int findNewId(int boardCollectionId, int boardId){
         int count= (int) query.selectFrom(posting)
                 .where(posting.boardCollectionId.eq(boardCollectionId),
@@ -42,7 +41,12 @@ public class PostingCustomRepository {
         return count+1;
     }
 
-    public Page<PostingDto> getPageOfLatestPosting(Pageable pageable){
+    @Override
+    public Page<PostingDto> get(PostingReadPagingRequestDto requestDto){
+        return this.getPageOfLatestPosting(requestDto.getPageable());
+    }
+
+    private Page<PostingDto> getPageOfLatestPosting(Pageable pageable){
         List<PostingDto> fetch=
                 query.select(
                         new QPostingDto(
@@ -86,8 +90,13 @@ public class PostingCustomRepository {
 
         return PageableExecutionUtils.getPage(fetch, pageable, count::fetchCount);
     }
+    public PostingDto get(PostingReadRequestDto requestDto){
+        return this.getPosting(requestDto.getBoardCollectionId(),
+                requestDto.getBoardId(),
+                requestDto.getId());
+    }
 
-    public PostingDto getPosting(int boardCollectionId, int boardId, int postingId){
+    private PostingDto getPosting(int boardCollectionId, int boardId, int postingId){
         QPosting p = new QPosting("p");
         QBoardCollection bc = new QBoardCollection("bc");
         QBoard b = new QBoard("b");
