@@ -1,20 +1,25 @@
 package com.m.blog.domain.posting.service;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.repository.BoardDslRepository;
-import com.m.blog.domain.posting.dto.PostingDto;
+import com.m.blog.domain.posting.dto.PostingCreateRequestDto;
+import com.m.blog.domain.posting.dto.PostingReadRequestDto;
+import com.m.blog.domain.posting.dto.PostingReadResponseDto;
+import com.m.blog.domain.posting.dto.PostingUpdateRequestDto;
+import com.m.blog.domain.posting.dto.dsl.PostingDto;
 import com.m.blog.domain.posting.entity.Posting;
 import com.m.blog.domain.posting.repository.PostingCustomRepository;
 import com.m.blog.domain.posting.repository.PostingJpaRepository;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +37,35 @@ public class PostingService {
         return new PagingResponse(removeImg(postingDtos), totalPage, totalElements, boardDto.getBoardName()+" | "+boardDto.getBoardCollectionName());
     }
 
+    @Transactional
+    public void update(PostingUpdateRequestDto requestDto){
+        postingJpaRepository
+                .findByBoardCollectionIdAndBoardIdAndId(
+                        requestDto.getBoardCollectionId(),
+                        requestDto.getBoardId(),
+                        requestDto.getPostingId()
+                )
+                .ifPresentOrElse(
+                        posting -> {
+                            posting.setContent(requestDto.getMarkup());
+                            posting.setTitle(requestDto.getTitle());
+                            postingJpaRepository.save(posting);
+                        },
+                        () -> {
+                            throw new NotFoundException("Posting is not found.");
+                        }
+                );
+    }
+
+
+    public PostingReadResponseDto get(PostingReadRequestDto requestDto){
+        return PostingReadResponseDto.of(
+                postingCustomRepository.getPosting(requestDto.getBoardCollectionId(),
+                        requestDto.getBoardId(),
+                        requestDto.getId())
+        );
+    }
+
     public PagingResponse getPagingResponse(Pageable pageable){
         Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting(pageable);
         List<PostingDto> postingDtos =page.getContent();
@@ -40,15 +74,15 @@ public class PostingService {
         return new PagingResponse(removeImg(postingDtos), totalPages, totalElements, "Home");
     }
     @Transactional
-    public void insertPosting(int boardCollectionId, int boardId, String title, String content){
-        int newId = postingCustomRepository.findNewId(boardCollectionId, boardId);
+    public void create(PostingCreateRequestDto requestDto){
+        int newId = postingCustomRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
         postingJpaRepository.save(
                 Posting.builder()
                         .id(newId)
-                        .boardId(boardId)
-                        .boardCollectionId(boardCollectionId)
-                        .title(title)
-                        .content(content)
+                        .boardId(requestDto.getBoardId())
+                        .boardCollectionId(requestDto.getBoardCollectionId())
+                        .title(requestDto.getTitle())
+                        .content(requestDto.getTitle())
                         .build()
         );
         return;
