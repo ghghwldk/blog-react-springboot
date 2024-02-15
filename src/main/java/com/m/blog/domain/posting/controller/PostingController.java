@@ -26,26 +26,17 @@ public class PostingController {
     PostingCustomRepository postingCustomRepository;
     @Autowired
     PostingJpaRepository postingJpaRepository;
-    @Autowired
-    BoardDslRepository boardDslRepository;
+
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
-        Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting("",pageable);
-        List<PostingDto> postingDtos =page.getContent();
-        Integer totalPages= page.getTotalPages();
-        Integer totalElements = (int) page.getTotalElements();
-        return new PagingResponse(postingService.removeImg(postingDtos), totalPages, totalElements, "Home");
+        return postingService.getPagingResponse(pageable);
     }
+
     @ResponseBody
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
-        Page<PostingDto> page = postingCustomRepository.getPageOfPosting(boardCollectionId, boardId,"",pageable);
-        BoardDto boardDto = boardDslRepository.findBoardDto(boardCollectionId, boardId);
-        List<PostingDto> postingDtos = page.getContent();
-        Integer totalPage= page.getTotalPages();
-        Integer totalElements = (int) page.getTotalElements();
-        return new PagingResponse(postingService.removeImg(postingDtos), totalPage, totalElements, boardDto.getBoardName()+" | "+boardDto.getBoardCollectionName());
+        return postingService.getPagingResponse(boardId, boardCollectionId, pageable);
     }
 
     @ResponseBody

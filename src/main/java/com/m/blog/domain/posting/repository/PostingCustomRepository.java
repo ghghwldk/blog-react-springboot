@@ -39,7 +39,7 @@ public class PostingCustomRepository {
         return count+1;
     }
 
-    public Page<PostingDto> getPageOfLatestPosting(String condition, Pageable pageable){
+    public Page<PostingDto> getPageOfLatestPosting(Pageable pageable){
         List<PostingDto> fetch=
                 query.select(
                         new QPostingDto(
@@ -109,7 +109,7 @@ public class PostingCustomRepository {
         return fetch;
     }
 
-    public Page<PostingDto> getPageOfPosting(int boardCollectionId, int boardId, String condition, Pageable pageable){
+    public Page<PostingDto> getPageOfPosting(int boardCollectionId, int boardId, Pageable pageable){
         List<PostingDto> fetch=
                 query.select(
                         new QPostingDto(
