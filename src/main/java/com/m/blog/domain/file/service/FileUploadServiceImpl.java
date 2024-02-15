@@ -6,7 +6,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.m.blog.domain.file.dto.FileUploadRequestDto;
 import com.m.blog.domain.file.dto.FileUploadResponseDto;
 import com.m.blog.domain.file.repository.FileJpaRepository;
-import com.m.blog.domain.file.util.FileUtil;
+import com.m.blog.domain.file.util.FileUploadUtil;
 import com.m.blog.domain.file.vo.UploadFileVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +17,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +24,7 @@ import java.nio.file.Paths;
 public class FileUploadServiceImpl implements FileUploadService{
     private final FileJpaRepository fileJpaRepository;
     private final AmazonS3Client amazonS3Client;
-    private final FileUtil fileUtil;
+    private final FileUploadUtil fileUploadUtil;
 
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
@@ -44,39 +41,10 @@ public class FileUploadServiceImpl implements FileUploadService{
     }
 
     private void upload(UploadFileVo fileVo) throws IOException {
-        File file = null;
-
         if(isLocal){
-            log.info("file is uploading on the local pc");
-            try{
-                InputStream fileStream = fileVo.getMultipartFile().getInputStream();
-                file = new File(this.directoryName + fileVo.getSavedFileName());
-                FileUtils.copyInputStreamToFile(fileStream, file);
-            }catch (IOException e) {
-                FileUtils.deleteQuietly(file);
-                throw e;
-            }
+            fileUploadUtil.uploadOnLocal(fileVo);
         }else{
-            try{
-                file = fileUtil.convert(fileVo.getMultipartFile())
-                        .orElseThrow(() ->
-                                new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다.")
-                        );
-
-                putS3(file, fileVo);
-            }catch (Exception e){
-                throw e;
-            }finally{
-                fileUtil.removeNewFile(file);
-            }
+            fileUploadUtil.uploadOnS3(fileVo);
         }
-    }
-
-    private void putS3(File uploadFile, UploadFileVo fileVo) {
-        String key= this.directoryName + "/" + fileVo.getSavedFileName();
-
-        amazonS3Client
-                .putObject(new PutObjectRequest(bucket, key, uploadFile)
-                        .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 }
