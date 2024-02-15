@@ -46,13 +46,10 @@ public class MenuServiceImpl implements MenuService{
                 .build();
     }
 
-    @Transactional
     @Override
     public MenuResponseDto get(){
-        List<BoardCollection> boardCollections = boardCollectionService.findAll();
-        List<BoardAggregationDto> all = boardCollectionService.get();
-
-        return get(boardCollections, all);
+        return get(boardCollectionService.getBoardCollections(),
+                boardCollectionService.getBoardAggregationDtos());
     }
 
 }

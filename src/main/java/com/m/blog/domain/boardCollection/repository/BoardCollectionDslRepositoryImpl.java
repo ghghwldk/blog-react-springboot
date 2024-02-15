@@ -6,22 +6,21 @@ import com.m.blog.domain.boardCollection.dto.QBoardAggregationDto;
 import com.m.blog.domain.boardCollection.entity.QBoardCollection;
 import com.m.blog.domain.posting.entity.QPosting;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.m.blog.domain.board.entity.QBoard.board;
 
 
 @Repository
-public class BoardCollectionRepositoryImpl implements BoardCollectionRepository {
-    @Autowired
-    JPAQueryFactory query;
+@RequiredArgsConstructor
+public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepository {
+    private final JPAQueryFactory query;
 
     @Override
-    public List<BoardAggregationDto> get(){
+    public List<BoardAggregationDto> getBoardAggregationDtos(){
         List<BoardAggregationDto> result = query
                 .select(
                         new QBoardAggregationDto(

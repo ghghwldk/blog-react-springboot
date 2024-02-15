@@ -6,8 +6,6 @@ import com.m.blog.domain.boardCollection.entity.BoardCollection;
 import java.util.List;
 
 public interface BoardCollectionService {
-    List<BoardCollection> findAll();
-
-
-    List<BoardAggregationDto> get();
+    List<BoardCollection> getBoardCollections();
+    List<BoardAggregationDto> getBoardAggregationDtos();
 }

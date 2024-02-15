@@ -1,5 +1,6 @@
 package com.m.blog.domain.board.entity;
 
+import com.m.blog.global.entity.TimeComponent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,15 +17,11 @@ import java.time.LocalDateTime;
 @Table(name="board")
 @Getter
 @NoArgsConstructor
-public class Board {
+public class Board extends TimeComponent {
     @Id
     int id;
     @Id
     int boardCollectionId;
     String name;
     String description;
-    @CreatedDate
-    LocalDateTime createdTime;
-    @LastModifiedDate
-    LocalDateTime updatedTime;
 }
