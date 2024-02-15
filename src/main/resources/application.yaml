@@ -6,18 +6,3 @@ spring:
     import:
       - classpath:localStorageSetting.yaml
 #      - optional:classpath:testconf4.yml # 없는 파일
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&allowPublicKeyRetrieval=true
-    username: ghma
-    password: Aa000000?
-  jpa:
-    database: mysql
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
-
-#mysql -u root -p
-#CREATE USER 'ghma'@'172.17.0.1' IDENTIFIED BY 'password';
-#GRANT ALL PRIVILEGES ON *.* TO 'ghma'@'172.17.0.1' WITH GRANT OPTION;
-#flush privileges;
