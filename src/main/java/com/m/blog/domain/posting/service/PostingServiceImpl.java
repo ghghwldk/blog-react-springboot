@@ -12,34 +12,45 @@ import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostingServiceImpl implements PostingService{
     private final PostingJpaRepository postingJpaRepository;
     private final PostingCustomRepository postingCustomRepository;
     private final BoardDslRepository boardDslRepository;
 
+    @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequestDto requestDto){
         Page<PostingDto> page = postingCustomRepository
                 .getPageOfPosting(requestDto.getBoardCollectionId(), requestDto.getBoardId(), requestDto.getPageable());
-        BoardDto boardDto = boardDslRepository.findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
-        List<PostingDto> postingDtos = page.getContent();
-        Integer totalPage= page.getTotalPages();
-        Integer totalElements = (int) page.getTotalElements();
-        return new PagingResponse(removeImg(postingDtos), totalPage, totalElements, boardDto.getBoardName()+" | "+boardDto.getBoardCollectionName());
+
+        BoardDto found = boardDslRepository
+                .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
+        final String location = found.getBoardName() + " | " + found.getBoardCollectionName();
+
+        return PagingResponse.builder()
+                .content(removeImg(page.getContent()))
+                .totalPages(page.getTotalPages())
+                .totalElements((int) page.getTotalElements())
+                .location(location)
+                .build();
     }
 
     @Override
     public PagingResponse getPagingResponse(PostingReadPagingRequestDto requestDto) {
         Page<PostingDto> page = postingCustomRepository.getPageOfLatestPosting(requestDto.getPageable());
-        List<PostingDto> postingDtos =page.getContent();
-        Integer totalPages= page.getTotalPages();
-        Integer totalElements = (int) page.getTotalElements();
-        return new PagingResponse(removeImg(postingDtos), totalPages, totalElements, "Home");
+
+        return PagingResponse.builder()
+                .content(removeImg(page.getContent()))
+                .totalPages(page.getTotalPages())
+                .totalElements((int) page.getTotalElements())
+                .location("Home")
+                .build();
     }
 
     @Transactional
@@ -78,6 +89,7 @@ public class PostingServiceImpl implements PostingService{
     @Override
     public void create(PostingCreateRequestDto requestDto){
         int newId = postingCustomRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
+
         postingJpaRepository.save(
                 Posting.builder()
                         .id(newId)
@@ -87,8 +99,8 @@ public class PostingServiceImpl implements PostingService{
                         .content(requestDto.getTitle())
                         .build()
         );
-        return;
     }
+
     private List<PostingDto> removeImg(List<PostingDto> postingDtos){
         //String pattern="\\< ?img(.*?)\\>";
         String pattern="<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>";

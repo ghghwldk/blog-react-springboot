@@ -1,5 +1,6 @@
 package com.m.blog.domain.board.repository;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.m.blog.domain.board.dto.BoardDto;
 import com.m.blog.domain.board.dto.QBoardDto;
 import com.m.blog.domain.board.entity.Board;
@@ -24,7 +25,7 @@ public class BoardDslRepositoryImpl implements BoardDslRepository{
 
     @Override
     public BoardDto findBoardDto(int boardCollectionId, int boardId){
-        BoardDto fetch=
+        BoardDto fetched =
                 query.select(
                         new QBoardDto(
                                 board.boardCollectionId,
@@ -40,7 +41,11 @@ public class BoardDslRepositoryImpl implements BoardDslRepository{
                         .where(board.boardCollectionId.eq(boardCollectionId), board.id.eq(boardId))
                         .orderBy(board.createdTime.desc())
                         .fetchOne();
-        return fetch;
+        if(fetched == null){
+            throw new NotFoundException("board is not found");
+        }
+
+        return fetched;
     }
     public List<Board> findBoards(int boardCollectionId){
         return query.selectFrom(board)
