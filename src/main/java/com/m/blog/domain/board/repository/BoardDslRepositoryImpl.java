@@ -5,7 +5,7 @@ import com.m.blog.domain.board.dto.QBoardDto;
 import com.m.blog.domain.board.entity.Board;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
@@ -18,15 +18,11 @@ import static com.m.blog.domain.boardCollection.entity.QBoardCollection.boardCol
 
 
 @Repository
-public class BoardCustomRepository {
-    @Autowired
-    JPAQueryFactory query;
-    public List<Board> findBoards(){
-        return query.selectFrom(board)
-                .orderBy(board.boardCollectionId.asc(),
-                        board.id.desc())
-                .fetch();
-    }
+@RequiredArgsConstructor
+public class BoardDslRepositoryImpl implements BoardDslRepository{
+    private final JPAQueryFactory query;
+
+    @Override
     public BoardDto findBoardDto(int boardCollectionId, int boardId){
         BoardDto fetch=
                 query.select(

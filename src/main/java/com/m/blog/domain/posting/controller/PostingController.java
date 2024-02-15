@@ -1,10 +1,10 @@
 package com.m.blog.domain.posting.controller;
 
 import com.m.blog.domain.board.dto.BoardDto;
+import com.m.blog.domain.board.repository.BoardDslRepository;
 import com.m.blog.domain.posting.dto.PostingDto;
 import com.m.blog.domain.posting.entity.Posting;
 import com.m.blog.global.paging.PagingResponse;
-import com.m.blog.domain.board.repository.BoardCustomRepository;
 import com.m.blog.domain.posting.repository.PostingCustomRepository;
 import com.m.blog.domain.posting.repository.PostingJpaRepository;
 import com.m.blog.domain.posting.service.PostingService;
@@ -27,7 +27,7 @@ public class PostingController {
     @Autowired
     PostingJpaRepository postingJpaRepository;
     @Autowired
-    BoardCustomRepository boardCustomRepository;
+    BoardDslRepository boardDslRepository;
     @ResponseBody
     @GetMapping("/list/latest")
     public PagingResponse list(Pageable pageable){
@@ -41,7 +41,7 @@ public class PostingController {
     @GetMapping("/list")
     public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
         Page<PostingDto> page = postingCustomRepository.getPageOfPosting(boardCollectionId, boardId,"",pageable);
-        BoardDto boardDto = boardCustomRepository.findBoardDto(boardCollectionId, boardId);
+        BoardDto boardDto = boardDslRepository.findBoardDto(boardCollectionId, boardId);
         List<PostingDto> postingDtos = page.getContent();
         Integer totalPage= page.getTotalPages();
         Integer totalElements = (int) page.getTotalElements();
