@@ -210,7 +210,8 @@ const Posting = ()=>{
         )
         }
         <p className={!isEditMode? '': 'editor-off'}>
-          {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)}
+          {savedData == undefined ? '': savedData.createdTime}
+          {/* {savedData == undefined ? '': changeDateTimeFormat(savedData.createdTime)} */}
         </p>
         
       </div>

@@ -16,7 +16,7 @@ const PostingInformation = ({componentName, board, posting, isHomePage})=>{
   const changeDateTimeFormat=(before)=>{
     const date= before.date
     const time= before.time
-    
+    debugger 
     const after = date.year + '/' + addZeroForOneDigit(date.month) + '/' + addZeroForOneDigit(date.day) + ' ' +
     addZeroForOneDigit(time.hour) + ':' + addZeroForOneDigit(time.minute)
     
@@ -44,8 +44,8 @@ const PostingInformation = ({componentName, board, posting, isHomePage})=>{
               {posting.title}
           </font>
         </Link>
-        
-        <p className="created-time">{changeDateTimeFormat(posting.createdTime)}</p>
+        <p className="created-time">{posting.createdTime}</p>
+        {/* <p className="created-time">{changeDateTimeFormat(posting.createdTime)}</p> */}
       </div>
     </li>
   )
