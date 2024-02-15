@@ -1,7 +1,7 @@
-package com.m.blog.domain.boardCollection.controller;
+package com.m.blog.domain.menu.controller;
 
 import com.m.blog.domain.boardCollection.service.BoardCollectionService;
-import com.m.blog.domain.menu.vo.MenuVo;
+import com.m.blog.domain.menu.dto.MenuResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/board_collection")
-public class BoardCollectionController {
+public class MenuController {
     @Autowired
     BoardCollectionService boardCollectionService;
 
     @GetMapping("/list/group_by_board_collection_id")
-    List<MenuVo> getMenuVos (){
+    MenuResponseDto getMenuVos (){
         return boardCollectionService.getMenuResponseDto();
     }
 }

@@ -5,7 +5,7 @@ import com.m.blog.domain.boardCollection.entity.BoardCollection;
 import com.m.blog.domain.boardCollection.repository.BoardCollectionRepository;
 import com.m.blog.domain.board.repository.BoardCustomRepository;
 import com.m.blog.domain.boardCollection.repository.BoardCollectionJpaRepository;
-import com.m.blog.domain.menu.vo.MenuVo;
+import com.m.blog.domain.menu.dto.MenuResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +25,11 @@ public class BoardCollectionService {
     BoardCustomRepository boardCustomRepository;
 
     @Transactional
-    public List<MenuVo> getMenuResponseDto(){
-        List<MenuVo> menuVos = new LinkedList<>();
+    public MenuResponseDto getMenuResponseDto(){
+        List<MenuResponseDto.Nested> nesteds = new LinkedList<>();
         List<BoardCollection> boardCollections = boardCollectionJpaRepository.findAll();
 
         List<BoardInformationInMenuDto> all = getAllBoardInformationInMenuDtos();
-
         for(BoardCollection bc: boardCollections){
             int postingCount = 0;
             String boardCollectionName= bc.getName();
@@ -42,10 +41,17 @@ public class BoardCollectionService {
                     postingCount += b.getPostingCount();
                 }
             }
-            menuVos.add(new MenuVo(boardCollectionName, boardCollectionId, postingCount, InSpecificBoardCollection));
+            nesteds.add(MenuResponseDto.Nested.builder()
+                            .boardCollectionName(boardCollectionName)
+                            .boardCollectionId(boardCollectionId)
+                            .postingCount(postingCount)
+                            .boardInformationInMenuDtos(InSpecificBoardCollection)
+                    .build());
         }
 
-        return menuVos;
+        return MenuResponseDto.builder()
+                .nesteds(nesteds)
+                .build();
     }
 
     public List<BoardInformationInMenuDto> getAllBoardInformationInMenuDtos(){

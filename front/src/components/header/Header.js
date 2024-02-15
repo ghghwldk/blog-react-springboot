@@ -21,7 +21,7 @@ const Header = ()=>{
       method: 'GET',
       async: false
     }).then((res) => {
-      setMenuData(res.data)
+      setMenuData(res.data.nesteds)
     })
   }
 
