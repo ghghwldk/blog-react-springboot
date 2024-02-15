@@ -6,6 +6,8 @@ cloud:
       auto: false
     region:
       static: ap-northeast-2
+file:
+  directory: static
 
 spring:
   datasource:

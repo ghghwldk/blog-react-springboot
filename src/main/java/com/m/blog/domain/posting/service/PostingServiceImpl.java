@@ -39,22 +39,15 @@ public class PostingServiceImpl implements PostingService{
     @Transactional
     @Override
     public void update(PostingUpdateRequestDto requestDto){
-        postingJpaRepository
+        Posting found = postingJpaRepository
                 .findByBoardCollectionIdAndBoardIdAndId(
                         requestDto.getBoardCollectionId(),
                         requestDto.getBoardId(),
                         requestDto.getPostingId()
-                )
-                .ifPresentOrElse(
-                        posting -> {
-                            posting.setContent(requestDto.getMarkup());
-                            posting.setTitle(requestDto.getTitle());
-                            postingJpaRepository.save(posting);
-                        },
-                        () -> {
-                            throw new NotFoundException("Posting is not found.");
-                        }
-                );
+                ).orElseThrow(RuntimeException::new);
+
+        found.setContent(requestDto.getMarkup());
+        found.setTitle(requestDto.getTitle());
     }
 
     @Override
