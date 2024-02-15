@@ -34,7 +34,7 @@ public class FileDownloadUtilImpl implements FileDownloadUtil{
 
     @Override
     public Resource getLocalResource(DownloadFileVo fileVo) throws IOException {
-        Path path = Paths.get(fileVo.getPath() + "/" + fileVo.getKey());
+        Path path = Paths.get(fileVo.getKey());
 
         return new InputStreamResource(Files.newInputStream(path));
     }

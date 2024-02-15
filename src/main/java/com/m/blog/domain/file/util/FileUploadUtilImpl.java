@@ -53,7 +53,7 @@ public class FileUploadUtilImpl implements FileUploadUtil {
         log.info("file is uploading on the local pc");
         try{
             InputStream fileStream = fileVo.getMultipartFile().getInputStream();
-            file = new File(this.directoryName + fileVo.getSavedFileName());
+            file = new File(this.directoryName + "/" + fileVo.getSavedFileName());
             FileUtils.copyInputStreamToFile(fileStream, file);
         }catch (IOException e) {
             FileUtils.deleteQuietly(file);

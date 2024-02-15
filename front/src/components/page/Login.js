@@ -26,7 +26,7 @@ const Login = ()=>{
     const password = passwordRef.current.value
     
     const parameter = {
-      'id': id,
+      'userId': id,
       'password': password, 
     }
     axios({
@@ -36,20 +36,18 @@ const Login = ()=>{
       headers: { 'content-type': 'application/json' },
       async: true
     }).then((res) => {
-      if(res.data.message==='success'){
-        const redirectUrl = query.get("redirectUrl")
-        const role = res.data.role
-        // set redux.
-        dispatch({type:'register', payload : {role : role, id: id} }) 
+      const redirectUrl = query.get("redirectUrl")
+      const role = res.data.role
+      // set redux.
+      dispatch({type:'register', payload : {role : role, id: id} }) 
 
-        if(redirectUrl=== null){
-          history.push(`/`)
-        } else {
-          history.push(redirectUrl)
-        }
+      if(redirectUrl=== null){
+        history.push(`/`)
+      } else {
+        history.push(redirectUrl)
       }
-      
-    })
+    }).catch(err=>{
+    });
   }
 
   useEffect(

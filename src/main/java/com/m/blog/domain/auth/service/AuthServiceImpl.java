@@ -27,18 +27,16 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public LoginResponse login(LoginRequest loginRequest, HttpServletRequest request){
-        LoginResponse.LoginResponseBuilder builder = LoginResponse.builder();
-
-        Member loginMember= memberJpaRepository.findMemberByIdAndPassword(loginRequest.getUserId(), loginRequest.getPassword())
+        Member loginMember= memberJpaRepository
+                .findMemberByIdAndPassword(loginRequest.getUserId(), loginRequest.getPassword())
                 .orElseThrow(RuntimeException::new);
 
-        // if entered information is about the member, then we have to process the login
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        request.getSession()
+                .setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        builder.role(loginMember.getRole());
-
-        return builder.build();
+        return LoginResponse.builder()
+                .role(loginMember.getRole())
+                .build();
     }
 
 }

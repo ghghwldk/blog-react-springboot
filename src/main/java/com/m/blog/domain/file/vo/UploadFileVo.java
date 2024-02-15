@@ -24,6 +24,7 @@ public class UploadFileVo {
                 .originalFileName(originalFileName)
                 .extension(extension)
                 .savedFileName(UUID.randomUUID() + extension)
+                .multipartFile(multipartFile)
                 .build();
     }
 }
