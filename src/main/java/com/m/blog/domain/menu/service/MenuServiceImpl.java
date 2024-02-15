@@ -1,10 +1,8 @@
 package com.m.blog.domain.menu.service;
 
 import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
-import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 import com.m.blog.domain.boardCollection.entity.BoardCollection;
 import com.m.blog.domain.boardCollection.service.BoardCollectionService;
-import com.m.blog.domain.boardCollection.service.BoardCollectionServiceImpl;
 import com.m.blog.domain.menu.dto.MenuResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

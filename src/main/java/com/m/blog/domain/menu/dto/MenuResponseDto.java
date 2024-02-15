@@ -1,7 +1,6 @@
 package com.m.blog.domain.menu.dto;
 
 import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
-import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
