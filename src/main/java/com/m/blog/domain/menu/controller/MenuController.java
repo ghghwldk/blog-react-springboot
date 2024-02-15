@@ -16,8 +16,8 @@ public class MenuController {
     private final MenuService menuService;
 
     @GetMapping
-    MenuResponseDto getMenuVos (){
-        return menuService.getMenuResponseDto();
+    MenuResponseDto get (){
+        return menuService.get();
     }
 }
 

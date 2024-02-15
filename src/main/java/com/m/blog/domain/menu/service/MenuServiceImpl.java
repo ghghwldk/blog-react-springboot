@@ -1,5 +1,6 @@
 package com.m.blog.domain.menu.service;
 
+import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
 import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 import com.m.blog.domain.boardCollection.entity.BoardCollection;
 import com.m.blog.domain.boardCollection.service.BoardCollectionService;
@@ -20,15 +21,15 @@ public class MenuServiceImpl implements MenuService{
 
 
     private MenuResponseDto get(List<BoardCollection> boardCollections,
-                            List<BoardInformationInMenuDto> boardInformationInMenuDtos){
+                            List<BoardAggregationDto> boardAggregationDtos){
         List<MenuResponseDto.Nested> nesteds = new LinkedList<>();
 
         for(BoardCollection bc: boardCollections){
             int postingCount = 0;
             String boardCollectionName= bc.getName();
             int boardCollectionId= bc.getId();
-            List<BoardInformationInMenuDto> InSpecificBoardCollection = new LinkedList<>();
-            for(BoardInformationInMenuDto b: boardInformationInMenuDtos){
+            List<BoardAggregationDto> InSpecificBoardCollection = new LinkedList<>();
+            for(BoardAggregationDto b: boardAggregationDtos){
                 if(b.getBoardCollectionId() == boardCollectionId){
                     InSpecificBoardCollection.add(b);
                     postingCount += b.getPostingCount();
@@ -49,10 +50,11 @@ public class MenuServiceImpl implements MenuService{
 
     @Transactional
     @Override
-    public MenuResponseDto getMenuResponseDto(){
+    public MenuResponseDto get(){
         List<BoardCollection> boardCollections = boardCollectionService.findAll();
-        List<BoardInformationInMenuDto> all = boardCollectionService.getAllBoardInformationInMenuDtos();
+        List<BoardAggregationDto> all = boardCollectionService.get();
 
         return get(boardCollections, all);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.m.blog.domain.menu.dto;
 
+import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
 import com.m.blog.domain.boardCollection.dto.BoardInformationInMenuDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class MenuResponseDto {
         String boardCollectionName;
         int boardCollectionId;
         int postingCount;
-        List<BoardInformationInMenuDto> boardInformationInMenuDtos;
+        List<BoardAggregationDto> boardInformationInMenuDtos;
     }
 
 }
