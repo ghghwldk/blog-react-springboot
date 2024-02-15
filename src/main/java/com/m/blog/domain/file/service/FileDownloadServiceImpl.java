@@ -1,23 +1,21 @@
 package com.m.blog.domain.file.service;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.m.blog.domain.file.dto.FileDownloadRequestDto;
 import com.m.blog.domain.file.entity.File;
 import com.m.blog.domain.file.repository.FileJpaRepository;
+import com.m.blog.domain.file.util.FileDownloadUtil;
 import com.m.blog.domain.file.vo.DownloadFileVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -26,19 +24,16 @@ import java.net.URLEncoder;
 public class FileDownloadServiceImpl implements FileDownloadService{
     @Autowired
     FileJpaRepository fileJpaRepository;
-
-    private final AmazonS3 amazonS3;
-
-    @Value("${aws.s3.bucket:#{null}}")
-    private String bucket;
+    private final FileDownloadUtil fileDownloadUtil;
 
 
-    private Resource getResource(DownloadFileVo fileVo){
-        S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, fileVo.getKey()));
-        S3ObjectInputStream objectInputStream = o.getObjectContent();
-        Resource resource = new InputStreamResource(objectInputStream);
+    @Value("${file.isLocal}")
+    private boolean isLocal;
 
-        return resource;
+    private Resource getResource(DownloadFileVo fileVo) throws IOException {
+        return isLocal?
+                fileDownloadUtil.getLocalResource(fileVo):
+                fileDownloadUtil.getS3Resource(fileVo);
     }
 
     private String getHeaderValues(DownloadFileVo fileVo) throws UnsupportedEncodingException {
@@ -47,7 +42,7 @@ public class FileDownloadServiceImpl implements FileDownloadService{
     }
 
     @Override
-    public ResponseEntity<Resource> get(FileDownloadRequestDto requestDto) throws UnsupportedEncodingException {
+    public ResponseEntity<Resource> get(FileDownloadRequestDto requestDto) throws IOException {
         File file = fileJpaRepository.findByFileName(requestDto.getFileName())
                 .orElseThrow(RuntimeException::new);
 

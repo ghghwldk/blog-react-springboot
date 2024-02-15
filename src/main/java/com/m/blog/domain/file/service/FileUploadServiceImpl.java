@@ -23,12 +23,12 @@ import java.io.InputStream;
 @Service
 public class FileUploadServiceImpl implements FileUploadService{
     private final FileJpaRepository fileJpaRepository;
-    private final AmazonS3Client amazonS3Client;
     private final FileUploadUtil fileUploadUtil;
 
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
-    @Value("${file.isLocal}") private boolean isLocal;
+    @Value("${file.isLocal}")
+    private boolean isLocal;
 
     @Override
     public FileUploadResponseDto upload(FileUploadRequestDto requestDto) throws IOException{

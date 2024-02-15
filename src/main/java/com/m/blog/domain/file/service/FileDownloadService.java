@@ -8,5 +8,5 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public interface FileDownloadService {
-    ResponseEntity<Resource> get(FileDownloadRequestDto requestDto) throws UnsupportedEncodingException;
+    ResponseEntity<Resource> get(FileDownloadRequestDto requestDto) throws IOException;
 }
