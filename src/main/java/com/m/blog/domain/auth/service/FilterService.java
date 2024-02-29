@@ -1,7 +1,7 @@
 package com.m.blog.domain.auth.service;
 
 import com.m.blog.global.config.variable.SessionConst;
-import com.m.blog.domain.auth.entity.Member;
+
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,10 +53,10 @@ public class FilterService {
     }
 
     public boolean checkIsMaster(HttpSession session){
-        Member loginnedMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (!loginnedMember.getRole().equals("master")) {
-            return false;
-        }
+//        Member loginnedMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//        if (!loginnedMember.getRole().equals("master")) {
+//            return false;
+//        }
         return true;
     }
 }

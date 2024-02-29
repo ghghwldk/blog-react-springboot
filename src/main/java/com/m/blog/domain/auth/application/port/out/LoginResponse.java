@@ -1,4 +1,4 @@
-package com.m.blog.domain.auth.dto;
+package com.m.blog.domain.auth.application.port.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
