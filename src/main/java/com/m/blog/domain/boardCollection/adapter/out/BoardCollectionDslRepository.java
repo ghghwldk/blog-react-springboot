@@ -1,6 +1,4 @@
-package com.m.blog.domain.boardCollection.repository;
-
-import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
+package com.m.blog.domain.boardCollection.adapter.out;
 
 import java.util.List;
 

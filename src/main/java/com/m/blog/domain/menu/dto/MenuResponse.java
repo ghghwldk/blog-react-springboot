@@ -1,7 +1,7 @@
 package com.m.blog.domain.menu.dto;
 
-import com.m.blog.domain.boardCollection.dto.BoardAggregationDto;
-import com.m.blog.domain.boardCollection.entity.BoardCollection;
+import com.m.blog.domain.boardCollection.adapter.out.BoardAggregationDto;
+import com.m.blog.domain.boardCollection.adapter.out.BoardCollectionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,13 +26,13 @@ public class MenuResponse {
         List<BoardAggregationDto> boardInformationInMenuDtos;
     }
 
-    public static MenuResponse of(List<BoardCollection> boardCollections,
+    public static MenuResponse of(List<BoardCollectionEntity> boardCollectionEntities,
                                   List<BoardAggregationDto> boardAggregationDtos){
         Map<Integer, List<BoardAggregationDto>> dtoPerBoardCollections = boardAggregationDtos.stream()
                 .collect(Collectors.groupingBy(BoardAggregationDto::getBoardCollectionId,
                         Collectors.toList()));
 
-        List<MenuResponse.Nested> nesteds = boardCollections.stream()
+        List<MenuResponse.Nested> nesteds = boardCollectionEntities.stream()
                 .map(bc -> {
                     List<BoardAggregationDto> filtered = dtoPerBoardCollections.get(bc.getId());
                     return MenuResponse.Nested.builder()

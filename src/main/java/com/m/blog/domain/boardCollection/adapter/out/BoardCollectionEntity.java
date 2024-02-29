@@ -1,4 +1,4 @@
-package com.m.blog.domain.boardCollection.entity;
+package com.m.blog.domain.boardCollection.adapter.out;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="board_collection")
 @Getter
 @NoArgsConstructor
-public class BoardCollection {
+public class BoardCollectionEntity {
     @Id
     int id;
     String name;

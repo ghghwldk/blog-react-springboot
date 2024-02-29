@@ -1,7 +1,7 @@
 package com.m.blog.domain.file.service;
 
 import com.m.blog.domain.file.dto.FileDownloadRequest;
-import com.m.blog.domain.file.entity.File;
+import com.m.blog.domain.file.entity.FileEntity;
 import com.m.blog.domain.file.repository.FileJpaRepository;
 import com.m.blog.domain.file.util.FileDownloadUtil;
 import com.m.blog.domain.file.vo.DownloadFileVo;
@@ -42,7 +42,7 @@ public class FileDownloadServiceImpl implements FileDownloadService{
 
     @Override
     public ResponseEntity<Resource> get(FileDownloadRequest requestDto) throws IOException {
-        File file = fileJpaRepository.findByFileName(requestDto.getFileName())
+        FileEntity file = fileJpaRepository.findByFileName(requestDto.getFileName())
                 .orElseThrow(RuntimeException::new);
 
         DownloadFileVo fileVo = DownloadFileVo.of(file, requestDto);

@@ -1,9 +1,9 @@
 package com.m.blog.domain.posting.service;
 
-import com.m.blog.domain.board.dto.BoardDto;
-import com.m.blog.domain.board.repository.BoardDslRepository;
+import com.m.blog.domain.board.application.port.out.BoardDto;
+import com.m.blog.domain.board.application.port.out.GetBoardQuery;
 import com.m.blog.domain.posting.dto.*;
-import com.m.blog.domain.posting.entity.Posting;
+import com.m.blog.domain.posting.entity.PostingEntity;
 import com.m.blog.domain.posting.repository.PostingDslRepository;
 import com.m.blog.domain.posting.repository.PostingJpaRepository;
 import com.m.blog.global.paging.PagingResponse;
@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostingServiceImpl implements PostingService{
     private final PostingJpaRepository postingJpaRepository;
     private final PostingDslRepository postingDslRepository;
-    private final BoardDslRepository boardDslRepository;
+    private final GetBoardQuery getBoardQuery;
 
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest requestDto){
-        BoardDto found = boardDslRepository
+        BoardDto found = getBoardQuery
                 .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
         return PagingResponse.get(postingDslRepository.get(requestDto), found);
@@ -38,7 +38,7 @@ public class PostingServiceImpl implements PostingService{
     @Transactional
     @Override
     public void update(PostingUpdateRequest requestDto){
-        Posting found = postingJpaRepository
+        PostingEntity found = postingJpaRepository
                 .findByBoardCollectionIdAndBoardIdAndId(
                         requestDto.getBoardCollectionId(),
                         requestDto.getBoardId(),
@@ -60,7 +60,7 @@ public class PostingServiceImpl implements PostingService{
         int newId = postingDslRepository.findNewId(requestDto.getBoardCollectionId(), requestDto.getBoardId());
 
         postingJpaRepository.save(
-                Posting.builder()
+                PostingEntity.builder()
                         .id(newId)
                         .boardId(requestDto.getBoardId())
                         .boardCollectionId(requestDto.getBoardCollectionId())

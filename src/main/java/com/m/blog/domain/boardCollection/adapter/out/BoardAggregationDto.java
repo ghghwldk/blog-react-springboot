@@ -1,4 +1,4 @@
-package com.m.blog.domain.boardCollection.dto;
+package com.m.blog.domain.boardCollection.adapter.out;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

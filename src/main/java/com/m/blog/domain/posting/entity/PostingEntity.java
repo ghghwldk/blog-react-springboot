@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name="posting")
 @Getter
 @NoArgsConstructor
-public class Posting extends TimeComponent {
+public class PostingEntity extends TimeComponent {
     @Id
     int id;
     int boardId;
@@ -29,7 +29,7 @@ public class Posting extends TimeComponent {
     public void setTitle(String title) { this.title = title; }
 
     @Builder
-    public Posting(int id, int boardId, int boardCollectionId, String title, String content) {
+    public PostingEntity(int id, int boardId, int boardCollectionId, String title, String content) {
         this.id = id;
         this.boardId = boardId;
         this.boardCollectionId = boardCollectionId;

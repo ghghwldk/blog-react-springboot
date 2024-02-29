@@ -17,14 +17,14 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class File extends TimeComponent {
+public class FileEntity extends TimeComponent {
     @Id
     String fileName;
     String originalFileName;
     String filePath;
 
-    public static File of(UploadFileVo vo, String directoryName){
-        return com.m.blog.domain.file.entity.File.builder()
+    public static FileEntity of(UploadFileVo vo, String directoryName){
+        return FileEntity.builder()
                 .fileName(vo.getSavedFileName())
                 .originalFileName(vo.getOriginalFileName())
                 .filePath(directoryName)

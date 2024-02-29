@@ -1,4 +1,4 @@
-package com.m.blog.domain.board.entity;
+package com.m.blog.domain.board.application.port.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

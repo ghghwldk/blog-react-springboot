@@ -2,6 +2,7 @@ package com.m.blog.domain.file.service;
 
 import com.m.blog.domain.file.dto.FileUploadRequest;
 import com.m.blog.domain.file.dto.FileUploadResponse;
+import com.m.blog.domain.file.entity.FileEntity;
 import com.m.blog.domain.file.repository.FileJpaRepository;
 import com.m.blog.domain.file.util.FileUploadUtil;
 import com.m.blog.domain.file.vo.UploadFileVo;
@@ -30,7 +31,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 
         this.upload(fileVo);
 
-        fileJpaRepository.save(com.m.blog.domain.file.entity.File.of(fileVo, this.directoryName));
+        fileJpaRepository.save(FileEntity.of(fileVo, this.directoryName));
         return FileUploadResponse.of(fileVo);
     }
 
