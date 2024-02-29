@@ -1,6 +1,6 @@
-package com.m.blog.domain.file.repository;
+package com.m.blog.domain.file.adapter.out;
 
-import com.m.blog.domain.file.entity.FileEntity;
+import com.m.blog.domain.file.adapter.out.FileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

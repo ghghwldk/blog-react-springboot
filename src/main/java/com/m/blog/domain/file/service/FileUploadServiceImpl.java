@@ -1,9 +1,9 @@
 package com.m.blog.domain.file.service;
 
-import com.m.blog.domain.file.dto.FileUploadRequest;
-import com.m.blog.domain.file.dto.FileUploadResponse;
-import com.m.blog.domain.file.entity.FileEntity;
-import com.m.blog.domain.file.repository.FileJpaRepository;
+import com.m.blog.domain.file.adapter.in.FileUploadRequest;
+import com.m.blog.domain.file.adapter.out.FileUploadResponse;
+import com.m.blog.domain.file.adapter.out.FileEntity;
+import com.m.blog.domain.file.adapter.out.FileJpaRepository;
 import com.m.blog.domain.file.util.FileUploadUtil;
 import com.m.blog.domain.file.vo.UploadFileVo;
 import lombok.RequiredArgsConstructor;

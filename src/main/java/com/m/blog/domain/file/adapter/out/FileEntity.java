@@ -1,4 +1,4 @@
-package com.m.blog.domain.file.entity;
+package com.m.blog.domain.file.adapter.out;
 
 import com.m.blog.domain.file.vo.UploadFileVo;
 import com.m.blog.global.entity.TimeComponent;

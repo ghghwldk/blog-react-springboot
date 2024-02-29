@@ -1,8 +1,8 @@
-package com.m.blog.domain.file;
+package com.m.blog.domain.file.adapter.in;
 
-import com.m.blog.domain.file.dto.FileDownloadRequest;
-import com.m.blog.domain.file.dto.FileUploadRequest;
-import com.m.blog.domain.file.dto.FileUploadResponse;
+import com.m.blog.domain.file.adapter.in.FileDownloadRequest;
+import com.m.blog.domain.file.adapter.in.FileUploadRequest;
+import com.m.blog.domain.file.adapter.out.FileUploadResponse;
 import com.m.blog.domain.file.service.FileDownloadService;
 import com.m.blog.domain.file.service.FileUploadService;
 import lombok.RequiredArgsConstructor;

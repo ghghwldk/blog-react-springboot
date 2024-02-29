@@ -1,4 +1,4 @@
-package com.m.blog.domain.file.dto;
+package com.m.blog.domain.file.adapter.out;
 
 import com.m.blog.domain.file.vo.UploadFileVo;
 import lombok.AllArgsConstructor;
