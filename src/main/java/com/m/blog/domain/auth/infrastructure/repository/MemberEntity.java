@@ -1,4 +1,4 @@
-package com.m.blog.domain.auth.adapter.persistence;
+package com.m.blog.domain.auth.infrastructure.repository;
 
 import com.m.blog.global.entity.TimeComponent;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="member")
 @Getter
 @NoArgsConstructor
-class MemberEntity extends TimeComponent {
+public class MemberEntity extends TimeComponent {
     @Id
     String id;
     String name;
