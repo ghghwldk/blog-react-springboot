@@ -13,4 +13,12 @@ public class FileJpaMapper {
                 .filePath(fileEntity.getFilePath())
                 .build();
     }
+
+    public static FileEntity toEntity(File file){
+        return FileEntity.builder()
+                .fileName(file.getFileName())
+                .originalFileName(file.getOriginalFileName())
+                .filePath(file.getFilePath())
+                .build();
+    }
 }

@@ -3,8 +3,8 @@ package com.m.blog.domain.file.infrastructure.web.controller;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
-import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadPort;
-import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadEndpointPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Controller
 public class FileController {
-    private final FileDownloadPort fileDownloadPort;
-    private final FileUploadPort fileUploadPort;
+    private final FileDownloadEndpointPort fileDownloadPort;
+    private final FileUploadEndpointPort fileUploadPort;
 
 
     @PostMapping(value="/upload", produces = "application/json")

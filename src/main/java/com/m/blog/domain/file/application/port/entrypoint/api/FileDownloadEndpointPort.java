@@ -6,6 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 
-public interface FileDownloadPort {
+public interface FileDownloadEndpointPort {
     ResponseEntity<Resource> getResponse(FileDownloadRequest requestDto) throws IOException;
 }

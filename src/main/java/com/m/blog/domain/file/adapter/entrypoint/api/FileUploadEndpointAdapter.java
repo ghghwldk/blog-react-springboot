@@ -1,7 +1,8 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadEndpointPort;
+import com.m.blog.domain.file.application.port.file.FileUploadPort;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import com.m.blog.domain.file.infrastructure.file.FileUploadHelper;
@@ -16,29 +17,22 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @Adapter
-public class FileUploadEndpointAdapter implements FileUploadPort {
+public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
     private final WriteFilePort writeFilePort;
-    private final FileUploadHelper fileUploadHelper;
+    private final FileUploadPort fileUploadPort;
 
     @Value("${file.directory}") private String directoryName; // static
-    @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
-    @Value("${file.isLocal}")
-    private boolean isLocal;
+
 
     @Override
     public FileUploadResponse upload(FileUploadRequest requestDto) throws IOException{
         UploadFile uploadFile = UploadFile.of(requestDto.getMultipartFile());
 
         writeFilePort.save(uploadFile, this.directoryName);
+        fileUploadPort.upload(uploadFile);
 
         return FileUploadResponse.of(uploadFile);
     }
 
-    private void upload(UploadFile fileVo) throws IOException {
-        if(isLocal){
-            fileUploadHelper.uploadOnLocal(fileVo);
-        }else{
-            fileUploadHelper.uploadOnS3(fileVo);
-        }
-    }
+
 }

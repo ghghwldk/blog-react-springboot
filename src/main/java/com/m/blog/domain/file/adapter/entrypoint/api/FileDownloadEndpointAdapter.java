@@ -2,7 +2,8 @@ package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.File;
-import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
+import com.m.blog.domain.file.application.port.file.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.domain.file.infrastructure.file.FileDownloadHelper;
 import com.m.blog.domain.file.application.domain.DownloadFile;
@@ -20,19 +21,9 @@ import java.net.URLEncoder;
 
 @Adapter
 @RequiredArgsConstructor
-public class FileDownloadEndpointAdapter implements FileDownloadPort {
+public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
+    private final FileDownloadPort fileDownloadPort;
     private final ReadFilePort readFilePort;
-    private final FileDownloadHelper fileDownloadHelper;
-
-
-    @Value("${file.isLocal}")
-    private boolean isLocal;
-
-    private Resource getResource(DownloadFile fileVo) throws IOException {
-        return isLocal?
-                fileDownloadHelper.getLocalResource(fileVo):
-                fileDownloadHelper.getS3Resource(fileVo);
-    }
 
     private String getHeaderValues(DownloadFile fileVo) throws UnsupportedEncodingException {
         String encoded = URLEncoder.encode(fileVo.getOriginalName(), "UTF-8").replaceAll("\\+", "%20");
@@ -40,14 +31,12 @@ public class FileDownloadEndpointAdapter implements FileDownloadPort {
     }
 
     @Override
-    public ResponseEntity<Resource> getResponse(FileDownloadRequest requestDto) throws IOException {
-        File file = readFilePort.findByFileName(requestDto.getFileName());
-
-        DownloadFile downloadFile = DownloadFile.of(file, requestDto);
+    public ResponseEntity<Resource> getResponse(FileDownloadRequest request) throws IOException {
+        DownloadFile downloadFile = readFilePort.getDownloadFile(request);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, getHeaderValues(downloadFile))
-                .body(this.getResource(downloadFile));
+                .body(fileDownloadPort.getResource(downloadFile));
     }
 }
