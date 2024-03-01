@@ -1,5 +1,6 @@
 package com.m.blog.domain.file.infrastructure.file;
 
+import com.m.blog.domain.file.domain.UploadFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,7 +12,7 @@ public interface FileUpload {
 
     void removeNewFile(File targetFile);
 
-    void uploadOnLocal(UploadFileVo fileVo) throws IOException;
+    void uploadOnLocal(UploadFile fileVo) throws IOException;
 
-    void uploadOnS3(UploadFileVo fileVo) throws IOException;
+    void uploadOnS3(UploadFile fileVo) throws IOException;
 }

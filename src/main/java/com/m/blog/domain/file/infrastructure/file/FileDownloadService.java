@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.m.blog.domain.file.domain.DownloadFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -23,7 +24,7 @@ class FileDownloadService implements FileDownload {
     private String bucket;
 
     @Override
-    public Resource getS3Resource(DownloadFileVo fileVo){
+    public Resource getS3Resource(DownloadFile fileVo){
         S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, fileVo.getKey()));
         S3ObjectInputStream objectInputStream = o.getObjectContent();
         Resource resource = new InputStreamResource(objectInputStream);
@@ -32,7 +33,7 @@ class FileDownloadService implements FileDownload {
     }
 
     @Override
-    public Resource getLocalResource(DownloadFileVo fileVo) throws IOException {
+    public Resource getLocalResource(DownloadFile fileVo) throws IOException {
         Path path = Paths.get(fileVo.getKey());
 
         return new InputStreamResource(Files.newInputStream(path));

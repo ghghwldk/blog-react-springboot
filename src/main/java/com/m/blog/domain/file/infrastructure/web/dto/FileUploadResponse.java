@@ -1,6 +1,6 @@
 package com.m.blog.domain.file.infrastructure.web.dto;
 
-import com.m.blog.domain.file.infrastructure.file.UploadFileVo;
+import com.m.blog.domain.file.domain.UploadFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class FileUploadResponse {
     private String url;
     private String downloadUrl;
 
-    public static FileUploadResponse of(UploadFileVo vo){
+    public static FileUploadResponse of(UploadFile vo){
         final String url = "/file/download/"+ vo.getSavedFileName();
 
         return FileUploadResponse.builder()

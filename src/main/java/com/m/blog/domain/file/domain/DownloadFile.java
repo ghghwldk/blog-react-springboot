@@ -1,7 +1,5 @@
-package com.m.blog.domain.file.infrastructure.file;
+package com.m.blog.domain.file.domain;
 
-import com.m.blog.domain.file.domain.File;
-import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +8,13 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class DownloadFileVo {
+public class DownloadFile {
     private String path;
     private String key;
     private String originalName;
 
-    public static DownloadFileVo of(File file, FileDownloadRequest requestDto){
-        return DownloadFileVo.builder()
+    public static DownloadFile of(File file, FileDownloadRequest requestDto){
+        return DownloadFile.builder()
                 .path(file.getFilePath())
                 .key(file.getFilePath() + "/" + requestDto.getFileName())
                 .originalName(file.getOriginalFileName())

@@ -3,6 +3,7 @@ package com.m.blog.domain.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.m.blog.domain.file.domain.UploadFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -46,7 +47,7 @@ class FileUploadService implements FileUpload {
     }
 
     @Override
-    public void uploadOnLocal(UploadFileVo fileVo) throws IOException{
+    public void uploadOnLocal(UploadFile fileVo) throws IOException{
         File file = null;
 
         log.info("file is uploading on the local pc");
@@ -60,7 +61,7 @@ class FileUploadService implements FileUpload {
         }
     }
 
-    private void putS3(File uploadFile, UploadFileVo fileVo) {
+    private void putS3(File uploadFile, UploadFile fileVo) {
         String key= this.directoryName + "/" + fileVo.getSavedFileName();
 
         amazonS3Client
@@ -69,7 +70,7 @@ class FileUploadService implements FileUpload {
     }
 
     @Override
-    public void uploadOnS3(UploadFileVo fileVo) throws IOException{
+    public void uploadOnS3(UploadFile fileVo) throws IOException{
         File file = null;
 
         try{

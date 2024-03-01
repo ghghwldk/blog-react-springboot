@@ -1,6 +1,6 @@
 package com.m.blog.domain.file.infrastructure.repository;
 
-import com.m.blog.domain.file.infrastructure.file.UploadFileVo;
+import com.m.blog.domain.file.domain.UploadFile;
 import com.m.blog.global.entity.TimeComponent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +23,7 @@ public class FileEntity extends TimeComponent {
     String originalFileName;
     String filePath;
 
-    public static FileEntity of(UploadFileVo vo, String directoryName){
+    public static FileEntity of(UploadFile vo, String directoryName){
         return FileEntity.builder()
                 .fileName(vo.getSavedFileName())
                 .originalFileName(vo.getOriginalFileName())
