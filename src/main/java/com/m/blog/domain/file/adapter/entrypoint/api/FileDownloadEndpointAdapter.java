@@ -4,7 +4,7 @@ import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.domain.File;
 import com.m.blog.domain.file.port.entrypoint.api.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
-import com.m.blog.domain.file.infrastructure.file.FileDownload;
+import com.m.blog.domain.file.infrastructure.file.FileDownloadHelper;
 import com.m.blog.domain.file.domain.DownloadFile;
 import com.m.blog.domain.file.port.persistence.ReadFilePort;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import java.net.URLEncoder;
 @RequiredArgsConstructor
 public class FileDownloadEndpointAdapter implements FileDownloadPort {
     private final ReadFilePort readFilePort;
-    private final FileDownload fileDownload;
+    private final FileDownloadHelper fileDownloadHelper;
 
 
     @Value("${file.isLocal}")
@@ -30,8 +30,8 @@ public class FileDownloadEndpointAdapter implements FileDownloadPort {
 
     private Resource getResource(DownloadFile fileVo) throws IOException {
         return isLocal?
-                fileDownload.getLocalResource(fileVo):
-                fileDownload.getS3Resource(fileVo);
+                fileDownloadHelper.getLocalResource(fileVo):
+                fileDownloadHelper.getS3Resource(fileVo);
     }
 
     private String getHeaderValues(DownloadFile fileVo) throws UnsupportedEncodingException {

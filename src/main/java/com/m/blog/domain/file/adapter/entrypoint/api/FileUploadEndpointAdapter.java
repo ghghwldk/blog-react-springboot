@@ -2,10 +2,9 @@ package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.port.entrypoint.api.FileUploadPort;
-import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
-import com.m.blog.domain.file.infrastructure.file.FileUpload;
+import com.m.blog.domain.file.infrastructure.file.FileUploadHelper;
 import com.m.blog.domain.file.domain.UploadFile;
 import com.m.blog.domain.file.port.persistence.WriteFilePort;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ import java.io.IOException;
 @Adapter
 public class FileUploadEndpointAdapter implements FileUploadPort {
     private final WriteFilePort writeFilePort;
-    private final FileUpload fileUploadUtil;
+    private final FileUploadHelper fileUploadHelper;
 
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
@@ -37,9 +36,9 @@ public class FileUploadEndpointAdapter implements FileUploadPort {
 
     private void upload(UploadFile fileVo) throws IOException {
         if(isLocal){
-            fileUploadUtil.uploadOnLocal(fileVo);
+            fileUploadHelper.uploadOnLocal(fileVo);
         }else{
-            fileUploadUtil.uploadOnS3(fileVo);
+            fileUploadHelper.uploadOnS3(fileVo);
         }
     }
 }

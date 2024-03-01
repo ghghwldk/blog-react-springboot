@@ -20,7 +20,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-class FileUploadService implements FileUpload {
+class FileUploadService implements FileUploadHelper {
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
 

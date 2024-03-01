@@ -5,7 +5,7 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
-public interface FileDownload {
+public interface FileDownloadHelper {
     Resource getS3Resource(DownloadFile fileVo);
 
     Resource getLocalResource(DownloadFile fileVo) throws IOException;

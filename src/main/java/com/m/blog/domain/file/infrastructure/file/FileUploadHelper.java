@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public interface FileUpload {
+public interface FileUploadHelper {
     Optional<File> convert(MultipartFile file) throws IOException;
 
     void removeNewFile(File targetFile);

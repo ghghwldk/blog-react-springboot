@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReadFileAdapter implements ReadFilePort {
     private final FileJpaRepository fileJpaRepository;
+
     @Override
     public File findByFileName(String fileName) {
         return fileJpaRepository.findByFileName(fileName)

@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 
 @Component
 @RequiredArgsConstructor
-class FileDownloadService implements FileDownload {
+class FileDownloadService implements FileDownloadHelper {
     private final AmazonS3 amazonS3;
     @Value("${aws.s3.bucket:#{null}}")
     private String bucket;
