@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.m.blog.domain.file.application.domain.DownloadFile;
+import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -20,12 +21,11 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 class FileDownloadHelperImpl implements FileDownloadHelper {
     private final AmazonS3 amazonS3;
-    @Value("${aws.s3.bucket:#{null}}")
-    private String bucket;
+    private final FileProperties fileProperties;
 
     @Override
     public Resource getS3Resource(DownloadFile downloadFile){
-        S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, downloadFile.getKey()));
+        S3Object o = amazonS3.getObject(new GetObjectRequest(fileProperties.getBucket(), downloadFile.getKey()));
         S3ObjectInputStream objectInputStream = o.getObjectContent();
         Resource resource = new InputStreamResource(objectInputStream);
 

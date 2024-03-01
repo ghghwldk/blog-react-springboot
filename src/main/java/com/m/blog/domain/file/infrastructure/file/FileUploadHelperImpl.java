@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -21,9 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 class FileUploadHelperImpl implements FileUploadHelper {
-    @Value("${file.directory}") private String directoryName; // static
-    @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
-
+    private final FileProperties fileProperties;
     private final AmazonS3Client amazonS3Client;
 
     @Override
@@ -53,7 +52,7 @@ class FileUploadHelperImpl implements FileUploadHelper {
         log.info("file is uploading on the local pc");
         try{
             InputStream fileStream = fileVo.getMultipartFile().getInputStream();
-            file = new File(this.directoryName + "/" + fileVo.getSavedFileName());
+            file = new File(fileProperties.getDirectoryName() + "/" + fileVo.getSavedFileName());
             FileUtils.copyInputStreamToFile(fileStream, file);
         }catch (IOException e) {
             FileUtils.deleteQuietly(file);
@@ -62,10 +61,10 @@ class FileUploadHelperImpl implements FileUploadHelper {
     }
 
     private void putS3(File uploadFile, UploadFile fileVo) {
-        String key= this.directoryName + "/" + fileVo.getSavedFileName();
+        String key= fileProperties.getDirectoryName() + "/" + fileVo.getSavedFileName();
 
         amazonS3Client
-                .putObject(new PutObjectRequest(bucket, key, uploadFile)
+                .putObject(new PutObjectRequest(fileProperties.getBucket(), key, uploadFile)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
