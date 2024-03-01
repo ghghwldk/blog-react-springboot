@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class FindPostingService implements FindPostingUsecase {
+class FindPostingService implements FindPostingUsecase {
     private final GetBoardQuery getBoardQuery;
     private final FindPostingPagingPort findPostingPagingPort;
     private final FindPostingPort findPostingPort;

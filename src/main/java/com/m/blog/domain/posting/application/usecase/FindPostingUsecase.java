@@ -1,6 +1,5 @@
 package com.m.blog.domain.posting.application.usecase;
 
-import com.m.blog.domain.board.application.port.out.BoardDto;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadResponse;
 import com.m.blog.global.paging.PagingResponse;

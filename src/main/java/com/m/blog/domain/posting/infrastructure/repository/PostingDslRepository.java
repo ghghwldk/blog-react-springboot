@@ -1,9 +1,6 @@
 package com.m.blog.domain.posting.infrastructure.repository;
 
 import com.m.blog.domain.posting.application.domain.Posting;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

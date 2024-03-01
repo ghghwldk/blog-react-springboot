@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SavePostingService implements SavePostingUsecase {
+class SavePostingService implements SavePostingUsecase {
     private final SavePostingPort savePostingPort;
     private final FindPostingNewIdPort findPostingNewIdPort;
 

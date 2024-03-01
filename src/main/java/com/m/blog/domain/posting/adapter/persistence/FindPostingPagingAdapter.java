@@ -5,7 +5,6 @@ import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
 import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
 import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
