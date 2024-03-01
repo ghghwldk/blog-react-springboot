@@ -1,14 +1,23 @@
 package com.m.blog.domain.file.adapter.persistence;
 
+import com.m.blog.common.Adapter;
+import com.m.blog.domain.file.domain.File;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
+import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
 import com.m.blog.domain.file.port.persistence.ReadFilePort;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
 
+@Adapter
+@RequiredArgsConstructor
 public class ReadFileAdapter implements ReadFilePort {
+    private final FileJpaRepository fileJpaRepository;
     @Override
-    public Optional<FileEntity> findByFileName(String fileName) {
-        return Optional.empty();
+    public File findByFileName(String fileName) {
+        return fileJpaRepository.findByFileName(fileName)
+                .map(FileJpaMapper::toDomain)
+                .orElseThrow(RuntimeException::new);
     }
 }

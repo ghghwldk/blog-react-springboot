@@ -1,6 +1,8 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
+import com.m.blog.domain.file.adapter.persistence.ReadFileAdapter;
+import com.m.blog.domain.file.domain.File;
 import com.m.blog.domain.file.port.entrypoint.api.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
@@ -23,8 +25,7 @@ import java.net.URLEncoder;
 @Adapter
 @RequiredArgsConstructor
 public class FileDownloadEndpointAdapter implements FileDownloadPort {
-    @Autowired
-    FileJpaRepository fileJpaRepository;
+    private final ReadFileAdapter readFileAdapter;
     private final FileDownload fileDownloadUtil;
 
 
@@ -44,8 +45,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadPort {
 
     @Override
     public ResponseEntity<Resource> get(FileDownloadRequest requestDto) throws IOException {
-        FileEntity file = fileJpaRepository.findByFileName(requestDto.getFileName())
-                .orElseThrow(RuntimeException::new);
+        File file = readFileAdapter.findByFileName(requestDto.getFileName());
 
         DownloadFileVo fileVo = DownloadFileVo.of(file, requestDto);
 
