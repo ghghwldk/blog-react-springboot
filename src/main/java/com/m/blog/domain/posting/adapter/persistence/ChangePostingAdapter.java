@@ -14,7 +14,6 @@ public class ChangePostingAdapter implements ChangePostingPort {
     private final PostingJpaRepository postingJpaRepository;
 
     @Override
-    @Transactional
     public void update(Posting.PostingId id, Posting.Mutable target) {
         PostingEntity found = postingJpaRepository
                 .findByBoardCollectionIdAndBoardIdAndId(

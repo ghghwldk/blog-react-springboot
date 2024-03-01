@@ -7,8 +7,6 @@ import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
 import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
 import com.m.blog.domain.posting.application.port.persistence.FindPostingPort;
-import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
-import com.m.blog.domain.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;

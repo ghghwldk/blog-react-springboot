@@ -24,7 +24,6 @@ public class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
     private final PostingDslRepository postingDslRepository;
     private final PostingDtoMapper postingDtoMapper;
 
-    @Transactional
     @Override
     public void update(PostingUpdateRequest request){
         changePostingUsecase.update(
@@ -33,23 +32,11 @@ public class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
         );
     }
 
-    @Transactional
     @Override
     public void create(PostingCreateRequest request){
         savePostingUsecase.save(
                 postingDtoMapper.toId(request),
                 postingDtoMapper.toMutable(request)
-        );
-        int newId = postingDslRepository.findNewId(request.getBoardCollectionId(), request.getBoardId());
-
-        postingJpaRepository.save(
-                PostingEntity.builder()
-                        .id(newId)
-                        .boardId(request.getBoardId())
-                        .boardCollectionId(request.getBoardCollectionId())
-                        .title(request.getTitle())
-                        .content(request.getTitle())
-                        .build()
         );
     }
 }

@@ -14,6 +14,7 @@ public class ChangePostingService implements ChangePostingUsecase {
     private final ChangePostingPort changePostingPort;
 
     @Override
+    @Transactional
     public void update(Posting.PostingId id, Posting.Mutable target) {
         changePostingPort.update(id, target);
     }
