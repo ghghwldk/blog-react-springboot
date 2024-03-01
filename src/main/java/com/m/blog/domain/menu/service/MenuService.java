@@ -1,6 +1,6 @@
 package com.m.blog.domain.menu.service;
 
-import com.m.blog.domain.boardCollection.adapter.in.GetBoardCollectionQuery;
+import com.m.blog.domain.boardCollection.application.port.persistence.GetBoardCollectionPort;
 import com.m.blog.domain.menu.infrastructure.web.dto.MenuResponse;
 import com.m.blog.domain.menu.application.usecase.MenuUsecase;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MenuService implements MenuUsecase {
-    private final GetBoardCollectionQuery getBoardCollectionQuery;
+    private final GetBoardCollectionPort getBoardCollectionQuery;
 
     @Override
     public MenuResponse get(){

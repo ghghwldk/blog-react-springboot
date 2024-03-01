@@ -1,10 +1,8 @@
-package com.m.blog.domain.boardCollection.service;
+package com.m.blog.domain.boardCollection.infrastructure.repository;
 
 import com.m.blog.domain.board.application.port.out.QBoardEntity;
-import com.m.blog.domain.boardCollection.adapter.out.BoardAggregationDto;
-import com.m.blog.domain.boardCollection.adapter.out.BoardCollectionDslRepository;
-import com.m.blog.domain.boardCollection.adapter.out.QBoardAggregationDto;
-import com.m.blog.domain.boardCollection.adapter.out.QBoardCollectionEntity;
+import com.m.blog.domain.boardCollection.adapter.persistence.QBoardAggregationDto;
+import com.m.blog.domain.boardCollection.adapter.persistence.QBoardCollectionEntity;
 import com.m.blog.domain.posting.infrastructure.repository.QPostingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +14,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardCollectionDslService implements BoardCollectionDslRepository {
+public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepository {
     private final JPAQueryFactory query;
 
     @Override

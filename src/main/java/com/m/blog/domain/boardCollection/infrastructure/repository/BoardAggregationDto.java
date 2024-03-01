@@ -1,10 +1,8 @@
-package com.m.blog.domain.boardCollection.adapter.out;
+package com.m.blog.domain.boardCollection.infrastructure.repository;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor

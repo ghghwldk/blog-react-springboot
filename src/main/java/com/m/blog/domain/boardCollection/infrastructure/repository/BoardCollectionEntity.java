@@ -1,4 +1,4 @@
-package com.m.blog.domain.boardCollection.adapter.out;
+package com.m.blog.domain.boardCollection.infrastructure.repository;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

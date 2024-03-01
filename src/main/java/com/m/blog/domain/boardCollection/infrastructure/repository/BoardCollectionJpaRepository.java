@@ -1,4 +1,4 @@
-package com.m.blog.domain.boardCollection.adapter.out;
+package com.m.blog.domain.boardCollection.infrastructure.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
