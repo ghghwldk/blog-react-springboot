@@ -1,6 +1,6 @@
 package com.m.blog.global.security;
 
-import com.m.blog.domain.auth.service.FilterService;
+import com.m.blog.domain.auth.application.service.FilterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

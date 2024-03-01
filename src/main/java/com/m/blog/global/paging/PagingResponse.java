@@ -1,9 +1,7 @@
 package com.m.blog.global.paging;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.m.blog.domain.board.dto.BoardDto;
-import com.m.blog.domain.board.entity.Board;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
+import com.m.blog.domain.board.infrastructure.repository.BoardDto;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
