@@ -1,7 +1,5 @@
-package com.m.blog.domain.posting.repository;
+package com.m.blog.domain.posting.infrastructure.repository;
 
-import com.m.blog.domain.posting.entity.PostingEntity;
-import com.m.blog.domain.posting.entity.PostingId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

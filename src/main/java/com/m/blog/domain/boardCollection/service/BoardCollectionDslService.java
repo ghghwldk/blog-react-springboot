@@ -5,7 +5,7 @@ import com.m.blog.domain.boardCollection.adapter.out.BoardAggregationDto;
 import com.m.blog.domain.boardCollection.adapter.out.BoardCollectionDslRepository;
 import com.m.blog.domain.boardCollection.adapter.out.QBoardAggregationDto;
 import com.m.blog.domain.boardCollection.adapter.out.QBoardCollectionEntity;
-import com.m.blog.domain.posting.entity.QPostingEntity;
+import com.m.blog.domain.posting.infrastructure.repository.QPostingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

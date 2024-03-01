@@ -19,10 +19,10 @@ public class DownloadFile {
     private String key;
     private String originalName;
 
-    public static DownloadFile of(File file, FileDownloadRequest requestDto){
+    public static DownloadFile of(File file, FileDownloadRequest request){
         return DownloadFile.builder()
                 .path(file.getFilePath())
-                .key(file.getFilePath() + "/" + requestDto.getFileName())
+                .key(file.getFilePath() + "/" + request.getFileName())
                 .originalName(file.getOriginalFileName())
                 .build();
     }

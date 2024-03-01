@@ -1,7 +1,7 @@
 package com.m.blog.global.paging;
 
 import com.m.blog.domain.board.application.port.out.BoardDto;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

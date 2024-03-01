@@ -1,4 +1,4 @@
-package com.m.blog.domain.posting.entity;
+package com.m.blog.domain.posting.infrastructure.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

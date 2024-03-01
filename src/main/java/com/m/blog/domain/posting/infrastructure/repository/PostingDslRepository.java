@@ -1,9 +1,8 @@
-package com.m.blog.domain.posting.repository;
+package com.m.blog.domain.posting.infrastructure.repository;
 
-import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequest;
-import com.m.blog.domain.posting.dto.PostingReadPagingRequest;
-import com.m.blog.domain.posting.dto.PostingReadRequest;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import org.springframework.data.domain.Page;
 
 public interface PostingDslRepository {

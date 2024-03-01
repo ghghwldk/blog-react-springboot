@@ -1,7 +1,7 @@
-package com.m.blog.domain.posting.dto;
+package com.m.blog.domain.posting.infrastructure.web.dto;
 
 
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

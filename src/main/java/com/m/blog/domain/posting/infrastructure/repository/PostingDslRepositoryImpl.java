@@ -1,12 +1,9 @@
-package com.m.blog.domain.posting.repository;
+package com.m.blog.domain.posting.infrastructure.repository;
 import com.m.blog.domain.board.application.port.out.QBoardEntity;
 import com.m.blog.domain.boardCollection.adapter.out.QBoardCollectionEntity;
-import com.m.blog.domain.posting.dto.PostingReadFilteredPagingRequest;
-import com.m.blog.domain.posting.dto.PostingReadPagingRequest;
-import com.m.blog.domain.posting.dto.PostingReadRequest;
-import com.m.blog.domain.posting.dto.dsl.PostingDto;
-import com.m.blog.domain.posting.dto.dsl.QPostingDto;
-import com.m.blog.domain.posting.entity.QPostingEntity;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static com.m.blog.domain.posting.entity.QPostingEntity.postingEntity;
+import static com.m.blog.domain.posting.infrastructure.repository.QPostingEntity.postingEntity;
 
 
 @Repository

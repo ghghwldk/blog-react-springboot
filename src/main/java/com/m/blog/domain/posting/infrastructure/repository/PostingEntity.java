@@ -1,6 +1,7 @@
-package com.m.blog.domain.posting.entity;
+package com.m.blog.domain.posting.infrastructure.repository;
 
 import com.m.blog.global.entity.TimeComponent;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="posting")
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostingEntity extends TimeComponent {
     @Id
     int id;
@@ -28,12 +31,5 @@ public class PostingEntity extends TimeComponent {
     }
     public void setTitle(String title) { this.title = title; }
 
-    @Builder
-    public PostingEntity(int id, int boardId, int boardCollectionId, String title, String content) {
-        this.id = id;
-        this.boardId = boardId;
-        this.boardCollectionId = boardCollectionId;
-        this.title = title;
-        this.content = content;
-    }
+
 }

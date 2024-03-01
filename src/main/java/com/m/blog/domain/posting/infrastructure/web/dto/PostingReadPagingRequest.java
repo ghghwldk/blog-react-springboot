@@ -1,4 +1,4 @@
-package com.m.blog.domain.posting.dto;
+package com.m.blog.domain.posting.infrastructure.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +8,6 @@ import org.springframework.data.domain.Pageable;
 @Data
 @AllArgsConstructor
 @Builder
-public class PostingReadFilteredPagingRequest {
-    private int boardCollectionId;
-    private int boardId;
+public class PostingReadPagingRequest {
     private Pageable pageable;
 }

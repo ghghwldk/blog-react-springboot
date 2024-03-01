@@ -6,5 +6,5 @@ import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import java.io.IOException;
 
 public interface FileUploadEndpointPort {
-    FileUploadResponse upload(FileUploadRequest requestDto) throws IOException;
+    FileUploadResponse upload(FileUploadRequest request) throws IOException;
 }

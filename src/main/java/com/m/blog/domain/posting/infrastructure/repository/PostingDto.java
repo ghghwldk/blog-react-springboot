@@ -1,4 +1,4 @@
-package com.m.blog.domain.posting.dto.dsl;
+package com.m.blog.domain.posting.infrastructure.repository;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

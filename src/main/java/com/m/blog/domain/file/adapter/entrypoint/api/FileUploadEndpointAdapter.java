@@ -25,8 +25,8 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
 
 
     @Override
-    public FileUploadResponse upload(FileUploadRequest requestDto) throws IOException{
-        UploadFile uploadFile = UploadFile.of(requestDto.getMultipartFile());
+    public FileUploadResponse upload(FileUploadRequest request) throws IOException{
+        UploadFile uploadFile = UploadFile.of(request.getMultipartFile());
 
         writeFilePort.save(uploadFile, this.directoryName);
         fileUploadPort.upload(uploadFile);
