@@ -4,6 +4,7 @@ import com.m.blog.common.Mapper;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingCreateRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingUpdateRequest;
 
 @Mapper
@@ -35,6 +36,12 @@ public class PostingDtoMapper {
         return Posting.Mutable.builder()
                 .content(request.getMarkup())
                 .title(request.getTitle())
+                .build();
+    }
+    public Posting.IdWithoutPostingId of(PostingReadFilteredPagingRequest request){
+        return Posting.IdWithoutPostingId.builder()
+                .boardCollectionId(request.getBoardCollectionId())
+                .boardId(request.getBoardId())
                 .build();
     }
 
