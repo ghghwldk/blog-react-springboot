@@ -126,7 +126,7 @@ public class PostingDslRepositoryImpl implements PostingDslRepository {
     }
 
     @Override
-    public PostingDto getSingle(Posting.SingleCondition condition) {
+    public PostingDto getSingle(Posting.PostingId condition) {
         return this.getPosting(condition.getBoardCollectionId(), condition.getBoardId(), condition.getPostingId());
     }
 

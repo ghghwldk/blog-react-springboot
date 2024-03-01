@@ -38,7 +38,7 @@ public class FindPostingEndpointAdapter implements FindPositngEndpointPort {
 
     @Override
     public PostingReadResponse get(PostingReadRequest request){
-        Posting.SingleCondition condition =
+        Posting.PostingId condition =
                 Posting.get(request.getBoardCollectionId(), request.getBoardId(), request.getId());
 
         return findPostingUsecase.get(condition);

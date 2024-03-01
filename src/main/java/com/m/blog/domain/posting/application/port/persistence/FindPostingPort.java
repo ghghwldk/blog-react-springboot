@@ -5,6 +5,6 @@ import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import org.springframework.data.domain.Pageable;
 
 public interface FindPostingPort {
-    PostingDto get(Posting.SingleCondition condition);
+    PostingDto get(Posting.PostingId condition);
 
 }

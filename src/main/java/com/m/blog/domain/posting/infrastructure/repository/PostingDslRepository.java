@@ -12,7 +12,7 @@ public interface PostingDslRepository {
     Page<PostingDto> getPage(Pageable pageable);
 
     Page<PostingDto> getFiltered(int boardCollectionIdm, int boardId, Pageable pageable);
-    PostingDto getSingle(Posting.SingleCondition condition);
+    PostingDto getSingle(Posting.PostingId condition);
 
 
 }

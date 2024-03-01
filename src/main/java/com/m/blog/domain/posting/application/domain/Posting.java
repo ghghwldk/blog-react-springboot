@@ -17,8 +17,8 @@ public class Posting {
                 .build();
     }
 
-    public static Posting.SingleCondition get(int boardCollectionId, int boardId, int postingId){
-        return Posting.SingleCondition.builder()
+    public static Posting.PostingId get(int boardCollectionId, int boardId, int postingId){
+        return Posting.PostingId.builder()
                 .boardCollectionId(boardCollectionId)
                 .boardId(boardId)
                 .postingId(postingId)
@@ -68,15 +68,6 @@ public class Posting {
     public static class InBoardCondition{
         private int boardCollectionId;
         private int boardId;
-    }
-
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    public static class SingleCondition{
-        private int boardCollectionId;
-        private int boardId;
-        private int postingId;
     }
 
     @AllArgsConstructor

@@ -13,7 +13,7 @@ public class FindPostingAdapter implements FindPostingPort {
     private final PostingDslRepository postingDslRepository;
 
     @Override
-    public PostingDto get(Posting.SingleCondition condition) {
+    public PostingDto get(Posting.PostingId condition) {
         return postingDslRepository.getSingle(condition);
     }
 }

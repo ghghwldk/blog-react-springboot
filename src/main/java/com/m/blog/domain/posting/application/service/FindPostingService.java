@@ -40,7 +40,7 @@ public class FindPostingService implements FindPostingUsecase {
     }
 
     @Override
-    public PostingReadResponse get(Posting.SingleCondition condition){
+    public PostingReadResponse get(Posting.PostingId condition){
         return PostingReadResponse.of(findPostingPort.get(condition));
     }
 }
