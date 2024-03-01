@@ -1,6 +1,6 @@
-package com.m.blog.domain.file.adapter.out;
+package com.m.blog.domain.file.infrastructure.repository;
 
-import com.m.blog.domain.file.vo.UploadFileVo;
+import com.m.blog.domain.file.infrastructure.file.UploadFileVo;
 import com.m.blog.global.entity.TimeComponent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

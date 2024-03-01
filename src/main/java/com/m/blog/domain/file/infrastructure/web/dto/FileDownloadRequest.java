@@ -1,4 +1,4 @@
-package com.m.blog.domain.file.adapter.in;
+package com.m.blog.domain.file.infrastructure.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

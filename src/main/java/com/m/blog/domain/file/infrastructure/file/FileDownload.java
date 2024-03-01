@@ -1,11 +1,10 @@
-package com.m.blog.domain.file.util;
+package com.m.blog.domain.file.infrastructure.file;
 
-import com.m.blog.domain.file.vo.DownloadFileVo;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
-public interface FileDownloadUtil {
+public interface FileDownload {
     Resource getS3Resource(DownloadFileVo fileVo);
 
     Resource getLocalResource(DownloadFileVo fileVo) throws IOException;

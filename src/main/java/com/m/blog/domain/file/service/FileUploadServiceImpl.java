@@ -1,11 +1,12 @@
 package com.m.blog.domain.file.service;
 
-import com.m.blog.domain.file.adapter.in.FileUploadRequest;
-import com.m.blog.domain.file.adapter.out.FileUploadResponse;
-import com.m.blog.domain.file.adapter.out.FileEntity;
-import com.m.blog.domain.file.adapter.out.FileJpaRepository;
-import com.m.blog.domain.file.util.FileUploadUtil;
-import com.m.blog.domain.file.vo.UploadFileVo;
+import com.m.blog.domain.file.adapter.entrypoint.api.FileUploadPort;
+import com.m.blog.domain.file.infrastructure.repository.FileEntity;
+import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
+import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
+import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
+import com.m.blog.domain.file.infrastructure.file.FileUpload;
+import com.m.blog.domain.file.infrastructure.file.UploadFileVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,9 +17,9 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class FileUploadServiceImpl implements FileUploadService{
+public class FileUploadServiceImpl implements FileUploadPort {
     private final FileJpaRepository fileJpaRepository;
-    private final FileUploadUtil fileUploadUtil;
+    private final FileUpload fileUploadUtil;
 
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;

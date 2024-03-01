@@ -1,10 +1,10 @@
-package com.m.blog.domain.file.adapter.in;
+package com.m.blog.domain.file.infrastructure.web.controller;
 
-import com.m.blog.domain.file.adapter.in.FileDownloadRequest;
-import com.m.blog.domain.file.adapter.in.FileUploadRequest;
-import com.m.blog.domain.file.adapter.out.FileUploadResponse;
-import com.m.blog.domain.file.service.FileDownloadService;
-import com.m.blog.domain.file.service.FileUploadService;
+import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
+import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
+import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
+import com.m.blog.domain.file.adapter.entrypoint.api.FileDownloadPort;
+import com.m.blog.domain.file.adapter.entrypoint.api.FileUploadPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Controller
 public class FileController {
-    private final FileDownloadService fileDownloadService;
-    private final FileUploadService fileUploadService;
+    private final FileDownloadPort fileDownloadService;
+    private final FileUploadPort fileUploadService;
 
 
     @PostMapping(value="/upload", produces = "application/json")

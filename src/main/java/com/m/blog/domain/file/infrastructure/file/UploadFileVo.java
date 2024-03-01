@@ -1,4 +1,4 @@
-package com.m.blog.domain.file.vo;
+package com.m.blog.domain.file.infrastructure.file;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,9 @@
-package com.m.blog.domain.file.util;
+package com.m.blog.domain.file.infrastructure.file;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.m.blog.domain.file.vo.DownloadFileVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -18,7 +17,7 @@ import java.nio.file.Paths;
 
 @Component
 @RequiredArgsConstructor
-public class FileDownloadUtilImpl implements FileDownloadUtil{
+class FileDownloadService implements FileDownload {
     private final AmazonS3 amazonS3;
     @Value("${aws.s3.bucket:#{null}}")
     private String bucket;

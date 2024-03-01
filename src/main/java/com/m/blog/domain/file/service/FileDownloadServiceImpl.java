@@ -1,10 +1,11 @@
 package com.m.blog.domain.file.service;
 
-import com.m.blog.domain.file.adapter.in.FileDownloadRequest;
-import com.m.blog.domain.file.adapter.out.FileEntity;
-import com.m.blog.domain.file.adapter.out.FileJpaRepository;
-import com.m.blog.domain.file.util.FileDownloadUtil;
-import com.m.blog.domain.file.vo.DownloadFileVo;
+import com.m.blog.domain.file.adapter.entrypoint.api.FileDownloadPort;
+import com.m.blog.domain.file.infrastructure.repository.FileEntity;
+import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
+import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
+import com.m.blog.domain.file.infrastructure.file.FileDownload;
+import com.m.blog.domain.file.infrastructure.file.DownloadFileVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,10 +21,10 @@ import java.net.URLEncoder;
 
 @Service
 @RequiredArgsConstructor
-public class FileDownloadServiceImpl implements FileDownloadService{
+public class FileDownloadServiceImpl implements FileDownloadPort {
     @Autowired
     FileJpaRepository fileJpaRepository;
-    private final FileDownloadUtil fileDownloadUtil;
+    private final FileDownload fileDownloadUtil;
 
 
     @Value("${file.isLocal}")

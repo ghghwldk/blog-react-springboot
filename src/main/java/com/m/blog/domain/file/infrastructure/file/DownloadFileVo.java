@@ -1,7 +1,7 @@
-package com.m.blog.domain.file.vo;
+package com.m.blog.domain.file.infrastructure.file;
 
-import com.m.blog.domain.file.adapter.in.FileDownloadRequest;
-import com.m.blog.domain.file.adapter.out.FileEntity;
+import com.m.blog.domain.file.infrastructure.repository.FileEntity;
+import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
