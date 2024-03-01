@@ -3,7 +3,7 @@ package com.m.blog.domain.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.m.blog.domain.file.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-class FileUploadService implements FileUploadHelper {
+class FileUploadHelperImpl implements FileUploadHelper {
     @Value("${file.directory}") private String directoryName; // static
     @Value("${cloud.aws.s3.bucket:#{null}}") private String bucket;
 

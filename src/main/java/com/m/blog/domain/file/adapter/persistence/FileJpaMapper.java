@@ -1,7 +1,7 @@
 package com.m.blog.domain.file.adapter.persistence;
 
 import com.m.blog.common.Mapper;
-import com.m.blog.domain.file.domain.File;
+import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 
 @Mapper

@@ -1,6 +1,6 @@
 package com.m.blog.domain.file.infrastructure.web.dto;
 
-import com.m.blog.domain.file.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

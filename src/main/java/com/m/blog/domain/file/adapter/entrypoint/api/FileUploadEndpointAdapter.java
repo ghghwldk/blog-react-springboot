@@ -1,12 +1,12 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.port.entrypoint.api.FileUploadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadPort;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import com.m.blog.domain.file.infrastructure.file.FileUploadHelper;
-import com.m.blog.domain.file.domain.UploadFile;
-import com.m.blog.domain.file.port.persistence.WriteFilePort;
+import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.port.persistence.WriteFilePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

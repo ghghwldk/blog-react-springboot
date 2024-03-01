@@ -1,9 +1,15 @@
-package com.m.blog.domain.file.domain;
+package com.m.blog.domain.file.application.domain;
 
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import java.io.IOException;
 
 @Data
 @Builder
@@ -20,5 +26,6 @@ public class DownloadFile {
                 .originalName(file.getOriginalFileName())
                 .build();
     }
+
 }
 

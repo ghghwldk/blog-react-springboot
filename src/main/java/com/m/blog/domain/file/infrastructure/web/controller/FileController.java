@@ -3,8 +3,8 @@ package com.m.blog.domain.file.infrastructure.web.controller;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
-import com.m.blog.domain.file.port.entrypoint.api.FileDownloadPort;
-import com.m.blog.domain.file.port.entrypoint.api.FileUploadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadPort;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +18,21 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Controller
 public class FileController {
-    private final FileDownloadPort fileDownloadService;
-    private final FileUploadPort fileUploadService;
+    private final FileDownloadPort fileDownloadPort;
+    private final FileUploadPort fileUploadPort;
 
 
     @PostMapping(value="/upload", produces = "application/json")
     @ResponseBody
     public FileUploadResponse upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        return fileUploadService.upload(FileUploadRequest.builder()
+        return fileUploadPort.upload(FileUploadRequest.builder()
                 .multipartFile(multipartFile)
                 .build());
     }
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) throws IOException{
-        return fileDownloadService.get(FileDownloadRequest.builder()
+        return fileDownloadPort.getResponse(FileDownloadRequest.builder()
                 .fileName(fileName)
                 .build());
     }

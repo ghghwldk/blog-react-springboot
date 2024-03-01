@@ -1,12 +1,12 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.domain.File;
-import com.m.blog.domain.file.port.entrypoint.api.FileDownloadPort;
+import com.m.blog.domain.file.application.domain.File;
+import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.domain.file.infrastructure.file.FileDownloadHelper;
-import com.m.blog.domain.file.domain.DownloadFile;
-import com.m.blog.domain.file.port.persistence.ReadFilePort;
+import com.m.blog.domain.file.application.domain.DownloadFile;
+import com.m.blog.domain.file.application.port.persistence.ReadFilePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -40,14 +40,14 @@ public class FileDownloadEndpointAdapter implements FileDownloadPort {
     }
 
     @Override
-    public ResponseEntity<Resource> get(FileDownloadRequest requestDto) throws IOException {
+    public ResponseEntity<Resource> getResponse(FileDownloadRequest requestDto) throws IOException {
         File file = readFilePort.findByFileName(requestDto.getFileName());
 
-        DownloadFile fileVo = DownloadFile.of(file, requestDto);
+        DownloadFile downloadFile = DownloadFile.of(file, requestDto);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .header(HttpHeaders.CONTENT_DISPOSITION, getHeaderValues(fileVo))
-                .body(this.getResource(fileVo));
+                .header(HttpHeaders.CONTENT_DISPOSITION, getHeaderValues(downloadFile))
+                .body(this.getResource(downloadFile));
     }
 }

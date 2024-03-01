@@ -1,6 +1,6 @@
 package com.m.blog.domain.file.infrastructure.file;
 
-import com.m.blog.domain.file.domain.DownloadFile;
+import com.m.blog.domain.file.application.domain.DownloadFile;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
