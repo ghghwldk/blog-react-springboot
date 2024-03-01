@@ -1,4 +1,4 @@
-package com.m.blog.domain.menu.dto;
+package com.m.blog.domain.menu.infrastructure.web.dto;
 
 import com.m.blog.domain.boardCollection.adapter.out.BoardAggregationDto;
 import com.m.blog.domain.boardCollection.adapter.out.BoardCollectionEntity;
