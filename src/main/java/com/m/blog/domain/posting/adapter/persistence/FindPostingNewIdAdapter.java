@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindPostingNewIdAdapter implements FindPostingNewIdPort {
+class FindPostingNewIdAdapter implements FindPostingNewIdPort {
     private final PostingDslRepository postingDslRepository;
 
     @Override

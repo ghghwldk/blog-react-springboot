@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindPostingAdapter implements FindPostingPort {
+class FindPostingAdapter implements FindPostingPort {
     private final PostingDslRepository postingDslRepository;
 
     @Override

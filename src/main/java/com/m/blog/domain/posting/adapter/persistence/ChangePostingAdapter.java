@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Adapter
 @RequiredArgsConstructor
-public class ChangePostingAdapter implements ChangePostingPort {
+class ChangePostingAdapter implements ChangePostingPort {
     private final PostingJpaRepository postingJpaRepository;
 
     @Override

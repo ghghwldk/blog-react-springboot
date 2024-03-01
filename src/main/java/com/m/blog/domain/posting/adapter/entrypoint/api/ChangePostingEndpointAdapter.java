@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Adapter
 @RequiredArgsConstructor
-public class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
+class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
     private final ChangePostingUsecase changePostingUsecase;
     private final SavePostingUsecase savePostingUsecase;
     private final PostingDtoMapper postingDtoMapper;

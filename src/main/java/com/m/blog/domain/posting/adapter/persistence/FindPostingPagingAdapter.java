@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindPostingPagingAdapter implements FindPostingPagingPort {
+class FindPostingPagingAdapter implements FindPostingPagingPort {
     private final PostingDslRepository postingDslRepository;
 
     @Override

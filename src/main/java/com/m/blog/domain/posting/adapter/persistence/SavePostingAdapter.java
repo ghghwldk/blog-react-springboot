@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-public class SavePostingAdapter implements SavePostingPort {
+class SavePostingAdapter implements SavePostingPort {
     private final PostingJpaRepository postingJpaRepository;
 
     @Override

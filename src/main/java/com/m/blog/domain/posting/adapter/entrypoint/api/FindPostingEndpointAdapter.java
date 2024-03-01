@@ -18,7 +18,7 @@ import org.springframework.data.domain.Pageable;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindPostingEndpointAdapter implements FindPositngEndpointPort {
+class FindPostingEndpointAdapter implements FindPositngEndpointPort {
     private final FindPostingUsecase findPostingUsecase;
     private final PostingDtoMapper postingDtoMapper;
 

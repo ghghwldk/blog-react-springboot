@@ -8,7 +8,7 @@ import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagin
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingUpdateRequest;
 
 @Mapper
-public class PostingDtoMapper {
+class PostingDtoMapper {
     public Posting toDomain(PostingEntity entity){
         return Posting.withId(entity.getId(),
                 entity.getBoardCollectionId(),

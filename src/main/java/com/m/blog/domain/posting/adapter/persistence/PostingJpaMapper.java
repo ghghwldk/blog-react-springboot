@@ -5,7 +5,7 @@ import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
 
 @Mapper
-public class PostingJpaMapper {
+class PostingJpaMapper {
     public PostingEntity toEntity (Posting domain){
         return PostingEntity.builder()
                 .boardCollectionId(domain.getId().getBoardCollectionId())
