@@ -3,8 +3,11 @@ package com.m.blog.domain.posting.adapter.entrypoint.api;
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.board.application.port.out.BoardDto;
 import com.m.blog.domain.board.application.port.out.GetBoardQuery;
+import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
-import com.m.blog.domain.posting.application.port.persistence.DslPostingPort;
+import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
+import com.m.blog.domain.posting.application.port.persistence.FindPostingPort;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
 import com.m.blog.domain.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
@@ -16,27 +19,32 @@ import lombok.RequiredArgsConstructor;
 @Adapter
 @RequiredArgsConstructor
 public class FindPostingEndpointAdapter implements FindPositngEndpointPort {
-    private final DslPostingPort postingDslRepository;
-    private final PostingJpaRepository postingJpaRepository;
     private final GetBoardQuery getBoardQuery;
+    private final FindPostingPort findPostingPort;
+    private final FindPostingPagingPort findPostingPagingPort;
+
 
     @Override
-    public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest requestDto){
+    public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest request){
         BoardDto found = getBoardQuery
-                .findBoardDto(requestDto.getBoardCollectionId(), requestDto.getBoardId());
+                .findBoardDto(request.getBoardCollectionId(), request.getBoardId());
 
-        return PagingResponse.get(postingDslRepository.get(requestDto), found);
+        Posting.InBoardCondition condition = Posting.forFilteredPage(request.getBoardCollectionId(), request.getBoardId());
+
+        return PagingResponse.get(findPostingPagingPort.getFilteredPage(condition, request.getPageable()), found);
     }
 
-
     @Override
-    public PagingResponse getPagingResponse(PostingReadPagingRequest requestDto) {
+    public PagingResponse getPagingResponse(PostingReadPagingRequest request) {
         BoardDto found = null;
 
-        return PagingResponse.get(postingDslRepository.get(requestDto), found);
+        return PagingResponse.get(findPostingPagingPort.getPaging(request.getPageable()), found);
     }
+
     @Override
-    public PostingReadResponse get(PostingReadRequest requestDto){
-        return PostingReadResponse.of(postingDslRepository.get(requestDto));
+    public PostingReadResponse get(PostingReadRequest request){
+        Posting.SingleCondition condition =
+                Posting.get(request.getBoardCollectionId(), request.getBoardId(), request.getId());
+        return PostingReadResponse.of(findPostingPort.get(condition));
     }
 }

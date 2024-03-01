@@ -1,9 +1,8 @@
 package com.m.blog.domain.posting.infrastructure.repository;
 import com.m.blog.domain.board.application.port.out.QBoardEntity;
 import com.m.blog.domain.boardCollection.adapter.out.QBoardCollectionEntity;
-import com.m.blog.domain.posting.application.port.persistence.DslPostingPort;
+import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -21,7 +20,7 @@ import static com.m.blog.domain.posting.infrastructure.repository.QPostingEntity
 
 @Repository
 @RequiredArgsConstructor
-public class PostingDslRepositoryImpl implements DslPostingPort {
+public class PostingDslRepositoryImpl implements PostingDslRepository {
     private final JPAQueryFactory query;
 
     @Transactional
@@ -36,9 +35,10 @@ public class PostingDslRepositoryImpl implements DslPostingPort {
         return count+1;
     }
 
+
     @Override
-    public Page<PostingDto> get(PostingReadPagingRequest requestDto){
-        return this.getPageOfLatestPosting(requestDto.getPageable());
+    public Page<PostingDto> getPage(Pageable pageable){
+        return this.getPageOfLatestPosting(pageable);
     }
 
     private Page<PostingDto> getPageOfLatestPosting(Pageable pageable){
@@ -121,10 +121,13 @@ public class PostingDslRepositoryImpl implements DslPostingPort {
     }
 
 
-    public Page<PostingDto> get(PostingReadFilteredPagingRequest requestDto){
-        return this.getPageOfPosting(requestDto.getBoardCollectionId(),
-                requestDto.getBoardId(),
-                requestDto.getPageable());
+    public Page<PostingDto> getFiltered(int boardCollectionId, int boardId, Pageable pageable){
+        return this.getPageOfPosting(boardCollectionId, boardId, pageable);
+    }
+
+    @Override
+    public PostingDto getSingle(Posting.SingleCondition condition) {
+        return this.getPosting(condition.getBoardCollectionId(), condition.getBoardId(), condition.getPostingId());
     }
 
 

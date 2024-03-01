@@ -2,7 +2,7 @@ package com.m.blog.domain.posting.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.posting.application.port.entrypoint.api.ChangePostingEndpointPort;
-import com.m.blog.domain.posting.application.port.persistence.DslPostingPort;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
 import com.m.blog.domain.posting.application.usecase.ChangePostingUsecase;
 import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
 import com.m.blog.domain.posting.infrastructure.repository.PostingJpaRepository;
@@ -15,10 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
     private final ChangePostingUsecase changePostingUsecase;
-
-
     private final PostingJpaRepository postingJpaRepository;
-    private final DslPostingPort postingDslRepository;
+    private final PostingDslRepository postingDslRepository;
 
     @Transactional
     @Override

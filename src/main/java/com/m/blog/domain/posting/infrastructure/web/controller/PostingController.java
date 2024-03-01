@@ -1,10 +1,8 @@
 package com.m.blog.domain.posting.infrastructure.web.controller;
 
-import com.m.blog.domain.posting.adapter.entrypoint.api.ChangePostingEndpointAdapter;
 import com.m.blog.domain.posting.application.port.entrypoint.api.ChangePostingEndpointPort;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
 import com.m.blog.domain.posting.infrastructure.web.dto.*;
-import com.m.blog.domain.posting.application.port.persistence.PostingService;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
