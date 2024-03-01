@@ -1,16 +1,9 @@
-package com.m.blog.domain.board.service;
+package com.m.blog.domain.board.infrastructure.repository;
 
-import com.amazonaws.services.kms.model.NotFoundException;
-import com.m.blog.domain.board.application.port.out.GetBoardQuery;
-import com.m.blog.domain.board.application.port.out.BoardDto;
-import com.m.blog.domain.board.application.port.out.BoardEntity;
-
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class GetBoardService implements GetBoardQuery {
+public class BoardDslRepositoryImpl implements BoardDslRepository {
     private final JPAQueryFactory query;
 
     @Override

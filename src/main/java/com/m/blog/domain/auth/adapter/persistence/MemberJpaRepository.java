@@ -1,4 +1,4 @@
-package com.m.blog.domain.auth.adapter.out.persistence;
+package com.m.blog.domain.auth.adapter.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

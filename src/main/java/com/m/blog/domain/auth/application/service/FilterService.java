@@ -1,4 +1,4 @@
-package com.m.blog.domain.auth.service;
+package com.m.blog.domain.auth.application.service;
 
 import com.m.blog.global.config.variable.SessionConst;
 

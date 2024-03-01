@@ -1,7 +1,7 @@
 package com.m.blog.domain.posting.application.service;
 
-import com.m.blog.domain.board.application.port.out.BoardDto;
-import com.m.blog.domain.board.application.port.out.GetBoardQuery;
+import com.m.blog.domain.board.infrastructure.repository.BoardDto;
+import com.m.blog.domain.board.infrastructure.repository.BoardDslRepository;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
 import com.m.blog.domain.posting.application.port.persistence.FindPostingPort;
@@ -17,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 class FindPostingService implements FindPostingUsecase {
-    private final GetBoardQuery getBoardQuery;
+    private final BoardDslRepository boardDslRepository;
     private final FindPostingPagingPort findPostingPagingPort;
     private final FindPostingPort findPostingPort;
 
     @Override
     public PagingResponse get(Posting.IdWithoutPostingId idWithoutPostingId, Pageable pageable){
-        BoardDto found = getBoardQuery
+        BoardDto found = boardDslRepository
                 .findBoardDto(idWithoutPostingId.getBoardCollectionId(), idWithoutPostingId.getBoardId());
 
         Posting.InBoardCondition condition =

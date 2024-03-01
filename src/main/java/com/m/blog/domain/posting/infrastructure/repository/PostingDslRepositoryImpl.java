@@ -1,6 +1,6 @@
 package com.m.blog.domain.posting.infrastructure.repository;
-import com.m.blog.domain.board.application.port.out.QBoardEntity;
-import com.m.blog.domain.boardCollection.adapter.persistence.QBoardCollectionEntity;
+import com.m.blog.domain.board.infrastructure.repository.QBoardEntity;
+import com.m.blog.domain.boardCollection.infrastructure.repository.QBoardCollectionEntity;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import com.querydsl.jpa.impl.JPAQuery;

@@ -1,11 +1,11 @@
-package com.m.blog.domain.auth.service;
+package com.m.blog.domain.auth.application.service;
 
 
-import com.m.blog.domain.auth.application.port.in.AuthUseCase;
-import com.m.blog.domain.auth.application.port.in.LoginRequest;
-import com.m.blog.domain.auth.application.port.out.LoginResponse;
+import com.m.blog.domain.auth.application.usecase.AuthUsecase;
+import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
+import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 //import com.m.blog.domain.auth.adapter.out.persistence.Member;
-import com.m.blog.domain.auth.adapter.out.persistence.MemberJpaRepository;
+import com.m.blog.domain.auth.adapter.persistence.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService implements AuthUseCase {
+public class AuthService implements AuthUsecase {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override

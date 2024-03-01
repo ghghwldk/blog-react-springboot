@@ -3,7 +3,7 @@ package com.m.blog.global.interceptor;
 import com.google.gson.Gson;
 import com.m.blog.global.security.CustomAuthenticationFilter;
 import com.m.blog.global.security.CustomAuthorityFilter;
-import com.m.blog.domain.auth.service.FilterService;
+import com.m.blog.domain.auth.application.service.FilterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

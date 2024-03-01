@@ -1,4 +1,4 @@
-package com.m.blog.domain.auth.application.port.in;
+package com.m.blog.domain.auth.infrastructure.web.dto;
 
 import lombok.Data;
 

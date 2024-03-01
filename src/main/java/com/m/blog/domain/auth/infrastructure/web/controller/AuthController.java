@@ -1,8 +1,9 @@
-package com.m.blog.domain.auth.adapter.in;
+package com.m.blog.domain.auth.infrastructure.web.controller;
 
-import com.m.blog.domain.auth.application.port.in.LoginRequest;
-import com.m.blog.domain.auth.application.port.out.LoginResponse;
-import com.m.blog.domain.auth.application.port.in.AuthUseCase;
+import com.m.blog.domain.auth.application.port.entrypoint.api.AuthEndpointPort;
+import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
+import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
+import com.m.blog.domain.auth.application.usecase.AuthUsecase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthUseCase authUseCase;
+    private final AuthEndpointPort authEndpointPort;
 
     @ResponseBody
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest, HttpServletRequest request){
-        return authUseCase.login(loginRequest, request);
+        return authEndpointPort.login(loginRequest, request);
     }
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request){
-        authUseCase.logout(request);
+        authEndpointPort.logout(request);
     }
 }
