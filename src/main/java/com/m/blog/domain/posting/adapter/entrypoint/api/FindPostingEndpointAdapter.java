@@ -4,7 +4,7 @@ import com.m.blog.common.Adapter;
 import com.m.blog.domain.board.application.port.out.BoardDto;
 import com.m.blog.domain.board.application.port.out.GetBoardQuery;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
-import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
+import com.m.blog.domain.posting.application.port.persistence.DslPostingPort;
 import com.m.blog.domain.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Adapter
 @RequiredArgsConstructor
 public class FindPostingEndpointAdapter implements FindPositngEndpointPort {
-    private final PostingDslRepository postingDslRepository;
+    private final DslPostingPort postingDslRepository;
     private final PostingJpaRepository postingJpaRepository;
     private final GetBoardQuery getBoardQuery;
 

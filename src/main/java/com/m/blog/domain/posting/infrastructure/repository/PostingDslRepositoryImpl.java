@@ -1,6 +1,7 @@
 package com.m.blog.domain.posting.infrastructure.repository;
 import com.m.blog.domain.board.application.port.out.QBoardEntity;
 import com.m.blog.domain.boardCollection.adapter.out.QBoardCollectionEntity;
+import com.m.blog.domain.posting.application.port.persistence.DslPostingPort;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
@@ -20,7 +21,7 @@ import static com.m.blog.domain.posting.infrastructure.repository.QPostingEntity
 
 @Repository
 @RequiredArgsConstructor
-public class PostingDslRepositoryImpl implements PostingDslRepository{
+public class PostingDslRepositoryImpl implements DslPostingPort {
     private final JPAQueryFactory query;
 
     @Transactional
