@@ -2,6 +2,6 @@ package com.m.blog.domain.posting.application.usecase;
 
 import com.m.blog.domain.posting.application.domain.Posting;
 
-public interface ChangePostingUsecase {
-    void update(Posting.PostingId id, Posting.Mutable target);
+public interface SavePostingUsecase {
+    void save(Posting.IdWithoutPostingId id, Posting.Mutable target);
 }

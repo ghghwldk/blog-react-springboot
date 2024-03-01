@@ -1,19 +1,12 @@
 package com.m.blog.domain.posting.application.domain;
 
-import com.m.blog.common.Adapter;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import lombok.*;
-import org.springframework.data.domain.Pageable;
-
-import javax.persistence.Id;
 
 @Data
 @Builder
 @AllArgsConstructor
 public class Posting {
-    PostingId postingId;
-    Integer boardId;
-    Integer boardCollectionId;
+    PostingId id;
     String title;
     String content;
 
@@ -36,18 +29,37 @@ public class Posting {
             int postingId, int boardCollectionId, int boardId,
             String title, String content) {
         return Posting.builder()
-                .postingId(new PostingId(postingId))
-                .boardCollectionId(boardCollectionId)
-                .boardId(boardId)
+                .id(PostingId.builder()
+                        .boardCollectionId(boardCollectionId)
+                        .boardId(boardId)
+                        .postingId(postingId)
+                        .build())
                 .title(title)
                 .content(content)
                 .build();
     }
 
     @Getter
+    @Builder
     @AllArgsConstructor
     public static class PostingId{
-        private int value;
+        private int boardCollectionId;
+        private int boardId;
+        private int postingId;
+
+        public PostingId(IdWithoutPostingId idWithoutPostingId, int postingId){
+            this.boardCollectionId = idWithoutPostingId.getBoardCollectionId();
+            this.boardId = idWithoutPostingId.getBoardId();
+            this.postingId = postingId;
+        }
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class IdWithoutPostingId{
+        private int boardCollectionId;
+        private int boardId;
     }
 
     @AllArgsConstructor
@@ -65,5 +77,13 @@ public class Posting {
         private int boardCollectionId;
         private int boardId;
         private int postingId;
+    }
+
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class Mutable {
+        private String title;
+        private String content;
     }
 }

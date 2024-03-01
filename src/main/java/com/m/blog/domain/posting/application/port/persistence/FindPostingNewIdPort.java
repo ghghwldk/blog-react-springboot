@@ -7,5 +7,5 @@ import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest
 import org.springframework.data.domain.Page;
 
 public interface FindPostingNewIdPort {
-    int findNewId(int boardCollectionId, int boardId);
+    int findNewId(Posting.IdWithoutPostingId id);
 }

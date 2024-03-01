@@ -1,10 +1,13 @@
 package com.m.blog.domain.posting.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
+import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.entrypoint.api.ChangePostingEndpointPort;
+import com.m.blog.domain.posting.application.usecase.SavePostingUsecase;
 import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
 import com.m.blog.domain.posting.application.usecase.ChangePostingUsecase;
 import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
+import com.m.blog.domain.posting.infrastructure.repository.PostingId;
 import com.m.blog.domain.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingCreateRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingUpdateRequest;
@@ -15,26 +18,28 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
     private final ChangePostingUsecase changePostingUsecase;
+    private final SavePostingUsecase savePostingUsecase;
+
     private final PostingJpaRepository postingJpaRepository;
     private final PostingDslRepository postingDslRepository;
+    private final PostingDtoMapper postingDtoMapper;
 
     @Transactional
     @Override
     public void update(PostingUpdateRequest request){
-        PostingEntity found = postingJpaRepository
-                .findByBoardCollectionIdAndBoardIdAndId(
-                        request.getBoardCollectionId(),
-                        request.getBoardId(),
-                        request.getPostingId()
-                ).orElseThrow(RuntimeException::new);
-
-        found.setContent(request.getMarkup());
-        found.setTitle(request.getTitle());
+        changePostingUsecase.update(
+                postingDtoMapper.toId(request),
+                postingDtoMapper.toMutable(request)
+        );
     }
 
     @Transactional
     @Override
     public void create(PostingCreateRequest request){
+        savePostingUsecase.save(
+                postingDtoMapper.toId(request),
+                postingDtoMapper.toMutable(request)
+        );
         int newId = postingDslRepository.findNewId(request.getBoardCollectionId(), request.getBoardId());
 
         postingJpaRepository.save(

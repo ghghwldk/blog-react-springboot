@@ -6,9 +6,9 @@ import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
 public class PostingJpaMapper {
     public PostingEntity toEntity (Posting domain){
         return PostingEntity.builder()
-                .boardCollectionId(domain.getBoardCollectionId())
-                .boardId(domain.getBoardId())
-                .id(domain.getPostingId().getValue())
+                .boardCollectionId(domain.getId().getBoardCollectionId())
+                .boardId(domain.getId().getBoardId())
+                .id(domain.getId().getPostingId())
                 .title(domain.getTitle())
                 .content(domain.getContent())
                 .build();
