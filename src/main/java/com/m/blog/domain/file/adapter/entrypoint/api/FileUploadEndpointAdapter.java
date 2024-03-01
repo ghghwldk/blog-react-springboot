@@ -1,6 +1,7 @@
-package com.m.blog.domain.file.service;
+package com.m.blog.domain.file.adapter.entrypoint.api;
 
-import com.m.blog.domain.file.adapter.entrypoint.api.FileUploadPort;
+import com.m.blog.common.Adapter;
+import com.m.blog.domain.file.port.entrypoint.api.FileUploadPort;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
@@ -16,8 +17,8 @@ import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
-@Service
-public class FileUploadServiceImpl implements FileUploadPort {
+@Adapter
+public class FileUploadEndpointAdapter implements FileUploadPort {
     private final FileJpaRepository fileJpaRepository;
     private final FileUpload fileUploadUtil;
 

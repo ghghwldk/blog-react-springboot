@@ -1,4 +1,4 @@
-package com.m.blog.domain.file.adapter.entrypoint.api;
+package com.m.blog.domain.file.port.entrypoint.api;
 
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import org.springframework.core.io.Resource;

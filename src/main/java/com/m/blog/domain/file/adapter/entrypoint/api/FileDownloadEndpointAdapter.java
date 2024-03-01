@@ -1,6 +1,7 @@
-package com.m.blog.domain.file.service;
+package com.m.blog.domain.file.adapter.entrypoint.api;
 
-import com.m.blog.domain.file.adapter.entrypoint.api.FileDownloadPort;
+import com.m.blog.common.Adapter;
+import com.m.blog.domain.file.port.entrypoint.api.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
@@ -19,9 +20,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-@Service
+@Adapter
 @RequiredArgsConstructor
-public class FileDownloadServiceImpl implements FileDownloadPort {
+public class FileDownloadEndpointAdapter implements FileDownloadPort {
     @Autowired
     FileJpaRepository fileJpaRepository;
     private final FileDownload fileDownloadUtil;
