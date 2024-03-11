@@ -9,5 +9,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface AuthEndpointPort {
     LoginResponse login(LoginRequest loginRequest, HttpServletRequest request);
 
-    void logout(HttpServletRequest request);
+    String logout(HttpServletRequest request);
 }

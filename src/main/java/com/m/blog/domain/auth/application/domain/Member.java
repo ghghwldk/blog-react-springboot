@@ -19,6 +19,14 @@ public class Member {
     @Builder
     @Getter
     public static class MemberId{
-        String id;
+        String userId;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class MemberLoginInfo{
+        MemberId id;
+        String password;
     }
 }

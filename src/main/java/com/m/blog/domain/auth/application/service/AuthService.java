@@ -30,14 +30,9 @@ public class AuthService implements AuthUsecase {
     }
 
     @Override
-    public LoginResponse login(LoginRequest request, HttpServletRequest httpServletRequest){
-        Member loginMember =
-                findMemberPort.find(request.getUserId(), request.getPassword());
-
-        httpServletRequest.getSession()
-                .setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
-        return MemberJpaMapper.of(loginMember);
+    public Member login(Member.MemberLoginInfo info){
+        return findMemberPort
+                .find(info.getId().getUserId(), info.getPassword());
     }
 
 }

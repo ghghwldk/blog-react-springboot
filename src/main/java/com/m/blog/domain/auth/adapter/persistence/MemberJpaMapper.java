@@ -10,7 +10,7 @@ public class MemberJpaMapper {
     public static Member of(MemberEntity entity){
         return Member.builder()
                 .id(Member.MemberId.builder()
-                        .id(entity.getId())
+                        .userId(entity.getId())
                         .build())
                 .name(entity.getName())
                 .password(entity.getPassword())
