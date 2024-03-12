@@ -15,13 +15,13 @@ public class FileDto {
     String fileNature;
     byte[] data;
 
-    public FileDto() {
-        fileNature = switch (fileNature){
-            case "I" -> String.valueOf(FileNature.IDENTITY);
-            case "P" -> String.valueOf(FileNature.PASSPORT);
-            default -> String.valueOf(FileNature.MULTIPLEFILES);
-        };
-    }
+//    public FileDto() {
+//        fileNature = switch (fileNature){
+//            case "I" -> String.valueOf(FileNature.IDENTITY);
+//            case "P" -> String.valueOf(FileNature.PASSPORT);
+//            default -> String.valueOf(FileNature.MULTIPLEFILES);
+//        };
+//    }
 
     @Override
     public boolean equals(Object o) {

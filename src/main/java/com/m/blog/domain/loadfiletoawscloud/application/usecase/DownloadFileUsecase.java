@@ -1,8 +1,8 @@
 package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
 import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.application.port.file.FilePort;
 import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePersistencePort;
-import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
 import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,9 +14,9 @@ import java.io.InputStream;
 @Component
 @RequiredArgsConstructor
 public class DownloadFileUsecase {
-
     private final FilePersistencePort filePersistencePort;
-    private final AmazonClient amazonClient;
+    private final FilePort filePort;
+
 
 
     public File excute(String fileName) throws IOException {
@@ -24,7 +24,7 @@ public class DownloadFileUsecase {
         if(file == null) {
             throw new FileNotFoundException();
         }else {
-            InputStream inputStream = amazonClient.getFileInputStream(file.getUuidAwsFile(),String.valueOf(file.getFileNature()));
+            InputStream inputStream = filePort.getInputStream(file);
             return new File(file.getName(),
                     file.getContentType(),
                     file.getSize(),

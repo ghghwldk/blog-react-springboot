@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class FileEntity {
+public class FileEntity2 {
     @Id
     @GeneratedValue(generator = "uuid")
 //    @GenericGenerator(name = "uuid")

@@ -28,11 +28,11 @@ public class AmazonClient {
 
     private AmazonS3 s3client;
 
-    @Value("${amazonProperties.bucketName}")
+//    @Value("${amazonProperties.bucketName}")
     private String bucketName;
-    @Value("${amazonProperties.accessKey}")
+//    @Value("${amazonProperties.accessKey}")
     private String accessKey;
-    @Value("${amazonProperties.secretKey}")
+//    @Value("${amazonProperties.secretKey}")
     private String secretKey;
 
     @PostConstruct

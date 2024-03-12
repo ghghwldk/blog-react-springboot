@@ -2,7 +2,7 @@ package com.m.blog.domain.loadfiletoawscloud.adapter.persistence;
 
 import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
 import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePersistencePort;
-import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.FileEntity;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.FileEntity2;
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.FileEntityRepository2;
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.MapperFileEntity;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class FilePersistenceAdapter implements FilePersistencePort {
     private final FileEntityRepository2 fileEntityRepository2;
 
     @Override
-    public FileEntity get(String fileName) throws FileNotFoundException {
+    public FileEntity2 get(String fileName) throws FileNotFoundException {
         return fileEntityRepository2.findFirstByName(fileName)
                 .orElseThrow(()-> new FileNotFoundException("File "+fileName+" not found"));
     }
