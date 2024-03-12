@@ -1,7 +1,7 @@
 package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
 import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
-import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePersistencePort;
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
 import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,12 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class DownloadFileUsecase {
 
-    private final FilePort filePort;
+    private final FilePersistencePort filePersistencePort;
     private final AmazonClient amazonClient;
 
 
     public File excute(String fileName) throws IOException {
-        File file = filePort.downloadFile(fileName).get();
+        File file = filePersistencePort.downloadFile(fileName).get();
         if(file == null) {
             throw new FileNotFoundException();
         }else {
