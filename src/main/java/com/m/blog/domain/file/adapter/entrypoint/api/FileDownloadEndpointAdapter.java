@@ -10,12 +10,14 @@ import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.port.persistence.ReadFilePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -34,9 +36,11 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     public ResponseEntity<Resource> getResponse(FileDownloadRequest request) throws IOException {
         DownloadFile downloadFile = readFilePort.getDownloadFile(request);
 
+        InputStream inputStream = fileDownloadPort.getResource(downloadFile);
+
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, getHeaderValues(downloadFile))
-                .body(fileDownloadPort.getResource(downloadFile));
+                .body(new InputStreamResource(inputStream));
     }
 }

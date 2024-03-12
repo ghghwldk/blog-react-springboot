@@ -5,8 +5,9 @@ import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public interface FileDownloadPort {
 
-    Resource getResource(DownloadFile fileVo) throws IOException;
+    InputStream getResource(DownloadFile fileVo) throws IOException;
 }

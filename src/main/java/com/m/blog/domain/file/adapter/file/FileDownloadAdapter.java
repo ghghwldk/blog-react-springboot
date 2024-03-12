@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 
 @Adapter
@@ -21,7 +22,7 @@ public class FileDownloadAdapter implements FileDownloadPort {
 
 
     @Override
-    public Resource getResource(DownloadFile fileVo) throws IOException {
+    public InputStream getResource(DownloadFile fileVo) throws IOException {
         return fileProperties.isLocal()?
                 fileDownloadHelper.getLocalResource(fileVo):
                 fileDownloadHelper.getS3Resource(fileVo);
