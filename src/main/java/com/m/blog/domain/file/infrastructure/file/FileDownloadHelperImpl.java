@@ -3,8 +3,7 @@ package com.m.blog.domain.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.m.blog.domain.file.application.domain.DownloadFile;
+import com.m.blog.domain.file.application.domain.DownloadFileInfo;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,15 +21,15 @@ class FileDownloadHelperImpl implements FileDownloadHelper {
     private final FileProperties fileProperties;
 
     @Override
-    public InputStream getS3Resource(DownloadFile downloadFile){
-        S3Object s3Object = amazonS3.getObject(new GetObjectRequest(fileProperties.getBucket(), downloadFile.getKey()));
+    public InputStream getS3Resource(DownloadFileInfo downloadFileInfo){
+        S3Object s3Object = amazonS3.getObject(new GetObjectRequest(fileProperties.getBucket(), downloadFileInfo.getKey()));
 
         return s3Object.getObjectContent();
     }
 
     @Override
-    public InputStream getLocalResource(DownloadFile downloadFile) throws IOException {
-        Path path = Paths.get(downloadFile.getKey());
+    public InputStream getLocalResource(DownloadFileInfo downloadFileInfo) throws IOException {
+        Path path = Paths.get(downloadFileInfo.getKey());
 
         return Files.newInputStream(path);
     }

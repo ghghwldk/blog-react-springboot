@@ -32,7 +32,7 @@ public class FileController {
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable("fileName") String fileName) throws IOException{
-        return fileDownloadPort.getResponse(FileDownloadRequest.builder()
+        return fileDownloadPort.download(FileDownloadRequest.builder()
                 .fileName(fileName)
                 .build());
     }
