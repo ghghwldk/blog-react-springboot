@@ -7,8 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public interface FilePort {
-    String uploadFile(File file);
-
+    
     Optional<File> downloadFile(String fileName) throws FileNotFoundException;
 
     //boolean fileExiste(String fileName);

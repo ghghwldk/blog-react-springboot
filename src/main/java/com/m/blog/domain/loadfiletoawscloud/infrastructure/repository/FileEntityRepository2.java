@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface RepositoryFile extends JpaRepository<FileEntity, Integer> {
+public interface FileEntityRepository2 extends JpaRepository<FileEntity, Integer> {
 
     @Transactional(readOnly = true)
     Optional<FileEntity> findFirstByName(String fileName);
