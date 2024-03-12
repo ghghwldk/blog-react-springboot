@@ -1,9 +1,10 @@
 package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
 import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
-import com.m.blog.domain.loadfiletoawscloud.application.port.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePort;
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
 import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
@@ -11,15 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Component
+@RequiredArgsConstructor
 public class DownloadFileUsecase {
 
     private final FilePort filePort;
     private final AmazonClient amazonClient;
 
-    public DownloadFileUsecase(FilePort filePort, AmazonClient amazonClient) {
-        this.filePort = filePort;
-        this.amazonClient = amazonClient;
-    }
 
     public File excute(String fileName) throws IOException {
         File file = filePort.downloadFile(fileName).get();

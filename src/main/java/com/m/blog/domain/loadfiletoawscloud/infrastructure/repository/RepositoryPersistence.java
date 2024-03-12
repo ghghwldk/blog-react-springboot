@@ -1,18 +1,17 @@
 package com.m.blog.domain.loadfiletoawscloud.infrastructure.repository;
 
-import com.m.blog.domain.loadfiletoawscloud.application.port.FilePersistencePort;
+import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePersistencePort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 
 @Component
+@RequiredArgsConstructor
 public class RepositoryPersistence implements FilePersistencePort {
 
     private final RepositoryFile repositoryFile;
 
-    public RepositoryPersistence(RepositoryFile repositoryFile) {
-        this.repositoryFile = repositoryFile;
-    }
 
     @Override
     public void saveFile(FileEntity fileEntity) {

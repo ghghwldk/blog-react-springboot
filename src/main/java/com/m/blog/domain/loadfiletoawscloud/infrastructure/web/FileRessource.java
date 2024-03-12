@@ -5,6 +5,7 @@ import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
 import com.m.blog.domain.loadfiletoawscloud.application.usecase.DownloadFileUsecase;
 import com.m.blog.domain.loadfiletoawscloud.application.usecase.ExistFileUsecase;
 import com.m.blog.domain.loadfiletoawscloud.application.usecase.UploadFileUsecase;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,18 +19,13 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController()
+@RequiredArgsConstructor
 public class FileRessource {
     private final UploadFileUsecase uploadFileUsecase;
 
     private final DownloadFileUsecase downloadFileUsecase;
 
     private final ExistFileUsecase existFileUsecase;
-
-    public FileRessource(UploadFileUsecase uploadFileUsecase, DownloadFileUsecase downloadFileUsecase, ExistFileUsecase existFileUsecase){
-        this.uploadFileUsecase = uploadFileUsecase;
-        this.downloadFileUsecase = downloadFileUsecase;
-        this.existFileUsecase = existFileUsecase;
-    }
 
     @PostMapping("/uploadFile")
     public ResponseEntity<String> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("type") String typeDocument) throws IOException {

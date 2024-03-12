@@ -1,4 +1,4 @@
-package com.m.blog.domain.loadfiletoawscloud.application.port;
+package com.m.blog.domain.loadfiletoawscloud.application.port.persistence;
 
 
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.FileEntity;

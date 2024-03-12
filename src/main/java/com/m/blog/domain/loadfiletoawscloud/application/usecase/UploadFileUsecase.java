@@ -1,22 +1,19 @@
 package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
 import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
-import com.m.blog.domain.loadfiletoawscloud.application.port.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.application.port.persistence.FilePort;
 import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
 import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UploadFileUsecase {
 
     private final FilePort filePort;
 
     private final AmazonClient amazonClient;
-
-    public UploadFileUsecase(FilePort filePort, AmazonClient amazonClient) {
-        this.filePort = filePort;
-        this.amazonClient = amazonClient;
-    }
 
     public String excute(File file){
         //vérifier l'existance du fichier
