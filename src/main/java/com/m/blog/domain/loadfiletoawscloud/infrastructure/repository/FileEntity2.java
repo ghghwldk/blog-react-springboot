@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="file")
+@Table(name="file_reference_code")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
