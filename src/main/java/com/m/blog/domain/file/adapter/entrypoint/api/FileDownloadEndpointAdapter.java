@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 
 @Adapter
 @RequiredArgsConstructor
-public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {\
+public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     private final FileDownloadUsecase fileDownloadUsecase;
 
     private ResponseEntity<Resource> get(DownloadContent downloadContent) throws UnsupportedEncodingException {
