@@ -1,9 +1,8 @@
-package com.m.blog.global.security.jwt;
+package com.m.blog.global.security.session;
 
 import com.m.blog.global.config.variable.SessionConst;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

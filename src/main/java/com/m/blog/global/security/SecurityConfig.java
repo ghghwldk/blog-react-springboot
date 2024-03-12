@@ -1,6 +1,6 @@
 package com.m.blog.global.security;
-import com.m.blog.global.security.jwt.SessionFilter;
-import com.m.blog.global.security.jwt.SessionProvider;
+import com.m.blog.global.security.session.SessionFilter;
+import com.m.blog.global.security.session.SessionProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,7 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/h2-console/**", "/favicon.ico");
+                .antMatchers("/**");
+//                .antMatchers("/h2-console/**", "/favicon.ico");
     }
 
     @Override
