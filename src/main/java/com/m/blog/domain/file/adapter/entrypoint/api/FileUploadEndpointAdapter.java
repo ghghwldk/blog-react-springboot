@@ -3,6 +3,7 @@ package com.m.blog.domain.file.adapter.entrypoint.api;
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadEndpointPort;
 import com.m.blog.domain.file.application.port.file.FileUploadPort;
+import com.m.blog.domain.file.application.usecase.FileUploadUsecase;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
 import com.m.blog.domain.file.infrastructure.file.FileUploadHelper;
@@ -18,18 +19,15 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Adapter
 public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
-    private final WriteFilePort writeFilePort;
-    private final FileUploadPort fileUploadPort;
+    private final FileUploadUsecase fileUploadUsecase;
 
     @Value("${file.directory}") private String directoryName; // static
 
-
     @Override
     public FileUploadResponse upload(FileUploadRequest request) throws IOException{
-        UploadFile uploadFile = UploadFile.of(request.getMultipartFile());
+        UploadFile uploadFile = UploadFile.of(request.getMultipartFile(), this.directoryName);
 
-        writeFilePort.save(uploadFile, this.directoryName);
-        fileUploadPort.upload(uploadFile);
+        fileUploadUsecase.upload(uploadFile);
 
         return FileUploadResponse.of(uploadFile);
     }

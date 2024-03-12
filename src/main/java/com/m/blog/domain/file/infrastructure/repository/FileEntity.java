@@ -23,11 +23,11 @@ public class FileEntity extends TimeComponent {
     String originalFileName;
     String filePath;
 
-    public static FileEntity of(UploadFile vo, String directoryName){
+    public static FileEntity of(UploadFile vo){
         return FileEntity.builder()
                 .fileName(vo.getSavedFileName())
                 .originalFileName(vo.getOriginalFileName())
-                .filePath(directoryName)
+                .filePath(vo.getDirectoryName())
                 .build();
     }
 

@@ -4,5 +4,5 @@ import com.m.blog.domain.file.application.domain.UploadFile;
 import com.m.blog.domain.file.application.domain.File;
 
 public interface WriteFilePort {
-    File save(UploadFile uploadFile, String directoryName);
+    File save(UploadFile uploadFile);
 }

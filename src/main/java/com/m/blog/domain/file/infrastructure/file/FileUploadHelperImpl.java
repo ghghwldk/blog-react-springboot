@@ -8,14 +8,9 @@ import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Optional;
 
 @Component
@@ -26,11 +21,11 @@ class FileUploadHelperImpl implements FileUploadHelper {
     private final AmazonS3Client amazonS3Client;
 
     @Override
-    public Optional<File> convert(MultipartFile file) throws IOException {
-        File convertFile = new File(file.getOriginalFilename());
+    public Optional<File> convert(UploadFile uploadFile) throws IOException {
+        File convertFile = new File(uploadFile.getOriginalFileName());
         if(convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-                fos.write(file.getBytes());
+                fos.write(uploadFile.getData());
             }
             return Optional.of(convertFile);
         }
@@ -51,7 +46,7 @@ class FileUploadHelperImpl implements FileUploadHelper {
 
         log.info("file is uploading on the local pc");
         try{
-            InputStream fileStream = fileVo.getMultipartFile().getInputStream();
+            InputStream fileStream = new ByteArrayInputStream(fileVo.getData());
             file = new File(fileProperties.getDirectoryName() + "/" + fileVo.getSavedFileName());
             FileUtils.copyInputStreamToFile(fileStream, file);
         }catch (IOException e) {
@@ -73,7 +68,7 @@ class FileUploadHelperImpl implements FileUploadHelper {
         File file = null;
 
         try{
-            file = convert(fileVo.getMultipartFile())
+            file = convert(fileVo)
                     .orElseThrow(() ->
                             new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다.")
                     );

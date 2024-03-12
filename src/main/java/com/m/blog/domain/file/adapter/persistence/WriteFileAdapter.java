@@ -14,7 +14,7 @@ public class WriteFileAdapter implements WriteFilePort {
     private final FileJpaRepository fileJpaRepository;
 
     @Override
-    public File save(UploadFile uploadFile, String directoryName){
-        return FileJpaMapper.toDomain(fileJpaRepository.save(FileEntity.of(uploadFile, directoryName)));
+    public File save(UploadFile uploadFile){
+        return FileJpaMapper.toDomain(fileJpaRepository.save(FileEntity.of(uploadFile)));
     }
 }
