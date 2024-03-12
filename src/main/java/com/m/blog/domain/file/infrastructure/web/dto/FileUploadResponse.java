@@ -11,16 +11,14 @@ import lombok.Data;
 public class FileUploadResponse {
     private String originalFileName;
     private String fileName;
-    private String url;
     private String downloadUrl;
 
-    public static FileUploadResponse of(UploadFile vo){
-        final String url = "/file/download/"+ vo.getSavedFileName();
+    public static FileUploadResponse of(UploadFile uploadFile){
+        final String url = uploadFile.getDownloadUrl();
 
         return FileUploadResponse.builder()
-                .originalFileName(vo.getOriginalFileName())
-                .fileName(vo.getSavedFileName())
-                .url(url)
+                .originalFileName(uploadFile.getOriginalFileName())
+                .fileName(uploadFile.getSavedFileName())
                 .downloadUrl(url)
                 .build();
     }

@@ -18,8 +18,14 @@ public class UploadFile {
     private String directoryName;
     private byte[] data;
 
+    public String getDownloadUrl(){
+        return "/file/download/"+ savedFileName;
+    }
+
     public static UploadFile of(MultipartFile multipartFile, String directoryName) throws IOException {
         String originalFileName = multipartFile.getOriginalFilename();
+        assert originalFileName != null;
+
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 
         return UploadFile.builder()
