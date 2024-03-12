@@ -1,9 +1,9 @@
-package com.m.blog.domain.loadfiletoawscloud.domain.use_case;
+package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
-import com.m.blog.domain.loadfiletoawscloud.aws.AmazonClient;
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.domain.port.PortFile;
-import com.m.blog.domain.loadfiletoawscloud.util.FileUtils;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.application.port.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Component
-public class DownloadFile {
+public class DownloadFileUsecase {
 
-    private final PortFile portFile;
+    private final FilePort filePort;
     private final AmazonClient amazonClient;
 
-    public DownloadFile(PortFile portFile, AmazonClient amazonClient) {
-        this.portFile = portFile;
+    public DownloadFileUsecase(FilePort filePort, AmazonClient amazonClient) {
+        this.filePort = filePort;
         this.amazonClient = amazonClient;
     }
 
     public File excute(String fileName) throws IOException {
-        File file = portFile.downloadFile(fileName).get();
+        File file = filePort.downloadFile(fileName).get();
         if(file == null) {
             throw new FileNotFoundException();
         }else {

@@ -1,28 +1,28 @@
-package com.m.blog.domain.loadfiletoawscloud.domain.use_case;
+package com.m.blog.domain.loadfiletoawscloud.application.usecase;
 
-import com.m.blog.domain.loadfiletoawscloud.aws.AmazonClient;
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.domain.port.PortFile;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.application.port.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.aws.AmazonClient;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
 @Component
-public class ExistFile {
+public class ExistFileUsecase {
 
-    private final PortFile portFile;
+    private final FilePort filePort;
 
     private final AmazonClient amazonClient;
 
-    public ExistFile(PortFile portFile, AmazonClient amazonClient) {
-        this.portFile = portFile;
+    public ExistFileUsecase(FilePort filePort, AmazonClient amazonClient) {
+        this.filePort = filePort;
         this.amazonClient = amazonClient;
     }
 
     public boolean excute(String fileName){
        try {
-           Optional<File> file = portFile.downloadFile(fileName);
+           Optional<File> file = filePort.downloadFile(fileName);
             if(file.isPresent()){
                 return file.get().getName().equalsIgnoreCase(fileName) &&
                         amazonClient.fileExistInBucket(file.get().getFileNature()+"/"+file.get().getUuidAwsFile());

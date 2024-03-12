@@ -1,21 +1,21 @@
-package com.m.blog.domain.loadfiletoawscloud.infra.adapter;
+package com.m.blog.domain.loadfiletoawscloud.adapter;
 
 
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.domain.port.PortFile;
-import com.m.blog.domain.loadfiletoawscloud.infra.mapper.MapperFileEntity;
-import com.m.blog.domain.loadfiletoawscloud.infra.repository.RepositoryDatabase;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.application.port.FilePort;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.MapperFileEntity;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.repository.RepositoryPersistence;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
 @Component
-public class AdapterFile implements PortFile {
+public class FileAdapter implements FilePort {
 
-    private final RepositoryDatabase repositoryDatabase;
+    private final RepositoryPersistence repositoryDatabase;
 
-    public AdapterFile(RepositoryDatabase repositoryDatabase) {
+    public FileAdapter(RepositoryPersistence repositoryDatabase) {
         this.repositoryDatabase = repositoryDatabase;
     }
 

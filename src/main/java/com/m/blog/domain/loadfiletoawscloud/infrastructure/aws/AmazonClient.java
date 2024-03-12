@@ -1,4 +1,4 @@
-package com.m.blog.domain.loadfiletoawscloud.aws;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.aws;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

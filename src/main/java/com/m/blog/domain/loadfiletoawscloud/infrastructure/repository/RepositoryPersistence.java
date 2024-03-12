@@ -1,17 +1,16 @@
-package com.m.blog.domain.loadfiletoawscloud.infra.repository;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.repository;
 
-import com.m.blog.domain.loadfiletoawscloud.infra.entity.FileEntity;
-import com.m.blog.domain.loadfiletoawscloud.infra.port.FileOperation;
+import com.m.blog.domain.loadfiletoawscloud.application.port.FilePersistencePort;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
 
 @Component
-public class RepositoryDatabase implements FileOperation {
+public class RepositoryPersistence implements FilePersistencePort {
 
     private final RepositoryFile repositoryFile;
 
-    public RepositoryDatabase(RepositoryFile repositoryFile) {
+    public RepositoryPersistence(RepositoryFile repositoryFile) {
         this.repositoryFile = repositoryFile;
     }
 

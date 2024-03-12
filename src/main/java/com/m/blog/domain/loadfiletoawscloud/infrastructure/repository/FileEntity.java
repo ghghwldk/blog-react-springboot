@@ -1,11 +1,10 @@
-package com.m.blog.domain.loadfiletoawscloud.infra.entity;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.repository;
 
-import com.m.blog.domain.loadfiletoawscloud.util.FileNature;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileNature;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 

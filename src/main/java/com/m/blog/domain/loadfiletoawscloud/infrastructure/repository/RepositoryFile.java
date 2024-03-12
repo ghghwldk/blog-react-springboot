@@ -1,6 +1,5 @@
-package com.m.blog.domain.loadfiletoawscloud.infra.repository;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.repository;
 
-import com.m.blog.domain.loadfiletoawscloud.infra.entity.FileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

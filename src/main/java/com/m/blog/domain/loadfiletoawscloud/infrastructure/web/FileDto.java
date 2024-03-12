@@ -1,9 +1,8 @@
-package com.m.blog.domain.loadfiletoawscloud.application.dto;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.web;
 
-import com.m.blog.domain.loadfiletoawscloud.util.FileNature;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileNature;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 

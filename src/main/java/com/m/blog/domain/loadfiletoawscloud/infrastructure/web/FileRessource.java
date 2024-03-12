@@ -1,11 +1,10 @@
-package com.m.blog.domain.loadfiletoawscloud.application.rest;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.web;
 
-import com.m.blog.domain.loadfiletoawscloud.application.dto.FileDto;
-import com.m.blog.domain.loadfiletoawscloud.domain.mapper.FileMapper;
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.domain.use_case.DownloadFile;
-import com.m.blog.domain.loadfiletoawscloud.domain.use_case.ExistFile;
-import com.m.blog.domain.loadfiletoawscloud.domain.use_case.UploadFile;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileMapper;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.application.usecase.DownloadFileUsecase;
+import com.m.blog.domain.loadfiletoawscloud.application.usecase.ExistFileUsecase;
+import com.m.blog.domain.loadfiletoawscloud.application.usecase.UploadFileUsecase;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,16 +19,16 @@ import java.util.List;
 
 @RestController()
 public class FileRessource {
-    private final UploadFile uploadFile;
+    private final UploadFileUsecase uploadFileUsecase;
 
-    private final DownloadFile downloadFile;
+    private final DownloadFileUsecase downloadFileUsecase;
 
-    private final ExistFile existFile;
+    private final ExistFileUsecase existFileUsecase;
 
-    public FileRessource(UploadFile uploadFile, DownloadFile downloadFile, ExistFile existFile){
-        this.uploadFile = uploadFile;
-        this.downloadFile = downloadFile;
-        this.existFile = existFile;
+    public FileRessource(UploadFileUsecase uploadFileUsecase, DownloadFileUsecase downloadFileUsecase, ExistFileUsecase existFileUsecase){
+        this.uploadFileUsecase = uploadFileUsecase;
+        this.downloadFileUsecase = downloadFileUsecase;
+        this.existFileUsecase = existFileUsecase;
     }
 
     @PostMapping("/uploadFile")
@@ -41,13 +40,13 @@ public class FileRessource {
             return new ResponseEntity<>("file must have more than 8MB",HttpStatus.NOT_ACCEPTABLE);
         }
 
-        if(existFile.excute(multipartFile.getOriginalFilename())){
+        if(existFileUsecase.excute(multipartFile.getOriginalFilename())){
             return new ResponseEntity<>("file already exist please choose another file",HttpStatus.NOT_ACCEPTABLE);
         }
         File file = FileMapper.mapFileDtoToFile(new FileDto(multipartFile.getOriginalFilename(),multipartFile.getContentType(),multipartFile.getSize(),
                 typeDocument, multipartFile.getBytes()));
 
-        return new ResponseEntity<>(uploadFile.excute(file), HttpStatus.CREATED);
+        return new ResponseEntity<>(uploadFileUsecase.excute(file), HttpStatus.CREATED);
     }
 
     @PostMapping("/uploadMultipleFiles")
@@ -60,7 +59,7 @@ public class FileRessource {
 
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String fileName) throws IOException {
-        FileDto fileDto = FileMapper.mapFileToFileDto(downloadFile.excute(fileName));
+        FileDto fileDto = FileMapper.mapFileToFileDto(downloadFileUsecase.excute(fileName));
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileDto.getContentType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "file = "+fileDto.getName())

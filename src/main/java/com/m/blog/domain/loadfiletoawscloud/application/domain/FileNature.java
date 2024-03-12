@@ -1,4 +1,4 @@
-package com.m.blog.domain.loadfiletoawscloud.util;
+package com.m.blog.domain.loadfiletoawscloud.application.domain;
 
 public enum FileNature {
     IDENTITY,

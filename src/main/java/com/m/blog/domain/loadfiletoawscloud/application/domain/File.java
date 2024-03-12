@@ -1,7 +1,6 @@
-package com.m.blog.domain.loadfiletoawscloud.domain.model;
+package com.m.blog.domain.loadfiletoawscloud.application.domain;
 
 
-import com.m.blog.domain.loadfiletoawscloud.util.FileNature;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

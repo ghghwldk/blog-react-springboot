@@ -1,7 +1,6 @@
-package com.m.blog.domain.loadfiletoawscloud.infra.mapper;
+package com.m.blog.domain.loadfiletoawscloud.infrastructure.repository;
 
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.infra.entity.FileEntity;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
 
 import java.util.Optional;
 

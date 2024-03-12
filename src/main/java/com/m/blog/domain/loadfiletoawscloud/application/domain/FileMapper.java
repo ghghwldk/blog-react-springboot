@@ -1,10 +1,10 @@
-package com.m.blog.domain.loadfiletoawscloud.domain.mapper;
+package com.m.blog.domain.loadfiletoawscloud.application.domain;
 
 
-import com.m.blog.domain.loadfiletoawscloud.application.dto.FileDto;
-import com.m.blog.domain.loadfiletoawscloud.domain.model.File;
-import com.m.blog.domain.loadfiletoawscloud.util.FileNature;
-import com.m.blog.domain.loadfiletoawscloud.util.FileUtils;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.File;
+import com.m.blog.domain.loadfiletoawscloud.infrastructure.web.FileDto;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileNature;
+import com.m.blog.domain.loadfiletoawscloud.application.domain.FileUtils;
 
 public class FileMapper {
 
