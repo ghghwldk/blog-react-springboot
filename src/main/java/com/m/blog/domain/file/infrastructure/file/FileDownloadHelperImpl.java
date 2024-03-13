@@ -21,15 +21,17 @@ class FileDownloadHelperImpl implements FileDownloadHelper {
     private final FileProperties fileProperties;
 
     @Override
-    public InputStream getS3Resource(DownloadFileInfo downloadFileInfo){
-        S3Object s3Object = amazonS3.getObject(new GetObjectRequest(fileProperties.getBucket(), downloadFileInfo.getKey()));
+    public InputStream getS3Resource(DownloadFileInfo info){
+        S3Object s3Object = amazonS3.getObject(
+                new GetObjectRequest(fileProperties.getBucket(), info.getKey())
+        );
 
         return s3Object.getObjectContent();
     }
 
     @Override
-    public InputStream getLocalResource(DownloadFileInfo downloadFileInfo) throws IOException {
-        Path path = Paths.get(downloadFileInfo.getKey());
+    public InputStream getLocalResource(DownloadFileInfo info) throws IOException {
+        Path path = Paths.get(info.getKey());
 
         return Files.newInputStream(path);
     }
