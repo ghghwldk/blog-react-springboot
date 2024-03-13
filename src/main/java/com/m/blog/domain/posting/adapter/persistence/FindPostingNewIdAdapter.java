@@ -12,7 +12,9 @@ class FindPostingNewIdAdapter implements FindPostingNewIdPort {
     private final PostingDslRepository postingDslRepository;
 
     @Override
-    public int findNewId(Posting.IdWithoutPostingId id) {
-        return postingDslRepository.findNewId(id.getBoardCollectionId(), id.getBoardId());
+    public Posting.NewId findNewId(Posting.IdWithoutPostingId id) {
+        return Posting.getNextId(
+            postingDslRepository.findMaxId(id.getBoardCollectionId(), id.getBoardId())
+        );
     }
 }

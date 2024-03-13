@@ -49,11 +49,19 @@ public class Posting {
         private int boardId;
         private int postingId;
 
-        public PostingId(IdWithoutPostingId idWithoutPostingId, int postingId){
-            this.boardCollectionId = idWithoutPostingId.getBoardCollectionId();
-            this.boardId = idWithoutPostingId.getBoardId();
-            this.postingId = postingId;
+        public static PostingId from(IdWithoutPostingId idWithoutPostingId, int postingId){
+            return PostingId.builder()
+                    .boardCollectionId(idWithoutPostingId.getBoardCollectionId())
+                    .boardId(idWithoutPostingId.getBoardId())
+                    .postingId(postingId)
+                    .build();
         }
+    }
+
+    public static NewId getNextId(int maxId){
+        return NewId.builder()
+                .value(maxId + 1)
+                .build();
     }
 
     @Getter
@@ -62,6 +70,13 @@ public class Posting {
     public static class IdWithoutPostingId{
         private int boardCollectionId;
         private int boardId;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class NewId{
+        private int value;
     }
 
     @AllArgsConstructor

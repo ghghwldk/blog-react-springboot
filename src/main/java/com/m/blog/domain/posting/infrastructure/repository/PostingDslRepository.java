@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface PostingDslRepository {
-    int findNewId(int boardCollectionId, int boardId);
+    int findMaxId(int boardCollectionId, int boardId);
     Page<PostingDto> getPage(Pageable pageable);
 
     Page<PostingDto> getFiltered(int boardCollectionIdm, int boardId, Pageable pageable);

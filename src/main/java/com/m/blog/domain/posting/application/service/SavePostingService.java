@@ -16,9 +16,12 @@ class SavePostingService implements SavePostingUsecase {
 
     @Override
     @Transactional
-    public void save(Posting.IdWithoutPostingId id, Posting.Mutable target) {
+    public void save(Posting.IdWithoutPostingId idWithoutPostingId, Posting.Mutable target) {
         Posting.PostingId newId =
-                new Posting.PostingId(id, findPostingNewIdPort.findNewId(id));
+                Posting.PostingId.from(
+                        idWithoutPostingId,
+                        findPostingNewIdPort.findNewId(idWithoutPostingId).getValue()
+                );
 
         savePostingPort.save(newId, target);
     }

@@ -24,14 +24,12 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
 
     @Transactional
     @Override
-    public int findNewId(int boardCollectionId, int boardId){
+    public int findMaxId(int boardCollectionId, int boardId){
         QPostingEntity p = postingEntity;
-        int count= (int) query.selectFrom(p)
+        return  (int) query.selectFrom(p)
                 .where(p.boardCollectionId.eq(boardCollectionId),
                         p.boardId.eq(boardId))
                 .fetchCount();
-
-        return count+1;
     }
 
 
