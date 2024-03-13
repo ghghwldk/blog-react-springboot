@@ -1,6 +1,7 @@
 package com.m.blog.global.security;
 import com.m.blog.global.security.session.SessionFilter;
-import com.m.blog.global.security.session.SessionProvider;
+import com.m.blog.global.security.session.SessionUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,17 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final SessionProvider sessionProvider;
+    private final SessionUtil sessionUtil;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
-
-    public SecurityConfig(SessionProvider sessionProvider, CustomAuthenticationEntryPoint customAuthenticationEntryPoint, CustomAccessDeniedHandler customAccessDeniedHandler) {
-        this.sessionProvider = sessionProvider;
-        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
-        this.customAccessDeniedHandler = customAccessDeniedHandler;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new SessionFilter(sessionProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new SessionFilter(sessionUtil), UsernamePasswordAuthenticationFilter.class);
     }
 }
 

@@ -9,7 +9,6 @@ import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 //import com.m.blog.domain.auth.adapter.out.persistence.Member;
 import com.m.blog.domain.auth.infrastructure.repository.MemberJpaRepository;
-import com.m.blog.global.config.variable.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

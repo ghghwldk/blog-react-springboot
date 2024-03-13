@@ -4,13 +4,11 @@ import com.m.blog.common.Adapter;
 import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.application.port.entrypoint.api.AuthEndpointPort;
 import com.m.blog.domain.auth.application.usecase.AuthUsecase;
-import com.m.blog.domain.auth.infrastructure.repository.MemberEntity;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
-import com.m.blog.global.config.variable.SessionConst;
+import com.m.blog.global.security.session.SessionUtil;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,17 +16,14 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class AuthEndpointAdapter implements AuthEndpointPort {
     private final AuthUsecase authUsecase;
+    private final SessionUtil sessionUtil;
 
-    private void setAttribute(Member member, HttpServletRequest httpServletRequest){
-        HttpSession session = httpServletRequest.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, member);
-    }
 
     @Override
     public LoginResponse login(LoginRequest request, HttpServletRequest httpServletRequest) {
         Member member = authUsecase.login(MemberMapper.of(request));
 
-        this.setAttribute(member, httpServletRequest);
+        sessionUtil.setAttribute(member, httpServletRequest);
 
         return LoginResponse.builder()
                 .role(member.getRole())
