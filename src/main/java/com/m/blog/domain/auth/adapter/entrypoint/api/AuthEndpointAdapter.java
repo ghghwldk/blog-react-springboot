@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class AuthEndpointAdapter implements AuthEndpointPort {
     private final AuthUsecase authUsecase;
-    private final MemberMapper memberMapper;
 
     private void setAttribute(Member member, HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession();

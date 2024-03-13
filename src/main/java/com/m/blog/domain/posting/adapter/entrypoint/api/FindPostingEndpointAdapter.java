@@ -15,12 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 class FindPostingEndpointAdapter implements FindPositngEndpointPort {
     private final FindPostingUsecase findPostingUsecase;
-    private final PostingDtoMapper postingDtoMapper;
 
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest request){
         return findPostingUsecase.get(
-                postingDtoMapper.of(request),
+                PostingDtoMapper.of(request),
                 request.getPageable()
         );
     }

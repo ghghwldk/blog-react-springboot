@@ -1,10 +1,8 @@
 package com.m.blog.domain.posting.adapter.persistence;
 
-import com.m.blog.common.Mapper;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.repository.PostingEntity;
 
-@Mapper
 class PostingJpaMapper {
     public PostingEntity toEntity (Posting domain){
         return PostingEntity.builder()

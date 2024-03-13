@@ -1,11 +1,9 @@
 package com.m.blog.domain.auth.adapter.persistence;
 
-import com.m.blog.common.Mapper;
 import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.infrastructure.repository.MemberEntity;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 
-@Mapper
 public class MemberJpaMapper {
     public static Member of(MemberEntity entity){
         return Member.builder()
