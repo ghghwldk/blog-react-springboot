@@ -2,6 +2,8 @@ package com.m.blog.domain.posting.application.domain;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -76,5 +78,19 @@ public class Posting {
     public static class Mutable {
         private String title;
         private String content;
+    }
+
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class Sophisticated {
+        private int postingId;
+        private String title;
+        private String content;
+        private int boardId;
+        private String boardName;
+        private int boardCollectionId;
+        private String boardCollectionName;
+        private LocalDateTime createdTime;
     }
 }

@@ -77,9 +77,8 @@ class FileUploadHelperImpl implements FileUploadHelper {
                     );
 
             putS3(file, fileVo);
-        }catch (Exception e){
-            throw e;
-        }finally{
+        } finally{
+            assert file != null;
             removeNewFile(file);
         }
     }

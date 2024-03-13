@@ -11,5 +11,5 @@ import java.io.InputStream;
 @AllArgsConstructor
 public class DownloadContent {
     InputStream data;
-    DownloadFileInfo downloadFileInfo;
+    DownloadFile downloadFile;
 }

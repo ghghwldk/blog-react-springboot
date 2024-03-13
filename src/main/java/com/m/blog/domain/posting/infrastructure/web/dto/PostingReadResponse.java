@@ -1,6 +1,7 @@
 package com.m.blog.domain.posting.infrastructure.web.dto;
 
 
+import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,16 +22,16 @@ public class PostingReadResponse {
     private String boardCollectionName;
     private LocalDateTime createdTime;
 
-    public static PostingReadResponse of(PostingDto postingDto){
+    public static PostingReadResponse of(Posting.Sophisticated sophisticated){
         return PostingReadResponse.builder()
-                .postingId(postingDto.getPostingId())
-                .title(postingDto.getTitle())
-                .content(postingDto.getContent())
-                .boardId(postingDto.getBoardId())
-                .boardName(postingDto.getBoardName())
-                .boardCollectionId(postingDto.getBoardCollectionId())
-                .boardCollectionName(postingDto.getBoardCollectionName())
-                .createdTime(postingDto.getCreatedTime())
+                .postingId(sophisticated.getPostingId())
+                .title(sophisticated.getTitle())
+                .content(sophisticated.getContent())
+                .boardId(sophisticated.getBoardId())
+                .boardName(sophisticated.getBoardName())
+                .boardCollectionId(sophisticated.getBoardCollectionId())
+                .boardCollectionName(sophisticated.getBoardCollectionName())
+                .createdTime(sophisticated.getCreatedTime())
                 .build();
     }
 }

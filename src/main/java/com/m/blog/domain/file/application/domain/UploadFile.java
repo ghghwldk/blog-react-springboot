@@ -38,7 +38,7 @@ public class UploadFile {
     }
 
     public String getS3Key(String directoryName){
-        return directoryName + savedFileName;
+        return directoryName + "/" + savedFileName;
     }
 }
 

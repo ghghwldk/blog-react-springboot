@@ -2,7 +2,7 @@ package com.m.blog.domain.file.adapter.file;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.DownloadContent;
-import com.m.blog.domain.file.application.domain.DownloadFileInfo;
+import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.port.file.FileDownloadPort;
 import com.m.blog.domain.file.infrastructure.file.FileDownloadHelper;
 import com.m.blog.global.properties.FileProperties;
@@ -19,14 +19,14 @@ public class FileDownloadAdapter implements FileDownloadPort {
     private final FileDownloadHelper fileDownloadHelper;
 
     @Override
-    public DownloadContent get(DownloadFileInfo downloadFileInfo) throws IOException {
+    public DownloadContent get(DownloadFile downloadFile) throws IOException {
         InputStream inputStream = fileProperties.isLocal()?
-                fileDownloadHelper.getLocalResource(downloadFileInfo):
-                fileDownloadHelper.getS3Resource(downloadFileInfo);
+                fileDownloadHelper.getLocalResource(downloadFile):
+                fileDownloadHelper.getS3Resource(downloadFile);
 
         return DownloadContent.builder()
                 .data(inputStream)
-                .downloadFileInfo(downloadFileInfo)
+                .downloadFile(downloadFile)
                 .build();
     }
 }
