@@ -16,12 +16,12 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
     private final JPAQueryFactory query;
 
     @Override
-    public List<BoardAggregationDto> getBoardAggregationDtos(){
+    public List<BoardAggregationDto> getAggregationDtos(){
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
         QPostingEntity p = QPostingEntity.postingEntity;
 
-        List<BoardAggregationDto> result = query
+        return query
                 .select(
                         new QBoardAggregationDto(
                                 bc.id,
@@ -45,6 +45,6 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
                         b.createdTime,
                         b.updatedTime
                 ).fetch();
-        return result;
     }
+
 }

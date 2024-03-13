@@ -26,7 +26,7 @@ public class GetBoardCollectionAdapter implements GetBoardCollectionPort {
 
     @Override
     public List<BoardCollection.Aggregation> getAggregations(){
-        return boardCollectionDslRepository.getBoardAggregationDtos().stream()
+        return boardCollectionDslRepository.getAggregationDtos().stream()
                 .map(BoardCollectionEntityMapper::of)
                 .collect(Collectors.toList());
     }
