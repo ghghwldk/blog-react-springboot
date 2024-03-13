@@ -9,6 +9,7 @@ public class MemberMapper {
                 .id(Member.MemberId.builder()
                         .userId(request.getUserId())
                         .build())
+                .password(request.getPassword())
                 .build();
     }
 }
