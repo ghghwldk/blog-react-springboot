@@ -36,5 +36,9 @@ public class UploadFile {
                 .data(multipartFile.getBytes())
                 .build();
     }
+
+    public String getS3Key(String directoryName){
+        return directoryName + savedFileName;
+    }
 }
 

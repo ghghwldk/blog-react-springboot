@@ -41,13 +41,16 @@ class FileUploadHelperImpl implements FileUploadHelper {
     }
 
     @Override
-    public void uploadOnLocal(UploadFile fileVo) throws IOException{
+    public void uploadOnLocal(UploadFile uploadFile) throws IOException{
         File file = null;
 
         log.info("file is uploading on the local pc");
         try{
-            InputStream fileStream = new ByteArrayInputStream(fileVo.getData());
-            file = new File(fileProperties.getDirectoryName() + "/" + fileVo.getSavedFileName());
+            InputStream fileStream = new ByteArrayInputStream(uploadFile.getData());
+            String key = uploadFile.getS3Key(fileProperties.getDirectoryName());
+
+            file = new File(key);
+
             FileUtils.copyInputStreamToFile(fileStream, file);
         }catch (IOException e) {
             FileUtils.deleteQuietly(file);
@@ -55,11 +58,11 @@ class FileUploadHelperImpl implements FileUploadHelper {
         }
     }
 
-    private void putS3(File uploadFile, UploadFile fileVo) {
-        String key= fileProperties.getDirectoryName() + "/" + fileVo.getSavedFileName();
+    private void putS3(File file, UploadFile uploadFile) {
+        String key= uploadFile.getS3Key(fileProperties.getDirectoryName());
 
         amazonS3Client
-                .putObject(new PutObjectRequest(fileProperties.getBucket(), key, uploadFile)
+                .putObject(new PutObjectRequest(fileProperties.getBucket(), key, file)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
