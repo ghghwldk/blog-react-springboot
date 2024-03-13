@@ -1,8 +1,8 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.application.domain.DownloadCondition;
-import com.m.blog.domain.file.application.domain.DownloadContent;
+import com.m.blog.domain.file.application.domain.DownloadResult;
+import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.domain.file.application.usecase.FileDownloadUsecase;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
@@ -21,9 +21,9 @@ import java.io.UnsupportedEncodingException;
 public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     private final FileDownloadUsecase fileDownloadUsecase;
 
-    private ResponseEntity<Resource> get(DownloadContent downloadContent) throws UnsupportedEncodingException {
-        Resource resource = new InputStreamResource(downloadContent.getData());
-        String header = downloadContent.getDownloadFile()
+    private ResponseEntity<Resource> get(DownloadResult downloadResult) throws UnsupportedEncodingException {
+        Resource resource = new InputStreamResource(downloadResult.getData());
+        String header = downloadResult.getDownloadFile()
                 .getHeaderValues();
 
         return ResponseEntity.ok()
@@ -34,10 +34,10 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        DownloadCondition downloadCondition = FileMapper.of(request);
+        DownloadFile.TrialCondition trialCondition = FileMapper.of(request);
 
-        DownloadContent downloadContent = fileDownloadUsecase.downlaod(downloadCondition);
+        DownloadResult downloadResult = fileDownloadUsecase.downlaod(trialCondition);
 
-        return get(downloadContent);
+        return get(downloadResult);
     }
 }
