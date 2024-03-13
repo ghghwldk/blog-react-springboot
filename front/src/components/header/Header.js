@@ -81,7 +81,7 @@ const Header = ()=>{
                             boardCollectionName={gnbData.boardCollectionName}
                             boardCollectionId={gnbData.boardCollectionId}
                             postingCount = {gnbData.postingCount}
-                            boards={gnbData.boardInformationInMenuDtos}
+                            boards={gnbData.aggregations}
                             selectedBoardCollectionId = {selectedBoardCollectionId}
                             setSelectedBoardCollectionId = {setSelectedBoardCollectionId}
                           />

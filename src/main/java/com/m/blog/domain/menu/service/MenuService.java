@@ -16,8 +16,8 @@ public class MenuService implements MenuUsecase {
     @Override
     public MenuResponse get(){
         return MenuResponse.of(
-                getBoardCollectionQuery.getBoardCollectionEntities(),
-                getBoardCollectionQuery.getBoardAggregationDtos()
+                getBoardCollectionQuery.getBoardCollections(),
+                getBoardCollectionQuery.getAggregations()
         );
     }
 }
