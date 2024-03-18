@@ -1,5 +1,6 @@
 package com.m.blog.domain.menu.infrastructure.web.controller;
 
+import com.m.blog.domain.menu.application.port.entrypoint.api.FindMenuEndpointPort;
 import com.m.blog.domain.menu.application.usecase.MenuUsecase;
 import com.m.blog.domain.menu.infrastructure.web.dto.MenuResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/menu")
 public class MenuController {
-    private final MenuUsecase menuUsecase;
+    private final FindMenuEndpointPort findMenuEndpointPort;
 
     @GetMapping
     MenuResponse get (){
-        return menuUsecase.get();
+        return findMenuEndpointPort.get();
     }
 }
 

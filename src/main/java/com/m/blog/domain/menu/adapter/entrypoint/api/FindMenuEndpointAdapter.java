@@ -12,5 +12,7 @@ public class FindMenuEndpointAdapter implements FindMenuEndpointPort {
     private final MenuUsecase menuUsecase;
 
     @Override
-    public MenuResponse get() {return menuUsecase.get();}
+    public MenuResponse get() {
+        return menuUsecase.get();
+    }
 }
