@@ -4,8 +4,8 @@ import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 
 public class MemberMapper {
-    public static Member.MemberLoginInfo of(LoginRequest request){
-        return Member.MemberLoginInfo.builder()
+    public static Member.LoginInfo of(LoginRequest request){
+        return Member.LoginInfo.builder()
                 .id(Member.MemberId.builder()
                         .userId(request.getUserId())
                         .build())

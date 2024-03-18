@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Id;
-
 @Getter
 @AllArgsConstructor
 @Builder
@@ -25,7 +23,7 @@ public class Member {
     @Builder
     @AllArgsConstructor
     @Getter
-    public static class MemberLoginInfo{
+    public static class LoginInfo {
         MemberId id;
         String password;
     }

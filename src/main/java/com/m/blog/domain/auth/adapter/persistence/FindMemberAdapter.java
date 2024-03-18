@@ -14,9 +14,11 @@ public class FindMemberAdapter implements FindMemberPort {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override
-    public Member find(String userId, String password){
+    public Member find(Member.LoginInfo loginInfo){
         return memberJpaRepository
-                .findMemberByIdAndPassword(userId, password)
+                .findMemberByIdAndPassword(
+                        loginInfo.getId().getUserId(), loginInfo.getPassword()
+                )
                 .map(MemberJpaMapper::of)
                 .orElseThrow(EntityNotFoundException::new);
     }

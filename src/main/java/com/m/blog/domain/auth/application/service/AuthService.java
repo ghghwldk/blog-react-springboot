@@ -1,14 +1,10 @@
 package com.m.blog.domain.auth.application.service;
 
 
-import com.m.blog.domain.auth.adapter.persistence.MemberJpaMapper;
 import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.application.port.persistence.FindMemberPort;
 import com.m.blog.domain.auth.application.usecase.AuthUsecase;
-import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
-import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 //import com.m.blog.domain.auth.adapter.out.persistence.Member;
-import com.m.blog.domain.auth.infrastructure.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +25,9 @@ public class AuthService implements AuthUsecase {
     }
 
     @Override
-    public Member login(Member.MemberLoginInfo info){
+    public Member login(Member.LoginInfo info){
         return findMemberPort
-                .find(info.getId().getUserId(), info.getPassword());
+                .find(info);
     }
 
 }
