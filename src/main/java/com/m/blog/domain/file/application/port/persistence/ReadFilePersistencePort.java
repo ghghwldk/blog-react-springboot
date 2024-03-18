@@ -5,7 +5,7 @@ import com.m.blog.domain.file.application.domain.File;
 
 import java.io.IOException;
 
-public interface ReadFilePort {
+public interface ReadFilePersistencePort {
     DownloadFile get(DownloadFile.TrialCondition condition) throws IOException;
 
     File findByFileName(String fileName);

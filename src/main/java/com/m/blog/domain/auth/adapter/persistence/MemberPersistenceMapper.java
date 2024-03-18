@@ -4,7 +4,7 @@ import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.infrastructure.repository.MemberEntity;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 
-public class MemberJpaMapper {
+public class MemberPersistenceMapper {
     public static Member of(MemberEntity entity){
         return Member.builder()
                 .id(Member.MemberId.builder()

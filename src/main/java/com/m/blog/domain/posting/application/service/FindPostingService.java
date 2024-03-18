@@ -3,8 +3,8 @@ package com.m.blog.domain.posting.application.service;
 import com.m.blog.domain.board.infrastructure.repository.BoardDto;
 import com.m.blog.domain.board.infrastructure.repository.BoardDslRepository;
 import com.m.blog.domain.posting.application.domain.Posting;
-import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
-import com.m.blog.domain.posting.application.port.persistence.FindPostingPort;
+import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPersistencePort;
+import com.m.blog.domain.posting.application.port.persistence.FindPostingPersistencePort;
 import com.m.blog.domain.posting.application.usecase.FindPostingUsecase;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadResponse;
 import com.m.blog.global.paging.PagingResponse;
@@ -18,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 class FindPostingService implements FindPostingUsecase {
     private final BoardDslRepository boardDslRepository;
-    private final FindPostingPagingPort findPostingPagingPort;
-    private final FindPostingPort findPostingPort;
+    private final FindPostingPagingPersistencePort findPostingPagingPersistencePort;
+    private final FindPostingPersistencePort findPostingPersistencePort;
 
     @Override
     public PagingResponse get(Posting.IdWithoutPostingId idWithoutPostingId, Pageable pageable){
@@ -29,18 +29,18 @@ class FindPostingService implements FindPostingUsecase {
         Posting.InBoardCondition condition =
                 Posting.forFilteredPage(idWithoutPostingId.getBoardCollectionId(), idWithoutPostingId.getBoardId());
 
-        return PagingResponse.get(findPostingPagingPort.getFilteredPage(condition, pageable), found);
+        return PagingResponse.get(findPostingPagingPersistencePort.getFilteredPage(condition, pageable), found);
     }
 
     @Override
     public PagingResponse getPagingResponse(Pageable pageable) {
         BoardDto found = null;
 
-        return PagingResponse.get(findPostingPagingPort.getPaging(pageable), found);
+        return PagingResponse.get(findPostingPagingPersistencePort.getPaging(pageable), found);
     }
 
     @Override
     public PostingReadResponse get(Posting.PostingId condition){
-        return PostingReadResponse.of(findPostingPort.get(condition));
+        return PostingReadResponse.of(findPostingPersistencePort.get(condition));
     }
 }

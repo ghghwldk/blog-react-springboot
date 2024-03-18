@@ -1,8 +1,7 @@
 package com.m.blog.domain.boardCollection.adapter.persistence;
 
 import com.m.blog.domain.boardCollection.application.domain.BoardCollection;
-import com.m.blog.domain.boardCollection.application.port.persistence.GetBoardCollectionPort;
-import com.m.blog.domain.boardCollection.infrastructure.repository.BoardAggregationDto;
+import com.m.blog.domain.boardCollection.application.port.persistence.GetBoardCollectionPersistencePort;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionDslRepository;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionEntityMapper;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionJpaRepository;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class GetBoardCollectionAdapter implements GetBoardCollectionPort {
+public class GetBoardCollectionPersistencePersistenceAdapter implements GetBoardCollectionPersistencePort {
     private final BoardCollectionJpaRepository boardCollectionJpaRepository;
     private final BoardCollectionDslRepository boardCollectionDslRepository;
     @Override

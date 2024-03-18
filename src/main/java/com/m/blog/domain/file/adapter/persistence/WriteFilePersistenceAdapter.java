@@ -5,12 +5,12 @@ import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.application.domain.UploadFile;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
-import com.m.blog.domain.file.application.port.persistence.WriteFilePort;
+import com.m.blog.domain.file.application.port.persistence.WriteFilePersistencePort;
 import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-public class WriteFileAdapter implements WriteFilePort {
+public class WriteFilePersistenceAdapter implements WriteFilePersistencePort {
     private final FileJpaRepository fileJpaRepository;
 
     @Override

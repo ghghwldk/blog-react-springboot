@@ -3,7 +3,7 @@ package com.m.blog.domain.file.adapter.persistence;
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.domain.File;
-import com.m.blog.domain.file.application.port.persistence.ReadFilePort;
+import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
 import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Adapter
 @RequiredArgsConstructor
-public class ReadFileAdapter implements ReadFilePort {
+public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
     private final FileJpaRepository fileJpaRepository;
 
 

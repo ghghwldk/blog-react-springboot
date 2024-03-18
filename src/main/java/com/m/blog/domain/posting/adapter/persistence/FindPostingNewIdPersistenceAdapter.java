@@ -2,13 +2,13 @@ package com.m.blog.domain.posting.adapter.persistence;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.posting.application.domain.Posting;
-import com.m.blog.domain.posting.application.port.persistence.FindPostingNewIdPort;
+import com.m.blog.domain.posting.application.port.persistence.FindPostingNewIdPersistencePort;
 import com.m.blog.domain.posting.infrastructure.repository.PostingDslRepository;
 import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-class FindPostingNewIdAdapter implements FindPostingNewIdPort {
+class FindPostingNewIdPersistenceAdapter implements FindPostingNewIdPersistencePort {
     private final PostingDslRepository postingDslRepository;
 
     @Override

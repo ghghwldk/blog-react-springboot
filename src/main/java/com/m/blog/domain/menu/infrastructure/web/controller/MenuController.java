@@ -2,7 +2,6 @@ package com.m.blog.domain.menu.infrastructure.web.controller;
 
 import com.m.blog.domain.menu.application.usecase.MenuUsecase;
 import com.m.blog.domain.menu.infrastructure.web.dto.MenuResponse;
-import com.m.blog.domain.posting.application.port.persistence.FindPostingPagingPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -5,7 +5,7 @@ import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface FindPostingPagingPort {
+public interface FindPostingPagingPersistencePort {
 
     Page<PostingDto> getPaging(Pageable pageable);
 

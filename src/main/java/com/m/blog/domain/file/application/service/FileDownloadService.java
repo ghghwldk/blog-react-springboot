@@ -4,7 +4,7 @@ import com.m.blog.common.UseCase;
 import com.m.blog.domain.file.application.domain.DownloadResult;
 import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.port.file.FileDownloadPort;
-import com.m.blog.domain.file.application.port.persistence.ReadFilePort;
+import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
 import com.m.blog.domain.file.application.usecase.FileDownloadUsecase;
 import lombok.RequiredArgsConstructor;
 
@@ -13,12 +13,12 @@ import java.io.IOException;
 @UseCase
 @RequiredArgsConstructor
 public class FileDownloadService implements FileDownloadUsecase {
-    private final ReadFilePort readFilePort;
+    private final ReadFilePersistencePort readFilePersistencePort;
     private final FileDownloadPort fileDownloadPort;
 
     @Override
     public DownloadResult downlaod(DownloadFile.TrialCondition condition) throws IOException {
-        DownloadFile downloadFile = readFilePort.get(condition);
+        DownloadFile downloadFile = readFilePersistencePort.get(condition);
 
         return  fileDownloadPort.get(downloadFile);
     }
