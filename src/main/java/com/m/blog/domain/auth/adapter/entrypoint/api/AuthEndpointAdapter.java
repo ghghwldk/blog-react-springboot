@@ -20,10 +20,10 @@ public class AuthEndpointAdapter implements AuthEndpointPort {
 
 
     @Override
-    public LoginResponse login(LoginRequest request, HttpServletRequest httpServletRequest) {
+    public LoginResponse login(LoginRequest request) {
         Member member = authUsecase.login(MemberMapper.of(request));
 
-        sessionUtil.setAttribute(member, httpServletRequest);
+        sessionUtil.setAttribute(member);
 
         return LoginResponse.builder()
                 .role(member.getRole())

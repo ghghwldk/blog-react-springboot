@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
 
 public interface AuthEndpointPort {
-    LoginResponse login(LoginRequest loginRequest, HttpServletRequest request);
+    LoginResponse login(LoginRequest loginRequest);
 
     String logout(HttpServletRequest request);
 }

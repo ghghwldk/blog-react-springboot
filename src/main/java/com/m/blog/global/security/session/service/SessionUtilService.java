@@ -7,16 +7,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Component
 public class SessionUtilService implements SessionUtil {
     private static final String LOGIN_MEMBER = "loginMember";
 
     @Override
-    public void setAttribute(Member member, HttpServletRequest httpServletRequest){
+    public void setAttribute(Member member){
+        HttpServletRequest httpServletRequest = this.getHttpServletRequest();
+
         HttpSession session = httpServletRequest.getSession();
         session.setAttribute(LOGIN_MEMBER, member);
     }
@@ -26,6 +31,26 @@ public class SessionUtilService implements SessionUtil {
         HttpSession httpSession = httpServletRequest.getSession();
 
         return httpSession != null && httpSession.getAttribute(LOGIN_MEMBER) != null;
+    }
+
+    private HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes)
+                Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
+                .getRequest();
+    }
+
+    private HttpSession getSession() {
+        return this.getHttpServletRequest()
+                .getSession(false);
+    }
+
+    @Override
+    public void inValidateSession(){
+        HttpSession httpSession = this.getSession();
+
+        if(httpSession!=null){
+            httpSession.invalidate();
+        }
     }
 
     @Override

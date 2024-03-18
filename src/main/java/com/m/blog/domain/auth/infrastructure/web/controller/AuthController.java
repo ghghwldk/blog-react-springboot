@@ -21,8 +21,8 @@ public class AuthController {
     private final AuthEndpointPort authEndpointPort;
     @ResponseBody
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request, HttpServletRequest httpServletRequest){
-        return authEndpointPort.login(request, httpServletRequest);
+    public LoginResponse login(@RequestBody LoginRequest request){
+        return authEndpointPort.login(request);
     }
 
     @PostMapping("/logout")
