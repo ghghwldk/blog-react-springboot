@@ -24,7 +24,7 @@ public class GetBoardCollectionPersistencePersistenceAdapter implements GetBoard
     }
 
     @Override
-    public List<BoardCollection.Aggregation> getAggregations(){
+    public List<BoardCollection.AggregationPerBoard> getAggregations(){
         return boardCollectionDslRepository.getAggregationDtos().stream()
                 .map(BoardCollectionEntityMapper::of)
                 .collect(Collectors.toList());

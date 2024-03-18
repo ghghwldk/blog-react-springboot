@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GetBoardCollectionPersistencePort {
     List<BoardCollection> getBoardCollections();
-    List<BoardCollection.Aggregation> getAggregations();
+    List<BoardCollection.AggregationPerBoard> getAggregations();
 }

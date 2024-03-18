@@ -1,29 +1,36 @@
 package com.m.blog.domain.menu.infrastructure.web.dto;
 
 import com.m.blog.domain.boardCollection.application.domain.BoardCollection;
-import com.m.blog.domain.boardCollection.infrastructure.repository.BoardAggregationDto;
-import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
 @AllArgsConstructor
 public class MenuResponse {
-    List<Nested> nesteds;
+    List<AggregationPerBoardCollection> nesteds;
 
     @Data
     @Builder
     @AllArgsConstructor
-    public static class Nested {
+    public static class AggregationPerBoardCollection {
         String boardCollectionName;
         int boardCollectionId;
         int postingCount;
-        List<BoardCollection.Aggregation> aggregations;
+        List<AggregationPerBoard> aggregationPerBoards;
+    }
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    public static class AggregationPerBoard {
+        private int boardCollectionId;
+        private String boardCollectionName;
+        private int boardId;
+        private String boardName;
+        private long postingCount;
     }
 }

@@ -1,7 +1,9 @@
 package com.m.blog.domain.menu.application.usecase;
 
-import com.m.blog.domain.menu.infrastructure.web.dto.MenuResponse;
+import com.m.blog.domain.boardCollection.application.domain.BoardCollection;
+
+import java.util.List;
 
 public interface MenuUsecase {
-    MenuResponse get();
+    List<BoardCollection.AggregationPerBoardCollection> get();
 }

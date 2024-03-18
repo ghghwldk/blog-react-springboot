@@ -3,8 +3,8 @@ package com.m.blog.domain.boardCollection.infrastructure.repository;
 import com.m.blog.domain.boardCollection.application.domain.BoardCollection;
 
 public class BoardCollectionEntityMapper {
-    public static BoardCollection.Aggregation of(BoardAggregationDto dto){
-        return BoardCollection.Aggregation.builder()
+    public static BoardCollection.AggregationPerBoard of(BoardAggregationDto dto){
+        return BoardCollection.AggregationPerBoard.builder()
                 .boardCollectionId(dto.getBoardCollectionId())
                 .boardCollectionName(dto.getBoardCollectionName())
                 .boardId(dto.getBoardId())
