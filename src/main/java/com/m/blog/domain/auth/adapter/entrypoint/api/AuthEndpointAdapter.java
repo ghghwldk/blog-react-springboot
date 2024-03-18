@@ -16,15 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class AuthEndpointAdapter implements AuthEndpointPort {
     private final AuthUsecase authUsecase;
-    private final SessionUtil sessionUtil;
-    private static final String signOutRedirectUri = "redirect:/";
-
 
     @Override
     public LoginResponse login(LoginRequest request) {
         Member member = authUsecase.login(MemberMapper.of(request));
-
-        sessionUtil.setAttribute(member);
 
         return LoginResponse.builder()
                 .role(member.getRole())
