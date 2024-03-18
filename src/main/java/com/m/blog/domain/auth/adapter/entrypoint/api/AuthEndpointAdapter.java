@@ -6,17 +6,18 @@ import com.m.blog.domain.auth.application.port.entrypoint.api.AuthEndpointPort;
 import com.m.blog.domain.auth.application.usecase.AuthUsecase;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
+import com.m.blog.domain.auth.infrastructure.web.dto.LogoutResponse;
 import com.m.blog.global.security.session.SessionUtil;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Adapter
 @RequiredArgsConstructor
 public class AuthEndpointAdapter implements AuthEndpointPort {
     private final AuthUsecase authUsecase;
     private final SessionUtil sessionUtil;
+    private static final String signOutRedirectUri = "redirect:/";
 
 
     @Override
@@ -31,12 +32,9 @@ public class AuthEndpointAdapter implements AuthEndpointPort {
     }
 
     @Override
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+    public LogoutResponse logout(HttpServletRequest request) {
+        authUsecase.logout();
 
-        return "redirect:/";
+        return LogoutResponse.builder().build();
     }
 }

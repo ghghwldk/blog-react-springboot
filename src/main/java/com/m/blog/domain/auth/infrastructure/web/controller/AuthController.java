@@ -3,6 +3,7 @@ package com.m.blog.domain.auth.infrastructure.web.controller;
 import com.m.blog.domain.auth.application.port.entrypoint.api.AuthEndpointPort;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
+import com.m.blog.domain.auth.infrastructure.web.dto.LogoutResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public LogoutResponse logout(HttpServletRequest request) {
         return authEndpointPort.logout(request);
     }
 }
