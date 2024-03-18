@@ -1,6 +1,7 @@
 package com.m.blog.domain.menu.service;
 
 import com.m.blog.domain.boardCollection.application.port.persistence.GetBoardCollectionPersistencePort;
+import com.m.blog.domain.menu.adapter.entrypoint.api.MenuMapper;
 import com.m.blog.domain.menu.infrastructure.web.dto.MenuResponse;
 import com.m.blog.domain.menu.application.usecase.MenuUsecase;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class MenuService implements MenuUsecase {
 
     @Override
     public MenuResponse get(){
-        return MenuResponse.of(
+        return MenuMapper.of(
                 getBoardCollectionQuery.getBoardCollections(),
                 getBoardCollectionQuery.getAggregations()
         );
