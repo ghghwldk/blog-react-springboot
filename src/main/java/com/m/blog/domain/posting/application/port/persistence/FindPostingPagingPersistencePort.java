@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface FindPostingPagingPersistencePort {
 
-    Page<PostingDto> getPaging(Pageable pageable);
+    Page<Posting.Sophisticated> getPaging(Pageable pageable);
 
 //    Page<PostingDto> get(PostingReadFilteredPagingRequest requestDto);
-    Page<PostingDto> getFilteredPage(Posting.InBoardCondition condition, Pageable pageable);
+    Page<Posting.Sophisticated> getFilteredPage(Posting.InBoardCondition condition, Pageable pageable);
 }

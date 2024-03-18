@@ -1,5 +1,6 @@
 package com.m.blog.domain.posting.application.domain;
 
+import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -40,6 +41,7 @@ public class Posting {
                 .content(content)
                 .build();
     }
+
 
     @Getter
     @Builder
@@ -97,7 +99,7 @@ public class Posting {
 
     @AllArgsConstructor
     @Builder
-    @Getter
+    @Data
     public static class Sophisticated {
         private int postingId;
         private String title;
@@ -108,4 +110,6 @@ public class Posting {
         private String boardCollectionName;
         private LocalDateTime createdTime;
     }
+
+
 }

@@ -18,10 +18,6 @@ public class PostingDto {
     private String boardCollectionName;
     private LocalDateTime createdTime;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     @QueryProjection
     public PostingDto(int postingId, String title, String content, int boardId, String boardName, int boardCollectionId, String boardCollectionName, LocalDateTime createdTime) {
         this.postingId = postingId;
