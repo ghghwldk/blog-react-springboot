@@ -17,16 +17,16 @@ class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
     @Override
     public void update(PostingUpdateRequest request){
         changePostingUsecase.update(
-                PostingDtoMapper.toId(request),
-                PostingDtoMapper.toMutable(request)
+                PostingMapper.toId(request),
+                PostingMapper.toMutable(request)
         );
     }
 
     @Override
     public void create(PostingCreateRequest request){
         savePostingUsecase.save(
-                PostingDtoMapper.toId(request),
-                PostingDtoMapper.toMutable(request)
+                PostingMapper.toId(request),
+                PostingMapper.toMutable(request)
         );
     }
 }

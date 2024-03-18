@@ -19,7 +19,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest request){
         return findPostingUsecase.get(
-                PostingDtoMapper.of(request),
+                PostingMapper.of(request),
                 request.getPageable()
         );
     }

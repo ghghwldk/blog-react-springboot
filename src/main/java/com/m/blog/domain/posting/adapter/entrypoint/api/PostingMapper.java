@@ -6,7 +6,7 @@ import com.m.blog.domain.posting.infrastructure.web.dto.PostingCreateRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingUpdateRequest;
 
-class PostingDtoMapper {
+class PostingMapper {
     public static Posting toDomain(PostingEntity entity){
         return Posting.withId(entity.getId(),
                 entity.getBoardCollectionId(),
