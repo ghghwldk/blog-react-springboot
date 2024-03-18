@@ -17,7 +17,7 @@ public class FileDownloadService implements FileDownloadUsecase {
     private final FileDownloadPort fileDownloadPort;
 
     @Override
-    public DownloadResult downlaod(DownloadFile.TrialCondition condition) throws IOException {
+    public DownloadResult download(DownloadFile.TrialCondition condition) throws IOException {
         DownloadFile downloadFile = readFilePersistencePort.get(condition);
 
         return  fileDownloadPort.get(downloadFile);

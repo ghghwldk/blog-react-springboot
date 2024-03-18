@@ -16,7 +16,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-class FileUploadHelperImpl implements FileUploadHelper {
+class FileUploadUtilImpl implements FileUploadUtil {
     private final FileProperties fileProperties;
     private final AmazonS3Client amazonS3Client;
 

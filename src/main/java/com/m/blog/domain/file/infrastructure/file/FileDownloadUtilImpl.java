@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 @Component
 @RequiredArgsConstructor
-class FileDownloadHelperImpl implements FileDownloadHelper {
+class FileDownloadUtilImpl implements FileDownloadUtil {
     private final AmazonS3 amazonS3;
     private final FileProperties fileProperties;
 

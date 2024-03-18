@@ -6,5 +6,5 @@ import com.m.blog.domain.file.application.domain.DownloadResult;
 import java.io.IOException;
 
 public interface FileDownloadUsecase {
-    DownloadResult downlaod(DownloadFile.TrialCondition condition) throws IOException;
+    DownloadResult download(DownloadFile.TrialCondition condition) throws IOException;
 }

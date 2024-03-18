@@ -36,7 +36,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
         DownloadFile.TrialCondition trialCondition = FileMapper.of(request);
 
-        DownloadResult downloadResult = fileDownloadUsecase.downlaod(trialCondition);
+        DownloadResult downloadResult = fileDownloadUsecase.download(trialCondition);
 
         return get(downloadResult);
     }

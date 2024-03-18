@@ -5,7 +5,7 @@ import com.m.blog.domain.file.application.domain.DownloadFile;
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface FileDownloadHelper {
+public interface FileDownloadUtil {
     InputStream getS3Resource(DownloadFile info);
 
     InputStream getLocalResource(DownloadFile info) throws IOException;

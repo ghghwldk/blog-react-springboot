@@ -4,7 +4,7 @@ import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.DownloadResult;
 import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.port.file.FileDownloadPort;
-import com.m.blog.domain.file.infrastructure.file.FileDownloadHelper;
+import com.m.blog.domain.file.infrastructure.file.FileDownloadUtil;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 
@@ -16,13 +16,13 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class FileDownloadAdapter implements FileDownloadPort {
     private final FileProperties fileProperties;
-    private final FileDownloadHelper fileDownloadHelper;
+    private final FileDownloadUtil fileDownloadUtil;
 
     @Override
     public DownloadResult get(DownloadFile downloadFile) throws IOException {
         InputStream inputStream = fileProperties.isLocal()?
-                fileDownloadHelper.getLocalResource(downloadFile):
-                fileDownloadHelper.getS3Resource(downloadFile);
+                fileDownloadUtil.getLocalResource(downloadFile):
+                fileDownloadUtil.getS3Resource(downloadFile);
 
         return DownloadResult.from(inputStream, downloadFile);
     }
