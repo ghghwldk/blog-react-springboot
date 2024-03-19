@@ -1,6 +1,7 @@
 package com.m.blog.domain.file.adapter.persistence;
 
 import com.m.blog.common.Adapter;
+import com.m.blog.domain.file.adapter.entrypoint.api.FileMapper;
 import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
@@ -23,7 +24,7 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
                 .map(FileJpaMapper::toDomain)
                 .orElseThrow(EntityNotFoundException::new);
 
-        return DownloadFile.of(file, condition);
+        return FileMapper.of(file, condition);
     }
 
     @Override

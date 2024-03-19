@@ -24,13 +24,7 @@ public class DownloadFile {
         return "attachment; filename=\"" + encoded + "\"";
     }
 
-    public static DownloadFile of(File file, TrialCondition condition){
-        return DownloadFile.builder()
-                .path(file.getFilePath())
-                .key(file.getFilePath() + "/" + condition.getFileName())
-                .originalName(file.getOriginalFileName())
-                .build();
-    }
+
 
     @Data
     @Builder
