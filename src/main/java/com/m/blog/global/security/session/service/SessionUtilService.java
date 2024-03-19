@@ -60,7 +60,7 @@ public class SessionUtilService implements SessionUtil {
         Member member = (Member) httpSession.getAttribute(LOGIN_MEMBER);
 
         UserDetails principal = User.builder()
-                .username(member.getId().getUserId())
+                .username(member.getMemberId().getUserId())
                 .authorities(member.getRole())
                 .password("") // Empty password as we're using token authentication
                 .build();

@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class Member {
-    MemberId id;
+    MemberId memberId;
     String name;
     String password;
     String role;
@@ -24,7 +24,7 @@ public class Member {
     @AllArgsConstructor
     @Getter
     public static class LoginInfo {
-        MemberId id;
+        MemberId memberId;
         String password;
     }
 }

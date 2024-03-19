@@ -7,7 +7,7 @@ import com.m.blog.domain.auth.infrastructure.web.dto.LoginResponse;
 public class MemberPersistenceMapper {
     public static Member of(MemberEntity entity){
         return Member.builder()
-                .id(Member.MemberId.builder()
+                .memberId(Member.MemberId.builder()
                         .userId(entity.getId())
                         .build())
                 .name(entity.getName())

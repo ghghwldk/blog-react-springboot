@@ -6,7 +6,7 @@ import com.m.blog.domain.auth.infrastructure.web.dto.LoginRequest;
 public class MemberMapper {
     public static Member.LoginInfo of(LoginRequest request){
         return Member.LoginInfo.builder()
-                .id(Member.MemberId.builder()
+                .memberId(Member.MemberId.builder()
                         .userId(request.getUserId())
                         .build())
                 .password(request.getPassword())

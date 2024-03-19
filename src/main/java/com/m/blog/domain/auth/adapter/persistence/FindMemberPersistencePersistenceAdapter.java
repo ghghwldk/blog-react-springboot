@@ -17,7 +17,7 @@ public class FindMemberPersistencePersistenceAdapter implements FindMemberPersis
     public Member find(Member.LoginInfo loginInfo){
         return memberJpaRepository
                 .findMemberByIdAndPassword(
-                        loginInfo.getId().getUserId(), loginInfo.getPassword()
+                        loginInfo.getMemberId().getUserId(), loginInfo.getPassword()
                 )
                 .map(MemberPersistenceMapper::of)
                 .orElseThrow(EntityNotFoundException::new);
