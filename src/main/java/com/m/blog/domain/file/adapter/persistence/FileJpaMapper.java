@@ -6,17 +6,17 @@ import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 public class FileJpaMapper {
     public static File toDomain(FileEntity fileEntity){
         return File.builder()
-                .fileName(fileEntity.getFileName())
+                .assignedFileName(fileEntity.getAssignedFileName())
                 .originalFileName(fileEntity.getOriginalFileName())
-                .filePath(fileEntity.getFilePath())
+                .directoryName(fileEntity.getFilePath())
                 .build();
     }
 
     public static FileEntity toEntity(File file){
         return FileEntity.builder()
-                .fileName(file.getFileName())
+                .assignedFileName(file.getAssignedFileName())
                 .originalFileName(file.getOriginalFileName())
-                .filePath(file.getFilePath())
+                .filePath(file.getDirectoryName())
                 .build();
     }
 }

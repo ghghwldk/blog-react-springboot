@@ -18,7 +18,7 @@ public class FileUploadResponse {
 
         return FileUploadResponse.builder()
                 .originalFileName(uploadFile.getOriginalFileName())
-                .fileName(uploadFile.getSavedFileName())
+                .fileName(uploadFile.getAssignedFileName())
                 .downloadUrl(url)
                 .build();
     }

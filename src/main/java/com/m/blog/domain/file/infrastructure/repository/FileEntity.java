@@ -19,13 +19,13 @@ import javax.persistence.Table;
 @Builder
 public class FileEntity extends TimeComponent {
     @Id
-    String fileName;
+    String assignedFileName;
     String originalFileName;
     String filePath;
 
     public static FileEntity of(UploadFile vo){
         return FileEntity.builder()
-                .fileName(vo.getSavedFileName())
+                .assignedFileName(vo.getAssignedFileName())
                 .originalFileName(vo.getOriginalFileName())
                 .filePath(vo.getDirectoryName())
                 .build();

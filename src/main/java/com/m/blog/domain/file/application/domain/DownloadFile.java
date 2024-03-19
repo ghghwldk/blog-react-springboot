@@ -12,13 +12,24 @@ import java.nio.charset.StandardCharsets;
 @Builder
 @AllArgsConstructor
 public class DownloadFile {
-    private String path;
-    private String key;
-    private String originalName;
+    private String assignedFileName;
+    private String originalFileName;
+    private String directoryName;
 
+    public static DownloadFile of(File file){
+        return DownloadFile.builder()
+                .directoryName(file.getDirectoryName())
+                .assignedFileName(file.getAssignedFileName())
+                .originalFileName(file.getOriginalFileName())
+                .build();
+    }
+
+    public String getFileKey(){
+        return directoryName + "/" + assignedFileName;
+    }
 
     public String getHeaderValues() throws UnsupportedEncodingException {
-        String encoded = URLEncoder.encode(originalName, StandardCharsets.UTF_8)
+        String encoded = URLEncoder.encode(originalFileName, StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20");
 
         return "attachment; filename=\"" + encoded + "\"";

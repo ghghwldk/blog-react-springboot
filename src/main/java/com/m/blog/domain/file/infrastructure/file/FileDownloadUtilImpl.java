@@ -21,17 +21,17 @@ class FileDownloadUtilImpl implements FileDownloadUtil {
     private final FileProperties fileProperties;
 
     @Override
-    public InputStream getS3Resource(DownloadFile info){
+    public InputStream getS3Resource(DownloadFile downloadFile){
         S3Object s3Object = amazonS3.getObject(
-                new GetObjectRequest(fileProperties.getBucket(), info.getKey())
+                new GetObjectRequest(fileProperties.getBucket(), downloadFile.getFileKey())
         );
 
         return s3Object.getObjectContent();
     }
 
     @Override
-    public InputStream getLocalResource(DownloadFile info) throws IOException {
-        Path path = Paths.get(info.getKey());
+    public InputStream getLocalResource(DownloadFile downloadFile) throws IOException {
+        Path path = Paths.get(downloadFile.getFileKey());
 
         return Files.newInputStream(path);
     }

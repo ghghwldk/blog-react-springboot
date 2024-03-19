@@ -22,7 +22,7 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
 
     @Override
     public FileUploadResponse upload(FileUploadRequest request) throws IOException{
-        UploadFile uploadFile = UploadFile.of(request.getMultipartFile(), this.directoryName);
+        UploadFile uploadFile = FileMapper.of(request.getMultipartFile(), this.directoryName);
 
         fileUploadUsecase.upload(uploadFile);
 

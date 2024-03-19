@@ -20,16 +20,16 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
 
     @Override
     public DownloadFile get(DownloadFile.TrialCondition condition) throws IOException {
-        File file = fileJpaRepository.findByFileName(condition.getFileName())
+        File file = fileJpaRepository.findByAssignedFileName(condition.getFileName())
                 .map(FileJpaMapper::toDomain)
                 .orElseThrow(EntityNotFoundException::new);
 
-        return FileMapper.of(file, condition);
+        return DownloadFile.of(file);
     }
 
     @Override
     public File findByFileName(String fileName) {
-        return fileJpaRepository.findByFileName(fileName)
+        return fileJpaRepository.findByAssignedFileName(fileName)
                 .map(FileJpaMapper::toDomain)
                 .orElseThrow(EntityNotFoundException::new);
     }
