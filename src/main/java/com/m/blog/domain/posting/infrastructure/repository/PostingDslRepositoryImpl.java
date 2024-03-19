@@ -34,7 +34,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
 
 
     @Override
-    public Page<PostingDto> getPage(Pageable pageable){
+    public Page<PostingDto> getNonFilteredPage(Pageable pageable){
         QPostingEntity p = postingEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
@@ -109,7 +109,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
 
 
     @Override
-    public Page<PostingDto> getFiltered(int boardCollectionId, int boardId, Pageable pageable){
+    public Page<PostingDto> getFilteredPage(int boardCollectionId, int boardId, Pageable pageable){
         QPostingEntity p = postingEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
@@ -161,7 +161,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
     }
 
     @Override
-    public PostingDto getSingle(Posting.PostingId condition) {
+    public PostingDto getSinglePage(Posting.PostingId condition) {
         return this.getPosting(condition.getBoardCollectionId(), condition.getBoardId(), condition.getPostingId());
     }
 }

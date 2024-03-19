@@ -22,16 +22,16 @@ public class PostingReadResponse {
     private String boardCollectionName;
     private LocalDateTime createdTime;
 
-    public static PostingReadResponse of(Posting.Sophisticated sophisticated){
+    public static PostingReadResponse of(PostingDto dto){
         return PostingReadResponse.builder()
-                .postingId(sophisticated.getPostingId())
-                .title(sophisticated.getTitle())
-                .content(sophisticated.getContent())
-                .boardId(sophisticated.getBoardId())
-                .boardName(sophisticated.getBoardName())
-                .boardCollectionId(sophisticated.getBoardCollectionId())
-                .boardCollectionName(sophisticated.getBoardCollectionName())
-                .createdTime(sophisticated.getCreatedTime())
+                .postingId(dto.getPostingId())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .boardId(dto.getBoardId())
+                .boardName(dto.getBoardName())
+                .boardCollectionId(dto.getBoardCollectionId())
+                .boardCollectionName(dto.getBoardCollectionName())
+                .createdTime(dto.getCreatedTime())
                 .build();
     }
 }

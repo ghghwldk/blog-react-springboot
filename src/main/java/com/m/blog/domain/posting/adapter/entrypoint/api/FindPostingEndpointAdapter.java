@@ -3,7 +3,7 @@ package com.m.blog.domain.posting.adapter.entrypoint.api;
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
-import com.m.blog.domain.posting.application.usecase.FindPostingUsecase;
+import com.m.blog.domain.posting.application.query.FindPostingQuery;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
@@ -14,11 +14,11 @@ import lombok.RequiredArgsConstructor;
 @Adapter
 @RequiredArgsConstructor
 class FindPostingEndpointAdapter implements FindPositngEndpointPort {
-    private final FindPostingUsecase findPostingUsecase;
+    private final FindPostingQuery findPostingQuery;
 
     @Override
     public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest request){
-        return findPostingUsecase.get(
+        return findPostingQuery.get(
                 PostingMapper.of(request),
                 request.getPageable()
         );
@@ -27,7 +27,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
 
     @Override
     public PagingResponse getPagingResponse(PostingReadPagingRequest request) {
-        return findPostingUsecase.getPagingResponse(request.getPageable());
+        return findPostingQuery.getPagingResponse(request.getPageable());
     }
 
     @Override
@@ -35,6 +35,6 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
         Posting.PostingId condition =
                 Posting.get(request.getBoardCollectionId(), request.getBoardId(), request.getId());
 
-        return findPostingUsecase.get(condition);
+        return findPostingQuery.get(condition);
     }
 }

@@ -97,19 +97,6 @@ public class Posting {
         private String content;
     }
 
-    @AllArgsConstructor
-    @Builder
-    @Data
-    public static class Sophisticated {
-        private int postingId;
-        private String title;
-        private String content;
-        private int boardId;
-        private String boardName;
-        private int boardCollectionId;
-        private String boardCollectionName;
-        private LocalDateTime createdTime;
-    }
 
 
 }

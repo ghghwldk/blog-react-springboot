@@ -2,6 +2,7 @@ package com.m.blog.global.paging;
 
 import com.m.blog.domain.board.infrastructure.repository.BoardDto;
 import com.m.blog.domain.posting.application.domain.Posting;
+import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class PagingResponse {
     private Integer totalElements;
     private String location;
 
-    public static PagingResponse get(Page<Posting.Sophisticated> page, BoardDto found){
+    public static PagingResponse get(Page<PostingDto> page, BoardDto found){
         return PagingResponse.builder()
                 .content(removeImg(page.getContent()))
                 .totalPages(page.getTotalPages())
@@ -38,7 +39,7 @@ public class PagingResponse {
         }
     }
 
-    private static List<Posting.Sophisticated> removeImg(List<Posting.Sophisticated> sophisticateds){
+    private static List<PostingDto> removeImg(List<PostingDto> sophisticateds){
         //String pattern="\\< ?img(.*?)\\>";
         String pattern="<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>";
 
