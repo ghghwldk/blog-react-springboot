@@ -28,20 +28,6 @@ public class Posting {
                 .build();
     }
 
-    public static Posting withId(
-            int postingId, int boardCollectionId, int boardId,
-            String title, String content) {
-        return Posting.builder()
-                .id(PostingId.builder()
-                        .boardCollectionId(boardCollectionId)
-                        .boardId(boardId)
-                        .postingId(postingId)
-                        .build())
-                .title(title)
-                .content(content)
-                .build();
-    }
-
 
     @Getter
     @Builder

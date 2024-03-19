@@ -7,14 +7,6 @@ import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagin
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingUpdateRequest;
 
 class PostingMapper {
-    public static Posting toDomain(PostingEntity entity){
-        return Posting.withId(entity.getId(),
-                entity.getBoardCollectionId(),
-                entity.getBoardId(),
-                entity.getTitle(),
-                entity.getContent());
-    }
-
     public static Posting.PostingId toId(PostingUpdateRequest request){
         return Posting.PostingId.builder()
                 .boardCollectionId(request.getBoardCollectionId())
@@ -48,13 +40,5 @@ class PostingMapper {
                 .content(request.getContent())
                 .title(request.getTitle())
                 .build();
-    }
-
-    public static Posting toDomain(PostingUpdateRequest request){
-        return Posting.withId(request.getPostingId(),
-                request.getBoardCollectionId(),
-                request.getBoardId(),
-                request.getTitle(),
-                request.getMarkup());
     }
 }
