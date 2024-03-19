@@ -41,7 +41,7 @@ public class DownloadFile {
     @Builder
     @AllArgsConstructor
     public static class TrialCondition {
-        private String fileName;
+        private String assignedFileName;
     }
 }
 

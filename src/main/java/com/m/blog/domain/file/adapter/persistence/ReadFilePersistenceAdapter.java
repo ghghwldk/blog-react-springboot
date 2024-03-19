@@ -1,7 +1,6 @@
 package com.m.blog.domain.file.adapter.persistence;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.adapter.entrypoint.api.FileMapper;
 import com.m.blog.domain.file.application.domain.DownloadFile;
 import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
@@ -20,7 +19,7 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
 
     @Override
     public DownloadFile get(DownloadFile.TrialCondition condition) throws IOException {
-        File file = fileJpaRepository.findByAssignedFileName(condition.getFileName())
+        File file = fileJpaRepository.findByAssignedFileName(condition.getAssignedFileName())
                 .map(FileJpaMapper::toDomain)
                 .orElseThrow(EntityNotFoundException::new);
 
