@@ -16,16 +16,14 @@ public class FileMapper {
                 .build();
     }
 
+
+
     public static UploadFile of(MultipartFile multipartFile, String directoryName) throws IOException {
         String originalFileName = multipartFile.getOriginalFilename();
         assert originalFileName != null;
 
-        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-
         return UploadFile.builder()
                 .originalFileName(originalFileName)
-                .extension(extension)
-                .assignedFileName(UUID.randomUUID() + extension)
                 .directoryName(directoryName)
                 .data(multipartFile.getBytes())
                 .build();
