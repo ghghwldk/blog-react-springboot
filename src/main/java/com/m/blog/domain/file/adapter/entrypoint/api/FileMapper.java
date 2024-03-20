@@ -20,10 +20,6 @@ public class FileMapper {
         String originalFileName = multipartFile.getOriginalFilename();
         assert originalFileName != null;
 
-        return UploadFile.builder()
-                .originalFileName(originalFileName)
-                .directoryName(directoryName)
-                .data(multipartFile.getBytes())
-                .build();
+        return new UploadFile(originalFileName, directoryName, multipartFile.getBytes());
     }
 }
