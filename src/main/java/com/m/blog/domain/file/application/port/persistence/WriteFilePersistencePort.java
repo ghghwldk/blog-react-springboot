@@ -1,8 +1,8 @@
 package com.m.blog.domain.file.application.port.persistence;
 
 import com.m.blog.domain.file.application.domain.UploadFile;
-import com.m.blog.domain.file.application.domain.File;
+import com.m.blog.domain.file.application.domain.BaseFile;
 
 public interface WriteFilePersistencePort {
-    File save(UploadFile uploadFile);
+    BaseFile save(UploadFile uploadFile);
 }

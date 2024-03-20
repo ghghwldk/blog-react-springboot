@@ -11,18 +11,10 @@ import java.nio.charset.StandardCharsets;
 @AllArgsConstructor
 @Builder
 @Data
-public class File {
+public class BaseFile {
     String assignedFileName;
     String originalFileName;
     String directoryName;
-
-    public static File of(File file){
-        return File.builder()
-                .directoryName(file.getDirectoryName())
-                .assignedFileName(file.getAssignedFileName())
-                .originalFileName(file.getOriginalFileName())
-                .build();
-    }
 
     public String getFileKey(){
         return directoryName + "/" + assignedFileName;

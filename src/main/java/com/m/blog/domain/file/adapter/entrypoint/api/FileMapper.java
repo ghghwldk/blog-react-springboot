@@ -1,6 +1,6 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
-import com.m.blog.domain.file.application.domain.File;
+import com.m.blog.domain.file.application.domain.BaseFile;
 import com.m.blog.domain.file.application.domain.UploadFile;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,8 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public class FileMapper {
-    public static File.TrialCondition of(FileDownloadRequest request){
-        return File.TrialCondition.builder()
+    public static BaseFile.TrialCondition of(FileDownloadRequest request){
+        return BaseFile.TrialCondition.builder()
                 .assignedFileName(request.getFileName())
                 .build();
     }

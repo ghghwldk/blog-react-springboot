@@ -11,12 +11,12 @@ import java.io.InputStream;
 @AllArgsConstructor
 public class DownloadResult {
     InputStream data;
-    File file;
+    BaseFile baseFile;
 
-    public static DownloadResult from(InputStream data, File file){
+    public static DownloadResult from(InputStream data, BaseFile baseFile){
         return DownloadResult.builder()
                 .data(data)
-                .file(file)
+                .baseFile(baseFile)
                 .build();
     }
 }
