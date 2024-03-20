@@ -24,6 +24,6 @@ public class FileDownloadAdapter implements FileDownloadPort {
                 fileDownloadUtil.getLocalResource(file):
                 fileDownloadUtil.getS3Resource(file);
 
-        return DownloadedFile.from(inputStream, file);
+        return DownloadedFile.from(inputStream.readAllBytes(), file);
     }
 }

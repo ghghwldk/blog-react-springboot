@@ -10,9 +10,9 @@ import java.io.InputStream;
 @SuperBuilder
 @AllArgsConstructor
 public class DownloadedFile extends BaseFile{
-    InputStream data;
+    byte[] data;
 
-    public static DownloadedFile from(InputStream data, File file){
+    public static DownloadedFile from(byte[] data, File file){
         return DownloadedFile.builder()
                 .assignedFileName(file.getAssignedFileName())
                 .originalFileName(file.getOriginalFileName())
