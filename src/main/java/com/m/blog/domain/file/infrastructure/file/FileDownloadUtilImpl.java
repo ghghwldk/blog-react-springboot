@@ -3,7 +3,7 @@ package com.m.blog.domain.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.m.blog.domain.file.application.domain.DownloadFile;
+import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,17 +21,17 @@ class FileDownloadUtilImpl implements FileDownloadUtil {
     private final FileProperties fileProperties;
 
     @Override
-    public InputStream getS3Resource(DownloadFile downloadFile){
+    public InputStream getS3Resource(File file){
         S3Object s3Object = amazonS3.getObject(
-                new GetObjectRequest(fileProperties.getBucket(), downloadFile.getFileKey())
+                new GetObjectRequest(fileProperties.getBucket(), file.getFileKey())
         );
 
         return s3Object.getObjectContent();
     }
 
     @Override
-    public InputStream getLocalResource(DownloadFile downloadFile) throws IOException {
-        Path path = Paths.get(downloadFile.getFileKey());
+    public InputStream getLocalResource(File file) throws IOException {
+        Path path = Paths.get(file.getFileKey());
 
         return Files.newInputStream(path);
     }

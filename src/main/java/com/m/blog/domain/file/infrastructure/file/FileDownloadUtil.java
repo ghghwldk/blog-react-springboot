@@ -1,12 +1,12 @@
 package com.m.blog.domain.file.infrastructure.file;
 
-import com.m.blog.domain.file.application.domain.DownloadFile;
+import com.m.blog.domain.file.application.domain.File;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public interface FileDownloadUtil {
-    InputStream getS3Resource(DownloadFile info);
+    InputStream getS3Resource(File info);
 
-    InputStream getLocalResource(DownloadFile info) throws IOException;
+    InputStream getLocalResource(File info) throws IOException;
 }
