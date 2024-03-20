@@ -47,7 +47,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
         log.info("file is uploading on the local pc");
         try{
             InputStream fileStream = new ByteArrayInputStream(uploadFile.getData());
-            String key = uploadFile.getFileKey(fileProperties.getDirectoryName());
+            String key = uploadFile.getFileKey();
 
             file = new File(key);
 
@@ -59,7 +59,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     private void putS3(File file, UploadFile uploadFile) {
-        String key= uploadFile.getFileKey(fileProperties.getDirectoryName());
+        String key= uploadFile.getFileKey();
 
         amazonS3Client
                 .putObject(new PutObjectRequest(fileProperties.getBucket(), key, file)

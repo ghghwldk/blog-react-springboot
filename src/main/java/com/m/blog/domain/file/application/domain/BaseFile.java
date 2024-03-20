@@ -34,11 +34,8 @@ public class BaseFile {
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 
-    public String getFileKey(){
-        return this.getFileKey(directoryName);
-    }
 
-    public String getFileKey(String directoryName){
+    public String getFileKey(){
         return directoryName + "/" + assignedFileName;
     }
 
