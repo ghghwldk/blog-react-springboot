@@ -3,6 +3,7 @@ package com.m.blog.domain.file.adapter.entrypoint.api;
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.DownloadResult;
 import com.m.blog.domain.file.application.domain.BaseFile;
+import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.domain.file.application.usecase.FileDownloadUsecase;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
@@ -34,9 +35,9 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        BaseFile.TrialCondition trialCondition = FileMapper.of(request);
+        DownloadTrialCondition downloadTrialCondition = FileMapper.of(request);
 
-        DownloadResult downloadResult = fileDownloadUsecase.download(trialCondition);
+        DownloadResult downloadResult = fileDownloadUsecase.download(downloadTrialCondition);
 
         return get(downloadResult);
     }

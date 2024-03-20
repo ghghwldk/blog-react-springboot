@@ -2,6 +2,7 @@ package com.m.blog.domain.file.adapter.persistence;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.BaseFile;
+import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
 import com.m.blog.domain.file.infrastructure.repository.FileJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
 
 
     @Override
-    public BaseFile get(BaseFile.TrialCondition condition) throws IOException {
+    public BaseFile get(DownloadTrialCondition condition) throws IOException {
         return fileJpaRepository.findByAssignedFileName(condition.getAssignedFileName())
                 .map(FileJpaMapper::toDomain)
                 .orElseThrow(EntityNotFoundException::new);

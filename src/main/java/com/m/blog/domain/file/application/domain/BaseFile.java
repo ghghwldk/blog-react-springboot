@@ -29,10 +29,5 @@ public class BaseFile {
 
 
 
-    @Data
-    @Builder
-    @AllArgsConstructor
-    public static class TrialCondition {
-        private String assignedFileName;
-    }
+
 }
