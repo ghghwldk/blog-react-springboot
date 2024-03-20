@@ -13,21 +13,9 @@ import java.util.UUID;
 public class UploadFile extends BaseFile{
     private byte[] data;
 
-    public String getDownloadUrl(){
-        return "/file/download/"+ assignedFileName;
-    }
-
-    public String getFileKey(String directoryName){
-        return directoryName + "/" + assignedFileName;
-    }
-
-    private static String getExtension(String originalFileName){
-        return originalFileName.substring(originalFileName.lastIndexOf("."));
-    }
-
     public UploadFile(String originalFileName, String directoryName, byte[] data){
         this.originalFileName = originalFileName;
-        this.assignedFileName = UUID.randomUUID() + getExtension(this.originalFileName);
+        this.assignedFileName = UUID.randomUUID() + getExtension();
         this.directoryName = directoryName;
         this.data = data;
     }

@@ -3,6 +3,7 @@ package com.m.blog.domain.file.application.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import net.bytebuddy.implementation.bind.annotation.Super;
 
@@ -12,11 +13,9 @@ import java.nio.charset.StandardCharsets;
 
 @AllArgsConstructor
 @SuperBuilder
-@Data
+@Getter
 public class File extends BaseFile{
 
-    public String getFileKey(){
-        return directoryName + "/" + assignedFileName;
-    }
+
 
 }

@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 @SuperBuilder
 @Getter
 public class BaseFile {
+    private static final String downloadPrefix = "/file/download/";
+
     protected String assignedFileName;
     protected String originalFileName;
     protected String directoryName;
@@ -23,5 +25,24 @@ public class BaseFile {
                 .replaceAll("\\+", "%20");
 
         return "attachment; filename=\"" + encoded + "\"";
+    }
+
+    protected String getExtension(){
+        if(originalFileName == null){
+            throw new RuntimeException("originalFileName can't be null.");
+        }
+        return originalFileName.substring(originalFileName.lastIndexOf("."));
+    }
+
+    public String getFileKey(){
+        return this.getFileKey(directoryName);
+    }
+
+    public String getFileKey(String directoryName){
+        return directoryName + "/" + assignedFileName;
+    }
+
+    public String getDownloadUrl(){
+        return downloadPrefix + assignedFileName;
     }
 }
