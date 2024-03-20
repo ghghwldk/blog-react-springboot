@@ -23,8 +23,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     private ResponseEntity<Resource> get(DownloadResult downloadResult) throws UnsupportedEncodingException {
         Resource resource = new InputStreamResource(downloadResult.getData());
-        String header = downloadResult.getFile()
-                .getHeaderValues();
+        String header = downloadResult.getHeaderValues();
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))

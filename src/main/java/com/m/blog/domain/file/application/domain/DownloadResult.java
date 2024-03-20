@@ -3,20 +3,23 @@ package com.m.blog.domain.file.application.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 import java.io.InputStream;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
-public class DownloadResult {
+public class DownloadResult extends BaseFile{
     InputStream data;
-    File file;
 
     public static DownloadResult from(InputStream data, File file){
         return DownloadResult.builder()
+                .assignedFileName(file.getAssignedFileName())
+                .originalFileName(file.getOriginalFileName())
+                .directoryName(file.getDirectoryName())
                 .data(data)
-                .file(file)
                 .build();
     }
 }

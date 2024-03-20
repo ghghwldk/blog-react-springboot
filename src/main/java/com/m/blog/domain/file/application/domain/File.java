@@ -19,14 +19,4 @@ public class File extends BaseFile{
         return directoryName + "/" + assignedFileName;
     }
 
-    public String getHeaderValues() throws UnsupportedEncodingException {
-        String encoded = URLEncoder.encode(originalFileName, StandardCharsets.UTF_8)
-                .replaceAll("\\+", "%20");
-
-        return "attachment; filename=\"" + encoded + "\"";
-    }
-
-
-
-
 }
