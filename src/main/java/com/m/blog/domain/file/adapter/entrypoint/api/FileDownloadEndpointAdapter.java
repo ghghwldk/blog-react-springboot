@@ -1,7 +1,7 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
-import com.m.blog.domain.file.application.domain.DownloadResult;
+import com.m.blog.domain.file.application.domain.DownloadedFile;
 import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.domain.file.application.usecase.FileDownloadUsecase;
@@ -21,9 +21,9 @@ import java.io.UnsupportedEncodingException;
 public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     private final FileDownloadUsecase fileDownloadUsecase;
 
-    private ResponseEntity<Resource> get(DownloadResult downloadResult) throws UnsupportedEncodingException {
-        Resource resource = new InputStreamResource(downloadResult.getData());
-        String header = downloadResult.getHeaderValues();
+    private ResponseEntity<Resource> get(DownloadedFile downloadedFile) throws UnsupportedEncodingException {
+        Resource resource = new InputStreamResource(downloadedFile.getData());
+        String header = downloadedFile.getHeaderValues();
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
@@ -35,8 +35,8 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
         DownloadTrialCondition downloadTrialCondition = FileMapper.of(request);
 
-        DownloadResult downloadResult = fileDownloadUsecase.download(downloadTrialCondition);
+        DownloadedFile downloadedFile = fileDownloadUsecase.download(downloadTrialCondition);
 
-        return get(downloadResult);
+        return get(downloadedFile);
     }
 }

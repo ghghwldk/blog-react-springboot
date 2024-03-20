@@ -3,7 +3,7 @@ package com.m.blog.domain.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +21,11 @@ class FileUploadUtilImpl implements FileUploadUtil {
     private final AmazonS3Client amazonS3Client;
 
     @Override
-    public Optional<File> convert(UploadFile uploadFile) throws IOException {
-        File convertFile = new File(uploadFile.getOriginalFileName());
+    public Optional<File> convert(UploadedFile uploadedFile) throws IOException {
+        File convertFile = new File(uploadedFile.getOriginalFileName());
         if(convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-                fos.write(uploadFile.getData());
+                fos.write(uploadedFile.getData());
             }
             return Optional.of(convertFile);
         }
@@ -41,13 +41,13 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     @Override
-    public void uploadOnLocal(UploadFile uploadFile) throws IOException{
+    public void uploadOnLocal(UploadedFile uploadedFile) throws IOException{
         File file = null;
 
         log.info("file is uploading on the local pc");
         try{
-            InputStream fileStream = new ByteArrayInputStream(uploadFile.getData());
-            String key = uploadFile.getFileKey();
+            InputStream fileStream = new ByteArrayInputStream(uploadedFile.getData());
+            String key = uploadedFile.getFileKey();
 
             file = new File(key);
 
@@ -58,8 +58,8 @@ class FileUploadUtilImpl implements FileUploadUtil {
         }
     }
 
-    private void putS3(File file, UploadFile uploadFile) {
-        String key= uploadFile.getFileKey();
+    private void putS3(File file, UploadedFile uploadedFile) {
+        String key= uploadedFile.getFileKey();
 
         amazonS3Client
                 .putObject(new PutObjectRequest(fileProperties.getBucket(), key, file)
@@ -67,7 +67,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     @Override
-    public void uploadOnS3(UploadFile fileVo) throws IOException{
+    public void uploadOnS3(UploadedFile fileVo) throws IOException{
         File file = null;
 
         try{

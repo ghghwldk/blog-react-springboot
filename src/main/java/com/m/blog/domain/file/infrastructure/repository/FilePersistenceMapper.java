@@ -1,13 +1,13 @@
 package com.m.blog.domain.file.infrastructure.repository;
 
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 
 public class FilePersistenceMapper {
-    public static FileEntity of(UploadFile uploadFile){
+    public static FileEntity of(UploadedFile uploadedFile){
         return FileEntity.builder()
-                .assignedFileName(uploadFile.getAssignedFileName())
-                .originalFileName(uploadFile.getOriginalFileName())
-                .filePath(uploadFile.getDirectoryName())
+                .assignedFileName(uploadedFile.getAssignedFileName())
+                .originalFileName(uploadedFile.getOriginalFileName())
+                .filePath(uploadedFile.getDirectoryName())
                 .build();
     }
 }

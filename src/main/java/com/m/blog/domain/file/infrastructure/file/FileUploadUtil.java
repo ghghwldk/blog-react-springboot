@@ -1,17 +1,17 @@
 package com.m.blog.domain.file.infrastructure.file;
 
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
 public interface FileUploadUtil {
-    Optional<File> convert(UploadFile uploadFile) throws IOException;
+    Optional<File> convert(UploadedFile uploadedFile) throws IOException;
 
     void removeNewFile(File targetFile);
 
-    void uploadOnLocal(UploadFile uploadFile) throws IOException;
+    void uploadOnLocal(UploadedFile uploadedFile) throws IOException;
 
-    void uploadOnS3(UploadFile uploadFile) throws IOException;
+    void uploadOnS3(UploadedFile uploadedFile) throws IOException;
 }

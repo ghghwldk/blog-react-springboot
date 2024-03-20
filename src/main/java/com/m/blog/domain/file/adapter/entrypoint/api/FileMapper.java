@@ -1,7 +1,7 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,10 +16,10 @@ public class FileMapper {
 
 
 
-    public static UploadFile of(MultipartFile multipartFile, String directoryName) throws IOException {
+    public static UploadedFile of(MultipartFile multipartFile, String directoryName) throws IOException {
         String originalFileName = multipartFile.getOriginalFilename();
         assert originalFileName != null;
 
-        return new UploadFile(originalFileName, directoryName, multipartFile.getBytes());
+        return new UploadedFile(originalFileName, directoryName, multipartFile.getBytes());
     }
 }

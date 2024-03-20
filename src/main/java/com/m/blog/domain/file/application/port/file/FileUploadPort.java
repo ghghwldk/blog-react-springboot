@@ -1,9 +1,9 @@
 package com.m.blog.domain.file.application.port.file;
 
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 
 import java.io.IOException;
 
 public interface FileUploadPort {
-    void upload(UploadFile uploadFile) throws IOException;
+    void upload(UploadedFile uploadedFile) throws IOException;
 }

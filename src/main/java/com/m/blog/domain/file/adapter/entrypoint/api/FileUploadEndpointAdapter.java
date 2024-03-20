@@ -5,11 +5,10 @@ import com.m.blog.domain.file.application.port.entrypoint.api.FileUploadEndpoint
 import com.m.blog.domain.file.application.usecase.FileUploadUsecase;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.domain.file.infrastructure.web.dto.FileUploadResponse;
-import com.m.blog.domain.file.application.domain.UploadFile;
+import com.m.blog.domain.file.application.domain.UploadedFile;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 
@@ -22,11 +21,11 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
 
     @Override
     public FileUploadResponse upload(FileUploadRequest request) throws IOException{
-        UploadFile uploadFile = FileMapper.of(request.getMultipartFile(), fileProperties.getDirectoryName());
+        UploadedFile uploadedFile = FileMapper.of(request.getMultipartFile(), fileProperties.getDirectoryName());
 
-        fileUploadUsecase.upload(uploadFile);
+        fileUploadUsecase.upload(uploadedFile);
 
-        return FileUploadResponse.of(uploadFile);
+        return FileUploadResponse.of(uploadedFile);
     }
 
 

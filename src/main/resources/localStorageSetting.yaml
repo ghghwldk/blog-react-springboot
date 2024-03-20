@@ -7,7 +7,7 @@ cloud:
       static: ap-northeast-2
 
 file:
-  directory: ../file
+  directory: ../blog-file
   isLocal: true
 
 
