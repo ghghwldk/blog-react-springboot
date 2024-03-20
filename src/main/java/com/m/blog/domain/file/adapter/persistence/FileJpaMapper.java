@@ -1,22 +1,22 @@
 package com.m.blog.domain.file.adapter.persistence;
 
-import com.m.blog.domain.file.application.domain.BaseFile;
+import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.infrastructure.repository.FileEntity;
 
 public class FileJpaMapper {
-    public static BaseFile toDomain(FileEntity fileEntity){
-        return BaseFile.builder()
+    public static File toDomain(FileEntity fileEntity){
+        return File.builder()
                 .assignedFileName(fileEntity.getAssignedFileName())
                 .originalFileName(fileEntity.getOriginalFileName())
                 .directoryName(fileEntity.getFilePath())
                 .build();
     }
 
-    public static FileEntity toEntity(BaseFile baseFile){
+    public static FileEntity toEntity(File file){
         return FileEntity.builder()
-                .assignedFileName(baseFile.getAssignedFileName())
-                .originalFileName(baseFile.getOriginalFileName())
-                .filePath(baseFile.getDirectoryName())
+                .assignedFileName(file.getAssignedFileName())
+                .originalFileName(file.getOriginalFileName())
+                .filePath(file.getDirectoryName())
                 .build();
     }
 }

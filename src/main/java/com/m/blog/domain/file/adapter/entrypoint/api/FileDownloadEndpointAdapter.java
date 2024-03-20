@@ -2,7 +2,6 @@ package com.m.blog.domain.file.adapter.entrypoint.api;
 
 import com.m.blog.common.Adapter;
 import com.m.blog.domain.file.application.domain.DownloadResult;
-import com.m.blog.domain.file.application.domain.BaseFile;
 import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.domain.file.application.usecase.FileDownloadUsecase;
@@ -24,7 +23,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     private ResponseEntity<Resource> get(DownloadResult downloadResult) throws UnsupportedEncodingException {
         Resource resource = new InputStreamResource(downloadResult.getData());
-        String header = downloadResult.getBaseFile()
+        String header = downloadResult.getFile()
                 .getHeaderValues();
 
         return ResponseEntity.ok()

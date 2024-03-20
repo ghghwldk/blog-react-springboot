@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 @AllArgsConstructor
 @Builder
 @Data
-public class BaseFile {
+public class File {
     String assignedFileName;
     String originalFileName;
     String directoryName;

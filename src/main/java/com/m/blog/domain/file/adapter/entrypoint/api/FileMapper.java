@@ -1,6 +1,5 @@
 package com.m.blog.domain.file.adapter.entrypoint.api;
 
-import com.m.blog.domain.file.application.domain.BaseFile;
 import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.domain.UploadFile;
 import com.m.blog.domain.file.infrastructure.web.dto.FileDownloadRequest;

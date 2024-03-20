@@ -2,7 +2,7 @@ package com.m.blog.domain.file.application.service;
 
 import com.m.blog.common.UseCase;
 import com.m.blog.domain.file.application.domain.DownloadResult;
-import com.m.blog.domain.file.application.domain.BaseFile;
+import com.m.blog.domain.file.application.domain.File;
 import com.m.blog.domain.file.application.domain.DownloadTrialCondition;
 import com.m.blog.domain.file.application.port.file.FileDownloadPort;
 import com.m.blog.domain.file.application.port.persistence.ReadFilePersistencePort;
@@ -19,8 +19,8 @@ public class FileDownloadService implements FileDownloadUsecase {
 
     @Override
     public DownloadResult download(DownloadTrialCondition condition) throws IOException {
-        BaseFile baseFile = readFilePersistencePort.get(condition);
+        File file = readFilePersistencePort.get(condition);
 
-        return  fileDownloadPort.get(baseFile);
+        return  fileDownloadPort.get(file);
     }
 }
