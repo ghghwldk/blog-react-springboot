@@ -19,7 +19,7 @@ public class PostingController {
     private final ChangePostingEndpointPort changePostingEndpointPort;
 
     @ResponseBody
-    @GetMapping("/list/latest")
+    @GetMapping("/list")
     public PagingResponse list(Pageable pageable){
         return findPositngEndpointPort.getPagingResponse(PostingReadPagingRequest.builder()
                         .pageable(pageable)
@@ -27,33 +27,28 @@ public class PostingController {
     }
 
     @ResponseBody
-    @GetMapping("/list")
-    public PagingResponse list(@RequestParam int boardId, @RequestParam int boardCollectionId, Pageable pageable){
-        return findPositngEndpointPort.getPagingResponse(PostingReadFilteredPagingRequest.builder()
-                        .boardCollectionId(boardCollectionId)
+    @GetMapping("/list-per-board")
+    public PagingResponse list(@RequestParam String boardId, Pageable pageable){
+        return findPositngEndpointPort.getPagingResponse(PostingReadPerBoardPagingRequest.builder()
                         .boardId(boardId)
                         .pageable(pageable)
                 .build());
     }
 
     @ResponseBody
-    @GetMapping("/data")
-    public PostingReadResponse data(@RequestParam int boardCollectionId, @RequestParam int boardId, @RequestParam int id){
-        return findPositngEndpointPort.get(PostingReadRequest.builder()
-                        .boardCollectionId(boardCollectionId)
-                        .boardId(boardId)
-                        .id(id)
-                .build());
+    @GetMapping
+    public PostingReadResponse data(@RequestParam String id){
+        return findPositngEndpointPort.get(PostingReadRequest.builder().id(id).build());
     }
 
     @Transactional
     @ResponseBody
-    @PutMapping("/data/update")
+    @PutMapping
     public void update(@RequestBody PostingUpdateRequest requestDto){
         changePostingEndpointPort.update(requestDto);
     }
 
-    @PostMapping("/data/insert/posting")
+    @PostMapping
     @ResponseBody
     public void create(@RequestBody PostingCreateRequest requestDto){
         changePostingEndpointPort.create(requestDto);

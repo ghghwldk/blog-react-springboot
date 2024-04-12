@@ -4,7 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.m.blog.domain.file.application.domain.File;
-import com.m.blog.global.properties.FileProperties;
+import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +18,12 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 class FileDownloadUtilImpl implements FileDownloadUtil {
     private final AmazonS3 amazonS3;
-    private final FileProperties fileProperties;
+    private final AwsProperties awsProperties;
 
     @Override
     public InputStream getS3Resource(File file){
         S3Object s3Object = amazonS3.getObject(
-                new GetObjectRequest(fileProperties.getBucket(), file.getFileKey())
+                new GetObjectRequest(awsProperties.getS3().getBucket(), file.getFileKey())
         );
 
         return s3Object.getObjectContent();

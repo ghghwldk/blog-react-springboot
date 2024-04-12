@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 @Data
 @AllArgsConstructor
 @Builder
-public class PostingReadFilteredPagingRequest {
-    private int boardCollectionId;
-    private int boardId;
+public class PostingReadPerBoardPagingRequest {
+    private String boardId;
     private Pageable pageable;
 }

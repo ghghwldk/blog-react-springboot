@@ -10,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostingId implements Serializable {
-    int id;
-    int boardId;
-    int boardCollectionId;
+    String id;
+    String boardId;
+    String boardCollectionId;
 }

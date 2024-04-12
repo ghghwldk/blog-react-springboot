@@ -16,7 +16,6 @@ const PostingInformation = ({componentName, board, posting, isHomePage})=>{
   const changeDateTimeFormat=(before)=>{
     const date= before.date
     const time= before.time
-    debugger 
     const after = date.year + '/' + addZeroForOneDigit(date.month) + '/' + addZeroForOneDigit(date.day) + ' ' +
     addZeroForOneDigit(time.hour) + ':' + addZeroForOneDigit(time.minute)
     

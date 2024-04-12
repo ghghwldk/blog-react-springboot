@@ -1,6 +1,5 @@
-package com.m.blog.domain.menu.infrastructure.web.dto;
+package com.m.blog.domain.boardCollection.infrastructure.web.dto;
 
-import com.m.blog.domain.boardCollection.application.domain.BoardCollection;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardAggregationDto;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionEntity;
 import lombok.AllArgsConstructor;
@@ -22,28 +21,28 @@ public class MenuResponse {
     @AllArgsConstructor
     public static class AggregationPerBoardCollection {
         String boardCollectionName;
-        int boardCollectionId;
-        int postingCount;
+        String boardCollectionId;
+        long postingCount;
         List<BoardAggregationDto> aggregationPerBoards;
     }
 
 
     public static MenuResponse of(List<BoardCollectionEntity> boardCollectionEntities,
                                                          List<BoardAggregationDto> aggregationPerBoards){
-        Map<Integer, List<BoardAggregationDto>> dtoPerBoardCollections = aggregationPerBoards.stream()
+        Map<String, List<BoardAggregationDto>> perBoardCollection = aggregationPerBoards.stream()
                 .collect(Collectors.groupingBy(BoardAggregationDto::getBoardCollectionId,
                         Collectors.toList()));
 
         List<AggregationPerBoardCollection> nesteds = boardCollectionEntities.stream()
                 .map(bce -> {
-                    List<BoardAggregationDto> filtered =
-                            dtoPerBoardCollections.get(bce.getId());
+                    List<BoardAggregationDto> perBoard =
+                            perBoardCollection.get(bce.getId());
 
                     return AggregationPerBoardCollection.builder()
                             .boardCollectionName(bce.getName())
                             .boardCollectionId(bce.getId())
-                            .postingCount(filtered != null ? filtered.size() : 0)
-                            .aggregationPerBoards(filtered)
+                            .postingCount(perBoard != null ? perBoard.size() : 0)
+                            .aggregationPerBoards(perBoard)
                             .build();
                 })
                 .collect(Collectors.toList());

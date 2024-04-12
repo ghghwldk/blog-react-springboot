@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class DownloadTrialCondition {
-    private String assignedFileName;
+    private BaseFile.FileId fileId;
 }

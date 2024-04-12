@@ -17,7 +17,7 @@ public class FileUploadAdapter implements FileUploadPort {
 
     @Override
     public void upload(UploadedFile uploadedFile) throws IOException {
-        if(fileProperties.isLocal()){
+        if(fileProperties.isForLocal()){
             fileUploadUtil.uploadOnLocal(uploadedFile);
         }else{
             fileUploadUtil.uploadOnS3(uploadedFile);

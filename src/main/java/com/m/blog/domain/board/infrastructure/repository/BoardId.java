@@ -11,5 +11,4 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class BoardId implements Serializable {
     int id;
-    int boardCollectionId;
 }

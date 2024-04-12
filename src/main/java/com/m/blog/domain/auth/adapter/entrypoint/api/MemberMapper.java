@@ -7,7 +7,7 @@ public class MemberMapper {
     public static Member.LoginInfo of(LoginRequest request){
         return Member.LoginInfo.builder()
                 .memberId(Member.MemberId.builder()
-                        .userId(request.getUserId())
+                        .value(request.getUserId())
                         .build())
                 .password(request.getPassword())
                 .build();

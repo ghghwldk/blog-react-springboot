@@ -44,7 +44,7 @@ const Posting = ()=>{
     if(isExisting){
       setIsEditMode(false)
       axios({
-        url: `/posting/data?boardCollectionId=${boardCollectionId}&boardId=${boardId}&id=${postingId}`,
+        url: `/posting?id=${postingId}`,
         method: 'GET',
         async: true
       }).then((res) => {
@@ -70,6 +70,7 @@ const Posting = ()=>{
           (async () => {
             let formData = new FormData();
             formData.append("file", blob);
+            formData.append("postingId", postingId);
 
             axios.defaults.withCredentials = true;
             
@@ -123,7 +124,7 @@ const Posting = ()=>{
       }
 
       axios({
-        url: `/posting/data/insert/posting`,
+        url: `/posting`,
         method: 'POST',
         data:JSON.stringify(parameter),
         headers: { 'content-type': 'application/json' },
@@ -143,7 +144,7 @@ const Posting = ()=>{
       }
 
       axios({
-        url: `/posting/data/update`,
+        url: `/posting`,
         method: 'PUT',
         data:JSON.stringify(parameter),
         headers: { 'content-type': 'application/json' },

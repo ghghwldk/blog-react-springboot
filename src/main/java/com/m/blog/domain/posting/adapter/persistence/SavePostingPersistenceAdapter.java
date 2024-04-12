@@ -13,15 +13,5 @@ class SavePostingPersistenceAdapter implements SavePostingPersistencePort {
     private final PostingJpaRepository postingJpaRepository;
 
     @Override
-    public void save(Posting.PostingId id, Posting.Mutable target) {
-        postingJpaRepository.save(
-                PostingEntity.builder()
-                        .id(id.getPostingId())
-                        .boardId(id.getBoardId())
-                        .boardCollectionId(id.getBoardCollectionId())
-                        .title(target.getTitle())
-                        .content(target.getContent())
-                        .build()
-        );
-    }
+    public void save(Posting posting) { postingJpaRepository.save(PostingJpaMapper.toEntity(posting));}
 }

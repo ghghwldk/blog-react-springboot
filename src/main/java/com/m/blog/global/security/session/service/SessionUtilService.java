@@ -25,7 +25,6 @@ public class SessionUtilService implements SessionUtil {
         HttpSession session = httpServletRequest.getSession();
         session.setAttribute(LOGIN_MEMBER, member);
     }
-
     @Override
     public boolean validate(HttpServletRequest httpServletRequest){
         HttpSession httpSession = httpServletRequest.getSession();
@@ -60,7 +59,7 @@ public class SessionUtilService implements SessionUtil {
         Member member = (Member) httpSession.getAttribute(LOGIN_MEMBER);
 
         UserDetails principal = User.builder()
-                .username(member.getMemberId().getUserId())
+                .username(member.getMemberId().getValue())
                 .authorities(member.getRole())
                 .password("") // Empty password as we're using token authentication
                 .build();

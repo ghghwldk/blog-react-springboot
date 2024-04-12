@@ -13,6 +13,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class BoardCollectionEntity {
     @Id
-    int id;
+    String id;
     String name;
 }

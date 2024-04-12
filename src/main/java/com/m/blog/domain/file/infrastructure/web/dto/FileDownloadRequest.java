@@ -8,5 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class FileDownloadRequest {
-    private String fileName;
+    private String id;
 }

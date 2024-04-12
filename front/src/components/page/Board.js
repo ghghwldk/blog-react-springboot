@@ -29,10 +29,10 @@ const Board = ()=>{
     let url= null
     if(isHomePage !==undefined){
       if(isHomePage){
-        url = `/posting/list/latest?page=${page-1}&size=10`
+        url = `/posting/list?page=${page-1}&size=10`
       }
       else{
-        url = `/posting/list?size=10&page=${page-1}&boardId=${boardId}&boardCollectionId=${boardCollectionId}`
+        url = `/posting/list-per-board?size=10&page=${page-1}&boardId=${boardId}&boardCollectionId=${boardCollectionId}`
       }
       axios({
         url: url,

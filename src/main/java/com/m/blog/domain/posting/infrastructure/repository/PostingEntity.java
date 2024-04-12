@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-@IdClass(PostingId.class)
 @Entity
 @Table(name="posting")
 @Getter
@@ -19,10 +18,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostingEntity extends TimeComponent {
-    @Id
-    int id;
-    int boardId;
-    int boardCollectionId;
+    @Id String id;
+    String boardId;
     String title;
     String content;
 

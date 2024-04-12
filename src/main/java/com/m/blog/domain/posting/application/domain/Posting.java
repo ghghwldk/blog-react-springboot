@@ -1,30 +1,25 @@
 package com.m.blog.domain.posting.application.domain;
 
-import com.m.blog.domain.posting.infrastructure.repository.PostingDto;
+import com.m.blog.domain.board.application.domain.Board;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class Posting {
-    PostingId id;
+    PostingId postingId;
+    Board.BoardId boardId;
     String title;
     String content;
 
-    public static Posting.InBoardCondition forFilteredPage(int boardCollectionId, int boardId){
-        return Posting.InBoardCondition.builder()
-                .boardCollectionId(boardCollectionId)
+    public static PerBoardCondition of(String boardId){
+        return PerBoardCondition.builder()
                 .boardId(boardId)
                 .build();
     }
 
-    public static Posting.PostingId get(int boardCollectionId, int boardId, int postingId){
-        return Posting.PostingId.builder()
-                .boardCollectionId(boardCollectionId)
-                .boardId(boardId)
-                .postingId(postingId)
+    public static PostingId get(String postingId){
+        return PostingId.builder()
+                .value(postingId)
                 .build();
     }
 
@@ -32,53 +27,24 @@ public class Posting {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class PostingId{
-        private int boardCollectionId;
-        private int boardId;
-        private int postingId;
-
-        public static PostingId from(IdWithoutPostingId idWithoutPostingId, int postingId){
-            return PostingId.builder()
-                    .boardCollectionId(idWithoutPostingId.getBoardCollectionId())
-                    .boardId(idWithoutPostingId.getBoardId())
-                    .postingId(postingId)
-                    .build();
-        }
+    public static class PostingId {
+        private String value;
     }
 
-    public static NewId getNextId(int maxId){
-        return NewId.builder()
-                .value(maxId + 1)
-                .build();
-    }
 
-    @Getter
-    @Builder
+
     @AllArgsConstructor
-    public static class IdWithoutPostingId{
-        private int boardCollectionId;
-        private int boardId;
-    }
-
-    @Getter
     @Builder
-    @AllArgsConstructor
-    public static class NewId{
-        private int value;
+    @Getter
+    public static class PerBoardCondition {
+        private String boardCollectionId;
+        private String boardId;
     }
 
     @AllArgsConstructor
     @Builder
     @Getter
-    public static class InBoardCondition{
-        private int boardCollectionId;
-        private int boardId;
-    }
-
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    public static class Mutable {
+    public static class WithoutId {
         private String title;
         private String content;
     }

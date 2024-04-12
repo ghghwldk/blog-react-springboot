@@ -34,8 +34,7 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
                 )
                 .from(bc)
                 .join(b).on(bc.id.eq(b.boardCollectionId))
-                .join(p).on(b.boardCollectionId.eq(p.boardCollectionId)
-                        .and(b.id.eq(p.boardId)))
+                .join(p).on(p.boardId.eq(b.id))
                 .groupBy(
                         bc.id,
                         bc.name,

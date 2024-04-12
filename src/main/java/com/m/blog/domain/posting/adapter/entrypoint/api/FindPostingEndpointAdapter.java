@@ -4,7 +4,7 @@ import com.m.blog.common.Adapter;
 import com.m.blog.domain.posting.application.domain.Posting;
 import com.m.blog.domain.posting.application.port.entrypoint.api.FindPositngEndpointPort;
 import com.m.blog.domain.posting.application.query.FindPostingQuery;
-import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadFilteredPagingRequest;
+import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPerBoardPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadRequest;
 import com.m.blog.domain.posting.infrastructure.web.dto.PostingReadResponse;
@@ -17,7 +17,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
     private final FindPostingQuery findPostingQuery;
 
     @Override
-    public PagingResponse getPagingResponse(PostingReadFilteredPagingRequest request){
+    public PagingResponse getPagingResponse(PostingReadPerBoardPagingRequest request){
         return findPostingQuery.get(
                 PostingMapper.of(request),
                 request.getPageable()
@@ -32,8 +32,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
 
     @Override
     public PostingReadResponse get(PostingReadRequest request){
-        Posting.PostingId condition =
-                Posting.get(request.getBoardCollectionId(), request.getBoardId(), request.getId());
+        Posting.PostingId condition = Posting.get(request.getId());
 
         return findPostingQuery.get(condition);
     }

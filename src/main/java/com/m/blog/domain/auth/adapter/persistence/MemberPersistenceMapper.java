@@ -8,7 +8,7 @@ public class MemberPersistenceMapper {
     public static Member of(MemberEntity entity){
         return Member.builder()
                 .memberId(Member.MemberId.builder()
-                        .userId(entity.getId())
+                        .value(entity.getId())
                         .build())
                 .name(entity.getName())
                 .password(entity.getPassword())

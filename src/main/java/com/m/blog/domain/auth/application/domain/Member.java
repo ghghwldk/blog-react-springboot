@@ -17,7 +17,7 @@ public class Member {
     @Builder
     @Getter
     public static class MemberId{
-        String userId;
+        String value;
     }
 
     @Builder

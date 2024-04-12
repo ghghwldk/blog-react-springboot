@@ -16,7 +16,7 @@ public class BoardDslRepositoryImpl implements BoardDslRepository {
     private final JPAQueryFactory query;
 
     @Override
-    public BoardDto findBoardDto(int boardCollectionId, int boardId){
+    public BoardDto findBoardDto(String boardId){
 //        BoardDto fetched =
 //                query.select(
 //                        new QBoardDto(
@@ -40,7 +40,7 @@ public class BoardDslRepositoryImpl implements BoardDslRepository {
 //        return fetched;
         return null;
     }
-    public List<BoardEntity> findBoards(int boardCollectionId){
+    public List<BoardEntity> findBoards(String boardCollectionId){
 //        return query.selectFrom(board)
 //                .orderBy(board.boardCollectionId.asc(),
 //                        board.id.desc())
@@ -48,7 +48,7 @@ public class BoardDslRepositoryImpl implements BoardDslRepository {
 //                .fetch();
         return null;
     }
-    public Page<BoardDto> findBoardPage(int boardCollectionId, Pageable pageable){
+    public Page<BoardDto> findBoardPage(String boardCollectionId, Pageable pageable){
 //        List<BoardDto> fetch=
 //                query.select(
 //                        new QBoardDto(

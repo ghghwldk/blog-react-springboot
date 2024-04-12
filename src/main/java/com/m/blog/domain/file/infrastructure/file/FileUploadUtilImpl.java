@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.m.blog.domain.file.application.domain.UploadedFile;
+import com.m.blog.global.properties.AwsProperties;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 class FileUploadUtilImpl implements FileUploadUtil {
-    private final FileProperties fileProperties;
+    private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
 
     @Override
@@ -62,7 +63,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
         String key= uploadedFile.getFileKey();
 
         amazonS3Client
-                .putObject(new PutObjectRequest(fileProperties.getBucket(), key, file)
+                .putObject(new PutObjectRequest(awsProperties.getS3().getBucket(), key, file)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 

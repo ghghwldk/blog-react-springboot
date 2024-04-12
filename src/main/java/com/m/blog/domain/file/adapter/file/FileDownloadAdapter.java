@@ -20,7 +20,7 @@ public class FileDownloadAdapter implements FileDownloadPort {
 
     @Override
     public DownloadedFile get(File file) throws IOException {
-        InputStream inputStream = fileProperties.isLocal()?
+        InputStream inputStream = fileProperties.isForLocal()?
                 fileDownloadUtil.getLocalResource(file):
                 fileDownloadUtil.getS3Resource(file);
 

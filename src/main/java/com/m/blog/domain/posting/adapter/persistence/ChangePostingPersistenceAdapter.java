@@ -13,15 +13,11 @@ class ChangePostingPersistenceAdapter implements ChangePostingPersistencePort {
     private final PostingJpaRepository postingJpaRepository;
 
     @Override
-    public void update(Posting.PostingId id, Posting.Mutable target) {
+    public void update(Posting after) {
         PostingEntity found = postingJpaRepository
-                .findByBoardCollectionIdAndBoardIdAndId(
-                        id.getBoardCollectionId(),
-                        id.getBoardId(),
-                        id.getPostingId()
-                ).orElseThrow(RuntimeException::new);
+                .findById(after.getPostingId().getValue()).orElseThrow(RuntimeException::new);
 
-        found.setContent(target.getContent());
-        found.setTitle(target.getTitle());
+        found.setContent(after.getContent());
+        found.setTitle(after.getTitle());
     }
 }

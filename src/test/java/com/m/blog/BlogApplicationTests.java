@@ -13,8 +13,7 @@ class BlogApplicationTests {
 	BoardCollectionJpaRepository boardCollectionJpaRepository;
 	@Test
 	void contextLoads() {
-		LocalDateTime temp = LocalDateTime.now();
-		temp = temp;
+
 	}
 
 }
