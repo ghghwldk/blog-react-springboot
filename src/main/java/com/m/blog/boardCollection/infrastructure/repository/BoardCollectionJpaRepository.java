@@ -1,7 +1,0 @@
-package com.m.blog.boardCollection.infrastructure.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-
-public interface BoardCollectionJpaRepository extends JpaRepository<BoardCollectionEntity, Integer> {
-}

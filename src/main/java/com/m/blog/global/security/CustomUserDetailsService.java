@@ -1,7 +1,7 @@
 package com.m.blog.global.security;
 
-import com.m.blog.auth.infrastructure.repository.MemberEntity;
-import com.m.blog.auth.infrastructure.repository.MemberJpaRepository;
+import com.m.blog.aggregate.auth.infrastructure.repository.MemberEntity;
+import com.m.blog.aggregate.auth.infrastructure.repository.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
