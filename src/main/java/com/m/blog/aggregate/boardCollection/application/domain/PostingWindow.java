@@ -2,8 +2,7 @@ package com.m.blog.aggregate.boardCollection.application.domain;
 
 import com.amazonaws.services.kms.model.NotFoundException;
 import com.m.blog.global.exception.DataNotFoundException;
-import com.m.blog.global.exception.MultipleChangedException;
-import com.m.blog.global.exception.NothingChangedException;
+import com.m.blog.global.exception.TooManyException;
 import lombok.NonNull;
 
 import java.util.LinkedList;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class PostingWindow {
     @NonNull private final List<Posting> postings;
 
-    PostingWindow(@NonNull List<Posting> postings){
+    public PostingWindow(@NonNull List<Posting> postings){
         this.postings = postings;
     }
 
@@ -44,10 +43,10 @@ public class PostingWindow {
     Posting getUpdatedPosting(){
         List<Posting> changeds = postings.stream().filter(Posting::isPostingUpdated).collect(Collectors.toList());
         if(changeds.size()==0){
-            throw new NothingChangedException();
+            throw new DataNotFoundException();
         }
-        if(changeds.size()>0){
-            throw new MultipleChangedException();
+        if(changeds.size()>1){
+            throw new TooManyException();
         }
 
         return changeds.get(0);
@@ -56,10 +55,10 @@ public class PostingWindow {
     Posting getAddedPosting(){
         List<Posting> addeds = postings.stream().filter(Posting::isPostingAdded).collect(Collectors.toList());
         if(addeds.size()==0){
-            throw new NothingChangedException();
+            throw new DataNotFoundException();
         }
-        if(addeds.size()>0){
-            throw new MultipleChangedException();
+        if(addeds.size()>1){
+            throw new TooManyException();
         }
 
         return addeds.get(0);

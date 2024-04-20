@@ -7,6 +7,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
 import com.m.blog.common.Adapter;
 import com.m.blog.global.exception.DataNotFoundException;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityNotFoundException;
@@ -26,32 +27,42 @@ public class LoadBoardCollectionPersistenceAdapter implements LoadBoardCollectio
 
     @Override
     public BoardCollection load(Posting.PostingId postingId) {
-        BoardCollection boardCollection = null;
+        BoardCollectionEntity boardCollectionEntity = getBoardCollectionEntity(postingId);
+        List<BoardEntity> boardEntities = boardJpaRepository.findAllByBoardCollectionId(boardCollectionEntity.getId());
+        List<PostingEntity> postingEntities = getPostingEntities(boardEntities);
 
+        List<Board> boards = this.getBoards(postingEntities, boardEntities);
+
+        return BoardCollectionPersistenceMapper.of(boardCollectionEntity , new BoardWindow(boards));
+    }
+
+    private BoardCollectionEntity getBoardCollectionEntity(Posting.PostingId postingId){
         BoardCollection.BoardCollectionId boardCollectionId = boardCollectionDslRepository.get(postingId)
                 .map(BoardCollectionPersistenceMapper::of)
                 .orElseThrow(DataNotFoundException::new);
 
-        BoardCollectionEntity boardCollectionEntity = boardCollectionJpaRepository.findById(boardCollectionId.getValue())
+        return boardCollectionJpaRepository.findById(boardCollectionId.getValue())
                 .orElseThrow(EntityNotFoundException::new);
+    }
 
-
-        List<BoardEntity> boardEntities = boardJpaRepository.findAllByBoardCollectionId(boardCollectionEntity.getId());
-
+    private List<PostingEntity> getPostingEntities(List<BoardEntity> boardEntities){
         List<String> boardEntityIds = boardEntities.stream()
                 .map(BoardEntity::getId)
                 .collect(Collectors.toList());
+        return postingJpaRepository.findAllByBoardIdIn(boardEntityIds);
+    }
 
-        List<PostingEntity> postingEntities = postingJpaRepository.findAllByBoardIdIn(boardEntityIds);
+    private List<Board> getBoards(List<PostingEntity> postingEntities, List<BoardEntity> boardEntities){
+        HashMap<String, List<Posting>> map = new HashMap<>();
 
-        HashMap<String, List<PostingEntity>> postingEntitiesPerBoardId = new HashMap<>();
         for (PostingEntity entity : postingEntities) {
-            postingEntitiesPerBoardId.computeIfAbsent(entity.getBoardId(), k -> new LinkedList<>())
-                    .add(entity);
+            map.computeIfAbsent(entity.getBoardId(), k -> new LinkedList<>())
+                    .add(BoardCollectionPersistenceMapper.of(entity));
         }
 
-//        boardCollection = BoardCollectionPersistenceMapper.of(boardCollectionEntity, , postings);
-        return null;
+        return boardEntities.stream()
+                .map(e->BoardCollectionPersistenceMapper.of(e, new PostingWindow(map.get(e.getId()))))
+                .collect(Collectors.toList());
     }
 
 }

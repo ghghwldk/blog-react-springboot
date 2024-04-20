@@ -23,6 +23,20 @@ class BoardCollectionPersistenceMapper {
                 .build();
     }
 
+
+    public static Posting of(PostingEntity entity){
+        return Posting.builder()
+                .postingId(Posting.PostingId.builder()
+                        .value(entity.getId())
+                        .build())
+                .boardId(Board.BoardId.builder()
+                        .value(entity.getBoardId())
+                        .build())
+                .title(entity.getTitle())
+                .content(entity.getContent())
+                .build();
+    }
+
     public static Board of(BoardEntity boardEntity, PostingWindow postingWindow){
         return Board.builder()
                 .boardId(Board.BoardId.builder()
@@ -48,6 +62,7 @@ class BoardCollectionPersistenceMapper {
                 .value(boardCollectionId)
                 .build();
     }
+
 
     public static BoardCollectionId of (BoardCollectionIdDto boardCollectionIdDto){
         return BoardCollectionId.builder()

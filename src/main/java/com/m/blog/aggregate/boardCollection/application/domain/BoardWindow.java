@@ -1,8 +1,7 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
 import com.m.blog.global.exception.DataNotFoundException;
-import com.m.blog.global.exception.MultipleChangedException;
-import com.m.blog.global.exception.NothingChangedException;
+import com.m.blog.global.exception.TooManyException;
 import lombok.NonNull;
 
 import java.util.List;
@@ -34,10 +33,10 @@ public class BoardWindow {
     Posting getUpdatedPosting(){
         List<Board> postingUpdatedBoards = boards.stream().filter(Board::isPostingUpdated).collect(Collectors.toList());
         if(postingUpdatedBoards.isEmpty()){
-            throw new NothingChangedException();
+            throw new DataNotFoundException();
         }
         if(postingUpdatedBoards.size() > 1){
-            throw new MultipleChangedException();
+            throw new TooManyException();
         }
 
         return postingUpdatedBoards.get(0).getUpdatedPosting();
@@ -70,7 +69,7 @@ public class BoardWindow {
             throw new DataNotFoundException();
         }
         if(postingAddedBoards.size()>1){
-            throw new MultipleChangedException();
+            throw new TooManyException();
         }
 
         return postingAddedBoards.get(0).getAddedPosting();
