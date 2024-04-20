@@ -30,7 +30,7 @@ public class BoardWindow {
         found.change(after);
     }
 
-    Posting getUpdatedPosting(){
+    Posting getUpdated(){
         List<Board> postingUpdatedBoards = boards.stream().filter(Board::isPostingUpdated).collect(Collectors.toList());
         if(postingUpdatedBoards.isEmpty()){
             throw new DataNotFoundException();
@@ -39,7 +39,7 @@ public class BoardWindow {
             throw new TooManyException();
         }
 
-        return postingUpdatedBoards.get(0).getUpdatedPosting();
+        return postingUpdatedBoards.get(0).getUpdated();
     }
 
     void changeBoard(Board after){
@@ -61,7 +61,7 @@ public class BoardWindow {
         board.add(posting);
     }
 
-    Posting getAddedPosting(){
+    Posting getAdded(){
         List<Board> postingAddedBoards = boards.stream()
                 .filter(Board::isPostingAdded)
                 .collect(Collectors.toList());
@@ -72,6 +72,6 @@ public class BoardWindow {
             throw new TooManyException();
         }
 
-        return postingAddedBoards.get(0).getAddedPosting();
+        return postingAddedBoards.get(0).getAdded();
     }
 }

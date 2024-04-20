@@ -40,7 +40,7 @@ public class PostingWindow {
         found.update(after);
     }
 
-    Posting getUpdatedPosting(){
+    Posting getUpdated(){
         List<Posting> changeds = postings.stream().filter(Posting::isPostingUpdated).collect(Collectors.toList());
         if(changeds.size()==0){
             throw new DataNotFoundException();
@@ -52,7 +52,7 @@ public class PostingWindow {
         return changeds.get(0);
     }
 
-    Posting getAddedPosting(){
+    Posting getAdded(){
         List<Posting> addeds = postings.stream().filter(Posting::isPostingAdded).collect(Collectors.toList());
         if(addeds.size()==0){
             throw new DataNotFoundException();

@@ -1,9 +1,9 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
 public interface BoardCollectionRepository {
-    Posting getUpdatedPosting();
+    Posting getUpdated();
 
-    Posting getAddedPosting();
+    Posting getAdded();
 
     void add(Posting posting);
 

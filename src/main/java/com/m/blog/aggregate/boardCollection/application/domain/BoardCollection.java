@@ -18,7 +18,7 @@ public class BoardCollection{
     @Getter private boolean isBoardUpdated = false;
     @Builder.Default
     private boolean isPostingUpdated = false;
-
+    @Builder.Default
     private boolean isPostingAdded = false;
 
 
@@ -34,18 +34,18 @@ public class BoardCollection{
         private String value;
     }
 
-    public Posting getUpdatedPosting(){
+    public Posting getUpdated(){
         if(! isPostingUpdated){
             throw new DataNotFoundException();
         }
-        return this.boardWindow.getUpdatedPosting();
+        return this.boardWindow.getUpdated();
     }
 
-    public Posting getAddedPosting(){
+    public Posting getAdded(){
         if(! isPostingAdded){
             throw new DataNotFoundException();
         }
-        return this.boardWindow.getAddedPosting();
+        return this.boardWindow.getAdded();
     }
 
     public void add(Board board){

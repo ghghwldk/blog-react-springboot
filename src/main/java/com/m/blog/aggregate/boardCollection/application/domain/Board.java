@@ -44,11 +44,11 @@ public class Board {
         private String value;
     }
 
-    Posting getUpdatedPosting(){
-        return postingWindow.getUpdatedPosting();
+    Posting getUpdated(){
+        return postingWindow.getUpdated();
     }
 
-    Posting getAddedPosting(){
-        return postingWindow.getAddedPosting();
+    Posting getAdded(){
+        return postingWindow.getAdded();
     }
 }
