@@ -1,18 +1,24 @@
 package com.m.blog.boardCollection.application.domain;
 
-import com.m.blog.boardCollection.application.domain.BoardCollection;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
-@Data
+@Getter
 @Builder
 public class Board {
-    BoardId boardId;
-    BoardCollection.Id boardCollectionId;
-    String name;
-    String description;
+    @NonNull private final BoardId boardId;
+    @NonNull private final BoardCollection.BoardCollectionId boardCollectionId;
+    @NonNull private String name;
+    @NonNull private String description;
+
+    void changeBoardName(@NonNull String after){
+        // some additional business logic if needed
+        this.name = after;
+    }
+
+    void changeDescription(@NonNull String after){
+        // some additional business logic if needed
+        this.description = after;
+    }
 
     @Getter
     @Builder

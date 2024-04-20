@@ -9,6 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Mapper {
-    @AliasFor(annotation = Component.class)
     String value() default "";
 }

@@ -2,22 +2,23 @@ package com.m.blog.boardCollection.application.domain;
 
 import com.m.blog.boardCollection.application.domain.Board;
 import lombok.*;
+import org.thymeleaf.util.StringUtils;
 
-@Data
+@Getter
 @Builder
 public class Posting {
-    PostingId postingId;
-    Board.BoardId boardId;
-    String title;
-    String content;
+    @NonNull private final PostingId postingId;
+    @NonNull private final Board.BoardId boardId;
+    private String title;
+    private String content;
 
-    public static PerBoardCondition of(String boardId){
+    public static PerBoardCondition of(@NonNull String boardId){
         return PerBoardCondition.builder()
                 .boardId(boardId)
                 .build();
     }
 
-    public static PostingId get(String postingId){
+    public static PostingId get(@NonNull String postingId){
         return PostingId.builder()
                 .value(postingId)
                 .build();
@@ -29,6 +30,16 @@ public class Posting {
     @AllArgsConstructor
     public static class PostingId {
         private String value;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (!(o instanceof PostingId))
+                return false;
+            PostingId converted = (PostingId) o;
+            return StringUtils.equals(value, converted.getValue());
+        }
     }
 
 
