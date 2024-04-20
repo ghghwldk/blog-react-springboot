@@ -1,9 +1,11 @@
 package com.m.blog.file.adapter.persistence;
 
+import com.m.blog.common.Mapper;
 import com.m.blog.file.application.domain.BaseFile;
 import com.m.blog.file.application.domain.File;
 import com.m.blog.file.infrastructure.repository.FileEntity;
 
+@Mapper
 class FileJpaMapper {
     public static File toDomain(FileEntity fileEntity){
         return File.builder()

@@ -5,8 +5,10 @@ import com.m.blog.boardCollection.application.domain.Posting;
 import com.m.blog.boardCollection.infrastructure.web.dto.PostingCreateRequest;
 import com.m.blog.boardCollection.infrastructure.web.dto.PostingReadPerBoardPagingRequest;
 import com.m.blog.boardCollection.infrastructure.web.dto.PostingUpdateRequest;
+import com.m.blog.common.Mapper;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 
+@Mapper
 class PostingMapper {
     public static Posting.PostingId toId(PostingUpdateRequest request){
         return Posting.PostingId.builder()
