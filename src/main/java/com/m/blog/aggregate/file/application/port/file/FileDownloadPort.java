@@ -1,11 +1,11 @@
 package com.m.blog.aggregate.file.application.port.file;
 
-import com.m.blog.aggregate.file.application.domain.DownloadedFile;
-import com.m.blog.aggregate.file.application.domain.File;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 
 import java.io.IOException;
 
 public interface FileDownloadPort {
 
-    DownloadedFile get(File fileVo) throws IOException;
+    BlogFile get(BlogFile blogFileVo) throws IOException;
 }

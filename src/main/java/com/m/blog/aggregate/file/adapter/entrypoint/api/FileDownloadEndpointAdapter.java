@@ -1,8 +1,8 @@
 package com.m.blog.aggregate.file.adapter.entrypoint.api;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.DownloadedFile;
-import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
@@ -26,10 +26,10 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        DownloadTrialCondition downloadTrialCondition = FileEntrypointMapper.of(request);
-        DownloadedFile downloadedFile = fileDownloadUsecase.download(downloadTrialCondition);
+        BlogFile.DownloadTrialCondition downloadTrialCondition = FileEntrypointMapper.of(request);
+        BlogFile blogFile = fileDownloadUsecase.download(downloadTrialCondition);
 
-        return get(downloadedFile);
+        return get(blogFile);
     }
 
     private String getHeaderValues(String originalFileName) throws UnsupportedEncodingException {
@@ -39,9 +39,9 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
         return "attachment; filename=\"" + encoded + "\"";
     }
 
-    private ResponseEntity<Resource> get(DownloadedFile downloadedFile) throws UnsupportedEncodingException {
-        Resource resource = new InputStreamResource(new ByteArrayInputStream(downloadedFile.getData()));
-        String header = getHeaderValues(downloadedFile.getOriginalFileName());
+    private ResponseEntity<Resource> get(BlogFile blogFile) throws UnsupportedEncodingException {
+        Resource resource = new InputStreamResource(new ByteArrayInputStream(blogFile.getData()));
+        String header = getHeaderValues(blogFile.getOriginalFileName());
 
         return get(resource, header);
     }

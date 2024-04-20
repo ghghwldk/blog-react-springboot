@@ -1,14 +1,13 @@
 package com.m.blog.aggregate.file.application.port.persistence;
 
-import com.m.blog.aggregate.file.application.domain.File;
-import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile.DownloadTrialCondition;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Optional;
 
 public interface ReadFilePersistencePort {
-    Optional<File> get(DownloadTrialCondition condition) throws IOException;
+    Optional<BlogFile> get(BlogFile.DownloadTrialCondition condition) throws IOException;
 
-    Optional<File> findByFileName(String fileName);
+    Optional<BlogFile> findByFileName(String fileName);
 }

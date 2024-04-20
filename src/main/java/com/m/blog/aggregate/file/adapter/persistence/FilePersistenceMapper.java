@@ -2,14 +2,14 @@ package com.m.blog.aggregate.file.adapter.persistence;
 
 import com.m.blog.global.customAnnotation.Mapper;
 import com.m.blog.aggregate.file.application.domain.BaseFile;
-import com.m.blog.aggregate.file.application.domain.File;
-import com.m.blog.aggregate.file.application.domain.UploadedFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;
 
 @Mapper
 class FilePersistenceMapper {
-    public static File toDomain(FileEntity fileEntity){
-        return File.builder()
+    public static BlogFile toDomain(FileEntity fileEntity){
+        return BlogFile.builder()
                 .fileId(BaseFile.FileId.builder()
                         .value(fileEntity.getId())
                         .build())
@@ -18,14 +18,14 @@ class FilePersistenceMapper {
                 .build();
     }
 
-    public static FileEntity of(UploadedFile uploadedFile){
+    public static FileEntity of(BlogFile blogFile){
         return FileEntity.builder()
-                .id(uploadedFile.getFileId().getValue())
-                .postingId(uploadedFile
+                .id(blogFile.getFileId().getValue())
+                .postingId(blogFile
                         .getPostingId()
                         .getValue())
-                .originalFileName(uploadedFile.getOriginalFileName())
-                .filePath(uploadedFile.getDirectoryName())
+                .originalFileName(blogFile.getOriginalFileName())
+                .filePath(blogFile.getDirectoryName())
                 .build();
     }
 }

@@ -1,10 +1,10 @@
 package com.m.blog.aggregate.file.application.usecase;
 
-import com.m.blog.aggregate.file.application.domain.DownloadedFile;
-import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile.DownloadTrialCondition;
 
 import java.io.IOException;
 
 public interface FileDownloadUsecase {
-    DownloadedFile download(DownloadTrialCondition condition) throws IOException;
+    BlogFile download(BlogFile.DownloadTrialCondition condition) throws IOException;
 }

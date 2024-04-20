@@ -1,6 +1,7 @@
 package com.m.blog.aggregate.file.application.domain;
 
 import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.global.exception.NotValidValueException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class BaseFile {
 
     protected String getExtension(){
         if(originalFileName == null){
-            throw new RuntimeException("originalFileName can't be null.");
+            throw new NotValidValueException();
         }
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }

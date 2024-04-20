@@ -1,9 +1,9 @@
 package com.m.blog.aggregate.file.application.service;
 
 import com.m.blog.global.customAnnotation.UseCase;
-import com.m.blog.aggregate.file.application.domain.DownloadedFile;
-import com.m.blog.aggregate.file.application.domain.File;
-import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.port.file.FileDownloadPort;
 import com.m.blog.aggregate.file.application.port.persistence.ReadFilePersistencePort;
 import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
@@ -20,8 +20,8 @@ public class FileDownloadUsecaseImpl implements FileDownloadUsecase {
     private final FileDownloadPort fileDownloadPort;
 
     @Override
-    public DownloadedFile download(DownloadTrialCondition condition) throws IOException {
-        Optional<File> found = readFilePersistencePort.get(condition);
+    public BlogFile download(BlogFile.DownloadTrialCondition condition) throws IOException {
+        Optional<BlogFile> found = readFilePersistencePort.get(condition);
 
         if(found.isEmpty()){
             throw new DataNotFoundException();

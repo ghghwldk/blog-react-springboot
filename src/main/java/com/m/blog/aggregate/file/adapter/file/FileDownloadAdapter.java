@@ -1,8 +1,8 @@
 package com.m.blog.aggregate.file.adapter.file;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.DownloadedFile;
-import com.m.blog.aggregate.file.application.domain.File;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.aggregate.file.application.port.file.FileDownloadPort;
 import com.m.blog.aggregate.file.infrastructure.file.FileDownloadUtil;
 import com.m.blog.global.properties.FileProperties;
@@ -19,11 +19,11 @@ public class FileDownloadAdapter implements FileDownloadPort {
     private final FileDownloadUtil fileDownloadUtil;
 
     @Override
-    public DownloadedFile get(File file) throws IOException {
+    public BlogFile get(BlogFile blogFile) throws IOException {
         InputStream inputStream = fileProperties.isForLocal()?
-                fileDownloadUtil.getLocalResource(file):
-                fileDownloadUtil.getS3Resource(file);
+                fileDownloadUtil.getLocalResource(blogFile):
+                fileDownloadUtil.getS3Resource(blogFile);
 
-        return DownloadedFile.from(inputStream.readAllBytes(), file);
+        return FileEntrypointMapper.from(inputStream.readAllBytes(), blogFile);
     }
 }

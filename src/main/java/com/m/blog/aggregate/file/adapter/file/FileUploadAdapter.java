@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.adapter.file;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.UploadedFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.aggregate.file.application.port.file.FileUploadPort;
 import com.m.blog.aggregate.file.infrastructure.file.FileUploadUtil;
 import com.m.blog.global.properties.FileProperties;
@@ -16,11 +16,11 @@ public class FileUploadAdapter implements FileUploadPort {
     private final FileUploadUtil fileUploadUtil;
 
     @Override
-    public void upload(UploadedFile uploadedFile) throws IOException {
+    public void upload(BlogFile blogFile) throws IOException {
         if(fileProperties.isForLocal()){
-            fileUploadUtil.uploadOnLocal(uploadedFile);
+            fileUploadUtil.uploadOnLocal(blogFile);
         }else{
-            fileUploadUtil.uploadOnS3(uploadedFile);
+            fileUploadUtil.uploadOnS3(blogFile);
         }
     }
 }

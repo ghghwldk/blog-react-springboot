@@ -1,9 +1,9 @@
 package com.m.blog.aggregate.file.application.usecase;
 
-import com.m.blog.aggregate.file.application.domain.UploadedFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 
 import java.io.IOException;
 
 public interface FileUploadUsecase {
-    void upload(UploadedFile uploadedFile) throws IOException;
+    void upload(BlogFile blogFile) throws IOException;
 }

@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.infrastructure.repository;
 
-import com.m.blog.aggregate.file.application.domain.UploadedFile;
+import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.global.entity.TimeComponent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
