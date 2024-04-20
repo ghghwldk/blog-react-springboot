@@ -6,7 +6,6 @@ import com.m.blog.file.application.domain.UploadedFile;
 import com.m.blog.file.infrastructure.repository.FileEntity;
 import com.m.blog.file.infrastructure.repository.FileJpaRepository;
 import com.m.blog.file.application.port.persistence.WriteFilePersistencePort;
-import com.m.blog.file.infrastructure.repository.FilePersistenceMapper;
 import lombok.RequiredArgsConstructor;
 
 @Adapter

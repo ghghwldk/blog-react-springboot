@@ -4,7 +4,7 @@ import com.m.blog.file.application.domain.BaseFile;
 import com.m.blog.file.application.domain.File;
 import com.m.blog.file.infrastructure.repository.FileEntity;
 
-public class FileJpaMapper {
+class FileJpaMapper {
     public static File toDomain(FileEntity fileEntity){
         return File.builder()
                 .fileId(BaseFile.FileId.builder()

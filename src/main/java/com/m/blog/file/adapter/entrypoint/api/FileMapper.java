@@ -9,7 +9,7 @@ import com.m.blog.boardCollection.application.domain.Posting;
 
 import java.io.IOException;
 
-public class FileMapper {
+class FileMapper {
     public static DownloadTrialCondition of(FileDownloadRequest request){
         return DownloadTrialCondition.builder()
                 .fileId(BaseFile.FileId.builder().value(request.getId()).build())

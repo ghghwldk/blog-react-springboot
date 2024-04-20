@@ -3,7 +3,7 @@ package com.m.blog.boardCollection.adapter.persistence;
 import com.m.blog.boardCollection.application.domain.Posting;
 import com.m.blog.boardCollection.infrastructure.repository.PostingEntity;
 
-public class PostingJpaMapper {
+class PostingJpaMapper {
     public static PostingEntity toEntity (Posting domain){
         return PostingEntity.builder()
                 .id(domain.getPostingId().getValue())

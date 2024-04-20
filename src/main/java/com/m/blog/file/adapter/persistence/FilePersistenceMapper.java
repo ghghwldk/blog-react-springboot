@@ -1,8 +1,9 @@
-package com.m.blog.file.infrastructure.repository;
+package com.m.blog.file.adapter.persistence;
 
 import com.m.blog.file.application.domain.UploadedFile;
+import com.m.blog.file.infrastructure.repository.FileEntity;
 
-public class FilePersistenceMapper {
+class FilePersistenceMapper {
     public static FileEntity of(UploadedFile uploadedFile){
         return FileEntity.builder()
                 .id(uploadedFile.getFileId().getValue())
