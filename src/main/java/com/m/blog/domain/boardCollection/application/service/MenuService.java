@@ -1,5 +1,6 @@
 package com.m.blog.domain.boardCollection.application.service;
 
+import com.m.blog.common.Query;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionDslRepository;
 import com.m.blog.domain.boardCollection.infrastructure.repository.BoardCollectionJpaRepository;
 import com.m.blog.domain.boardCollection.application.query.MenuQuery;
@@ -8,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Query
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MenuService implements MenuQuery {

@@ -1,5 +1,6 @@
 package com.m.blog.domain.posting.application.service;
 
+import com.m.blog.common.Query;
 import com.m.blog.domain.board.application.domain.Board;
 import com.m.blog.domain.board.infrastructure.repository.BoardDto;
 import com.m.blog.domain.board.infrastructure.repository.BoardDslRepository;
@@ -15,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Query
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 class FindPostingService implements FindPostingQuery {

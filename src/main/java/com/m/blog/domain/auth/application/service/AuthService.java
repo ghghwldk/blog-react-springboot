@@ -1,6 +1,7 @@
 package com.m.blog.domain.auth.application.service;
 
 
+import com.m.blog.common.UseCase;
 import com.m.blog.domain.auth.application.domain.Member;
 import com.m.blog.domain.auth.application.port.persistence.FindMemberPersistencePort;
 import com.m.blog.domain.auth.application.usecase.AuthUsecase;
@@ -9,7 +10,7 @@ import com.m.blog.global.security.session.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class AuthService implements AuthUsecase {
     private final FindMemberPersistencePort findMemberPersistencePort;
