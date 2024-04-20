@@ -1,7 +1,5 @@
 package com.m.blog.boardCollection.infrastructure.repository;
 
-import com.m.blog.board.infrastructure.repository.QBoardEntity;
-import com.m.blog.domain.posting.infrastructure.repository.QPostingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

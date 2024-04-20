@@ -1,6 +1,6 @@
 package com.m.blog.file.application.domain;
 
-import com.m.blog.domain.posting.application.domain.Posting;
+import com.m.blog.boardCollection.application.domain.Posting;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import lombok.*;
 

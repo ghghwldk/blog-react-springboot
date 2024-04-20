@@ -5,7 +5,7 @@ import com.m.blog.file.application.domain.DownloadTrialCondition;
 import com.m.blog.file.application.domain.UploadedFile;
 import com.m.blog.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.file.infrastructure.web.dto.FileUploadRequest;
-import com.m.blog.domain.posting.application.domain.Posting;
+import com.m.blog.boardCollection.application.domain.Posting;
 
 import java.io.IOException;
 
