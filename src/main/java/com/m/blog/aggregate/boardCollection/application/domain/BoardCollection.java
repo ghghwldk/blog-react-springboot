@@ -2,11 +2,20 @@ package com.m.blog.aggregate.boardCollection.application.domain;
 
 import lombok.*;
 
-@AllArgsConstructor
-public class BoardCollection implements BoardCollectionRepository{
+import java.util.List;
+
+
+public class BoardCollection{
     @NonNull private final BoardCollection.BoardCollectionId boardCollectionId;
     @NonNull private String name;
-    @NonNull private final BoardWindow boardWindow;
+    private BoardWindow boardWindow;
+
+    @Builder
+    public BoardCollection(BoardCollection.BoardCollectionId boardCollectionId, String name, BoardWindow boardWindow){
+        this.boardCollectionId = boardCollectionId;
+        this.name = name;
+        this.boardWindow = boardWindow;
+    }
 
     public String remove(@NonNull Board.BoardId boardId){
         return boardWindow.remove(boardId);
@@ -17,7 +26,7 @@ public class BoardCollection implements BoardCollectionRepository{
     @Builder
     @AllArgsConstructor
     public static class BoardCollectionId {
-        private int id;
+        private String value;
     }
 
     @Getter
@@ -29,22 +38,26 @@ public class BoardCollection implements BoardCollectionRepository{
         private Posting posting;
     }
 
-    @Override
     public Posting getUpdatedPosting(){
         return this.boardWindow.getUpdatedPosting();
     }
 
-    @Override
     public Posting getAddedPosting(){
         return this.boardWindow.getAddedPosting();
     }
 
-    @Override
+    public void add(Board board){
+        if(this.boardWindow == null){
+            this.boardWindow = new BoardWindow(List.of(board));
+        }
+
+        boardWindow.add(board);
+    }
+
     public void add(Posting posting){
         this.boardWindow.add(posting);
     }
 
-    @Override
     public void update(Posting posting){
         this.boardWindow.update(posting);
     }

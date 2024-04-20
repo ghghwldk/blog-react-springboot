@@ -1,11 +1,13 @@
 package com.m.blog.aggregate.boardCollection.infrastructure.repository;
 
+import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.boardCollection.application.domain.Posting;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Repository
@@ -42,6 +44,32 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
                         b.createdTime,
                         b.updatedTime
                 ).fetch();
+    }
+
+    @Override
+    public Optional<BoardCollectionIdDto> get(Board.BoardId boardId) {
+        QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
+        QBoardEntity b = QBoardEntity.boardEntity;
+
+        return Optional.ofNullable(query.select(new QBoardCollectionIdDto(bc.id))
+                .from(bc)
+                .join(b).on(bc.id.eq(b.boardCollectionId))
+                .where(b.id.eq(boardId.getValue()))
+                .fetchOne());
+    }
+
+    @Override
+    public Optional<BoardCollectionIdDto> get(Posting.PostingId postingId) {
+        QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
+        QBoardEntity b = QBoardEntity.boardEntity;
+        QPostingEntity p = QPostingEntity.postingEntity;
+
+        return Optional.ofNullable(query.select(new QBoardCollectionIdDto(bc.id))
+                .from(bc)
+                .join(b).on(bc.id.eq(b.boardCollectionId))
+                .join(p).on(p.boardId.eq(b.id))
+                .where(p.id.eq(postingId.getValue()))
+                .fetchOne());
     }
 
 }

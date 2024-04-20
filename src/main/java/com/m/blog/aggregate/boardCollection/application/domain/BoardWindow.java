@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class BoardWindow {
     @NonNull private final List<Board> boards;
 
-    BoardWindow(@NonNull List<Board> boards){
+    public BoardWindow(@NonNull List<Board> boards){
         this.boards = boards;
     }
 
