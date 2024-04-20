@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @UseCase
 @RequiredArgsConstructor
-public class FileUploadService implements FileUploadUsecase {
+public class FileUploadUsecaseImpl implements FileUploadUsecase {
     private final WriteFilePersistencePort writeFilePersistencePort;
     private final FileUploadPort fileUploadPort;
 

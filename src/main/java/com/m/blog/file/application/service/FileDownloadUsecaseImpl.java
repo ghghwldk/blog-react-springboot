@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @UseCase
 @RequiredArgsConstructor
-public class FileDownloadService implements FileDownloadUsecase {
+public class FileDownloadUsecaseImpl implements FileDownloadUsecase {
     private final ReadFilePersistencePort readFilePersistencePort;
     private final FileDownloadPort fileDownloadPort;
 

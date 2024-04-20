@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @UseCase
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-class ChangePostingService implements ChangePostingUsecase {
+class ChangePostingUsecaseImpl implements ChangePostingUsecase {
     private final ChangePostingPersistencePort changePostingPersistencePort;
 
     @Override

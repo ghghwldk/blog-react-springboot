@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Query
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-class FindPostingService implements FindPostingQuery {
+class FindPostingQueryImpl implements FindPostingQuery {
     private final BoardDslRepository boardDslRepository;
     private final PostingDslRepository postingDslRepository;
 

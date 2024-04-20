@@ -6,13 +6,12 @@ import com.m.blog.boardCollection.infrastructure.repository.BoardCollectionJpaRe
 import com.m.blog.boardCollection.application.query.MenuQuery;
 import com.m.blog.boardCollection.infrastructure.web.dto.MenuResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Query
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MenuService implements MenuQuery {
+public class MenuQueryImpl implements MenuQuery {
 
     private final BoardCollectionJpaRepository boardCollectionJpaRepository;
     private final BoardCollectionDslRepository boardCollectionDslRepository;

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-class SavePostingService implements SavePostingUsecase {
+class SavePostingUsecaseImpl implements SavePostingUsecase {
     private final SavePostingPersistencePort savePostingPersistencePort;
 
     @Override
