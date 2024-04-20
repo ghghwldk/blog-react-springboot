@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindMemberPersistencePersistenceAdapter implements FindMemberPersistencePort {
+public class FindMemberPersistenceAdapter implements FindMemberPersistencePort {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override

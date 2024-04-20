@@ -14,9 +14,7 @@ public class WriteFilePersistenceAdapter implements WriteFilePersistencePort {
     private final FileJpaRepository fileJpaRepository;
 
     @Override
-    public File save(UploadedFile uploadedFile){
-        FileEntity saved = fileJpaRepository.save(FilePersistenceMapper.of(uploadedFile));
-
-        return FilePersistenceMapper.toDomain(saved);
+    public void save(UploadedFile uploadedFile){
+        fileJpaRepository.save(FilePersistenceMapper.of(uploadedFile));
     }
 }

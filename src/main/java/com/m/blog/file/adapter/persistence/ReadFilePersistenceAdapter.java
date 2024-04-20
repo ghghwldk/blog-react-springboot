@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 
 @Adapter
@@ -20,16 +21,14 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
 
 
     @Override
-    public File get(DownloadTrialCondition condition) throws IOException {
+    public Optional<File> get(DownloadTrialCondition condition) throws IOException {
         return fileJpaRepository.findById(condition.getFileId().getValue())
-                .map(FilePersistenceMapper::toDomain)
-                .orElseThrow(EntityNotFoundException::new);
+                .map(FilePersistenceMapper::toDomain);
     }
 
     @Override
-    public File findByFileName(String fileName) {
+    public Optional<File> findByFileName(String fileName) {
         return fileJpaRepository.findById(fileName)
-                .map(FilePersistenceMapper::toDomain)
-                .orElseThrow(EntityNotFoundException::new);
+                .map(FilePersistenceMapper::toDomain);
     }
 }
