@@ -9,8 +9,8 @@ import org.thymeleaf.util.StringUtils;
 public class Posting {
     @NonNull private final PostingId postingId;
     @NonNull private final Board.BoardId boardId;
-    private String title;
-    private String content;
+    @NonNull private String title;
+    @NonNull private String content;
 
     public static PerBoardCondition of(@NonNull String boardId){
         return PerBoardCondition.builder()

@@ -9,6 +9,7 @@ public class Board {
     @NonNull private final BoardCollection.BoardCollectionId boardCollectionId;
     @NonNull private String name;
     @NonNull private String description;
+    @NonNull private final PostingLine postingLine;
 
     void changeBoardName(@NonNull String after){
         // some additional business logic if needed

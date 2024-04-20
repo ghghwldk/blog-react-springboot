@@ -7,17 +7,28 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@Builder
-@RequiredArgsConstructor
 public class PostingLine {
     @NonNull private final List<Posting> postings;
+    private long count;
+
+    PostingLine(@NonNull List<Posting> postings){
+        this.postings = postings;
+        this.count = postings.size();
+    }
 
     String remove(@NonNull Posting.PostingId postingId) {
-        boolean removed = postings.removeIf(posting -> posting.getPostingId().equals(postingId));
-        if (!removed) {
-            throw new NotFoundException("Target board doesn't exist");
+        if (!postings.removeIf(e -> e.getPostingId().getValue().equals(postingId.getValue()))) {
+            throw new NotFoundException("target posting doesn't exist");
         }
-        // some additional business logic if needed
+
+        this.count -= 1;
         return postingId.getValue();
+    }
+
+    String add(@NonNull Posting posting){
+        postings.add(posting);
+
+        this.count += 1;
+        return posting.getPostingId().getValue();
     }
 }
