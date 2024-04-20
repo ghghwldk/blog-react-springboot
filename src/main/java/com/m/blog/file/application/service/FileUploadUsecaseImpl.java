@@ -6,11 +6,13 @@ import com.m.blog.file.application.port.file.FileUploadPort;
 import com.m.blog.file.application.port.persistence.WriteFilePersistencePort;
 import com.m.blog.file.application.usecase.FileUploadUsecase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
 @UseCase
 @RequiredArgsConstructor
+@Transactional
 public class FileUploadUsecaseImpl implements FileUploadUsecase {
     private final WriteFilePersistencePort writeFilePersistencePort;
     private final FileUploadPort fileUploadPort;

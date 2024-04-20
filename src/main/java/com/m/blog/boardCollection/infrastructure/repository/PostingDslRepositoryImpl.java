@@ -92,7 +92,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
 
 
     @Override
-    public Page<PostingDto> getPagePerBoard(String boardCollectionId, String boardId, Pageable pageable){
+    public Page<PostingDto> getPagePerBoard(String boardId, Pageable pageable){
         QPostingEntity p = postingEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
@@ -112,7 +112,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
                         .from(p)
                         .join(b).on(p.boardId.eq(b.id))
                         .join(bc).on(b.boardCollectionId.eq(bc.id))
-                        .where(bc.id.eq(boardCollectionId), p.boardId.eq(boardId))
+                        .where(p.boardId.eq(boardId))
                         .orderBy(p.createdTime.desc())
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize())
@@ -133,7 +133,7 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
                         .from(p)
                         .join(b).on(p.boardId.eq(b.id))
                         .join(bc).on(b.boardCollectionId.eq(bc.id))
-                        .where(b.boardCollectionId.eq(boardCollectionId), p.boardId.eq(boardId))
+                        .where(p.boardId.eq(boardId))
                         .orderBy(p.createdTime.desc())
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize());

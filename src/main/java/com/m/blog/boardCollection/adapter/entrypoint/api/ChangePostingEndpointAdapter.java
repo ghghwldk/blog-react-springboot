@@ -16,11 +16,11 @@ class ChangePostingEndpointAdapter implements ChangePostingEndpointPort {
 
     @Override
     public void update(PostingUpdateRequest request){
-        changePostingUsecase.update(PostingMapper.toEntity(request));
+        changePostingUsecase.update(PostingEntrypointMapper.from(request));
     }
 
     @Override
     public void create(PostingCreateRequest request){
-        savePostingUsecase.save(PostingMapper.from(request));
+        savePostingUsecase.save(PostingEntrypointMapper.from(request));
     }
 }

@@ -2,16 +2,14 @@ package com.m.blog.boardCollection.application.domain;
 
 import lombok.*;
 
-@Getter
 @AllArgsConstructor
-public class BoardCollection {
+public class BoardCollection implements BoardCollectionRepository{
     @NonNull private final BoardCollection.BoardCollectionId boardCollectionId;
     @NonNull private String name;
-    @NonNull private final BoardLine boardLine;
-
+    @NonNull private final BoardWindow boardWindow;
 
     public String remove(@NonNull Board.BoardId boardId){
-        return boardLine.remove(boardId);
+        return boardWindow.remove(boardId);
     }
 
 
@@ -22,4 +20,32 @@ public class BoardCollection {
         private int id;
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PostingUpsertInfo {
+        private BoardCollection.BoardCollectionId boardCollectionId;
+        private Board.BoardId boardId;
+        private Posting posting;
+    }
+
+    @Override
+    public Posting getUpdatedPosting(){
+        return this.boardWindow.getUpdatedPosting();
+    }
+
+    @Override
+    public Posting getAddedPosting(){
+        return this.boardWindow.getAddedPosting();
+    }
+
+    @Override
+    public void add(Posting posting){
+        this.boardWindow.add(posting);
+    }
+
+    @Override
+    public void update(Posting posting){
+        this.boardWindow.update(posting);
+    }
 }

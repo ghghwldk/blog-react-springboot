@@ -7,7 +7,6 @@ import com.m.blog.auth.application.usecase.AuthUsecase;
 import com.m.blog.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.auth.infrastructure.web.dto.LoginResponse;
 import com.m.blog.auth.infrastructure.web.dto.LogoutResponse;
-import com.m.blog.global.security.session.SessionUtil;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class AuthEndpointAdapter implements AuthEndpointPort {
 
     @Override
     public LoginResponse login(LoginRequest request) {
-        Member member = authUsecase.login(MemberMapper.of(request));
+        Member member = authUsecase.login(MemberEntrypointMapper.of(request));
 
         return LoginResponse.builder()
                 .role(member.getRole())

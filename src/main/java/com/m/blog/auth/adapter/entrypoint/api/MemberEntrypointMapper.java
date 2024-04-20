@@ -5,7 +5,7 @@ import com.m.blog.auth.infrastructure.web.dto.LoginRequest;
 import com.m.blog.common.Mapper;
 
 @Mapper
-class MemberMapper {
+class MemberEntrypointMapper {
     public static Member.LoginInfo of(LoginRequest request){
         return Member.LoginInfo.builder()
                 .memberId(Member.MemberId.builder()

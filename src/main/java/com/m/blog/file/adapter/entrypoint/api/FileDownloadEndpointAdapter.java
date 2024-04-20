@@ -26,7 +26,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        DownloadTrialCondition downloadTrialCondition = FileMapper.of(request);
+        DownloadTrialCondition downloadTrialCondition = FileEntrypointMapper.of(request);
         DownloadedFile downloadedFile = fileDownloadUsecase.download(downloadTrialCondition);
 
         return get(downloadedFile);

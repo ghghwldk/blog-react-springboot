@@ -11,7 +11,7 @@ import com.m.blog.boardCollection.application.domain.Posting;
 import java.io.IOException;
 
 @Mapper
-class FileMapper {
+class FileEntrypointMapper {
     public static DownloadTrialCondition of(FileDownloadRequest request){
         return DownloadTrialCondition.builder()
                 .fileId(BaseFile.FileId.builder().value(request.getId()).build())

@@ -22,11 +22,4 @@ public class PostingEntity extends TimeComponent {
     String boardId;
     String title;
     String content;
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-    public void setTitle(String title) { this.title = title; }
-
-
 }

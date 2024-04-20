@@ -9,14 +9,14 @@ import com.m.blog.common.Mapper;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 
 @Mapper
-class PostingMapper {
+class PostingEntrypointMapper {
     public static Posting.PostingId toId(PostingUpdateRequest request){
         return Posting.PostingId.builder()
                 .value(request.getPostingId())
                 .build();
     }
 
-    public static Posting toEntity(PostingUpdateRequest request){
+    public static Posting from(PostingUpdateRequest request){
         return Posting.builder()
                 .postingId(toId(request))
                 .title(request.getTitle())
