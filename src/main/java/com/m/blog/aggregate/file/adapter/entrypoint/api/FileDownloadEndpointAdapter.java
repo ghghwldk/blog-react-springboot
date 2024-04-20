@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.adapter.entrypoint.api;
 
-import com.m.blog.common.Adapter;
+import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.DownloadedFile;
 import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.port.entrypoint.api.FileDownloadEndpointPort;

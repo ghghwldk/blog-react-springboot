@@ -21,7 +21,7 @@ public class Posting {
                 .build();
     }
 
-    void update(Posting after){
+    void update(@NonNull Posting after){
         this.title = after.getTitle();
         this.content = after.getContent();
 

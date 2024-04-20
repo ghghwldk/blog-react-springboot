@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.application.service;
 
-import com.m.blog.common.UseCase;
+import com.m.blog.global.customAnnotation.UseCase;
 import com.m.blog.aggregate.file.application.domain.DownloadedFile;
 import com.m.blog.aggregate.file.application.domain.File;
 import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;

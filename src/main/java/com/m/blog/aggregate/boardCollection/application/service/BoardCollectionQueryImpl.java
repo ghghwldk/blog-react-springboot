@@ -7,7 +7,7 @@ import com.m.blog.aggregate.boardCollection.application.query.MenuQuery;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.MenuResponse;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadResponse;
-import com.m.blog.common.Query;
+import com.m.blog.global.customAnnotation.Query;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

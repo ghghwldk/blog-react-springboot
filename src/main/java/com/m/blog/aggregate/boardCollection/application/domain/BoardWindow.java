@@ -21,7 +21,7 @@ public class BoardWindow {
         return boardId.getValue();
     }
 
-    void update(Posting after){
+    void update(@NonNull Posting after){
         Board found = boards.stream()
                 .filter(e->e.getBoardId().equals(after.getBoardId()))
                 .findAny()
@@ -42,7 +42,7 @@ public class BoardWindow {
         return postingUpdatedBoards.get(0).getUpdated();
     }
 
-    void changeBoard(Board after){
+    void changeBoard(@NonNull Board after){
         Board found = boards.stream()
                 .filter(e->e.getBoardId().equals(after.getBoardId()))
                 .findAny()

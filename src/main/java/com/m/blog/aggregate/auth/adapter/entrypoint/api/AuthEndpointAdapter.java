@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.auth.adapter.entrypoint.api;
 
-import com.m.blog.common.Adapter;
+import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.application.port.entrypoint.api.AuthEndpointPort;
 import com.m.blog.aggregate.auth.application.usecase.AuthUsecase;

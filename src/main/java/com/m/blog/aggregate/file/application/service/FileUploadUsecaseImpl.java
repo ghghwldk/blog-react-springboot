@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.application.service;
 
-import com.m.blog.common.UseCase;
+import com.m.blog.global.customAnnotation.UseCase;
 import com.m.blog.aggregate.file.application.domain.UploadedFile;
 import com.m.blog.aggregate.file.application.port.file.FileUploadPort;
 import com.m.blog.aggregate.file.application.port.persistence.WriteFilePersistencePort;

@@ -6,12 +6,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardColle
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardCollectionIdDto;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardEntity;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.PostingEntity;
-import com.m.blog.common.Mapper;
-import lombok.Getter;
-import lombok.NonNull;
-
-import java.util.List;
-import java.util.Optional;
+import com.m.blog.global.customAnnotation.Mapper;
 
 @Mapper
 class BoardCollectionPersistenceMapper {

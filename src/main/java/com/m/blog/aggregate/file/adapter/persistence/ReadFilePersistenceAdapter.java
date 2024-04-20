@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.adapter.persistence;
 
-import com.m.blog.common.Adapter;
+import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.File;
 import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.port.persistence.ReadFilePersistencePort;
@@ -8,7 +8,6 @@ import com.m.blog.aggregate.file.infrastructure.repository.FileJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 

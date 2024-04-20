@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.adapter.entrypoint.api;
 
-import com.m.blog.common.Mapper;
+import com.m.blog.global.customAnnotation.Mapper;
 import com.m.blog.aggregate.file.application.domain.BaseFile;
 import com.m.blog.aggregate.file.application.domain.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.domain.UploadedFile;

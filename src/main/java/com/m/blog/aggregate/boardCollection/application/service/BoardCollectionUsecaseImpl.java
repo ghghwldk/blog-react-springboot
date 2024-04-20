@@ -7,7 +7,7 @@ import com.m.blog.aggregate.boardCollection.application.port.persistence.LoadBoa
 import com.m.blog.aggregate.boardCollection.application.port.persistence.SavePostingPersistencePort;
 import com.m.blog.aggregate.boardCollection.application.usecase.ChangePostingUsecase;
 import com.m.blog.aggregate.boardCollection.application.usecase.SavePostingUsecase;
-import com.m.blog.common.UseCase;
+import com.m.blog.global.customAnnotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

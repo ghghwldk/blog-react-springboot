@@ -1,14 +1,13 @@
 package com.m.blog.aggregate.auth.application.service;
 
 
-import com.m.blog.common.UseCase;
+import com.m.blog.global.customAnnotation.UseCase;
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.application.port.persistence.FindMemberPersistencePort;
 import com.m.blog.aggregate.auth.application.usecase.AuthUsecase;
 //import com.m.blog.domain.auth.adapter.out.persistence.Member;
 import com.m.blog.global.security.session.SessionUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @UseCase
 @RequiredArgsConstructor

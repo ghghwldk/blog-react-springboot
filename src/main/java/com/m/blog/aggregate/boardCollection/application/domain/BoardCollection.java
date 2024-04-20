@@ -1,10 +1,14 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
+import com.m.blog.global.customAnnotation.Domain;
+import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.exception.DataNotFoundException;
 import lombok.*;
 
 @Builder
 @AllArgsConstructor
+@Root
+@Domain
 public class BoardCollection{
     @NonNull @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @NonNull private String name;
@@ -48,17 +52,17 @@ public class BoardCollection{
         return this.boardWindow.getAdded();
     }
 
-    public void add(Board board){
+    public void add(@NonNull Board board){
         boardWindow.add(board);
         isBoardAdded = true;
     }
 
-    public void add(Posting posting){
+    public void add(@NonNull Posting posting){
         this.boardWindow.add(posting);
         isPostingAdded = true;
     }
 
-    public void update(Posting posting){
+    public void update(@NonNull Posting posting){
         this.boardWindow.update(posting);
         isPostingUpdated = true;
     }

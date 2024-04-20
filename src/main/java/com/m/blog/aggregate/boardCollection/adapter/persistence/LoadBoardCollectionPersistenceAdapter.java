@@ -4,17 +4,14 @@ import com.m.blog.aggregate.boardCollection.application.domain.*;
 import com.m.blog.aggregate.boardCollection.application.port.persistence.LoadBoardCollectionPersistencePort;
 
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
-import com.m.blog.common.Adapter;
+import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.global.exception.DataNotFoundException;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Adapter

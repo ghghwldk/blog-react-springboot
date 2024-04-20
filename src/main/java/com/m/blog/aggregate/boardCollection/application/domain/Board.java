@@ -19,20 +19,20 @@ public class Board {
     @Builder.Default
     @Getter private boolean isPostingUpdated = false;
 
-    void change(Board after){
+    void change(@NonNull Board after){
         this.name = after.name;
         this.description = after.name;
 
         isBoardUpdated = true;
     }
 
-    void change(Posting after){
+    void change(@NonNull Posting after){
         this.postingWindow.update(after);
 
         isPostingUpdated = true;
     }
 
-    void add(Posting posting){
+    void add(@NonNull Posting posting){
         this.postingWindow.add(posting);
         isPostingAdded = true;
     }

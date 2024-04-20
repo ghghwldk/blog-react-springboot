@@ -1,4 +1,4 @@
-package com.m.blog.common;
+package com.m.blog.global.customAnnotation;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface Query {
+public @interface UseCase {
     @AliasFor(annotation = Component.class)
     String value() default "";
 }

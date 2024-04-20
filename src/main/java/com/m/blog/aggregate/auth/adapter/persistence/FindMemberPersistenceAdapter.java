@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.auth.adapter.persistence;
 
-import com.m.blog.common.Adapter;
+import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.application.port.persistence.FindMemberPersistencePort;
 import com.m.blog.aggregate.auth.infrastructure.repository.MemberJpaRepository;

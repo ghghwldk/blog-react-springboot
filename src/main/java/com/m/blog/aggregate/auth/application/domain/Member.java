@@ -1,5 +1,7 @@
 package com.m.blog.aggregate.auth.application.domain;
 
+import com.m.blog.global.customAnnotation.Domain;
+import com.m.blog.global.customAnnotation.Root;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +9,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @Builder
+@Domain
+@Root
 public class Member {
     MemberId memberId;
     String name;
