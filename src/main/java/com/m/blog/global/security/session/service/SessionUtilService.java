@@ -1,6 +1,6 @@
 package com.m.blog.global.security.session.service;
 
-import com.m.blog.domain.auth.application.domain.Member;
+import com.m.blog.auth.application.domain.Member;
 import com.m.blog.global.security.session.SessionUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
