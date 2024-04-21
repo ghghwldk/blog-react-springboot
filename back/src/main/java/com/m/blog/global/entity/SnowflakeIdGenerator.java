@@ -1,5 +1,8 @@
 package com.m.blog.global.entity;
 
+import com.m.blog.global.exception.CustomIllegalArgumentException;
+import com.m.blog.global.exception.SnowflakeException;
+
 public class SnowflakeIdGenerator {
     // 데이터센터 ID와 서버 ID는 초기에 설정되어야 합니다.
     private static long dataCenterId;
@@ -22,14 +25,14 @@ public class SnowflakeIdGenerator {
 
     public static synchronized void setDataCenterId(long dataCenterId) {
         if (dataCenterId < 0 || dataCenterId > maxDataCenterId) {
-            throw new IllegalArgumentException("Data Center ID must be between 0 and " + maxDataCenterId);
+            throw new CustomIllegalArgumentException("Data Center ID must be between 0 and " + maxDataCenterId);
         }
         SnowflakeIdGenerator.dataCenterId = dataCenterId;
     }
 
     public static synchronized void setServerId(long serverId) {
         if (serverId < 0 || serverId > maxServerId) {
-            throw new IllegalArgumentException("Server ID must be between 0 and " + maxServerId);
+            throw new CustomIllegalArgumentException("Server ID must be between 0 and " + maxServerId);
         }
         SnowflakeIdGenerator.serverId = serverId;
     }
@@ -38,7 +41,7 @@ public class SnowflakeIdGenerator {
         long timestamp = System.currentTimeMillis();
 
         if (timestamp < lastTimestamp) {
-            throw new RuntimeException("Clock moved backwards. Refusing to generate id for " + (lastTimestamp - timestamp) + " milliseconds");
+            throw new SnowflakeException("Clock moved backwards. Refusing to generate id for " + (lastTimestamp - timestamp) + " milliseconds");
         }
 
         if (lastTimestamp == timestamp) {

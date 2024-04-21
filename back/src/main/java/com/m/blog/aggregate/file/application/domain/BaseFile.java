@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.application.domain;
 
 import com.m.blog.aggregate.boardCollection.application.domain.Posting;
-import com.m.blog.global.exception.NotValidValueException;
+import com.m.blog.global.exception.CustomIllegalArgumentException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class BaseFile {
 
     protected String getExtension(){
         if(originalFileName == null){
-            throw new NotValidValueException();
+            throw new CustomIllegalArgumentException();
         }
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }

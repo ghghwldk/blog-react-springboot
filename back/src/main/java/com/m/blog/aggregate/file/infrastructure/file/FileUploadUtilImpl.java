@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.global.exception.CustomIllegalArgumentException;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
         try{
             file = convert(fileVo)
                     .orElseThrow(() ->
-                            new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다.")
+                            new CustomIllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다.")
                     );
 
             putS3(file, fileVo);
