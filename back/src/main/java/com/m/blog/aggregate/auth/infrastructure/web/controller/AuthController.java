@@ -7,27 +7,26 @@ import com.m.blog.aggregate.auth.infrastructure.web.dto.LogoutResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 @Slf4j
-@RequestMapping("/member")
+@RequestMapping("/auth")
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthEndpointPort authEndpointPort;
     @ResponseBody
-    @PostMapping("/login")
+    @PostMapping
     public LoginResponse login(@RequestBody LoginRequest request){
         return authEndpointPort.login(request);
     }
 
-    @PostMapping("/logout")
-    public LogoutResponse logout(HttpServletRequest request) {
-        return authEndpointPort.logout(request);
+    @ResponseBody
+    @DeleteMapping
+    public void logout() {
+        authEndpointPort.logout();
     }
 }

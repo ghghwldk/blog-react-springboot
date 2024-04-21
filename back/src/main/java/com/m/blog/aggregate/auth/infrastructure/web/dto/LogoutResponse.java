@@ -8,5 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class LogoutResponse {
-    private static final String signOutRedirectUri = "redirect:/";
+
 }

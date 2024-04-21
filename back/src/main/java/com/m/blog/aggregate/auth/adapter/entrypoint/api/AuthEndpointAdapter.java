@@ -9,8 +9,6 @@ import com.m.blog.aggregate.auth.infrastructure.web.dto.LoginResponse;
 import com.m.blog.aggregate.auth.infrastructure.web.dto.LogoutResponse;
 import lombok.RequiredArgsConstructor;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Adapter
 @RequiredArgsConstructor
 public class AuthEndpointAdapter implements AuthEndpointPort {
@@ -26,9 +24,7 @@ public class AuthEndpointAdapter implements AuthEndpointPort {
     }
 
     @Override
-    public LogoutResponse logout(HttpServletRequest request) {
+    public void logout() {
         authUsecase.logout();
-
-        return LogoutResponse.builder().build();
     }
 }

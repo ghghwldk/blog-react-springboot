@@ -22,7 +22,6 @@ const Login = ()=>{
   const dispatch = useDispatch()
   const activeEnter = (e) => {
     if(e.key === "Enter") {
-      debugger
       processLogin()
     }
   }
@@ -35,7 +34,7 @@ const Login = ()=>{
       'password': password, 
     }
     axios({
-      url: `/member/login`,
+      url: `/auth`,
       method: 'POST',
       data:JSON.stringify(parameter),
       headers: { 'content-type': 'application/json' },
@@ -52,6 +51,7 @@ const Login = ()=>{
         history.push(redirectUrl)
       }
     }).catch(err=>{
+      alert('invalid member information')
     });
   }
 

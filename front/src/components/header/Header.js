@@ -14,6 +14,7 @@ const Header = ()=>{
   const [isMenuOpend, setIsMenuOpened] = useState(false);
   const [menuData, setMenuData] = useState([]);
   const [selectedBoardCollectionId, setSelectedBoardCollectionId] = useState(undefined)
+  const dispatch = useDispatch()
 
   const setMenu = ()=> {
     axios({
@@ -34,8 +35,21 @@ const Header = ()=>{
     if(condition === 'sign-in'){
       history.push(`/login`)
     }else{
-      //history.push(`/login`)
+      processLogout()
     }
+  }
+
+  const processLogout = ()=> {
+    axios({
+      url: `/auth`,
+      method: 'DELETE',
+      // data:JSON.stringify(parameter),
+      headers: { 'content-type': 'application/json' },
+      async: true
+    }).then((res) => {
+      dispatch({type:'register', payload : {role : '', id: ''} })
+      history.push(`/`)
+    })
   }
 
   return (
