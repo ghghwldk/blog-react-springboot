@@ -4,6 +4,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardColle
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +12,17 @@ import java.time.LocalDateTime;
 class BlogApplicationTests {
 	@Autowired
 	BoardCollectionJpaRepository boardCollectionJpaRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Test
 	void contextLoads() {
-
+		String password = passwordEncoder.encode("ghma");
+		boolean isMatched = passwordEncoder.matches(
+				"ghma",
+				passwordEncoder.encode("ghma")
+		);
+		isMatched = isMatched;
 	}
 
 }

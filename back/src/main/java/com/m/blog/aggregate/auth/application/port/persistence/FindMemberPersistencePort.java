@@ -2,6 +2,8 @@ package com.m.blog.aggregate.auth.application.port.persistence;
 
 import com.m.blog.aggregate.auth.application.domain.Member;
 
+import java.util.Optional;
+
 public interface FindMemberPersistencePort {
-    Member find(Member.LoginInfo loginInfo);
+    Optional<Member> find(Member.LoginInfo loginInfo);
 }

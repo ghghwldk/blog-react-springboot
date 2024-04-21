@@ -2,6 +2,7 @@ package com.m.blog.global.security.session.service;
 
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.global.security.session.SessionUtil;
+import com.m.blog.global.security.session.vo.SessionData;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -16,20 +17,18 @@ import java.util.Objects;
 
 @Component
 public class SessionUtilService implements SessionUtil {
-    private static final String LOGIN_MEMBER = "loginMember";
+    private static final String SessionData = "SessionData";
 
     @Override
-    public void setAttribute(Member member){
-        HttpServletRequest httpServletRequest = this.getHttpServletRequest();
-
-        HttpSession session = httpServletRequest.getSession();
-        session.setAttribute(LOGIN_MEMBER, member);
+    public void setAttribute(SessionData sessionData){
+        this.getSession()
+                .setAttribute(SessionData, sessionData);
     }
     @Override
-    public boolean validate(HttpServletRequest httpServletRequest){
-        HttpSession httpSession = httpServletRequest.getSession();
+    public boolean validate(){
+        HttpSession httpSession = this.getSession();
 
-        return httpSession != null && httpSession.getAttribute(LOGIN_MEMBER) != null;
+        return httpSession != null && httpSession.getAttribute(SessionData) != null;
     }
 
     private HttpServletRequest getHttpServletRequest() {
@@ -40,7 +39,7 @@ public class SessionUtilService implements SessionUtil {
 
     private HttpSession getSession() {
         return this.getHttpServletRequest()
-                .getSession(false);
+                .getSession();
     }
 
     @Override
@@ -53,14 +52,12 @@ public class SessionUtilService implements SessionUtil {
     }
 
     @Override
-    public Authentication getAuthentication(HttpServletRequest httpServletRequest) {
-        HttpSession httpSession = httpServletRequest.getSession();
-
-        Member member = (Member) httpSession.getAttribute(LOGIN_MEMBER);
+    public Authentication getAuthentication() {
+        SessionData sessionData = (SessionData) this.getSession().getAttribute(SessionData);
 
         UserDetails principal = User.builder()
-                .username(member.getMemberId().getValue())
-                .authorities(member.getRole())
+                .username(sessionData.getMemberId())
+                .authorities(sessionData.getRole())
                 .password("") // Empty password as we're using token authentication
                 .build();
 

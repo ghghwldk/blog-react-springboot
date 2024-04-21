@@ -20,8 +20,8 @@ public class SessionFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        if(sessionUtil.validate(request)){
-            Authentication authentication = sessionUtil.getAuthentication(request);
+        if(sessionUtil.validate()){
+            Authentication authentication = sessionUtil.getAuthentication();
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
