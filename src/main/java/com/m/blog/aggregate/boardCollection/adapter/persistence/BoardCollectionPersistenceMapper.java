@@ -13,6 +13,7 @@ class BoardCollectionPersistenceMapper {
     public static PostingEntity toEntity (Posting domain){
         return PostingEntity.builder()
                 .id(domain.getPostingId().getValue())
+                .boardId(domain.getBoardIdValue())
                 .title(domain.getTitle())
                 .content(domain.getContent())
                 .build();

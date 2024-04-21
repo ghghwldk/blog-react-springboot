@@ -55,7 +55,7 @@ public class BoardWindow {
 
     void add(@NonNull Posting posting){
         Board board = boards.stream()
-                .filter(e->e.getBoardId().equals(posting.getBoardId().getValue()))
+                .filter(e->e.getBoardIdValue().equals(posting.getBoardIdValue()))
                 .findAny().orElseThrow(DataNotFoundException::new);
 
         board.add(posting);

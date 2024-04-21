@@ -16,16 +16,16 @@ class PostingEntrypointMapper {
                 .build();
     }
 
-    public static Board.BoardId toBoardId(PostingUpdateRequest request){
+    public static Board.BoardId toBoardId(String boardId){
         return Board.BoardId.builder()
-                .value(request.getBoardId())
+                .value(boardId)
                 .build();
     }
 
     public static Posting from(PostingUpdateRequest request){
         return Posting.builder()
                 .postingId(toPostingId(request))
-                .boardId(toBoardId(request))
+                .boardId(toBoardId(request.getBoardId()))
                 .title(request.getTitle())
                 .content(request.getMarkup())
                 .build();
@@ -36,8 +36,10 @@ class PostingEntrypointMapper {
                 .postingId(Posting.PostingId.builder()
                         .value(SnowflakeIdGenerator.generateId())
                         .build())
+                .boardId(toBoardId(request.getBoardId()))
                 .title(request.getTitle())
                 .content(request.getContent())
+                .isPostingAdded(true)
                 .build();
     }
 

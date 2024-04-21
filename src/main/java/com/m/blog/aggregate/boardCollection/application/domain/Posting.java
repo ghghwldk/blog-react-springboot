@@ -21,6 +21,10 @@ public class Posting {
                 .build();
     }
 
+    public String getBoardIdValue(){
+        return this.getBoardId().getValue();
+    }
+
     void update(@NonNull Posting after){
         this.title = after.getTitle();
         this.content = after.getContent();

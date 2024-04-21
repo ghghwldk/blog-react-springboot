@@ -6,4 +6,5 @@ import com.m.blog.aggregate.boardCollection.application.domain.Posting;
 
 public interface LoadBoardCollectionPersistencePort {
     BoardCollection load(Posting.PostingId postingId);
+    BoardCollection load(Board.BoardId boardId);
 }

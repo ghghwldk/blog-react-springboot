@@ -23,14 +23,35 @@ public class LoadBoardCollectionPersistenceAdapter implements LoadBoardCollectio
     private final PostingJpaRepository postingJpaRepository;
 
     @Override
+    public BoardCollection load(Board.BoardId boardId) {
+        BoardCollectionEntity boardCollectionEntity = getBoardCollectionEntity(boardId);
+
+        return make(boardCollectionEntity);
+    }
+
+    @Override
     public BoardCollection load(Posting.PostingId postingId) {
         BoardCollectionEntity boardCollectionEntity = getBoardCollectionEntity(postingId);
+
+        return make(boardCollectionEntity);
+    }
+
+    private BoardCollection make(BoardCollectionEntity boardCollectionEntity){
         List<BoardEntity> boardEntities = boardJpaRepository.findAllByBoardCollectionId(boardCollectionEntity.getId());
         List<PostingEntity> postingEntities = getPostingEntities(boardEntities);
 
         List<Board> boards = this.getBoards(postingEntities, boardEntities);
 
         return BoardCollectionPersistenceMapper.of(boardCollectionEntity , new BoardWindow(boards));
+    }
+
+    private BoardCollectionEntity getBoardCollectionEntity(Board.BoardId boardId){
+        BoardCollection.BoardCollectionId boardCollectionId = boardCollectionDslRepository.get(boardId)
+                .map(BoardCollectionPersistenceMapper::of)
+                .orElseThrow(DataNotFoundException::new);
+
+        return boardCollectionJpaRepository.findById(boardCollectionId.getValue())
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     private BoardCollectionEntity getBoardCollectionEntity(Posting.PostingId postingId){

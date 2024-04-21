@@ -21,7 +21,7 @@ class BoardCollectionUsecaseImpl implements SavePostingUsecase, ChangePostingUse
     @Override
     public void save(Posting posting) {
         BoardCollection boardCollection
-                = loadBoardCollectionPersistencePort.load(posting.getPostingId());
+                = loadBoardCollectionPersistencePort.load(posting.getBoardId());
 
         boardCollection.add(posting);
 

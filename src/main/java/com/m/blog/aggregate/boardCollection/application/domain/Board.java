@@ -26,6 +26,10 @@ public class Board {
         isBoardUpdated = true;
     }
 
+    public String getBoardIdValue(){
+        return this.getBoardId().getValue();
+    }
+
     void change(@NonNull Posting after){
         this.postingWindow.update(after);
 
