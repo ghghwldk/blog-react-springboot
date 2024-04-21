@@ -10,15 +10,22 @@ import com.m.blog.global.entity.SnowflakeIdGenerator;
 
 @Mapper
 class PostingEntrypointMapper {
-    public static Posting.PostingId toId(PostingUpdateRequest request){
+    public static Posting.PostingId toPostingId(PostingUpdateRequest request){
         return Posting.PostingId.builder()
                 .value(request.getPostingId())
                 .build();
     }
 
+    public static Board.BoardId toBoardId(PostingUpdateRequest request){
+        return Board.BoardId.builder()
+                .value(request.getBoardId())
+                .build();
+    }
+
     public static Posting from(PostingUpdateRequest request){
         return Posting.builder()
-                .postingId(toId(request))
+                .postingId(toPostingId(request))
+                .boardId(toBoardId(request))
                 .title(request.getTitle())
                 .content(request.getMarkup())
                 .build();
