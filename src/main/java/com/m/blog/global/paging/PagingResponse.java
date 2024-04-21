@@ -31,7 +31,7 @@ public class PagingResponse {
         final String homeLocation = "Home";
 
         if (found != null) {
-            return found.getBoardName() + " | " + found.getBoardCollectionName();
+            return found.getBoardCollectionName() + " | " + found.getBoardName();
         } else {
             return homeLocation;
         }
