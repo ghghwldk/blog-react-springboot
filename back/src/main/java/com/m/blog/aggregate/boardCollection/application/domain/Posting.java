@@ -21,10 +21,6 @@ public class Posting {
                 .build();
     }
 
-    public String getBoardIdValue(){
-        return this.getBoardId().getValue();
-    }
-
     void update(@NonNull Posting after){
         this.title = after.getTitle();
         this.content = after.getContent();
@@ -37,6 +33,16 @@ public class Posting {
     @AllArgsConstructor
     public static class PostingId {
         private String value;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (!(o instanceof PostingId))
+                return false;
+
+            return this.value.equals(((PostingId) o).getValue());
+        }
     }
 
 

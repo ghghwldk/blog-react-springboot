@@ -18,17 +18,15 @@ public class PostingWindow {
     }
 
     String remove(@NonNull Posting.PostingId postingId) {
-        if (!postings.removeIf(e -> e.getPostingId().getValue().equals(postingId.getValue()))) {
+        if (!postings.removeIf(e -> e.getPostingId().equals(postingId))) {
             throw new NotFoundException("target posting doesn't exist");
         }
 
         return postingId.getValue();
     }
 
-    String add(@NonNull Posting posting){
+    void add(@NonNull Posting posting){
         postings.add(posting);
-
-        return posting.getPostingId().getValue();
     }
 
     void update(@NonNull Posting after){

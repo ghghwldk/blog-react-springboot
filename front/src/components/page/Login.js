@@ -30,7 +30,7 @@ const Login = ()=>{
       'password': password, 
     }
     axios({
-      url: `/user/login`,
+      url: `/member/login`,
       method: 'POST',
       data:JSON.stringify(parameter),
       headers: { 'content-type': 'application/json' },

@@ -26,10 +26,6 @@ public class Board {
         isBoardUpdated = true;
     }
 
-    public String getBoardIdValue(){
-        return this.getBoardId().getValue();
-    }
-
     void change(@NonNull Posting after){
         this.postingWindow.update(after);
 
@@ -46,6 +42,15 @@ public class Board {
     @AllArgsConstructor
     public static class BoardId {
         private String value;
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (!(o instanceof BoardId))
+                return false;
+
+            return this.value.equals(((BoardId) o).getValue());
+        }
     }
 
     Posting getUpdated(){

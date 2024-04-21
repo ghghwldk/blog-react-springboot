@@ -15,7 +15,7 @@ public class BoardWindow {
     }
 
     String remove(@NonNull Board.BoardId boardId) {
-        if (!boards.removeIf(e -> e.getBoardId().getValue().equals(boardId.getValue()))) {
+        if (!boards.removeIf(e -> e.getBoardId().equals(boardId))) {
             throw new DataNotFoundException();
         }
         return boardId.getValue();
@@ -55,7 +55,7 @@ public class BoardWindow {
 
     void add(@NonNull Posting posting){
         Board board = boards.stream()
-                .filter(e->e.getBoardIdValue().equals(posting.getBoardIdValue()))
+                .filter(e->e.getBoardId().equals(posting.getBoardId()))
                 .findAny().orElseThrow(DataNotFoundException::new);
 
         board.add(posting);
