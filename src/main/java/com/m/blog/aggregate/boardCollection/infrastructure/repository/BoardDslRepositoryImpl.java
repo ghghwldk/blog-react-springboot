@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Repository
@@ -16,29 +16,28 @@ public class BoardDslRepositoryImpl implements BoardDslRepository {
     private final JPAQueryFactory query;
 
     @Override
-    public BoardDto findBoardDto(String boardId){
-//        BoardDto fetched =
-//                query.select(
-//                        new QBoardDto(
-//                                board.boardCollectionId,
-//                                boardCollection.name,
-//                                board.id,
-//                                board.name,
-//                                board.description,
-//                                board.createdTime,
-//                                board.updatedTime
-//                        ))
-//                        .from(boardCollection)
-//                        .join(board).on(boardCollection.id.eq(board.boardCollectionId))
-//                        .where(board.boardCollectionId.eq(boardCollectionId), board.id.eq(boardId))
-//                        .orderBy(board.createdTime.desc())
-//                        .fetchOne();
-//        if(fetched == null){
-//            throw new NotFoundException("board is not found");
-//        }
-//
-//        return fetched;
-        return null;
+    public Optional<BoardDto> findBoardDto(String boardId){
+        QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
+        QBoardEntity b = QBoardEntity.boardEntity;
+
+        BoardDto fetched =
+                query.select(
+                        new QBoardDto(
+                                b.boardCollectionId,
+                                bc.name,
+                                b.id,
+                                b.name,
+                                b.description,
+                                b.createdTime,
+                                b.updatedTime
+                        ))
+                        .from(bc)
+                        .join(b).on(bc.id.eq(b.boardCollectionId))
+                        .where(b.id.eq(boardId))
+                        .orderBy(b.createdTime.desc())
+                        .fetchOne();
+
+        return Optional.ofNullable(fetched);
     }
     public List<BoardEntity> findBoards(String boardCollectionId){
 //        return query.selectFrom(board)

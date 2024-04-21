@@ -8,6 +8,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.MenuResponse;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadResponse;
 import com.m.blog.global.customAnnotation.Query;
+import com.m.blog.global.exception.DataNotFoundException;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,8 @@ class BoardCollectionQueryImpl implements FindPostingQuery, MenuQuery {
     @Override
     public PagingResponse get(Board.BoardId boardId, Pageable pageable){
         BoardDto found = boardDslRepository
-                .findBoardDto(boardId.getValue());
+                .findBoardDto(boardId.getValue())
+                .orElseThrow(DataNotFoundException::new);
 
 
         return PagingResponse.get(getPagePerBoard(boardId, pageable), found);

@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class BoardDto {
-    int boardCollectionId;
+    String boardCollectionId;
     String boardCollectionName;
-    int boardId;
+    String boardId;
     String boardName;
     String description;
     LocalDateTime createdTime;
@@ -19,7 +19,7 @@ public class BoardDto {
 
 
     @QueryProjection
-    public BoardDto(int boardCollectionId, String boardCollectionName, int boardId, String boardName, String description, LocalDateTime createdTime, LocalDateTime updatedTime) {
+    public BoardDto(String boardCollectionId, String boardCollectionName, String boardId, String boardName, String description, LocalDateTime createdTime, LocalDateTime updatedTime) {
         this.boardCollectionId = boardCollectionId;
         this.boardCollectionName = boardCollectionName;
         this.boardId = boardId;

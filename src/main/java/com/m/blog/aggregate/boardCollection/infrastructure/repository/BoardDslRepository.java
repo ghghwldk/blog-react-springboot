@@ -1,5 +1,7 @@
 package com.m.blog.aggregate.boardCollection.infrastructure.repository;
 
+import java.util.Optional;
+
 public interface BoardDslRepository {
-    BoardDto findBoardDto(String boardId);
+    Optional<BoardDto> findBoardDto(String boardId);
 }
