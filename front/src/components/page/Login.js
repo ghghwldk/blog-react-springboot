@@ -20,7 +20,12 @@ const Login = ()=>{
   let query= useQuery();
   const history = useHistory()
   const dispatch = useDispatch()
-
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      debugger
+      processLogin()
+    }
+  }
   const processLogin = ()=> {
     const id = idRef.current.value
     const password = passwordRef.current.value
@@ -61,10 +66,12 @@ const Login = ()=>{
         <p>ID</p>
         <input id="id" name="id" type="text"
           ref= {idRef}
+          onKeyDown={(e) => activeEnter(e)}
         ></input>
         <p>PW</p>
         <input id="password" name="password" type="password"
           ref= {passwordRef}
+          onKeyDown={(e) => activeEnter(e)}
         ></input>
         <button className="custom-button" id="submit"
           onClick={()=>{
