@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FileStorageConfiguration {
+public class StorageConfiguration {
     private final FileProperties fileProperties;
     private final boolean isLocal;
     private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
     private final AmazonS3 amazonS3;
 
-    public FileStorageConfiguration(FileProperties fileProperties, AwsProperties awsProperties, AmazonS3Client amazonS3Client, AmazonS3 amazonS3) {
+    public StorageConfiguration(FileProperties fileProperties, AwsProperties awsProperties, AmazonS3Client amazonS3Client, AmazonS3 amazonS3) {
         this.fileProperties = fileProperties;
         this.isLocal = fileProperties.isForLocal();
 
