@@ -3,7 +3,6 @@ package com.m.blog.aggregate.file.adapter.file;
 import com.m.blog.aggregate.file.application.domain.BaseFile;
 import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.aggregate.file.application.usecase.FileDeleteUsecase;
-import com.m.blog.aggregate.file.infrastructure.file.FileDeleteUtil;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FileDeleteAdapter implements FileDeleteUsecase {
     private final FileProperties fileProperties;
-    private final FileDeleteUtil fileDeleteUtil;
 
     @Override
     public void delete(List<BaseFile.FileId> fileIds) {
@@ -27,7 +25,7 @@ public class FileDeleteAdapter implements FileDeleteUsecase {
                 .map(BlogFile::getFileKey)
                 .collect(Collectors.toList());
 
-        fileDeleteUtil.enterLocalDeleteQueue(fileKeys);
+//        fileDeleteUtil.enterLocalDeleteQueue(fileKeys);
     }
 }
 

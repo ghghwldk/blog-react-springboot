@@ -7,6 +7,4 @@ import java.io.InputStream;
 
 public interface FileDownloadUtil {
     InputStream get(BlogFile info) throws IOException;
-
-//    InputStream getLocalResource(BlogFile info) throws IOException;
 }

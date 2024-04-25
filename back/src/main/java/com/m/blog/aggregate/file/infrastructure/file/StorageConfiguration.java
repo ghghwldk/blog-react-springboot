@@ -15,7 +15,8 @@ public class StorageConfiguration {
     private final AmazonS3Client amazonS3Client;
     private final AmazonS3 amazonS3;
 
-    public StorageConfiguration(FileProperties fileProperties, AwsProperties awsProperties, AmazonS3Client amazonS3Client, AmazonS3 amazonS3) {
+    public StorageConfiguration(FileProperties fileProperties, AwsProperties awsProperties,
+                                AmazonS3Client amazonS3Client, AmazonS3 amazonS3) {
         this.fileProperties = fileProperties;
         this.isLocal = fileProperties.isForLocal();
 
@@ -34,5 +35,11 @@ public class StorageConfiguration {
     FileDownloadUtil fileDownloadUtil(){
         return isLocal? new LocalFileDownloadUtilImpl():
             new S3FileDownloadUtilImpl(amazonS3, awsProperties);
+    }
+
+    @Bean
+    FileDeleteUtil fileDeleteUtil(){
+        return isLocal? new LocalFileDeleteUtilExtended():
+                new S3FileDeleteUtilExtended(amazonS3, awsProperties);
     }
 }
