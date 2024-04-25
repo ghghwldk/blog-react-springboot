@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 public interface FileUploadUtil {
-    Optional<File> convert(BlogFile blogFile) throws IOException;
+    Optional<File> convert(String originalFileName, byte[] data) throws IOException;
 
-    void remove(File targetFile);
+    void uploadOnLocal(byte[] data, String fileKey) throws IOException;
 
-    void uploadOnLocal(BlogFile blogFile) throws IOException;
-
-    void uploadOnS3(BlogFile blogFile) throws IOException;
+    void uploadOnS3(String originalFileName, String fileKey, byte[] data) throws IOException;
 }

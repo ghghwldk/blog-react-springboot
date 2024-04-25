@@ -3,7 +3,6 @@ package com.m.blog.aggregate.file.infrastructure.file;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
 import com.m.blog.global.exception.CustomIllegalArgumentException;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +21,11 @@ class FileUploadUtilImpl implements FileUploadUtil {
     private final AmazonS3Client amazonS3Client;
 
     @Override
-    public Optional<File> convert(BlogFile blogFile) throws IOException {
-        File convertFile = new File(blogFile.getOriginalFileName());
+    public Optional<File> convert(String originalFileName, byte[] data) throws IOException {
+        File convertFile = new File(originalFileName);
         if(convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-                fos.write(blogFile.getData());
+                fos.write(data);
             }
             return Optional.of(convertFile);
         }
@@ -34,21 +33,13 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     @Override
-    public void remove(File targetFile) {
-        if (targetFile.delete()) {
-            log.info("파일이 삭제되었습니다.");
-        } else {
-            log.info("파일이 삭제되지 못했습니다."); }
-    }
-
-    @Override
-    public void uploadOnLocal(BlogFile blogFile) throws IOException{
+    public void uploadOnLocal(byte[] data, String fileKey) throws IOException{
         File file = null;
 
         log.info("file is uploading on the local pc");
         try{
-            InputStream fileStream = new ByteArrayInputStream(blogFile.getData());
-            String key = blogFile.getFileKey();
+            InputStream fileStream = new ByteArrayInputStream(data);
+            String key = fileKey;
 
             file = new File(key);
 
@@ -59,8 +50,8 @@ class FileUploadUtilImpl implements FileUploadUtil {
         }
     }
 
-    private void putS3(File file, BlogFile blogFile) {
-        String key= blogFile.getFileKey();
+    private void putS3(File file, String fileKey) {
+        String key= fileKey;
 
         amazonS3Client
                 .putObject(new PutObjectRequest(awsProperties.getS3().getBucket(), key, file)
@@ -68,19 +59,17 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     @Override
-    public void uploadOnS3(BlogFile fileVo) throws IOException{
+    public void uploadOnS3(String originalFileName, String fileKey, byte[] data) throws IOException{
         File file = null;
 
         try{
-            file = convert(fileVo)
-                    .orElseThrow(() ->
-                            new CustomIllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다.")
-                    );
+            file = convert(originalFileName, data)
+                    .orElseThrow(() ->new CustomIllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
-            putS3(file, fileVo);
+            putS3(file, fileKey);
         } finally{
             assert file != null;
-            remove(file);
+            FileUtils.deleteQuietly(file);
         }
     }
 }
