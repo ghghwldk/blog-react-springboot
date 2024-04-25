@@ -20,8 +20,8 @@ class FileUploadUtilImpl implements FileUploadUtil {
     private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
 
-    @Override
-    public Optional<File> convert(String originalFileName, byte[] data) throws IOException {
+
+    private Optional<File> convert(String originalFileName, byte[] data) throws IOException {
         File convertFile = new File(originalFileName);
         if(convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) {
@@ -33,7 +33,7 @@ class FileUploadUtilImpl implements FileUploadUtil {
     }
 
     @Override
-    public void uploadOnLocal(byte[] data, String fileKey) throws IOException{
+    public void uploadOnLocal(String fileKey, byte[] data) throws IOException{
         File file = null;
 
         log.info("file is uploading on the local pc");

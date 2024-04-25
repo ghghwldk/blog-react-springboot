@@ -22,7 +22,7 @@ public class FileUploadAdapter implements FileUploadPort {
         String originalFileName = blogFile.getOriginalFileName();
 
         if(fileProperties.isForLocal()){
-            fileUploadUtil.uploadOnLocal(data, fileKey);
+            fileUploadUtil.uploadOnLocal(fileKey, data);
         }else{
             fileUploadUtil.uploadOnS3(originalFileName, fileKey, data);
         }
