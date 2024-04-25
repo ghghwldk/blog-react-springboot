@@ -7,8 +7,5 @@ import java.io.IOException;
 import java.util.Optional;
 
 public interface FileUploadUtil {
-
-    void uploadOnLocal(String fileKey, byte[] data) throws IOException;
-
-    void uploadOnS3(String originalFileName, String fileKey, byte[] data) throws IOException;
+    void upload(String fileKey, byte[] data) throws IOException;
 }

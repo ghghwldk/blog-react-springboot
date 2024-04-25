@@ -27,7 +27,7 @@ public class FileDeleteAdapter implements FileDeleteUsecase {
                 .map(BlogFile::getFileKey)
                 .collect(Collectors.toList());
 
-        fileDeleteUtil.enterQueue(fileKeys);
+        fileDeleteUtil.enterLocalDeleteQueue(fileKeys);
     }
 }
 

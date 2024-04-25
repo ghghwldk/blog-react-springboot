@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface FileDownloadUtil {
-    InputStream getS3Resource(BlogFile info);
+    InputStream get(BlogFile info) throws IOException;
 
-    InputStream getLocalResource(BlogFile info) throws IOException;
+//    InputStream getLocalResource(BlogFile info) throws IOException;
 }

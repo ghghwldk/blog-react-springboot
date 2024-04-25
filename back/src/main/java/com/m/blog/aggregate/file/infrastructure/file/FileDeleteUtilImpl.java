@@ -22,7 +22,7 @@ public class FileDeleteUtilImpl implements FileDeleteUtil {
     private final BlockingQueue<String> waitings = new LinkedBlockingQueue<>();
 
     @Override
-    public void enterQueue(List<String> fileKeys) {
+    public void enterLocalDeleteQueue(List<String> fileKeys) {
         waitings.addAll(fileKeys);
 
         if (waitings.size() >= maximumLength) {
@@ -35,6 +35,11 @@ public class FileDeleteUtilImpl implements FileDeleteUtil {
 
             delete(current);
         }
+
+    }
+
+    @Override
+    public void enterS3DeletingQueue(List<String> fileKeys) {
 
     }
 

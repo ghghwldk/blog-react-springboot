@@ -19,12 +19,7 @@ public class FileUploadAdapter implements FileUploadPort {
     public void upload(BlogFile blogFile) throws IOException {
         byte[] data = blogFile.getData();
         String fileKey = blogFile.getFileKey();
-        String originalFileName = blogFile.getOriginalFileName();
 
-        if(fileProperties.isForLocal()){
-            fileUploadUtil.uploadOnLocal(fileKey, data);
-        }else{
-            fileUploadUtil.uploadOnS3(originalFileName, fileKey, data);
-        }
+        fileUploadUtil.upload(fileKey, data);
     }
 }
