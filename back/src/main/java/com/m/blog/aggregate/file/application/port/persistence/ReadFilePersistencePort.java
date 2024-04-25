@@ -8,6 +8,4 @@ import java.util.Optional;
 
 public interface ReadFilePersistencePort {
     Optional<BlogFile> get(BlogFile.DownloadTrialCondition condition) throws IOException;
-
-    Optional<BlogFile> findByFileName(String fileName);
 }

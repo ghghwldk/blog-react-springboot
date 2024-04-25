@@ -14,12 +14,10 @@ public class FileUploadResponse {
     private String downloadUrl;
 
     public static FileUploadResponse of(BlogFile blogFile){
-        final String url = blogFile.getDownloadUrl();
-
         return FileUploadResponse.builder()
                 .originalFileName(blogFile.getOriginalFileName())
                 .fileName(blogFile.getFileId().getValue())
-                .downloadUrl(url)
+                .downloadUrl(blogFile.getDownloadUrl())
                 .build();
     }
 

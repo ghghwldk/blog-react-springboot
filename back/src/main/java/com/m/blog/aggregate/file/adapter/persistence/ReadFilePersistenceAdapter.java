@@ -24,10 +24,4 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
         return fileJpaRepository.findById(condition.getFileId().getValue())
                 .map(FilePersistenceMapper::toDomain);
     }
-
-    @Override
-    public Optional<BlogFile> findByFileName(String fileName) {
-        return fileJpaRepository.findById(fileName)
-                .map(FilePersistenceMapper::toDomain);
-    }
 }

@@ -21,11 +21,9 @@ public class FileDownloadUsecaseImpl implements FileDownloadUsecase {
 
     @Override
     public BlogFile download(BlogFile.DownloadTrialCondition condition) throws IOException {
-        Optional<BlogFile> found = readFilePersistencePort.get(condition);
+        BlogFile found = readFilePersistencePort.get(condition)
+                .orElseThrow(DataNotFoundException::new);
 
-        if(found.isEmpty()){
-            throw new DataNotFoundException();
-        }
-        return  fileDownloadPort.get(found.get());
+        return  fileDownloadPort.get(found);
     }
 }
