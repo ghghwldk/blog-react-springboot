@@ -19,19 +19,27 @@ import org.springframework.lang.Nullable;
 public class BlogFile{
     private static final String downloadPrefix = "/file/download/";
 
-    @Nullable protected FileId fileId;
-    @NotNull protected String originalFileName;
-    @Nullable protected String directoryName;
-    @Nullable protected Posting.PostingId postingId;
-    @Nullable private byte[] data;
+    protected FileId fileId;
+    protected String originalFileName;
+    protected String directoryName;
+    protected Posting.PostingId postingId;
+    private byte[] data;
 
     public static BlogFile withoutData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
         return new BlogFile(fileId, originalFileName, directoryName, postingId, null);
     }
 
-    public static BlogFile withSnowflakeId(String originalFileName, String directoryName, Posting.PostingId postingId, byte[] data){
+    private BlogFile(FileId fileId){
+        this.fileId = fileId;
+    }
+
+    public static BlogFile withDownloadCondition(String fileId){
+        return new BlogFile(new FileId(fileId));
+    }
+
+    public static BlogFile withSnowflakeId(String originalFileName, String directoryName, String postingId, byte[] data){
         return new BlogFile(new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName)),
-                originalFileName, directoryName, postingId, data);
+                originalFileName, directoryName, new Posting.PostingId(postingId), data);
     }
 
     private static String getExtension(String originalFileName){
@@ -41,7 +49,7 @@ public class BlogFile{
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 
-    public BlogFile setData(byte[] data){
+    public BlogFile addData(byte[] data){
         this.data = data;
 
         return this;
@@ -66,10 +74,5 @@ public class BlogFile{
         private String value;
     }
 
-    @Data
-    @Builder
-    @AllArgsConstructor
-    public static class DownloadTrialCondition {
-        private BlogFile.FileId fileId;
-    }
+
 }

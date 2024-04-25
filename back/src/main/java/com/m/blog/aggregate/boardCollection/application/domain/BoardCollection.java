@@ -5,34 +5,32 @@ import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.exception.DataNotFoundException;
 import lombok.*;
 
-@Builder
 @AllArgsConstructor
 @Root
 @Domain
 public class BoardCollection{
-    @NonNull @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
-    @NonNull private String name;
-    @NonNull private BoardWindow boardWindow;
+    @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
+    @Getter private String name;
+    @Getter private BoardWindow boardWindow;
 
-    @Builder.Default
     @Getter private boolean isBoardCollectionUpdated = false;
-    @Builder.Default
     @Getter private boolean isBoardAdded = false;
-    @Builder.Default
     @Getter private boolean isBoardUpdated = false;
-    @Builder.Default
-    private boolean isPostingUpdated = false;
-    @Builder.Default
-    private boolean isPostingAdded = false;
+    @Getter private boolean isPostingUpdated = false;
+    @Getter private boolean isPostingAdded = false;
 
 
     public String remove(@NonNull Board.BoardId boardId){
         return boardWindow.remove(boardId);
     }
 
+    public BoardCollection(String boardCollectionId, String name, BoardWindow boardWindow){
+        this.boardCollectionId = new BoardCollectionId(boardCollectionId);
+        this.name = name;
+        this.boardWindow = boardWindow;
+    }
 
     @Getter
-    @Builder
     @AllArgsConstructor
     public static class BoardCollectionId {
         private String value;

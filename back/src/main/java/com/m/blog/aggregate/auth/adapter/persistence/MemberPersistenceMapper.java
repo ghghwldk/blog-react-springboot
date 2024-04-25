@@ -2,24 +2,17 @@ package com.m.blog.aggregate.auth.adapter.persistence;
 
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.infrastructure.repository.MemberEntity;
-import com.m.blog.aggregate.auth.infrastructure.web.dto.LoginResponse;
+import com.m.blog.aggregate.auth.infrastructure.web.dto.SigninResponse;
 import com.m.blog.global.customAnnotation.Mapper;
 
 @Mapper
 class MemberPersistenceMapper {
     public static Member of(MemberEntity entity){
-        return Member.builder()
-                .memberId(Member.MemberId.builder()
-                        .value(entity.getId())
-                        .build())
-                .name(entity.getName())
-                .password(entity.getPassword())
-                .role(entity.getRole())
-                .build();
+        return new Member(entity.getId(), entity.getName(), entity.getPassword(), entity.getRole());
     }
 
-    public static LoginResponse of(Member loginMember){
-        return LoginResponse.builder()
+    public static SigninResponse of(Member loginMember){
+        return SigninResponse.builder()
                 .role(loginMember.getRole())
                 .build();
     }

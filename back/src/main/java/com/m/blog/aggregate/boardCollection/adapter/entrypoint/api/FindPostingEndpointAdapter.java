@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.boardCollection.adapter.entrypoint.api;
 
+import com.m.blog.aggregate.boardCollection.application.domain.Board;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadPerBoardPagingRequest;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadRequest;
@@ -19,7 +20,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
     @Override
     public PagingResponse getPagingResponse(PostingReadPerBoardPagingRequest request){
         return findPostingQuery.get(
-                PostingEntrypointMapper.of(request),
+                new Board.BoardId(request.getBoardId()),
                 request.getPageable()
         );
     }
@@ -32,7 +33,7 @@ class FindPostingEndpointAdapter implements FindPositngEndpointPort {
 
     @Override
     public PostingReadResponse get(PostingReadRequest request){
-        Posting.PostingId condition = Posting.get(request.getId());
+        Posting.PostingId condition = new Posting.PostingId(request.getId());
 
         return findPostingQuery.get(condition);
     }

@@ -7,6 +7,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardColle
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardEntity;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.PostingEntity;
 import com.m.blog.global.customAnnotation.Mapper;
+import lombok.NonNull;
 
 @Mapper
 class BoardCollectionPersistenceMapper {
@@ -21,49 +22,21 @@ class BoardCollectionPersistenceMapper {
 
 
     public static Posting of(PostingEntity entity){
-        return Posting.builder()
-                .postingId(Posting.PostingId.builder()
-                        .value(entity.getId())
-                        .build())
-                .boardId(Board.BoardId.builder()
-                        .value(entity.getBoardId())
-                        .build())
-                .title(entity.getTitle())
-                .content(entity.getContent())
-                .build();
+        return new Posting(entity.getId(), entity.getBoardId(),
+                entity.getTitle(), entity.getContent());
     }
 
     public static Board of(BoardEntity boardEntity, PostingWindow postingWindow){
-        return Board.builder()
-                .boardId(Board.BoardId.builder()
-                        .value(boardEntity.getId())
-                        .build())
-                .boardCollectionId(of(boardEntity.getBoardCollectionId()))
-                .name(boardEntity.getName())
-                .description(boardEntity.getDescription())
-                .postingWindow(postingWindow)
-                .build();
+        return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId(), postingWindow);
     }
 
     public static BoardCollection of(BoardCollectionEntity entity, BoardWindow boardWindow){
-        return BoardCollection.builder()
-                .boardCollectionId(of(entity.getId()))
-                .name(entity.getName())
-                .boardWindow(boardWindow)
-                .build();
-    }
-
-    public static BoardCollectionId of (String boardCollectionId){
-        return BoardCollectionId.builder()
-                .value(boardCollectionId)
-                .build();
+        return new BoardCollection(entity.getId(), entity.getName(), boardWindow);
     }
 
 
     public static BoardCollectionId of (BoardCollectionIdDto boardCollectionIdDto){
-        return BoardCollectionId.builder()
-                .value(boardCollectionIdDto.getBoardCollectionId())
-                .build();
+        return new BoardCollectionId(boardCollectionIdDto.getBoardCollectionId());
     }
 
 

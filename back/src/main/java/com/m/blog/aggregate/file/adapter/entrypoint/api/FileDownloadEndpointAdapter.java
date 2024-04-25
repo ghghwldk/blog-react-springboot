@@ -2,7 +2,6 @@ package com.m.blog.aggregate.file.adapter.entrypoint.api;
 
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.BlogFile;
-import com.m.blog.aggregate.file.application.domain.BlogFile.DownloadTrialCondition;
 import com.m.blog.aggregate.file.application.port.entrypoint.api.FileDownloadEndpointPort;
 import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
@@ -26,8 +25,7 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        BlogFile.DownloadTrialCondition downloadTrialCondition = FileEntrypointMapper.of(request);
-        BlogFile blogFile = fileDownloadUsecase.download(downloadTrialCondition);
+        BlogFile blogFile = fileDownloadUsecase.download(BlogFile.withDownloadCondition(request.getId()));
 
         return get(blogFile);
     }

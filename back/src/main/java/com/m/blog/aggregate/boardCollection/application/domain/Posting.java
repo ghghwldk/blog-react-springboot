@@ -1,24 +1,29 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
+import com.m.blog.global.entity.SnowflakeIdGenerator;
 import lombok.*;
 import org.thymeleaf.util.StringUtils;
 
 @Getter
-@Builder
 public class Posting {
-    @NonNull private final PostingId postingId;
-    @NonNull private final Board.BoardId boardId;
-    @NonNull private String title;
-    @NonNull private String content;
-    @Builder.Default
+    private final PostingId postingId;
+    private final Board.BoardId boardId;
+    private String title;
+    private String content;
     private boolean isPostingUpdated = false;
-    @Builder.Default
     private boolean isPostingAdded = false;
 
-    public static PostingId get(@NonNull String postingId){
-        return PostingId.builder()
-                .value(postingId)
-                .build();
+    public Posting(@NonNull String postingId, @NonNull String boardId,
+                   @NonNull String title, @NonNull String content) {
+        this.postingId = new PostingId(postingId);
+        this.boardId = new Board.BoardId(boardId);
+        this.title = title;
+        this.content = content;
+    }
+
+    public static Posting withSnowflakeId(String boardId, String title, String content){
+        return new Posting(SnowflakeIdGenerator.generateId(), boardId,
+                title, content);
     }
 
     void update(@NonNull Posting after){
@@ -29,7 +34,6 @@ public class Posting {
     }
 
     @Getter
-    @Builder
     @AllArgsConstructor
     public static class PostingId {
         private String value;
@@ -44,24 +48,4 @@ public class Posting {
             return this.value.equals(((PostingId) o).getValue());
         }
     }
-
-
-
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    public static class PerBoardCondition {
-        private String boardId;
-    }
-
-    @AllArgsConstructor
-    @Builder
-    @Getter
-    public static class WithoutId {
-        private String title;
-        private String content;
-    }
-
-
-
 }

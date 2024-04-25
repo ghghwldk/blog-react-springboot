@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class LoginResponse {
+public class SigninResponse {
     private String role;
 }

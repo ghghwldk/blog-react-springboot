@@ -29,12 +29,12 @@ public class AuthService implements AuthUsecase {
     }
 
     @Override
-    public Member login(Member.LoginInfo info){
-        Member found = findMemberPersistencePort.find(info)
+    public Member login(Member member){
+        Member found = findMemberPersistencePort.find(member)
                 .orElseThrow(DataNotFoundException::new);
 
         boolean isMatched = passwordEncoder
-                .matches(info.getPassword(), found.getPassword());
+                .matches(member.getPassword(), found.getPassword());
 
         if(!isMatched) throw new PasswordNotMatchedException();
 

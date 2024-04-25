@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StorageConfiguration {
     private final FileProperties fileProperties;
-    private final boolean isLocal;
+    private final boolean forLocal;
     private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
     private final AmazonS3 amazonS3;
@@ -18,7 +18,7 @@ public class StorageConfiguration {
     public StorageConfiguration(FileProperties fileProperties, AwsProperties awsProperties,
                                 AmazonS3Client amazonS3Client, AmazonS3 amazonS3) {
         this.fileProperties = fileProperties;
-        this.isLocal = fileProperties.isForLocal();
+        this.forLocal = fileProperties.isForLocal();
 
         this.awsProperties = awsProperties;
         this.amazonS3Client = amazonS3Client;
@@ -27,19 +27,19 @@ public class StorageConfiguration {
 
     @Bean
     FileUploadUtil fileUploadUtil(){
-        return isLocal? new LocalFileUploadUtilImpl() :
+        return forLocal ? new LocalFileUploadUtilImpl() :
                 new S3FileUploadUtilImpl(awsProperties, amazonS3Client);
     }
 
     @Bean
     FileDownloadUtil fileDownloadUtil(){
-        return isLocal? new LocalFileDownloadUtilImpl():
+        return forLocal ? new LocalFileDownloadUtilImpl():
             new S3FileDownloadUtilImpl(amazonS3, awsProperties);
     }
 
     @Bean
     FileDeleteUtil fileDeleteUtil(){
-        return isLocal? new LocalFileDeleteUtilExtended():
+        return forLocal ? new LocalFileDeleteUtilExtended():
                 new S3FileDeleteUtilExtended(amazonS3, awsProperties);
     }
 }

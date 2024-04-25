@@ -10,43 +10,14 @@ import com.m.blog.global.entity.SnowflakeIdGenerator;
 
 @Mapper
 class PostingEntrypointMapper {
-    public static Posting.PostingId toPostingId(PostingUpdateRequest request){
-        return Posting.PostingId.builder()
-                .value(request.getPostingId())
-                .build();
-    }
-
-    public static Board.BoardId toBoardId(String boardId){
-        return Board.BoardId.builder()
-                .value(boardId)
-                .build();
-    }
-
     public static Posting from(PostingUpdateRequest request){
-        return Posting.builder()
-                .postingId(toPostingId(request))
-                .boardId(toBoardId(request.getBoardId()))
-                .title(request.getTitle())
-                .content(request.getMarkup())
-                .build();
+        return new Posting(request.getPostingId(), request.getBoardId(),
+                request.getTitle(), request.getMarkup());
     }
 
     public static Posting from(PostingCreateRequest request){
-        return Posting.builder()
-                .postingId(Posting.PostingId.builder()
-                        .value(SnowflakeIdGenerator.generateId())
-                        .build())
-                .boardId(toBoardId(request.getBoardId()))
-                .title(request.getTitle())
-                .content(request.getContent())
-                .isPostingAdded(true)
-                .build();
+        return Posting.withSnowflakeId(request.getBoardId(), request.getTitle(), request.getContent());
     }
 
-    public static Board.BoardId of(PostingReadPerBoardPagingRequest request){
-        return Board.BoardId.builder()
-                .value(request.getBoardId())
-                .build();
-    }
 
 }

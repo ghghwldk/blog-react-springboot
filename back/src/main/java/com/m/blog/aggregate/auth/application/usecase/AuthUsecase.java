@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface AuthUsecase {
     void logout();
 
-    Member login(Member.LoginInfo loginInfo);
+    Member login(Member member);
 }

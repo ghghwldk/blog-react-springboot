@@ -12,10 +12,8 @@ import static com.m.blog.aggregate.file.application.domain.BlogFile.withSnowflak
 
 @Mapper
 class FileEntrypointMapper {
-    public static BlogFile.DownloadTrialCondition of(FileDownloadRequest request){
-        return BlogFile.DownloadTrialCondition.builder()
-                .fileId(new BlogFile.FileId(request.getId()))
-                .build();
+    public static BlogFile of(FileDownloadRequest request){
+        return BlogFile.withDownloadCondition(request.getId());
     }
 
 
@@ -27,7 +25,6 @@ class FileEntrypointMapper {
 
         assert originalFileName != null;
 
-        return withSnowflakeId(originalFileName, directoryName,
-                Posting.PostingId.builder().value(postingId).build(), data);
+        return withSnowflakeId(originalFileName, directoryName, postingId, data);
     }
 }

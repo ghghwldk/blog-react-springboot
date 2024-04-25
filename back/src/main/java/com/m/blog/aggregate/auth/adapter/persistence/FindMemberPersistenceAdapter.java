@@ -14,9 +14,9 @@ public class FindMemberPersistenceAdapter implements FindMemberPersistencePort {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override
-    public Optional<Member> find(Member.LoginInfo loginInfo){
+    public Optional<Member> find(Member member){
         return memberJpaRepository
-                .findById(loginInfo.getMemberId().getValue())
+                .findById(member.getMemberId().getValue())
                 .map(MemberPersistenceMapper::of);
     }
 }
