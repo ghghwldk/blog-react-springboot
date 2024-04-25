@@ -28,6 +28,12 @@ public class BlogFile extends BaseFile{
         this.postingId = postingId;
     }
 
+    public BlogFile(BaseFile.FileId fileId, String directoryName){
+        this.fileId = fileId;
+        this.directoryName = directoryName;
+        this.data = null;
+    }
+
     @Data
     @Builder
     @AllArgsConstructor
