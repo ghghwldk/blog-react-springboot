@@ -6,6 +6,7 @@ import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.*;
 import com.m.blog.global.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,37 +21,49 @@ public class PostingController {
 
     @ResponseBody
     @GetMapping("/list")
-    public PagingResponse list(Pageable pageable){
-        return findPositngEndpointPort.getPagingResponse(PostingReadPagingRequest.builder()
-                        .pageable(pageable)
-                .build());
+    public ResponseEntity<PagingResponse> list(Pageable pageable){
+        PostingReadPagingRequest request = PostingReadPagingRequest.builder()
+                .pageable(pageable)
+                .build();
+
+        return ResponseEntity.ok(findPositngEndpointPort.getPagingResponse(request));
     }
 
     @ResponseBody
     @GetMapping("/list-per-board")
-    public PagingResponse list(@RequestParam String boardId, Pageable pageable){
-        return findPositngEndpointPort.getPagingResponse(PostingReadPerBoardPagingRequest.builder()
-                        .boardId(boardId)
-                        .pageable(pageable)
-                .build());
+    public ResponseEntity<PagingResponse> list(@RequestParam String boardId, Pageable pageable){
+        PostingReadPerBoardPagingRequest request = PostingReadPerBoardPagingRequest.builder()
+                .boardId(boardId)
+                .pageable(pageable)
+                .build();
+
+        return ResponseEntity.ok(findPositngEndpointPort.getPagingResponse(request));
     }
 
     @ResponseBody
     @GetMapping
-    public PostingReadResponse data(@RequestParam String id){
-        return findPositngEndpointPort.get(PostingReadRequest.builder().id(id).build());
+    public ResponseEntity<PostingReadResponse> data(@RequestParam String id){
+        PostingReadRequest request = PostingReadRequest.builder()
+                .id(id)
+                .build();
+
+        return ResponseEntity.ok(findPositngEndpointPort.get(request));
     }
 
     @Transactional
     @ResponseBody
     @PutMapping
-    public void update(@RequestBody PostingUpdateRequest requestDto){
-        changePostingEndpointPort.update(requestDto);
+    public ResponseEntity update(@RequestBody PostingUpdateRequest request){
+        changePostingEndpointPort.update(request);
+
+        return (ResponseEntity) ResponseEntity.ok();
     }
 
     @PostMapping
     @ResponseBody
-    public void create(@RequestBody PostingCreateRequest requestDto){
-        changePostingEndpointPort.create(requestDto);
+    public ResponseEntity create(@RequestBody PostingCreateRequest request){
+        changePostingEndpointPort.create(request);
+
+        return (ResponseEntity) ResponseEntity.ok();
     }
 }

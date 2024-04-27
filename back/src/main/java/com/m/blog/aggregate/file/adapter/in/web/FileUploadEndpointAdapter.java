@@ -25,7 +25,7 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
 
         fileUploadUsecase.upload(file);
 
-        return FileUploadResponse.of(file);
+        return FileEntrypointMapper.toUploadResponse(file);
     }
 
 

@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class FileUploadResponse {
+public class FileDownloadResponse {
     private String originalFileName;
-    private String fileName;
-    private String downloadUrl;
+    private byte[] data;
+
 
 }

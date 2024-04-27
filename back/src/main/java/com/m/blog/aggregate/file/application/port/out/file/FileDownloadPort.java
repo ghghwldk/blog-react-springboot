@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface FileDownloadPort {
 
-    File_ get(File_ fileVo) throws IOException;
+    File_ get(File_ file) throws IOException;
 }
