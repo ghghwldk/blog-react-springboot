@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.auth.infrastructure.web.controller;
 
-import com.m.blog.aggregate.auth.application.port.entrypoint.api.AuthEndpointPort;
+import com.m.blog.aggregate.auth.application.port.in.AuthEndpointPort;
 import com.m.blog.aggregate.auth.infrastructure.web.dto.SigninRequest;
 import com.m.blog.aggregate.auth.infrastructure.web.dto.SigninResponse;
 import lombok.RequiredArgsConstructor;
