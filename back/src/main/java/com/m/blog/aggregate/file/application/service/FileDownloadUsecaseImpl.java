@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.application.service;
 
 import com.m.blog.global.customAnnotation.UseCase;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileDownloadPort;
 import com.m.blog.aggregate.file.application.port.out.persistence.ReadFilePersistencePort;
 import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
@@ -17,8 +17,8 @@ public class FileDownloadUsecaseImpl implements FileDownloadUsecase {
     private final FileDownloadPort fileDownloadPort;
 
     @Override
-    public BlogFile download(BlogFile condition) throws IOException {
-        BlogFile found = readFilePersistencePort.get(condition)
+    public File_ download(File_ condition) throws IOException {
+        File_ found = readFilePersistencePort.get(condition)
                 .orElseThrow(DataNotFoundException::new);
 
         return  fileDownloadPort.get(found);

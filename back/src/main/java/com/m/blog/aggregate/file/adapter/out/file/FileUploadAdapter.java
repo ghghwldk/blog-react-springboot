@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.adapter.out.file;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileUploadPort;
 import com.m.blog.aggregate.file.infrastructure.file.FileUploadUtil;
 import com.m.blog.global.properties.FileProperties;
@@ -16,9 +16,9 @@ public class FileUploadAdapter implements FileUploadPort {
     private final FileUploadUtil fileUploadUtil;
 
     @Override
-    public void upload(BlogFile blogFile) throws IOException {
-        byte[] data = blogFile.getData();
-        String fileKey = blogFile.getFileKey();
+    public void upload(File_ file) throws IOException {
+        byte[] data = file.getData();
+        String fileKey = file.getFileKey();
 
         fileUploadUtil.upload(fileKey, data);
     }

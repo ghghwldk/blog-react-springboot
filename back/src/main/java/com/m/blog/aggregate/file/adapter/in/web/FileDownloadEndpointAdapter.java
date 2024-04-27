@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.adapter.in.web;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.in.web.FileDownloadEndpointPort;
 import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
@@ -25,9 +25,9 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
 
     @Override
     public ResponseEntity<Resource> download(FileDownloadRequest request) throws IOException {
-        BlogFile blogFile = fileDownloadUsecase.download(BlogFile.withDownloadCondition(request.getId()));
+        File_ file = fileDownloadUsecase.download(File_.withDownloadCondition(request.getId()));
 
-        return get(blogFile);
+        return get(file);
     }
 
     private String getHeaderValues(String originalFileName) throws UnsupportedEncodingException {
@@ -37,9 +37,9 @@ public class FileDownloadEndpointAdapter implements FileDownloadEndpointPort {
         return "attachment; filename=\"" + encoded + "\"";
     }
 
-    private ResponseEntity<Resource> get(BlogFile blogFile) throws UnsupportedEncodingException {
-        Resource resource = new InputStreamResource(new ByteArrayInputStream(blogFile.getData()));
-        String header = getHeaderValues(blogFile.getOriginalFileName());
+    private ResponseEntity<Resource> get(File_ file) throws UnsupportedEncodingException {
+        Resource resource = new InputStreamResource(new ByteArrayInputStream(file.getData()));
+        String header = getHeaderValues(file.getOriginalFileName());
 
         return get(resource, header);
     }

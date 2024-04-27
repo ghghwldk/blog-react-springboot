@@ -5,7 +5,7 @@ import com.m.blog.aggregate.file.application.port.in.web.FileUploadEndpointPort;
 import com.m.blog.aggregate.file.application.usecase.FileUploadUsecase;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadResponse;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +21,11 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
 
     @Override
     public FileUploadResponse upload(FileUploadRequest request) throws IOException{
-        BlogFile blogFile = FileEntrypointMapper.of(request, fileProperties.getDirectoryName());
+        File_ file = FileEntrypointMapper.of(request, fileProperties.getDirectoryName());
 
-        fileUploadUsecase.upload(blogFile);
+        fileUploadUsecase.upload(file);
 
-        return FileUploadResponse.of(blogFile);
+        return FileUploadResponse.of(file);
     }
 
 

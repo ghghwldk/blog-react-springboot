@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.adapter.out.persistence;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.persistence.ReadFilePersistencePort;
 import com.m.blog.aggregate.file.infrastructure.repository.FileJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
     private final FileJpaRepository fileJpaRepository;
 
     @Override
-    public Optional<BlogFile> get(BlogFile condition) throws IOException {
+    public Optional<File_> get(File_ condition) throws IOException {
         return fileJpaRepository.findById(condition.getFileId().getValue())
                 .map(FilePersistenceMapper::toDomain);
     }

@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.application.service;
 
 import com.m.blog.global.customAnnotation.UseCase;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileUploadPort;
 import com.m.blog.aggregate.file.application.port.out.persistence.WriteFilePersistencePort;
 import com.m.blog.aggregate.file.application.usecase.FileUploadUsecase;
@@ -18,8 +18,8 @@ public class FileUploadUsecaseImpl implements FileUploadUsecase {
     private final FileUploadPort fileUploadPort;
 
     @Override
-    public void upload(BlogFile blogFile) throws IOException {
-        writeFilePersistencePort.save(blogFile);
-        fileUploadPort.upload(blogFile);
+    public void upload(File_ file) throws IOException {
+        writeFilePersistencePort.save(file);
+        fileUploadPort.upload(file);
     }
 }

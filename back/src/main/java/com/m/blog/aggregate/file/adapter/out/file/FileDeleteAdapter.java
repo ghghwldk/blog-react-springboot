@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.adapter.out.file;
 
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.usecase.FileDeleteUsecase;
 import com.m.blog.aggregate.file.infrastructure.file.FileDeleteUtil;
 import com.m.blog.global.customAnnotation.Adapter;
@@ -19,12 +19,12 @@ public class FileDeleteAdapter implements FileDeleteUsecase {
     private final FileDeleteUtil fileDeleteUtil;
 
     @Override
-    public void delete(List<BlogFile.FileId> fileIds) {
+    public void delete(List<File_.FileId> fileIds) {
         final String directoryName = fileProperties.getDirectoryName();
 
         List<String> fileKeys = fileIds.stream()
-                .map(BlogFile.FileId::getValue)
-                .map(value-> BlogFile.getFileKey(directoryName, value))
+                .map(File_.FileId::getValue)
+                .map(value-> File_.getFileKey(directoryName, value))
                 .collect(Collectors.toList());
 
         fileDeleteUtil.wait(fileKeys);

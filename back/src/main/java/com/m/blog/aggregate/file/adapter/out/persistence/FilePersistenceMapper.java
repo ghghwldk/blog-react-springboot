@@ -2,24 +2,24 @@ package com.m.blog.aggregate.file.adapter.out.persistence;
 
 import com.m.blog.aggregate.boardCollection.application.domain.Posting;
 import com.m.blog.global.customAnnotation.Mapper;
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;
 
 @Mapper
 class FilePersistenceMapper {
-    public static BlogFile toDomain(FileEntity entity){
-        return BlogFile.withoutData(new BlogFile.FileId(entity.getId()),
+    public static File_ toDomain(FileEntity entity){
+        return File_.withoutData(new File_.FileId(entity.getId()),
                 entity.getOriginalFileName(), entity.getFilePath(), new Posting.PostingId(entity.getPostingId()));
     }
 
-    public static FileEntity of(BlogFile blogFile){
+    public static FileEntity of(File_ file){
         return FileEntity.builder()
-                .id(blogFile.getFileId().getValue())
-                .postingId(blogFile
+                .id(file.getFileId().getValue())
+                .postingId(file
                         .getPostingId()
                         .getValue())
-                .originalFileName(blogFile.getOriginalFileName())
-                .filePath(blogFile.getDirectoryName())
+                .originalFileName(file.getOriginalFileName())
+                .filePath(file.getDirectoryName())
                 .build();
     }
 }

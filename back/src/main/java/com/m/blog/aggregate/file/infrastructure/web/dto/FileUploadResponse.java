@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.infrastructure.web.dto;
 
-import com.m.blog.aggregate.file.application.domain.BlogFile;
+import com.m.blog.aggregate.file.application.domain.File_;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +13,11 @@ public class FileUploadResponse {
     private String fileName;
     private String downloadUrl;
 
-    public static FileUploadResponse of(BlogFile blogFile){
+    public static FileUploadResponse of(File_ file){
         return FileUploadResponse.builder()
-                .originalFileName(blogFile.getOriginalFileName())
-                .fileName(blogFile.getFileId().getValue())
-                .downloadUrl(blogFile.getDownloadUrl())
+                .originalFileName(file.getOriginalFileName())
+                .fileName(file.getFileId().getValue())
+                .downloadUrl(file.getDownloadUrl())
                 .build();
     }
 

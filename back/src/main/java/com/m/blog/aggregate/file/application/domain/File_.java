@@ -5,18 +5,14 @@ import com.m.blog.global.customAnnotation.Domain;
 import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import com.m.blog.global.exception.CustomIllegalArgumentException;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import org.springframework.lang.Nullable;
 
 @AllArgsConstructor
 @Getter
 @Root
 @Domain
-public class BlogFile{
+public class File_ {
     private static final String downloadPrefix = "/file/download/";
 
     protected FileId fileId;
@@ -25,20 +21,20 @@ public class BlogFile{
     protected Posting.PostingId postingId;
     private byte[] data;
 
-    public static BlogFile withoutData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
-        return new BlogFile(fileId, originalFileName, directoryName, postingId, null);
+    public static File_ withoutData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
+        return new File_(fileId, originalFileName, directoryName, postingId, null);
     }
 
-    private BlogFile(FileId fileId){
+    private File_(FileId fileId){
         this.fileId = fileId;
     }
 
-    public static BlogFile withDownloadCondition(String fileId){
-        return new BlogFile(new FileId(fileId));
+    public static File_ withDownloadCondition(String fileId){
+        return new File_(new FileId(fileId));
     }
 
-    public static BlogFile withSnowflakeId(String originalFileName, String directoryName, String postingId, byte[] data){
-        return new BlogFile(new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName)),
+    public static File_ withSnowflakeId(String originalFileName, String directoryName, String postingId, byte[] data){
+        return new File_(new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName)),
                 originalFileName, directoryName, new Posting.PostingId(postingId), data);
     }
 
@@ -49,7 +45,7 @@ public class BlogFile{
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 
-    public BlogFile addData(byte[] data){
+    public File_ addData(byte[] data){
         this.data = data;
 
         return this;
