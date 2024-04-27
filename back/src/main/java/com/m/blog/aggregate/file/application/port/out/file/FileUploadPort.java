@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.application.port.file;
+package com.m.blog.aggregate.file.application.port.out.file;
 
 import com.m.blog.aggregate.file.application.domain.BlogFile;
 

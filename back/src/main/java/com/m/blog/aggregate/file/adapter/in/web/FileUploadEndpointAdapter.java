@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.adapter.in.web;
 
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.file.application.port.entrypoint.api.FileUploadEndpointPort;
+import com.m.blog.aggregate.file.application.port.in.web.FileUploadEndpointPort;
 import com.m.blog.aggregate.file.application.usecase.FileUploadUsecase;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadResponse;

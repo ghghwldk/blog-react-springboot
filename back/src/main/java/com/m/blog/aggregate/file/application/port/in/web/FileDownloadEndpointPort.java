@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.application.port.entrypoint.api;
+package com.m.blog.aggregate.file.application.port.in.web;
 
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
 import org.springframework.core.io.Resource;
