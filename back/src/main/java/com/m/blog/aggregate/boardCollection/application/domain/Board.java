@@ -1,7 +1,6 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
 import lombok.*;
-import org.thymeleaf.util.StringUtils;
 
 
 public class Board {
@@ -9,16 +8,16 @@ public class Board {
     @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @Getter private String name;
     @Getter private String description;
-    private final PostingWindow postingWindow;
+    private final PostingStore postingStore;
     @Getter private boolean isBoardAdded = false;
     @Getter private boolean isBoardUpdated = false;
     @Getter private boolean isPostingAdded = false;
     @Getter private boolean isPostingUpdated = false;
 
-    public Board(@NonNull String boardId, @NonNull String boardCollectionId, @NonNull PostingWindow postingWindow) {
+    public Board(@NonNull String boardId, @NonNull String boardCollectionId, @NonNull PostingStore postingStore) {
         this.boardId = new BoardId(boardId);
         this.boardCollectionId = new BoardCollection.BoardCollectionId(boardCollectionId);
-        this.postingWindow = postingWindow;
+        this.postingStore = postingStore;
     }
 
     void change(@NonNull Board after){
@@ -29,13 +28,13 @@ public class Board {
     }
 
     void change(@NonNull Posting after){
-        this.postingWindow.update(after);
+        this.postingStore.update(after);
 
         isPostingUpdated = true;
     }
 
     void add(@NonNull Posting posting){
-        this.postingWindow.add(posting);
+        this.postingStore.add(posting);
         isPostingAdded = true;
     }
 
@@ -55,10 +54,10 @@ public class Board {
     }
 
     Posting getUpdated(){
-        return postingWindow.getUpdated();
+        return postingStore.getUpdated();
     }
 
     Posting getAdded(){
-        return postingWindow.getAdded();
+        return postingStore.getAdded();
     }
 }

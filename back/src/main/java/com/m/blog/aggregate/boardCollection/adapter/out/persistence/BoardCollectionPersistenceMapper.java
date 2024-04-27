@@ -7,7 +7,6 @@ import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardColle
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.BoardEntity;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.PostingEntity;
 import com.m.blog.global.customAnnotation.Mapper;
-import lombok.NonNull;
 
 @Mapper
 class BoardCollectionPersistenceMapper {
@@ -26,12 +25,12 @@ class BoardCollectionPersistenceMapper {
                 entity.getTitle(), entity.getContent());
     }
 
-    public static Board of(BoardEntity boardEntity, PostingWindow postingWindow){
-        return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId(), postingWindow);
+    public static Board of(BoardEntity boardEntity, PostingStore postingStore){
+        return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId(), postingStore);
     }
 
-    public static BoardCollection of(BoardCollectionEntity entity, BoardWindow boardWindow){
-        return new BoardCollection(entity.getId(), entity.getName(), boardWindow);
+    public static BoardCollection of(BoardCollectionEntity entity, BoardStore boardStore){
+        return new BoardCollection(entity.getId(), entity.getName(), boardStore);
     }
 
 

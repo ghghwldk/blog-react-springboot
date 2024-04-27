@@ -7,10 +7,10 @@ import lombok.NonNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BoardWindow {
+public class BoardStore {
     @NonNull private final List<Board> boards;
 
-    public BoardWindow(@NonNull List<Board> boards){
+    public BoardStore(@NonNull List<Board> boards){
         this.boards = boards;
     }
 

@@ -11,7 +11,7 @@ import lombok.*;
 public class BoardCollection{
     @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @Getter private String name;
-    @Getter private BoardWindow boardWindow;
+    @Getter private BoardStore boardStore;
 
     @Getter private boolean isBoardCollectionUpdated = false;
     @Getter private boolean isBoardAdded = false;
@@ -21,13 +21,13 @@ public class BoardCollection{
 
 
     public String remove(@NonNull Board.BoardId boardId){
-        return boardWindow.remove(boardId);
+        return boardStore.remove(boardId);
     }
 
-    public BoardCollection(String boardCollectionId, String name, BoardWindow boardWindow){
+    public BoardCollection(String boardCollectionId, String name, BoardStore boardStore){
         this.boardCollectionId = new BoardCollectionId(boardCollectionId);
         this.name = name;
-        this.boardWindow = boardWindow;
+        this.boardStore = boardStore;
     }
 
     @Getter
@@ -50,28 +50,28 @@ public class BoardCollection{
         if(! isPostingUpdated){
             throw new DataNotFoundException();
         }
-        return this.boardWindow.getUpdated();
+        return this.boardStore.getUpdated();
     }
 
     public Posting getAdded(){
         if(! isPostingAdded){
             throw new DataNotFoundException();
         }
-        return this.boardWindow.getAdded();
+        return this.boardStore.getAdded();
     }
 
     public void add(@NonNull Board board){
-        boardWindow.add(board);
+        boardStore.add(board);
         isBoardAdded = true;
     }
 
     public void add(@NonNull Posting posting){
-        this.boardWindow.add(posting);
+        this.boardStore.add(posting);
         isPostingAdded = true;
     }
 
     public void update(@NonNull Posting posting){
-        this.boardWindow.update(posting);
+        this.boardStore.update(posting);
         isPostingUpdated = true;
     }
 }

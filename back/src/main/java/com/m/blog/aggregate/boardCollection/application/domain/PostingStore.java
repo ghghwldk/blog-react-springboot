@@ -5,15 +5,13 @@ import com.m.blog.global.exception.DataNotFoundException;
 import com.m.blog.global.exception.TooManyException;
 import lombok.NonNull;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class PostingWindow {
+public class PostingStore {
     @NonNull private final List<Posting> postings;
 
-    public PostingWindow(@NonNull List<Posting> postings){
+    public PostingStore(@NonNull List<Posting> postings){
         this.postings = postings;
     }
 
