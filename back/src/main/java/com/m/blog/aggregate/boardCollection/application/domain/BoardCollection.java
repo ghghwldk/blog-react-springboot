@@ -3,7 +3,10 @@ package com.m.blog.aggregate.boardCollection.application.domain;
 import com.m.blog.global.customAnnotation.Domain;
 import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.exception.DataNotFoundException;
+import com.m.blog.global.exception.TooManyException;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Root
@@ -11,20 +14,10 @@ import lombok.*;
 public class BoardCollection{
     @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @Getter private String name;
-    @Getter private BoardStore boardStore;
-
-    @Getter private boolean isBoardCollectionUpdated = false;
-    @Getter private boolean isBoardAdded = false;
-    @Getter private boolean isBoardUpdated = false;
-    @Getter private boolean isPostingUpdated = false;
-    @Getter private boolean isPostingAdded = false;
+    @Getter private _BoardStore boardStore;
 
 
-    public String remove(@NonNull Board.BoardId boardId){
-        return boardStore.remove(boardId);
-    }
-
-    public BoardCollection(String boardCollectionId, String name, BoardStore boardStore){
+    public BoardCollection(String boardCollectionId, String name, _BoardStore boardStore){
         this.boardCollectionId = new BoardCollectionId(boardCollectionId);
         this.name = name;
         this.boardStore = boardStore;
@@ -46,32 +39,39 @@ public class BoardCollection{
         }
     }
 
-    public Posting getUpdated(){
-        if(! isPostingUpdated){
-            throw new DataNotFoundException();
-        }
-        return this.boardStore.getUpdated();
-    }
 
-    public Posting getAdded(){
-        if(! isPostingAdded){
-            throw new DataNotFoundException();
-        }
-        return this.boardStore.getAdded();
-    }
 
     public void add(@NonNull Board board){
-        boardStore.add(board);
-        isBoardAdded = true;
+        boardStore.save(board);
     }
 
     public void add(@NonNull Posting posting){
-        this.boardStore.add(posting);
-        isPostingAdded = true;
+        this.boardStore.save(posting);
     }
 
     public void update(@NonNull Posting posting){
         this.boardStore.update(posting);
-        isPostingUpdated = true;
+    }
+
+    private Object getSingle(List list){
+        if(list.isEmpty()){
+            throw new DataNotFoundException();
+        }
+        if(list.size()>1){
+            throw new TooManyException();
+        }
+        return list.get(0);
+    }
+    public void delete(@NonNull Board.BoardId boardId){
+        boardStore.delete(boardId);
+    }
+
+
+    public Posting getUpdated(){
+        return (Posting) getSingle(this.boardStore.getUpdatedPostings());
+    }
+
+    public Posting getAdded(){
+        return (Posting) getSingle(this.boardStore.getSavedPostings());
     }
 }

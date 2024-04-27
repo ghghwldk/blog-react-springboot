@@ -56,7 +56,7 @@ public class PostingController {
     public ResponseEntity update(@RequestBody PostingUpdateRequest request){
         changePostingEndpointPort.update(request);
 
-        return (ResponseEntity) ResponseEntity.ok();
+        return ResponseEntity.ok(null);
     }
 
     @PostMapping
@@ -64,6 +64,7 @@ public class PostingController {
     public ResponseEntity create(@RequestBody PostingCreateRequest request){
         changePostingEndpointPort.create(request);
 
-        return (ResponseEntity) ResponseEntity.ok();
+
+        return ResponseEntity.ok(null);
     }
 }

@@ -26,6 +26,6 @@ public class AuthController {
     public ResponseEntity logout() {
         authEndpointPort.logout();
 
-        return (ResponseEntity) ResponseEntity.ok();
+        return ResponseEntity.ok(null);
     }
 }

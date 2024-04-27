@@ -10,8 +10,6 @@ public class Posting {
     private final Board.BoardId boardId;
     private String title;
     private String content;
-    private boolean isPostingUpdated = false;
-    private boolean isPostingAdded = false;
 
     public Posting(@NonNull String postingId, @NonNull String boardId,
                    @NonNull String title, @NonNull String content) {
@@ -29,8 +27,6 @@ public class Posting {
     void update(@NonNull Posting after){
         this.title = after.getTitle();
         this.content = after.getContent();
-
-        isPostingUpdated = true;
     }
 
     @Getter

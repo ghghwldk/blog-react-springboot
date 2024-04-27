@@ -25,11 +25,11 @@ class BoardCollectionPersistenceMapper {
                 entity.getTitle(), entity.getContent());
     }
 
-    public static Board of(BoardEntity boardEntity, PostingStore postingStore){
+    public static Board of(BoardEntity boardEntity, _PostingStore postingStore){
         return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId(), postingStore);
     }
 
-    public static BoardCollection of(BoardCollectionEntity entity, BoardStore boardStore){
+    public static BoardCollection of(BoardCollectionEntity entity, _BoardStore boardStore){
         return new BoardCollection(entity.getId(), entity.getName(), boardStore);
     }
 

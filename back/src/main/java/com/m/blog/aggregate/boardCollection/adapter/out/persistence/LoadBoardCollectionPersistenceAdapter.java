@@ -42,7 +42,7 @@ public class LoadBoardCollectionPersistenceAdapter implements LoadBoardCollectio
 
         List<Board> boards = this.getBoards(postingEntities, boardEntities);
 
-        return BoardCollectionPersistenceMapper.of(boardCollectionEntity , new BoardStore(boards));
+        return BoardCollectionPersistenceMapper.of(boardCollectionEntity , new _BoardStore(boards));
     }
 
     private BoardCollectionEntity getBoardCollectionEntity(Board.BoardId boardId){
@@ -79,7 +79,7 @@ public class LoadBoardCollectionPersistenceAdapter implements LoadBoardCollectio
         }
 
         return boardEntities.stream()
-                .map(e->BoardCollectionPersistenceMapper.of(e, new PostingStore(map.get(e.getId()))))
+                .map(e->BoardCollectionPersistenceMapper.of(e, new _PostingStore(map.get(e.getId()))))
                 .collect(Collectors.toList());
     }
 
