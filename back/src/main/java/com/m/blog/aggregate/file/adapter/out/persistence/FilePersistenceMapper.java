@@ -9,15 +9,15 @@ import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;
 class FilePersistenceMapper {
     public static File_ toDomain(FileEntity entity){
         return File_.withoutData(new File_.FileId(entity.getId()),
-                entity.getOriginalFileName(), entity.getFilePath(), new Posting.PostingId(entity.getPostingId()));
+                entity.getOriginalFileName(), entity.getFilePath(), new Posting.PostingId(entity.getPostingEntity().getId()));
     }
 
     public static FileEntity of(File_ file){
         return FileEntity.builder()
                 .id(file.getFileId().getValue())
-                .postingId(file
-                        .getPostingId()
-                        .getValue())
+//                .postingId(file
+//                        .getPostingId()
+//                        .getValue())
                 .originalFileName(file.getOriginalFileName())
                 .filePath(file.getDirectoryName())
                 .build();
