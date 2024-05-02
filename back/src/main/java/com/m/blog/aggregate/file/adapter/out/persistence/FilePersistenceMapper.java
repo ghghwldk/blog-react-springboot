@@ -8,7 +8,7 @@ import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;
 @Mapper
 class FilePersistenceMapper {
     public static File_ toDomain(FileEntity entity){
-        return File_.withoutData(new File_.FileId(entity.getId()),
+        return File_.withoutDownloadData(new File_.FileId(entity.getId()),
                 entity.getOriginalFileName(), entity.getFilePath(), new Posting.PostingId(entity.getPostingId()));
     }
 

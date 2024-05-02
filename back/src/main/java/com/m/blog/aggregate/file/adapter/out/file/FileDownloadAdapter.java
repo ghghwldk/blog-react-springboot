@@ -19,6 +19,6 @@ public class FileDownloadAdapter implements FileDownloadPort {
     public File_ get(File_ file) throws IOException {
         InputStream inputStream = fileDownloadUtil.get(file);
 
-        return file.addData(inputStream.readAllBytes());
+        return file.setDataAfterDownload(inputStream.readAllBytes());
     }
 }

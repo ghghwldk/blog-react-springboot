@@ -12,7 +12,7 @@ public class LocalFileDownloadUtilImpl implements FileDownloadUtil{
 
     @Override
     public InputStream get(File_ file) throws IOException {
-        Path path = Paths.get(file.getFileKey());
+        Path path = Paths.get(file.getInternalFileKey());
 
         return Files.newInputStream(path);
     }

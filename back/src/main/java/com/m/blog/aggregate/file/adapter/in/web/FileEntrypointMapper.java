@@ -6,10 +6,11 @@ import com.m.blog.global.customAnnotation.Mapper;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
 import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadRequest;
+import com.m.blog.global.exception.GetFileNullException;
 
 import java.io.IOException;
 
-import static com.m.blog.aggregate.file.application.domain.File_.withSnowflakeId;
+import static com.m.blog.aggregate.file.application.domain.File_.withSnowflakeIdAndUploadData;
 
 @Mapper
 class FileEntrypointMapper {
@@ -20,7 +21,7 @@ class FileEntrypointMapper {
     static FileDownloadResponse toDownloadResposne(File_ file){
         return FileDownloadResponse.builder()
                 .originalFileName(file.getOriginalFileName())
-                .data(file.getData())
+                .data(file.getDownloadData().orElseThrow(GetFileNullException::new))
                 .build();
     }
 
@@ -39,6 +40,6 @@ class FileEntrypointMapper {
 
         assert originalFileName != null;
 
-        return withSnowflakeId(originalFileName, directoryName, postingId, data);
+        return withSnowflakeIdAndUploadData(originalFileName, directoryName, postingId, data);
     }
 }

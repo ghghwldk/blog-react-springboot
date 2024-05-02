@@ -7,21 +7,31 @@ import com.m.blog.global.entity.SnowflakeIdGenerator;
 import com.m.blog.global.exception.CustomIllegalArgumentException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.lang.Nullable;
+
+import java.util.Optional;
 
 @AllArgsConstructor
-@Getter
 @Root
 @Domain
 public class File_ {
     private static final String downloadPrefix = "/file/download/";
 
-    protected FileId fileId;
-    protected String originalFileName;
-    protected String directoryName;
-    protected Posting.PostingId postingId;
-    private byte[] data;
+    @Getter private FileId fileId;
+    @Getter private String originalFileName;
+    @Getter private String directoryName;
+    @Getter private Posting.PostingId postingId;
+    @Nullable private byte[] data = null;
 
-    public static File_ withoutData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
+    public Optional<byte[]> getUploadData(){
+        return Optional.ofNullable(this.data);
+    }
+
+    public Optional<byte[]> getDownloadData(){
+        return Optional.ofNullable(this.data);
+    }
+
+    public static File_ withoutDownloadData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
         return new File_(fileId, originalFileName, directoryName, postingId, null);
     }
 
@@ -33,7 +43,7 @@ public class File_ {
         return new File_(new FileId(fileId));
     }
 
-    public static File_ withSnowflakeId(String originalFileName, String directoryName, String postingId, byte[] data){
+    public static File_ withSnowflakeIdAndUploadData(String originalFileName, String directoryName, String postingId, byte[] data){
         return new File_(new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName)),
                 originalFileName, directoryName, new Posting.PostingId(postingId), data);
     }
@@ -45,7 +55,7 @@ public class File_ {
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 
-    public File_ addData(byte[] data){
+    public File_ setDataAfterDownload(byte[] data){
         this.data = data;
 
         return this;
@@ -56,8 +66,8 @@ public class File_ {
         return directoryName + "/" + fileId;
     }
 
-    public String getFileKey(){
-        return directoryName + "/" + fileId.getValue();
+    public String getInternalFileKey(){
+        return this.getFileKey(directoryName, fileId.getValue());
     }
 
     public String getDownloadUrl(){
@@ -69,6 +79,4 @@ public class File_ {
     public static class FileId {
         private String value;
     }
-
-
 }
