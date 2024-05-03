@@ -1,9 +1,14 @@
 package com.m.blog.aggregate.boardCollection.adapter.out.persistence;
 
+import com.m.blog.aggregate.board.infrastructure.repository.BoardEntity;
+import com.m.blog.aggregate.board.infrastructure.repository.BoardJpaRepository;
 import com.m.blog.aggregate.boardCollection.application.domain.*;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.LoadBoardCollectionPersistencePort;
+import com.m.blog.aggregate.boardCollection.application.port.out.persistence.LoadBoardCollectionPersistencePort;
 
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
+import com.m.blog.aggregate.posting.adapter.out.persistence.PostingPersistenceMapper;
+import com.m.blog.aggregate.posting.infrastructure.repository.PostingEntity;
+import com.m.blog.aggregate.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.global.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +80,7 @@ public class LoadBoardCollectionPersistenceAdapter implements LoadBoardCollectio
 
         for (PostingEntity entity : postingEntities) {
             map.computeIfAbsent(entity.getBoardId(), k -> new LinkedList<>())
-                    .add(BoardCollectionPersistenceMapper.of(entity));
+                    .add(PostingPersistenceMapper.of(entity));
         }
 
         return boardEntities.stream()

@@ -1,12 +1,16 @@
 package com.m.blog.aggregate.boardCollection.application.service;
 
+import com.m.blog.aggregate.board.infrastructure.repository.BoardDslRepository;
+import com.m.blog.aggregate.board.infrastructure.repository.BoardDto;
 import com.m.blog.aggregate.boardCollection.application.domain.Board;
 import com.m.blog.aggregate.boardCollection.application.domain.Posting;
-import com.m.blog.aggregate.boardCollection.application.query.FindPostingQuery;
+import com.m.blog.aggregate.posting.application.query.FindPostingQuery;
 import com.m.blog.aggregate.boardCollection.application.query.MenuQuery;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
 import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.MenuResponse;
-import com.m.blog.aggregate.boardCollection.infrastructure.web.dto.PostingReadResponse;
+import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadResponse;
+import com.m.blog.aggregate.posting.infrastructure.repository.PostingDslRepository;
+import com.m.blog.aggregate.posting.infrastructure.repository.PostingDto;
 import com.m.blog.global.customAnnotation.Query;
 import com.m.blog.global.exception.DataNotFoundException;
 import com.m.blog.global.paging.PagingResponse;

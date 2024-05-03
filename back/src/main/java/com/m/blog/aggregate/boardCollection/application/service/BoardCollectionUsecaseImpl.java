@@ -2,11 +2,11 @@ package com.m.blog.aggregate.boardCollection.application.service;
 
 import com.m.blog.aggregate.boardCollection.application.domain.BoardCollection;
 import com.m.blog.aggregate.boardCollection.application.domain.Posting;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.ChangePostingPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.LoadBoardCollectionPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.SavePostingPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.usecase.ChangePostingUsecase;
-import com.m.blog.aggregate.boardCollection.application.usecase.SavePostingUsecase;
+import com.m.blog.aggregate.posting.application.port.out.persistence.ChangePostingPersistencePort;
+import com.m.blog.aggregate.boardCollection.application.port.out.persistence.LoadBoardCollectionPersistencePort;
+import com.m.blog.aggregate.boardCollection.application.port.out.persistence.SavePostingPersistencePort;
+import com.m.blog.aggregate.posting.application.usecase.ChangePostingUsecase;
+import com.m.blog.aggregate.posting.application.usecase.SavePostingUsecase;
 import com.m.blog.global.customAnnotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
