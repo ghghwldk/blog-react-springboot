@@ -23,7 +23,9 @@ public class FileUploadEndpointAdapter implements FileUploadEndpointPort {
     public FileUploadResponse upload(FileUploadRequest request) throws IOException{
         File_ file = FileEntrypointMapper.of(request, fileProperties.getDirectoryName());
 
-        fileUploadUsecase.upload(file);
+        fileUploadUsecase.upload(
+                file.setSnowflakeIdDuringUpload()
+        );
 
         return FileEntrypointMapper.toUploadResponse(file);
     }

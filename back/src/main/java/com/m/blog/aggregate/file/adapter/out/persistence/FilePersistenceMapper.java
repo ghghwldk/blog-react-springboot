@@ -1,16 +1,11 @@
 package com.m.blog.aggregate.file.adapter.out.persistence;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
 import com.m.blog.global.customAnnotation.Mapper;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;
 
 @Mapper
 class FilePersistenceMapper {
-    public static File_ toDomain(FileEntity entity){
-        return File_.withoutDownloadData(new File_.FileId(entity.getId()),
-                entity.getOriginalFileName(), entity.getFilePath(), new Posting.PostingId(entity.getPostingId()));
-    }
 
     public static FileEntity of(File_ file){
         return FileEntity.builder()
@@ -21,5 +16,13 @@ class FilePersistenceMapper {
                 .originalFileName(file.getOriginalFileName())
                 .filePath(file.getDirectoryName())
                 .build();
+    }
+
+    public static File_ of(File_ condition, FileEntity entity){
+        return condition.setAfterRetrievedUsingDownloadCondition(
+                entity.getOriginalFileName(),
+                entity.getFilePath(),
+                entity.getPostingId()
+        );
     }
 }

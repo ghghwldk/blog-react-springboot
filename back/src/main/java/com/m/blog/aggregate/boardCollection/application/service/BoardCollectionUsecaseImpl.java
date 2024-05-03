@@ -1,13 +1,13 @@
 package com.m.blog.aggregate.boardCollection.application.service;
 
-import com.m.blog.aggregate.boardCollection.application.domain.BoardCollection;
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.ChangePostingPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.LoadBoardCollectionPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.port.persistence.SavePostingPersistencePort;
-import com.m.blog.aggregate.boardCollection.application.usecase.ChangePostingUsecase;
-import com.m.blog.aggregate.boardCollection.application.usecase.SavePostingUsecase;
+import com.m.blog.aggregate.posting.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.port.out.persistence.ChangePostingPersistencePort;
+import com.m.blog.aggregate.posting.application.port.out.persistence.LoadPostingPersistencePort;
+import com.m.blog.aggregate.posting.application.port.out.persistence.SavePostingPersistencePort;
+import com.m.blog.aggregate.posting.application.usecase.ChangePostingUsecase;
+import com.m.blog.aggregate.posting.application.usecase.SavePostingUsecase;
 import com.m.blog.global.customAnnotation.UseCase;
+import com.m.blog.global.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,25 +17,21 @@ import org.springframework.transaction.annotation.Transactional;
 class BoardCollectionUsecaseImpl implements SavePostingUsecase, ChangePostingUsecase {
     private final SavePostingPersistencePort savePostingPersistencePort;
     private final ChangePostingPersistencePort changePostingPersistencePort;
-    private final LoadBoardCollectionPersistencePort loadBoardCollectionPersistencePort;
+    private final LoadPostingPersistencePort loadPostingPersistencePort;
     @Override
-    public void save(Posting posting) {
-        BoardCollection boardCollection
-                = loadBoardCollectionPersistencePort.load(posting.getBoardId());
-
-        boardCollection.add(posting);
-
-        savePostingPersistencePort.save(boardCollection.getAdded());
+    public void save(Posting brandNew) {
+        brandNew.validate();
+        savePostingPersistencePort.save(brandNew);
     }
 
     @Override
     public void update(Posting after) {
-        BoardCollection boardCollection
-                = loadBoardCollectionPersistencePort.load(after.getPostingId());
+        Posting posting = loadPostingPersistencePort.load(after.getPostingId())
+                .orElseThrow(DataNotFoundException::new);
 
-        boardCollection.update(after);
+        posting.update(after);
 
-        changePostingPersistencePort.update(boardCollection.getUpdated());
+        changePostingPersistencePort.update(posting);
     }
 
 
