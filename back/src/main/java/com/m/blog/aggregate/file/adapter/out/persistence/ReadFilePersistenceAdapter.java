@@ -20,6 +20,6 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
     @Override
     public Optional<File_> get(File_ condition) throws IOException {
         return fileJpaRepository.findById(condition.getFileId().getValue())
-                .map(FilePersistenceMapper::toDomain);
+                .map(e->FilePersistenceMapper.of(condition, e));
     }
 }

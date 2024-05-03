@@ -10,7 +10,7 @@ import com.m.blog.global.exception.GetFileNullException;
 
 import java.io.IOException;
 
-import static com.m.blog.aggregate.file.application.domain.File_.withSnowflakeIdAndUploadData;
+import static com.m.blog.aggregate.file.application.domain.File_.withoutId;
 
 @Mapper
 class FileEntrypointMapper {
@@ -40,6 +40,6 @@ class FileEntrypointMapper {
 
         assert originalFileName != null;
 
-        return withSnowflakeIdAndUploadData(originalFileName, directoryName, postingId, data);
+        return withoutId(originalFileName, directoryName, postingId, data);
     }
 }

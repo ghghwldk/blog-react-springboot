@@ -5,13 +5,14 @@ import com.m.blog.global.customAnnotation.Domain;
 import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import com.m.blog.global.exception.CustomIllegalArgumentException;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
 
 import java.util.Optional;
 
-@AllArgsConstructor
 @Root
 @Domain
 public class File_ {
@@ -23,29 +24,46 @@ public class File_ {
     @Getter private Posting.PostingId postingId;
     @Nullable private byte[] data = null;
 
-    public Optional<byte[]> getUploadData(){
-        return Optional.ofNullable(this.data);
+    @Builder(access = AccessLevel.PRIVATE)
+    private File_(String fileId, String originalFileName, String directoryName, String postingId, byte[] data) {
+        this.fileId = new FileId(fileId);
+        this.originalFileName = originalFileName;
+        this.directoryName = directoryName;
+        this.postingId = new Posting.PostingId(postingId);
+        this.data = data;
+    }
+
+    public static File_ withDownloadCondition(String fileId){
+        return File_.builder().fileId(fileId).build();
+    }
+
+    public File_ setAfterRetrievedUsingDownloadCondition
+            (String originalFileName, String directoryName, String postingId){
+        assert this.fileId == null;
+        this.originalFileName = originalFileName;
+        this.directoryName = directoryName;
+        this.postingId = new Posting.PostingId(postingId);
+
+        return this;
+    }
+
+    public File_ setDataAfterDownload(byte[] data){
+        this.data = data;
+
+        return this;
     }
 
     public Optional<byte[]> getDownloadData(){
         return Optional.ofNullable(this.data);
     }
 
-    public static File_ withoutDownloadData(FileId fileId, String originalFileName, String directoryName, Posting.PostingId postingId){
-        return new File_(fileId, originalFileName, directoryName, postingId, null);
-    }
-
-    private File_(FileId fileId){
-        this.fileId = fileId;
-    }
-
-    public static File_ withDownloadCondition(String fileId){
-        return new File_(new FileId(fileId));
-    }
-
-    public static File_ withSnowflakeIdAndUploadData(String originalFileName, String directoryName, String postingId, byte[] data){
-        return new File_(new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName)),
-                originalFileName, directoryName, new Posting.PostingId(postingId), data);
+    public static File_ withoutId(String originalFileName, String directoryName, String postingId, byte[] data){
+        return File_.builder()
+                .originalFileName(originalFileName)
+                .directoryName(directoryName)
+                .postingId(postingId)
+                .data(data)
+                .build();
     }
 
     private static String getExtension(String originalFileName){
@@ -55,12 +73,16 @@ public class File_ {
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
 
-    public File_ setDataAfterDownload(byte[] data){
-        this.data = data;
+    public File_ setSnowflakeIdDuringUpload(){
+        this.fileId =
+                new FileId(SnowflakeIdGenerator.generateId() + getExtension(originalFileName));
 
         return this;
     }
 
+    public Optional<byte[]> getUploadData(){
+        return Optional.ofNullable(this.data);
+    }
 
     public static String getFileKey(String directoryName, String fileId){
         return directoryName + "/" + fileId;
@@ -73,6 +95,7 @@ public class File_ {
     public String getDownloadUrl(){
         return downloadPrefix + fileId.getValue();
     }
+
 
     @Getter
     @AllArgsConstructor
