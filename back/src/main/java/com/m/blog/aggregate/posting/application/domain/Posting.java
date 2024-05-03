@@ -1,8 +1,8 @@
-package com.m.blog.aggregate.boardCollection.application.domain;
+package com.m.blog.aggregate.posting.application.domain;
 
+import com.m.blog.aggregate.boardCollection.application.domain.Board;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import lombok.*;
-import org.thymeleaf.util.StringUtils;
 
 @Getter
 public class Posting {
@@ -24,9 +24,13 @@ public class Posting {
                 title, content);
     }
 
-    void update(@NonNull Posting after){
+    public void update(@NonNull Posting after){
         this.title = after.getTitle();
         this.content = after.getContent();
+    }
+
+    public void validate(){
+
     }
 
     @Getter

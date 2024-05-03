@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.adapter.out.persistence;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.global.customAnnotation.Mapper;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.infrastructure.repository.FileEntity;

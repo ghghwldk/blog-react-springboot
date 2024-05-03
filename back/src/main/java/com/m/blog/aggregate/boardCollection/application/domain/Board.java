@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import lombok.*;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.m.blog.aggregate.posting.infrastructure.repository;
 
 import com.m.blog.aggregate.board.infrastructure.repository.QBoardEntity;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.QBoardCollectionEntity;
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

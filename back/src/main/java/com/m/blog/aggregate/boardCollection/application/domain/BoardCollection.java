@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.global.customAnnotation.Domain;
 import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.exception.DataNotFoundException;

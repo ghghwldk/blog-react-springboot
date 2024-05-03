@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.boardCollection.application.domain;
 
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.global.exception.AlreadyExistException;
 import com.m.blog.global.exception.DataNotFoundException;
 import lombok.NonNull;

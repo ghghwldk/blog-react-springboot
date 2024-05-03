@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.posting.adapter.in.web;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingCreateRequest;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingUpdateRequest;
 import com.m.blog.global.customAnnotation.Mapper;

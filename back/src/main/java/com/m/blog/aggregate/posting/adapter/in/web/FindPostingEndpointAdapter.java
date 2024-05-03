@@ -6,7 +6,7 @@ import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadPerBoardPa
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadRequest;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadResponse;
 import com.m.blog.global.customAnnotation.Adapter;
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.application.port.in.web.FindPositngEndpointPort;
 import com.m.blog.aggregate.posting.application.query.FindPostingQuery;
 import com.m.blog.global.paging.PagingResponse;

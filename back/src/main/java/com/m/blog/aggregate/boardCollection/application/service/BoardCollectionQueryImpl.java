@@ -3,7 +3,7 @@ package com.m.blog.aggregate.boardCollection.application.service;
 import com.m.blog.aggregate.board.infrastructure.repository.BoardDslRepository;
 import com.m.blog.aggregate.board.infrastructure.repository.BoardDto;
 import com.m.blog.aggregate.boardCollection.application.domain.Board;
-import com.m.blog.aggregate.boardCollection.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.application.query.FindPostingQuery;
 import com.m.blog.aggregate.boardCollection.application.query.MenuQuery;
 import com.m.blog.aggregate.boardCollection.infrastructure.repository.*;
