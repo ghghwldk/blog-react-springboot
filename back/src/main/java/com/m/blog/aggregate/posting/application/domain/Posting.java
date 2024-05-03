@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.posting.application.domain;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import lombok.*;
 

@@ -1,5 +1,6 @@
-package com.m.blog.aggregate.boardCollection.application.domain;
+package com.m.blog.aggregate.board.application.domain;
 
+import com.m.blog.aggregate.boardCollection.application.domain.BoardCollection;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 import lombok.*;
 
@@ -21,14 +22,5 @@ public class Board {
     @AllArgsConstructor
     public static class BoardId {
         private String value;
-        @Override
-        public boolean equals(Object o) {
-            if (this == o)
-                return true;
-            if (!(o instanceof BoardId))
-                return false;
-
-            return this.value.equals(((BoardId) o).getValue());
-        }
     }
 }

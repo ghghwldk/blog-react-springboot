@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.boardCollection.infrastructure.repository;
 
 import com.m.blog.aggregate.board.infrastructure.repository.QBoardEntity;
-import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.infrastructure.repository.QPostingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;

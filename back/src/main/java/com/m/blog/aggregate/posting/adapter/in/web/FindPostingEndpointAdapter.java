@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.posting.adapter.in.web;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadPagingRequest;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadPerBoardPagingRequest;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadRequest;

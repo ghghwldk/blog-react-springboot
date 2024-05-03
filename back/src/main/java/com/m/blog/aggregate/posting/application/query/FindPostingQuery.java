@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.posting.application.query;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadResponse;
 import com.m.blog.global.paging.PagingResponse;

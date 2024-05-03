@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.boardCollection.infrastructure.repository;
 
-import com.m.blog.aggregate.boardCollection.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 
 import java.util.List;

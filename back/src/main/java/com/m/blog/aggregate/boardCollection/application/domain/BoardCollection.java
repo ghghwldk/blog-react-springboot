@@ -21,16 +21,6 @@ public class BoardCollection{
     @AllArgsConstructor
     public static class BoardCollectionId {
         private String value;
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o)
-                return true;
-            if (!(o instanceof BoardCollectionId))
-                return false;
-
-            return this.value.equals(((BoardCollectionId) o).getValue());
-        }
     }
 
 }
