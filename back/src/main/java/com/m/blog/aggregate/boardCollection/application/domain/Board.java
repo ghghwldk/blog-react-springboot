@@ -19,19 +19,6 @@ public class Board {
         this.postingStore = postingStore;
     }
 
-    void update(@NonNull Board after){
-        this.name = after.name;
-        this.description = after.name;
-    }
-
-    void update(@NonNull Posting after){
-        this.postingStore.update(after);
-    }
-
-    void save(@NonNull Posting posting){
-        this.postingStore.save(posting);
-    }
-
     @Getter
     @AllArgsConstructor
     public static class BoardId {
@@ -45,13 +32,5 @@ public class Board {
 
             return this.value.equals(((BoardId) o).getValue());
         }
-    }
-
-    List<Posting> getUpdatedPostings(){
-        return postingStore.getUpdatedPostings();
-    }
-
-    List<Posting> getSavedPostings(){
-        return postingStore.getSavedPostings();
     }
 }

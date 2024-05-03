@@ -40,39 +40,4 @@ public class BoardCollection{
         }
     }
 
-
-
-    public void add(@NonNull Board board){
-        boardStore.save(board);
-    }
-
-    public void add(@NonNull Posting posting){
-        this.boardStore.save(posting);
-    }
-
-    public void update(@NonNull Posting posting){
-        this.boardStore.update(posting);
-    }
-
-    private Object getSingle(List list){
-        if(list.isEmpty()){
-            throw new DataNotFoundException();
-        }
-        if(list.size()>1){
-            throw new TooManyException();
-        }
-        return list.get(0);
-    }
-    public void delete(@NonNull Board.BoardId boardId){
-        boardStore.delete(boardId);
-    }
-
-
-    public Posting getUpdated(){
-        return (Posting) getSingle(this.boardStore.getUpdatedPostings());
-    }
-
-    public Posting getAdded(){
-        return (Posting) getSingle(this.boardStore.getSavedPostings());
-    }
 }
