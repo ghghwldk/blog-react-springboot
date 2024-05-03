@@ -15,14 +15,7 @@ import java.util.List;
 public class BoardCollection{
     @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @Getter private String name;
-    @Getter private _BoardStore boardStore;
 
-
-    public BoardCollection(String boardCollectionId, String name, _BoardStore boardStore){
-        this.boardCollectionId = new BoardCollectionId(boardCollectionId);
-        this.name = name;
-        this.boardStore = boardStore;
-    }
 
     @Getter
     @AllArgsConstructor
