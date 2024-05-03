@@ -11,8 +11,8 @@ import com.m.blog.global.customAnnotation.Mapper;
 class BoardCollectionPersistenceMapper {
 
 
-    public static Board of(BoardEntity boardEntity, _PostingStore postingStore){
-        return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId(), postingStore);
+    public static Board of(BoardEntity boardEntity){
+        return new Board(boardEntity.getId(), boardEntity.getBoardCollectionId());
     }
 
     public static BoardCollection of(BoardCollectionEntity entity, _BoardStore boardStore){

@@ -11,12 +11,10 @@ public class Board {
     @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
     @Getter private String name;
     @Getter private String description;
-    private final _PostingStore postingStore;
 
-    public Board(@NonNull String boardId, @NonNull String boardCollectionId, @NonNull _PostingStore postingStore) {
+    public Board(@NonNull String boardId, @NonNull String boardCollectionId) {
         this.boardId = new BoardId(boardId);
         this.boardCollectionId = new BoardCollection.BoardCollectionId(boardCollectionId);
-        this.postingStore = postingStore;
     }
 
     @Getter
