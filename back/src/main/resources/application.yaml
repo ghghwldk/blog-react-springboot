@@ -5,6 +5,6 @@ server:
 spring:
   config:
     import:
-      - classpath:localStorageSetting.yaml
-      - classpath:cloudSettings.yaml
+      - classpath:local-settings.yaml
+      - classpath:cloud-settings.yaml
 #      - optional:classpath:testconf4.yml # 없는 파일
