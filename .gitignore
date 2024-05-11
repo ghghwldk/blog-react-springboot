@@ -21,6 +21,9 @@ back//.nb-gradle/
 back/build/
 !back/**/src/main/**/build/
 !back/**/src/test/**/build/
+back/src/main/resources/cloudSettings.yaml
+
+
 
 ### VS Code ###
 .vscode/
