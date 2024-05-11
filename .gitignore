@@ -12,6 +12,9 @@ back/*.ipr
 back/*.yml
 back/.gradle
 
+### Yaml ###
+back/*.yaml
+
 ### NetBeans ###
 back//nbproject/private/
 back//nbbuild/
