@@ -1,0 +1,7 @@
+cloud:
+  credentials:
+    accessKey: ak
+    secretKey: sk
+  s3:
+    bucket: bk
+  region: rasdf

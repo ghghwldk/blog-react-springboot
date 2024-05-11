@@ -1,0 +1,30 @@
+# to avoid the error related with aws temporalily.
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+
+file:
+  forLocal: true
+  directoryName: ../blog-file
+
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useSSL=false&allowPublicKeyRetrieval=true
+    username: ghma
+    password: Aa000000?
+  jpa:
+    database: mysql
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+jwt:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+#mysql -u root -p
+#CREATE USER 'ghma'@'172.17.0.1' IDENTIFIED BY 'password';
+#GRANT ALL PRIVILEGES ON *.* TO 'ghma'@'172.17.0.1' WITH GRANT OPTION;
+#flush privileges;
