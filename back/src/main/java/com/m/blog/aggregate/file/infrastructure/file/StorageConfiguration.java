@@ -28,7 +28,7 @@ public class StorageConfiguration {
     @Bean
     FileUploadUtil fileUploadUtil(){
         return forLocal ? new LocalFileUploadUtilImpl() :
-                new S3FileUploadUtilImpl(awsProperties, amazonS3Client);
+                new S3FileUploadUtilImpl(awsProperties, amazonS3Client, fileProperties);
     }
 
     @Bean

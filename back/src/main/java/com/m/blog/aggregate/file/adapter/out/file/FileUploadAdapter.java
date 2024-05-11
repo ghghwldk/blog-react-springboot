@@ -19,8 +19,8 @@ public class FileUploadAdapter implements FileUploadPort {
     @Override
     public void upload(File_ file) throws IOException {
         byte[] data = file.getUploadData().orElseThrow(GetFileNullException::new);
-        String fileKey = file.getInternalFileKey();
+        String filePath = file.getPathName();
 
-        fileUploadUtil.upload(fileKey, data);
+        fileUploadUtil.upload(file.getFileId().getValue(), filePath, data);
     }
 }

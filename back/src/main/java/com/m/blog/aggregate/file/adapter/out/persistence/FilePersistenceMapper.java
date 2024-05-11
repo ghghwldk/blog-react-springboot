@@ -14,7 +14,7 @@ class FilePersistenceMapper {
                         .getPostingId()
                         .getValue())
                 .originalFileName(file.getOriginalFileName())
-                .filePath(file.getDirectoryName())
+                .filePath(file.getPathName())
                 .build();
     }
 

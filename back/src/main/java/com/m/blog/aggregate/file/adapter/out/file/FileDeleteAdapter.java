@@ -24,7 +24,7 @@ public class FileDeleteAdapter implements FileDeleteUsecase {
 
         List<String> fileKeys = fileIds.stream()
                 .map(File_.FileId::getValue)
-                .map(value-> File_.getFileKey(directoryName, value))
+                .map(value-> File_.getPathName(directoryName, value))
                 .collect(Collectors.toList());
 
         fileDeleteUtil.wait(fileKeys);

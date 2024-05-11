@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 @Configuration
-@ConfigurationProperties("cloud")
+@ConfigurationProperties("cloud.aws")
 @Data
 public class AwsProperties {
 //    @Value("${cloud.aws.credentials.access-key:#{null}}") private String accessKey;

@@ -84,12 +84,12 @@ public class File_ {
         return Optional.ofNullable(this.data);
     }
 
-    public static String getFileKey(String directoryName, String fileId){
+    public static String getPathName(String directoryName, String fileId){
         return directoryName + "/" + fileId;
     }
 
-    public String getInternalFileKey(){
-        return this.getFileKey(directoryName, fileId.getValue());
+    public String getPathName(){
+        return this.getPathName(directoryName, fileId.getValue());
     }
 
     public String getDownloadUrl(){
