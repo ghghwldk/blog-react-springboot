@@ -1,6 +1,7 @@
 package com.m.blog.aggregate.file.infrastructure.file;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -21,22 +23,26 @@ import java.util.stream.Collectors;
 public abstract class FileDeleteUtil {
     private final int maximumLength = 1;
 
-    protected final BlockingQueue<String> waitings = new LinkedBlockingQueue<>();
+    protected final BlockingQueue<File_.FileId> waitings = new LinkedBlockingQueue<>();
 
-    public void wait(List<String> fileKeys) {
-        addAndDelete(fileKeys);
+    public void wait(List<File_.FileId> fileIds) {
+        if(fileIds.size() == 0){
+            return;
+        }
+
+        addAndDelete(fileIds);
     }
 
-    private void addAndDelete(List<String> fileKeys){
-        waitings.addAll(fileKeys);
+    private void addAndDelete(List<File_.FileId> fileIds){
+        waitings.addAll(fileIds);
 
         if (waitings.size() >= maximumLength) {
             delete(getTargets());
         }
     }
 
-    private List<String> getTargets(){
-        List<String> targets = new LinkedList<>();
+    private List<File_.FileId> getTargets(){
+        List<File_.FileId> targets = new LinkedList<>();
         int countToDelete = waitings.size() - maximumLength + 1;
 
         for (int i = 0; i < countToDelete; i++) {
@@ -45,12 +51,12 @@ public abstract class FileDeleteUtil {
         return targets;
     }
 
-    protected abstract void delete(List<String> targets);
+    protected abstract void delete(List<File_.FileId> targets);
 
     @PreDestroy
     private void deleteRemains(){
         log.info("--PreDestroy to delete remains");
 
-        delete((List<String>) waitings);
+        delete((List<File_.FileId>) waitings);
     }
 }

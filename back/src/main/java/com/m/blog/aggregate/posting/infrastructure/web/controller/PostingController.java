@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Controller
 @RequestMapping("/posting")
@@ -50,12 +51,10 @@ public class PostingController {
         return ResponseEntity.ok(findPositngEndpointPort.get(request));
     }
 
-    @Transactional
     @ResponseBody
     @PutMapping
     public ResponseEntity update(@RequestBody PostingUpdateRequest request){
         changePostingEndpointPort.update(request);
-
         return ResponseEntity.ok(null);
     }
 

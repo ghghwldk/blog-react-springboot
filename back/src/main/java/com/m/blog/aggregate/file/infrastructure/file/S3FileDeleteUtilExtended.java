@@ -4,6 +4,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +16,11 @@ public class S3FileDeleteUtilExtended extends FileDeleteUtil{
     private final AwsProperties awsProperties;
 
     @Override
-    protected void delete(List<String> targets) {
+    protected void delete(List<File_.FileId> targets) {
         try {
-            for(String target: targets){
+            for(File_.FileId target: targets){
                 DeleteObjectRequest request =
-                        new DeleteObjectRequest(awsProperties.getS3().getBucket(), target);
+                        new DeleteObjectRequest(awsProperties.getS3().getBucket(), target.getValue());
 
                 amazonS3.deleteObject(request);
             }

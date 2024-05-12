@@ -14,15 +14,12 @@ class FilePersistenceMapper {
                         .getPostingId()
                         .getValue())
                 .originalFileName(file.getOriginalFileName())
-                .filePath(file.getPathName())
+                .filePath(file.getDirectoryName())
                 .build();
     }
 
-    public static File_ of(File_ condition, FileEntity entity){
-        return condition.setAfterRetrievedUsingDownloadCondition(
-                entity.getOriginalFileName(),
-                entity.getFilePath(),
-                entity.getPostingId()
-        );
+    public static File_ of(File_.FileId condition, FileEntity e){
+        return File_
+                .setAfterRetrievedUsingDownloadCondition(condition.getValue(), e.getOriginalFileName(), e.getFilePath(), e.getPostingId());
     }
 }

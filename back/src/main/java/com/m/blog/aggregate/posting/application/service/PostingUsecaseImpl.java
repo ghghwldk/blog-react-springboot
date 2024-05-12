@@ -1,5 +1,6 @@
-package com.m.blog.aggregate.boardCollection.application.service;
+package com.m.blog.aggregate.posting.application.service;
 
+import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.application.port.out.persistence.ChangePostingPersistencePort;
 import com.m.blog.aggregate.posting.application.port.out.persistence.LoadPostingPersistencePort;
@@ -11,29 +12,37 @@ import com.m.blog.global.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @UseCase
 @RequiredArgsConstructor
 @Transactional
-class BoardCollectionUsecaseImpl implements SavePostingUsecase, ChangePostingUsecase {
+class PostingUsecaseImpl implements SavePostingUsecase, ChangePostingUsecase {
     private final SavePostingPersistencePort savePostingPersistencePort;
     private final ChangePostingPersistencePort changePostingPersistencePort;
     private final LoadPostingPersistencePort loadPostingPersistencePort;
+
+
     @Override
+    @Transactional
     public void save(Posting brandNew) {
         brandNew.validate();
         savePostingPersistencePort.save(brandNew);
     }
 
     @Override
-    public void update(Posting after) {
+    @Transactional
+    public List<File_.FileId> update(Posting after) {
         Posting posting = loadPostingPersistencePort.load(after.getPostingId())
                 .orElseThrow(DataNotFoundException::new);
 
-        posting.update(after);
-
+        Set<String> existings = posting.update(after, File_.provideDownloadPrefix());
         changePostingPersistencePort.update(posting);
+
+        return existings.stream()
+                .map(File_.FileId::new)
+                .collect(Collectors.toList());
     }
-
-
-
 }

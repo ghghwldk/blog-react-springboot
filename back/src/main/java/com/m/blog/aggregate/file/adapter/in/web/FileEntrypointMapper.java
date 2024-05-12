@@ -14,9 +14,6 @@ import static com.m.blog.aggregate.file.application.domain.File_.withoutId;
 
 @Mapper
 class FileEntrypointMapper {
-    static File_ of(FileDownloadRequest request){
-        return File_.withDownloadCondition(request.getId());
-    }
 
     static FileDownloadResponse toDownloadResposne(File_ file){
         return FileDownloadResponse.builder()

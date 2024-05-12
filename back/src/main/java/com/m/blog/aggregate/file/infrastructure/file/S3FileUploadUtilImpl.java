@@ -19,7 +19,6 @@ import java.util.Optional;
 public class S3FileUploadUtilImpl implements FileUploadUtil{
     private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
-    private final FileProperties fileProperties;
 
     @Override
     public void upload(String fileId, String pathName, byte[] data) throws IOException{
@@ -37,9 +36,11 @@ public class S3FileUploadUtilImpl implements FileUploadUtil{
     }
 
     private void putS3(File file, String key) {
-        amazonS3Client
-                .putObject(new PutObjectRequest(awsProperties.getS3().getBucket(), key, file)
-                        .withCannedAcl(CannedAccessControlList.PublicRead));
+        PutObjectRequest request =
+                new PutObjectRequest(awsProperties.getS3().getBucket(), key, file)
+                        .withCannedAcl(CannedAccessControlList.PublicRead);
+
+        amazonS3Client.putObject(request);
     }
 
     private Optional<File> convert(String pathName, byte[] data) throws IOException {

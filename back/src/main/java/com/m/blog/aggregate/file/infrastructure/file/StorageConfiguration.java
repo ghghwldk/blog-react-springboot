@@ -28,7 +28,7 @@ public class StorageConfiguration {
     @Bean
     FileUploadUtil fileUploadUtil(){
         return forLocal ? new LocalFileUploadUtilImpl() :
-                new S3FileUploadUtilImpl(awsProperties, amazonS3Client, fileProperties);
+                new S3FileUploadUtilImpl(awsProperties, amazonS3Client);
     }
 
     @Bean
@@ -39,7 +39,7 @@ public class StorageConfiguration {
 
     @Bean
     FileDeleteUtil fileDeleteUtil(){
-        return forLocal ? new LocalFileDeleteUtilExtended():
+        return forLocal ? new LocalFileDeleteUtilExtended(fileProperties):
                 new S3FileDeleteUtilExtended(amazonS3, awsProperties);
     }
 }

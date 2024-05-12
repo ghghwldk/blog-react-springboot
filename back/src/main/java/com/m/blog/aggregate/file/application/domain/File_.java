@@ -33,24 +33,30 @@ public class File_ {
         this.data = data;
     }
 
-    public static File_ withDownloadCondition(String fileId){
-        return File_.builder().fileId(fileId).build();
+    public static String provideDownloadPrefix(){return downloadPrefix;}
+
+    public static FileId getDownloadCondition(String fileId){
+        return new FileId(fileId);
     }
 
-    public File_ setAfterRetrievedUsingDownloadCondition
-            (String originalFileName, String directoryName, String postingId){
-        assert this.fileId == null;
-        this.originalFileName = originalFileName;
-        this.directoryName = directoryName;
-        this.postingId = new Posting.PostingId(postingId);
-
-        return this;
+    public static File_ setAfterRetrievedUsingDownloadCondition
+            (String fileId, String originalFileName, String directoryName, String postingId){
+        return File_.builder()
+                .fileId(fileId)
+                .originalFileName(originalFileName)
+                .directoryName(directoryName)
+                .postingId(postingId)
+                .build();
     }
 
     public File_ setDataAfterDownload(byte[] data){
         this.data = data;
 
         return this;
+    }
+
+    public static FileId getByPostingId(String value){
+        return new FileId(value);
     }
 
     public Optional<byte[]> getDownloadData(){

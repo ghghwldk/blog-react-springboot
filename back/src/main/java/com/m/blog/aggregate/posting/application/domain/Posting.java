@@ -4,6 +4,16 @@ import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static com.m.blog.aggregate.file.helper.FileDeleteHelper.getFileIdSet;
+
 @Getter
 public class Posting {
     private final PostingId postingId;
@@ -24,10 +34,14 @@ public class Posting {
                 title, content);
     }
 
-    public void update(@NonNull Posting after){
+    public Set<String> update(@NonNull Posting after, String downloadPrefix){
         this.title = after.getTitle();
         this.content = after.getContent();
+
+        return getFileIdSet(after.getContent(), downloadPrefix);
     }
+
+
 
     public void validate(){
 
