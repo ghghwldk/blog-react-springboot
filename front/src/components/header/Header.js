@@ -18,7 +18,7 @@ const Header = ()=>{
 
   const setMenu = ()=> {
     axios({
-      url: `/menu`,
+      url: `/api/menu`,
       method: 'GET',
       async: false
     }).then((res) => {
@@ -41,7 +41,7 @@ const Header = ()=>{
 
   const processLogout = ()=> {
     axios({
-      url: `/auth`,
+      url: `/api/auth`,
       method: 'DELETE',
       // data:JSON.stringify(parameter),
       headers: { 'content-type': 'application/json' },

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/menu")
+@RequestMapping("/api/menu")
 public class MenuController {
     private final MenuEndpointPort menuEndpointPort;
 

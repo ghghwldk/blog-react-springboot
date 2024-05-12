@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
-@RequestMapping("/posting")
+@RequestMapping("/api/posting")
 @RequiredArgsConstructor
 public class PostingController {
     private final FindPositngEndpointPort findPositngEndpointPort;

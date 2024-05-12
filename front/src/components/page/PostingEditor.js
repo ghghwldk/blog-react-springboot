@@ -44,7 +44,7 @@ const Posting = ()=>{
     if(isExisting){
       setIsEditMode(false)
       axios({
-        url: `/posting?id=${postingId}`,
+        url: `/api/posting?id=${postingId}`,
         method: 'GET',
         async: true
       }).then((res) => {
@@ -77,7 +77,7 @@ const Posting = ()=>{
             let downloadUrl=null;
             await axios
             .post(
-              `/file/upload`,
+              `/api/file/upload`,
               formData,
               {
                 header: { "content-type": "multipart/formdata" },
@@ -124,7 +124,7 @@ const Posting = ()=>{
       }
 
       axios({
-        url: `/posting`,
+        url: `/api/posting`,
         method: 'POST',
         data:JSON.stringify(parameter),
         headers: { 'content-type': 'application/json' },
@@ -144,7 +144,7 @@ const Posting = ()=>{
       }
 
       axios({
-        url: `/posting`,
+        url: `/api/posting`,
         method: 'PUT',
         data:JSON.stringify(parameter),
         headers: { 'content-type': 'application/json' },

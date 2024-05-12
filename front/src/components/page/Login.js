@@ -34,7 +34,7 @@ const Login = ()=>{
       'password': password, 
     }
     axios({
-      url: `/auth`,
+      url: `/api/auth`,
       method: 'POST',
       data:JSON.stringify(parameter),
       headers: { 'content-type': 'application/json' },
