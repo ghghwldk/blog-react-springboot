@@ -30,13 +30,13 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
                                 bc.name,
                                 b.id,
                                 b.name,
-                                b.count()
+                                p.count()
                         )
 
                 )
                 .from(bc)
-                .join(b).on(bc.id.eq(b.boardCollectionId))
-                .join(p).on(p.boardId.eq(b.id))
+                .leftJoin(b).on(bc.id.eq(b.boardCollectionId))
+                .leftJoin(p).on(p.boardId.eq(b.id))
                 .groupBy(
                         bc.id,
                         bc.name,
