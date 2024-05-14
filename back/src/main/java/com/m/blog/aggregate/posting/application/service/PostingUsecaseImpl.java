@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @UseCase
 @RequiredArgsConstructor
@@ -38,11 +36,9 @@ class PostingUsecaseImpl implements SavePostingUsecase, ChangePostingUsecase {
         Posting posting = loadPostingPersistencePort.load(after.getPostingId())
                 .orElseThrow(DataNotFoundException::new);
 
-        Set<String> existings = posting.update(after, File_.provideDownloadPrefix());
+        List<File_.FileId> existings = posting.update(after, File_.getDownloadPrefix());
         changePostingPersistencePort.update(posting);
 
-        return existings.stream()
-                .map(File_.FileId::new)
-                .collect(Collectors.toList());
+        return existings;
     }
 }

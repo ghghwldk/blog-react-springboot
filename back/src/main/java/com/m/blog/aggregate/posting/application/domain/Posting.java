@@ -1,18 +1,15 @@
 package com.m.blog.aggregate.posting.application.domain;
 
 import com.m.blog.aggregate.board.application.domain.Board;
+import com.m.blog.aggregate.file.application.domain.File_;
+import com.m.blog.aggregate.file.helper.FileCheckHelper;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
 
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import static com.m.blog.aggregate.file.helper.FileDeleteHelper.getFileIdSet;
 
 @Getter
 public class Posting {
@@ -34,11 +31,11 @@ public class Posting {
                 title, content);
     }
 
-    public Set<String> update(@NonNull Posting after, String downloadPrefix){
+    public List<File_.FileId> update(@NonNull Posting after, String downloadPrefix){
         this.title = after.getTitle();
         this.content = after.getContent();
 
-        return getFileIdSet(after.getContent(), downloadPrefix);
+        return FileCheckHelper.getFileIdsInsideContent(after.getContent(), downloadPrefix);
     }
 
 

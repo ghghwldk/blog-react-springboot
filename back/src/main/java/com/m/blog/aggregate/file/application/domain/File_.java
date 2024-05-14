@@ -11,7 +11,9 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Root
 @Domain
@@ -33,7 +35,7 @@ public class File_ {
         this.data = data;
     }
 
-    public static String provideDownloadPrefix(){return downloadPrefix;}
+    public static String getDownloadPrefix(){return downloadPrefix;}
 
     public static FileId getDownloadCondition(String fileId){
         return new FileId(fileId);
@@ -53,6 +55,20 @@ public class File_ {
         this.data = data;
 
         return this;
+    }
+
+    public static List<FileId> getDeleteTargets(List<FileId> existings, List<FileId> whole){
+        List<String> existingIds = existings.stream()
+                .map(File_.FileId::getValue)
+                .collect(Collectors.toList());
+
+        List<File_.FileId> deleteTargets = whole.stream()
+                .map(FileId::getValue)
+                .filter(fileId -> !existingIds.contains(fileId))
+                .map(File_.FileId::new)
+                .collect(Collectors.toList());
+
+        return deleteTargets;
     }
 
     public static FileId getByPostingId(String value){

@@ -25,17 +25,8 @@ public class FileDeleteAdapter implements FileDeleteUsecase {
 
     @Override
     public void deleteUsing(List<File_.FileId> existings, Posting.PostingId postingId){
-        List<String> wholeFileIds =  readFilePersistencePort.findAll(postingId).stream()
-                .map(File_.FileId::getValue)
-                .collect(Collectors.toList());
-        List<String> existingIds = existings.stream()
-                .map(File_.FileId::getValue)
-                .collect(Collectors.toList());
-
-        List<File_.FileId> deleteTargets = wholeFileIds.stream()
-                .filter(fileId -> !existingIds.contains(fileId))
-                .map(File_.FileId::new)
-                .collect(Collectors.toList());
+        List<File_.FileId> whole =  readFilePersistencePort.findAll(postingId);
+        List<File_.FileId> deleteTargets = File_.getDeleteTargets(existings, whole);
 
         deleteFilePersistencePort.deleteAll(deleteTargets);
         fileDeleteUtil.wait(deleteTargets);

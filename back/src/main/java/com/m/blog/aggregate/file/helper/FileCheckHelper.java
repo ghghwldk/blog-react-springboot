@@ -1,13 +1,15 @@
 package com.m.blog.aggregate.file.helper;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.m.blog.aggregate.file.application.domain.File_;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileDeleteHelper {
-    public static Set<String> getFileIdSet(String content, String downloadPrefix){
-        Set<String> result = new HashSet<>();
+public class FileCheckHelper {
+    public static List<File_.FileId> getFileIdsInsideContent(String content, String downloadPrefix){
+        List<File_.FileId> result = new LinkedList<>();
         // 정규 표현식 패턴
         String pattern = downloadPrefix + "(\\d+\\.\\w+)";
 
@@ -19,7 +21,7 @@ public class FileDeleteHelper {
 
         // 매치된 문자열 출력
         while (m.find()) {
-            result.add(m.group(1));
+            result.add(new File_.FileId(m.group(1)));
         }
 
         return result;
