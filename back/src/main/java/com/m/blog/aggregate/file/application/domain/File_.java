@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Root
 @Domain
 public class File_ {
-    private static final String downloadPrefix = "/file/download/";
+    private static final String downloadPrefix = "/api/file/download/";
 
     @Getter private FileId fileId;
     @Getter private String originalFileName;
