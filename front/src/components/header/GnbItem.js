@@ -15,7 +15,7 @@ const GnbItem = ({boardCollectionName,boardCollectionId, postingCount, boards, s
           }
         }}
       >
-        <p to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}{' ('+postingCount+')'}</p>
+        <p to={`/boardCollection/${boardCollectionId}`}>{boardCollectionName}{' ('+postingCount+'개의 항목)'}</p>
         
         <div>
           <ul>
@@ -23,7 +23,7 @@ const GnbItem = ({boardCollectionName,boardCollectionId, postingCount, boards, s
               <li key={board.boardCollectionId, board.boardId}>
                 <Link 
                   to={`/board/${boardCollectionId}/${board.boardId}`}
-                ><span>{board.boardName}{' ('+board.postingCount+')'}</span></Link>
+                ><span>{board.boardName}{' ('+board.postingCount+'개의 글)'}</span></Link>
                 
               </li>
             ))}

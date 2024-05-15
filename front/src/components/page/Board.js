@@ -91,7 +91,7 @@ const Board = ()=>{
               <FontAwesomeIcon 
                 icon={faMapMarkerAlt} 
               />&nbsp;{`${location}`}
-              <font>{' ('+postingCount+')'}</font>
+              <font>{' ('+postingCount+'개의 글)'}</font>
             </Link>
           }
         </div>
