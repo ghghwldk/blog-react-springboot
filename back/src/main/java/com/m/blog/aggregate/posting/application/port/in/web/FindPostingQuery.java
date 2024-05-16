@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.posting.application.query;
+package com.m.blog.aggregate.posting.application.port.in.web;
 
 import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.posting.application.domain.Posting;

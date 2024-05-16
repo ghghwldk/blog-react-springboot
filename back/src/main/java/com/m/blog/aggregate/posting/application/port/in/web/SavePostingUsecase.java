@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.posting.application.usecase;
+package com.m.blog.aggregate.posting.application.port.in.web;
 
 import com.m.blog.aggregate.posting.adapter.in.web.PostingCreateCommand;
 

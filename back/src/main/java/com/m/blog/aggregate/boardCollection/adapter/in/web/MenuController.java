@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.boardCollection.adapter.in.web;
 
-import com.m.blog.aggregate.boardCollection.application.query.MenuQuery;
+import com.m.blog.aggregate.boardCollection.application.port.in.MenuQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
