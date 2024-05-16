@@ -1,6 +1,6 @@
 package com.m.blog.aggregate.file.application.service;
 
-import com.m.blog.global.customAnnotation.UseCase;
+import com.m.blog.global.customAnnotation.Usecase;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileUploadPort;
 import com.m.blog.aggregate.file.application.port.out.persistence.WriteFilePersistencePort;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
-@UseCase
+@Usecase
 @RequiredArgsConstructor
 @Transactional
 public class FileUploadService implements FileUploadUsecase {

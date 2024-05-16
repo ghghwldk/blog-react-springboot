@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.auth.application.service;
 
 
-import com.m.blog.global.customAnnotation.UseCase;
+import com.m.blog.global.customAnnotation.Usecase;
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.application.port.out.FindMemberPersistencePort;
 import com.m.blog.aggregate.auth.application.port.in.AuthUsecase;
@@ -13,7 +13,7 @@ import com.m.blog.global.security.session.vo.SessionData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@UseCase
+@Usecase
 @RequiredArgsConstructor
 public class AuthService implements AuthUsecase {
     private final FindMemberPersistencePort findMemberPersistencePort;

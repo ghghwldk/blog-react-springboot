@@ -9,17 +9,17 @@ import com.m.blog.aggregate.posting.application.port.out.persistence.LoadPosting
 import com.m.blog.aggregate.posting.application.port.out.persistence.SavePostingPersistencePort;
 import com.m.blog.aggregate.posting.application.port.in.web.ChangePostingUsecase;
 import com.m.blog.aggregate.posting.application.port.in.web.SavePostingUsecase;
-import com.m.blog.global.customAnnotation.UseCase;
+import com.m.blog.global.customAnnotation.Usecase;
 import com.m.blog.global.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@UseCase
+@Usecase
 @RequiredArgsConstructor
 @Transactional
-class PostingService implements SavePostingUsecase, ChangePostingUsecase {
+class PostingUsecaseService implements SavePostingUsecase, ChangePostingUsecase {
     private final SavePostingPersistencePort savePostingPersistencePort;
     private final ChangePostingPersistencePort changePostingPersistencePort;
     private final LoadPostingPersistencePort loadPostingPersistencePort;
@@ -37,14 +37,12 @@ class PostingService implements SavePostingUsecase, ChangePostingUsecase {
     @Override
     @Transactional
     public List<File_.FileId> update(PostingUpdateCommand command) {
-        Posting posting = loadPostingPersistencePort.load(command.getPostingId())
+        Posting found = loadPostingPersistencePort.load(command.getPostingId())
                 .orElseThrow(DataNotFoundException::new);
 
-        Posting after = PostingServiceMapper.from(command);
+        List<File_.FileId> existings = found.update(PostingServiceMapper.from(command), File_.getDownloadPrefix());
 
-        List<File_.FileId> existings = posting.update(after, File_.getDownloadPrefix());
-
-        changePostingPersistencePort.update(posting);
+        changePostingPersistencePort.update(found);
 
         return existings;
     }

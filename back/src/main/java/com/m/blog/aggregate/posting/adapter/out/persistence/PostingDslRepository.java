@@ -7,5 +7,5 @@ public interface PostingDslRepository {
     Page<PostingDto> getPage(Pageable pageable);
 
     Page<PostingDto> getPagePerBoard(String boardId, Pageable pageable);
-    PostingDto getSinglePage(String condition);
+    PostingDto getSinglePage(String postingId);
 }

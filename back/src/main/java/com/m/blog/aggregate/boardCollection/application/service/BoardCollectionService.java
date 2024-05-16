@@ -22,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Query
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-class BoardCollectionService implements FindPostingQuery, MenuQuery {
-    private final BoardDslRepository boardDslRepository;
-    private final PostingDslRepository postingDslRepository;
+class BoardCollectionService implements MenuQuery {
     private final BoardCollectionJpaRepository boardCollectionJpaRepository;
     private final BoardCollectionDslRepository boardCollectionDslRepository;
 
@@ -35,32 +33,5 @@ class BoardCollectionService implements FindPostingQuery, MenuQuery {
                 , boardCollectionDslRepository.getAggregationDtos()
         );
     }
-    public Page<PostingDto> getPage(Pageable pageable) {
-        return postingDslRepository.getPage(pageable);
-    }
 
-    public Page<PostingDto> getPagePerBoard(String boardId, Pageable pageable) {
-        return postingDslRepository
-                .getPagePerBoard(boardId, pageable);
-    }
-
-    @Override
-    public PagingResponse get(String boardId, Pageable pageable){
-        BoardDto found = boardDslRepository
-                .findBoardDto(boardId)
-                .orElseThrow(DataNotFoundException::new);
-
-
-        return PagingResponse.get(getPagePerBoard(boardId, pageable), found);
-    }
-
-    @Override
-    public PagingResponse getPagingResponse(Pageable pageable) {
-        return PagingResponse.get(getPage(pageable), null);
-    }
-
-    @Override
-    public PostingReadResponse get(String condition){
-        return PostingReadResponse.of(postingDslRepository.getSinglePage(condition));
-    }
 }
