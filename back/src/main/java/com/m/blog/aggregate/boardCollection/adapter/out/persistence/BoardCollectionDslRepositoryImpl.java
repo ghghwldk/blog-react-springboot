@@ -2,8 +2,10 @@ package com.m.blog.aggregate.boardCollection.adapter.out.persistence;
 
 import com.m.blog.aggregate.board.adapter.out.persistence.QBoardEntity;
 import com.m.blog.aggregate.board.application.domain.Board;
+import com.m.blog.aggregate.board.application.domain.BoardId;
 import com.m.blog.aggregate.posting.adapter.out.persistence.QPostingEntity;
 import com.m.blog.aggregate.posting.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.PostingId;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -49,7 +51,7 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
     }
 
     @Override
-    public Optional<BoardCollectionIdDto> get(Board.BoardId boardId) {
+    public Optional<BoardCollectionIdDto> get(BoardId boardId) {
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
 
@@ -61,7 +63,7 @@ public class BoardCollectionDslRepositoryImpl implements BoardCollectionDslRepos
     }
 
     @Override
-    public Optional<BoardCollectionIdDto> get(Posting.PostingId postingId) {
+    public Optional<BoardCollectionIdDto> get(PostingId postingId) {
         QBoardCollectionEntity bc = QBoardCollectionEntity.boardCollectionEntity;
         QBoardEntity b = QBoardEntity.boardEntity;
         QPostingEntity p = QPostingEntity.postingEntity;

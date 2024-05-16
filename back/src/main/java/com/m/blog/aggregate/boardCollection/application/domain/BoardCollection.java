@@ -13,14 +13,6 @@ import java.util.List;
 @Root
 @Domain
 public class BoardCollection{
-    @Getter private final BoardCollection.BoardCollectionId boardCollectionId;
+    @Getter private final BoardCollectionId boardCollectionId;
     @Getter private String name;
-
-
-    @Getter
-    @AllArgsConstructor
-    public static class BoardCollectionId {
-        private String value;
-    }
-
 }

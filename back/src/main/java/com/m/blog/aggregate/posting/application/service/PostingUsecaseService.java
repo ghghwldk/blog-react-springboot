@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.posting.application.service;
 
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.posting.adapter.in.web.PostingCreateCommand;
 import com.m.blog.aggregate.posting.adapter.in.web.PostingUpdateCommand;
@@ -36,11 +37,11 @@ class PostingUsecaseService implements SavePostingUsecase, ChangePostingUsecase 
 
     @Override
     @Transactional
-    public List<File_.FileId> update(PostingUpdateCommand command) {
+    public List<FileId> update(PostingUpdateCommand command) {
         Posting found = loadPostingPersistencePort.load(command.getPostingId())
                 .orElseThrow(DataNotFoundException::new);
 
-        List<File_.FileId> existings = found.update(PostingServiceMapper.from(command), File_.getDownloadPrefix());
+        List<FileId> existings = found.update(PostingServiceMapper.from(command), File_.getDownloadPrefix());
 
         changePostingPersistencePort.update(found);
 

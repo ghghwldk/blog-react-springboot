@@ -1,8 +1,10 @@
 package com.m.blog.aggregate.posting.adapter.in.web;
 
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.usecase.FileDeleteUsecase;
 import com.m.blog.aggregate.posting.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.PostingId;
 import com.m.blog.aggregate.posting.application.port.in.web.FindPostingQuery;
 import com.m.blog.aggregate.posting.application.port.in.web.ChangePostingUsecase;
 import com.m.blog.aggregate.posting.application.port.in.web.SavePostingUsecase;
@@ -51,9 +53,9 @@ public class PostingController {
     @ResponseBody
     @PutMapping
     public ResponseEntity update(@RequestBody PostingUpdateCommand command){
-        List<File_.FileId> existings = changePostingUsecase.update(command);
+        List<FileId> existings = changePostingUsecase.update(command);
 
-        Posting.PostingId postingId = new Posting.PostingId(command.getPostingId());
+        PostingId postingId = new PostingId(command.getPostingId());
 
         fileDeleteUsecase.deleteUsing(existings, postingId);
 

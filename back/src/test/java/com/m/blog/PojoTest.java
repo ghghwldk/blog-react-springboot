@@ -1,5 +1,6 @@
 package com.m.blog;
 
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.helper.FileCheckHelper;
 import com.m.blog.aggregate.posting.application.domain.Posting;
@@ -29,12 +30,12 @@ class PojoTest {
 	@Test
     public void test(){
 
-        List<File_.FileId> previous
+        List<FileId> previous
                 = Posting.getFileIdsInsideContent(originalPosting.getContent(), downloadPrefix);
-        List<File_.FileId> updated
+        List<FileId> updated
                 = originalPosting.update(updatedPosting, downloadPrefix);
 
-        List<File_.FileId> deleteTargets = File_.getDeleteTargets(updated, previous);
+        List<FileId> deleteTargets = File_.getDeleteTargets(updated, previous);
         Assertions.assertThat(deleteTargets.size()).isEqualTo(1);
     }
 

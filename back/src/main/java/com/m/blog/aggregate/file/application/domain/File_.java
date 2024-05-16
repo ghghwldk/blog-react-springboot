@@ -1,6 +1,7 @@
 package com.m.blog.aggregate.file.application.domain;
 
 import com.m.blog.aggregate.posting.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.PostingId;
 import com.m.blog.global.customAnnotation.Domain;
 import com.m.blog.global.customAnnotation.Root;
 import com.m.blog.global.entity.SnowflakeIdGenerator;
@@ -23,7 +24,7 @@ public class File_ {
     @Getter private FileId fileId;
     @Getter private String originalFileName;
     @Getter private String directoryName;
-    @Getter private Posting.PostingId postingId;
+    @Getter private PostingId postingId;
     @Nullable private byte[] data = null;
 
     @Builder(access = AccessLevel.PRIVATE)
@@ -31,7 +32,7 @@ public class File_ {
         this.fileId = new FileId(fileId);
         this.originalFileName = originalFileName;
         this.directoryName = directoryName;
-        this.postingId = new Posting.PostingId(postingId);
+        this.postingId = new PostingId(postingId);
         this.data = data;
     }
 
@@ -57,13 +58,13 @@ public class File_ {
 
     public static List<FileId> getDeleteTargets(List<FileId> existings, List<FileId> whole){
         List<String> existingIds = existings.stream()
-                .map(File_.FileId::getValue)
+                .map(FileId::getValue)
                 .collect(Collectors.toList());
 
-        List<File_.FileId> deleteTargets = whole.stream()
+        List<FileId> deleteTargets = whole.stream()
                 .map(FileId::getValue)
                 .filter(fileId -> !existingIds.contains(fileId))
-                .map(File_.FileId::new)
+                .map(FileId::new)
                 .collect(Collectors.toList());
 
         return deleteTargets;
@@ -114,12 +115,5 @@ public class File_ {
 
     public String getDownloadUrl(){
         return downloadPrefix + fileId.getValue();
-    }
-
-
-    @Getter
-    @AllArgsConstructor
-    public static class FileId {
-        private String value;
     }
 }

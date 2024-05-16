@@ -1,6 +1,7 @@
 package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ import java.util.stream.Collectors;
 public abstract class FileDeleteUtil {
     private final int maximumLength = 1;
 
-    protected final BlockingQueue<File_.FileId> waitings = new LinkedBlockingQueue<>();
+    protected final BlockingQueue<FileId> waitings = new LinkedBlockingQueue<>();
 
-    public void wait(List<File_.FileId> fileIds) {
+    public void wait(List<FileId> fileIds) {
         if(fileIds.size() == 0){
             return;
         }
@@ -33,7 +34,7 @@ public abstract class FileDeleteUtil {
         addAndDelete(fileIds);
     }
 
-    private void addAndDelete(List<File_.FileId> fileIds){
+    private void addAndDelete(List<FileId> fileIds){
         waitings.addAll(fileIds);
 
         if (waitings.size() >= maximumLength) {
@@ -41,8 +42,8 @@ public abstract class FileDeleteUtil {
         }
     }
 
-    private List<File_.FileId> getTargets(){
-        List<File_.FileId> targets = new LinkedList<>();
+    private List<FileId> getTargets(){
+        List<FileId> targets = new LinkedList<>();
         int countToDelete = waitings.size() - maximumLength + 1;
 
         for (int i = 0; i < countToDelete; i++) {
@@ -51,12 +52,12 @@ public abstract class FileDeleteUtil {
         return targets;
     }
 
-    protected abstract void delete(List<File_.FileId> targets);
+    protected abstract void delete(List<FileId> targets);
 
     @PreDestroy
     private void deleteRemains(){
         log.info("--PreDestroy to delete remains");
 
-        delete((List<File_.FileId>) waitings);
+        delete((List<FileId>) waitings);
     }
 }

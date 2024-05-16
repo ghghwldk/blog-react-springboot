@@ -1,6 +1,8 @@
 package com.m.blog.aggregate.file.adapter.out.persistence;
 
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.posting.application.domain.Posting;
+import com.m.blog.aggregate.posting.application.domain.PostingId;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.persistence.ReadFilePersistencePort;
@@ -25,7 +27,7 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
     }
 
     @Override
-    public List<File_.FileId> findAll(Posting.PostingId postingId){
+    public List<FileId> findAll(PostingId postingId){
         List<FileEntity> founds =  fileJpaRepository.findAllByPostingId(postingId.getValue());
 
         return founds.stream()

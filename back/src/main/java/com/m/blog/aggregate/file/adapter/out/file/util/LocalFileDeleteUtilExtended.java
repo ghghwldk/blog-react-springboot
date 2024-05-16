@@ -1,6 +1,7 @@
 package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import com.m.blog.aggregate.file.adapter.out.file.util.FileDeleteUtil;
+import com.m.blog.aggregate.file.application.domain.FileId;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class LocalFileDeleteUtilExtended extends FileDeleteUtil {
     private final FileProperties fileProperties;
 
     @Override
-    protected void delete(List<File_.FileId> fileIds){
+    protected void delete(List<FileId> fileIds){
         String directoryName = fileProperties.getDirectoryName();
         fileIds.stream()
                 .map(fileId-> directoryName + "/" + fileId.getValue())
