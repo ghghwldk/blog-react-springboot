@@ -1,7 +1,6 @@
 package com.m.blog.aggregate.posting.adapter.out.persistence;
 
 import com.m.blog.aggregate.posting.application.domain.Posting;
-import com.m.blog.aggregate.posting.infrastructure.repository.PostingEntity;
 
 public class PostingPersistenceMapper {
     public static PostingEntity toEntity (Posting domain){

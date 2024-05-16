@@ -1,7 +1,6 @@
 package com.m.blog.aggregate.posting.adapter.out.persistence;
 
 import com.m.blog.aggregate.posting.application.port.out.persistence.LoadPostingPersistencePort;
-import com.m.blog.aggregate.posting.infrastructure.repository.PostingJpaRepository;
 import com.m.blog.aggregate.posting.application.port.out.persistence.ChangePostingPersistencePort;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.posting.application.domain.Posting;
@@ -27,8 +26,8 @@ class PostingPersistenceAdapter
     }
 
     @Override
-    public Optional<Posting> load(Posting.PostingId postingId) {
-        return postingJpaRepository.findById(postingId.getValue())
+    public Optional<Posting> load(String postingId) {
+        return postingJpaRepository.findById(postingId)
                 .map(PostingPersistenceMapper::of);
     }
 }

@@ -1,7 +1,7 @@
-package com.m.blog.aggregate.posting.infrastructure.web.dto;
+package com.m.blog.aggregate.posting.adapter.in.web;
 
 
-import com.m.blog.aggregate.posting.infrastructure.repository.PostingDto;
+import com.m.blog.aggregate.posting.adapter.out.persistence.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

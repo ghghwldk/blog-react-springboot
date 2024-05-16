@@ -1,8 +1,8 @@
-package com.m.blog.aggregate.posting.infrastructure.repository;
+package com.m.blog.aggregate.posting.adapter.out.persistence;
 
 import com.m.blog.aggregate.board.adapter.out.persistence.QBoardEntity;
 import com.m.blog.aggregate.boardCollection.adapter.out.persistence.QBoardCollectionEntity;
-import com.m.blog.aggregate.posting.application.domain.Posting;
+
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.m.blog.aggregate.posting.infrastructure.repository.QPostingEntity.postingEntity;
+import static com.m.blog.aggregate.posting.adapter.out.persistence.QPostingEntity.postingEntity;
 
 
 @Repository
@@ -144,8 +144,8 @@ class PostingDslRepositoryImpl implements PostingDslRepository {
     }
 
     @Override
-    public PostingDto getSinglePage(Posting.PostingId condition) {
-        return this.getPosting(condition.getValue());
+    public PostingDto getSinglePage(String condition) {
+        return this.getPosting(condition);
     }
 }
 

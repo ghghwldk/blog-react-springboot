@@ -1,9 +1,9 @@
-package com.m.blog.aggregate.posting.infrastructure.web.dto;
+package com.m.blog.aggregate.posting.adapter.in.web;
 
 import lombok.Data;
 
 @Data
-public class PostingCreateRequest {
+public class PostingCreateCommand {
     private String boardId;
     private String title;
     private String content;

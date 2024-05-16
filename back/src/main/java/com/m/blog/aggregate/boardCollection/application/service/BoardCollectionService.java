@@ -2,16 +2,14 @@ package com.m.blog.aggregate.boardCollection.application.service;
 
 import com.m.blog.aggregate.board.adapter.out.persistence.BoardDslRepository;
 import com.m.blog.aggregate.board.adapter.out.persistence.BoardDto;
-import com.m.blog.aggregate.board.application.domain.Board;
 import com.m.blog.aggregate.boardCollection.adapter.in.web.MenuResponse;
 import com.m.blog.aggregate.boardCollection.adapter.out.persistence.BoardCollectionDslRepository;
 import com.m.blog.aggregate.boardCollection.adapter.out.persistence.BoardCollectionJpaRepository;
-import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.aggregate.posting.application.query.FindPostingQuery;
 import com.m.blog.aggregate.boardCollection.application.query.MenuQuery;
-import com.m.blog.aggregate.posting.infrastructure.web.dto.PostingReadResponse;
-import com.m.blog.aggregate.posting.infrastructure.repository.PostingDslRepository;
-import com.m.blog.aggregate.posting.infrastructure.repository.PostingDto;
+import com.m.blog.aggregate.posting.adapter.in.web.PostingReadResponse;
+import com.m.blog.aggregate.posting.adapter.out.persistence.PostingDslRepository;
+import com.m.blog.aggregate.posting.adapter.out.persistence.PostingDto;
 import com.m.blog.global.customAnnotation.Query;
 import com.m.blog.global.exception.DataNotFoundException;
 import com.m.blog.global.paging.PagingResponse;
@@ -41,15 +39,15 @@ class BoardCollectionService implements FindPostingQuery, MenuQuery {
         return postingDslRepository.getPage(pageable);
     }
 
-    public Page<PostingDto> getPagePerBoard(Board.BoardId boardId, Pageable pageable) {
+    public Page<PostingDto> getPagePerBoard(String boardId, Pageable pageable) {
         return postingDslRepository
-                .getPagePerBoard(boardId.getValue(), pageable);
+                .getPagePerBoard(boardId, pageable);
     }
 
     @Override
-    public PagingResponse get(Board.BoardId boardId, Pageable pageable){
+    public PagingResponse get(String boardId, Pageable pageable){
         BoardDto found = boardDslRepository
-                .findBoardDto(boardId.getValue())
+                .findBoardDto(boardId)
                 .orElseThrow(DataNotFoundException::new);
 
 
@@ -62,7 +60,7 @@ class BoardCollectionService implements FindPostingQuery, MenuQuery {
     }
 
     @Override
-    public PostingReadResponse get(Posting.PostingId condition){
+    public PostingReadResponse get(String condition){
         return PostingReadResponse.of(postingDslRepository.getSinglePage(condition));
     }
 }

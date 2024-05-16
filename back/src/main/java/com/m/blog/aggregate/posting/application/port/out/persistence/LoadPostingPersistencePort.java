@@ -5,5 +5,5 @@ import com.m.blog.aggregate.posting.application.domain.Posting;
 import java.util.Optional;
 
 public interface LoadPostingPersistencePort {
-    Optional<Posting> load(Posting.PostingId postingId);
+    Optional<Posting> load(String postingId);
 }

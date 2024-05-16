@@ -2,8 +2,8 @@ package com.m.blog.aggregate.boardCollection.adapter.out.persistence;
 
 import com.m.blog.aggregate.board.adapter.out.persistence.QBoardEntity;
 import com.m.blog.aggregate.board.application.domain.Board;
+import com.m.blog.aggregate.posting.adapter.out.persistence.QPostingEntity;
 import com.m.blog.aggregate.posting.application.domain.Posting;
-import com.m.blog.aggregate.posting.infrastructure.repository.QPostingEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

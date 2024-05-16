@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.posting.infrastructure.repository;
+package com.m.blog.aggregate.posting.adapter.out.persistence;
 
 import com.m.blog.global.entity.TimeComponent;
 import lombok.AllArgsConstructor;
