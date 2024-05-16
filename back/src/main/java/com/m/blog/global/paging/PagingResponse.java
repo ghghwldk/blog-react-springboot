@@ -1,5 +1,5 @@
 package com.m.blog.global.paging;
-import com.m.blog.aggregate.board.infrastructure.repository.BoardDto;
+import com.m.blog.aggregate.board.adapter.out.persistence.BoardDto;
 import com.m.blog.aggregate.posting.infrastructure.repository.PostingDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
