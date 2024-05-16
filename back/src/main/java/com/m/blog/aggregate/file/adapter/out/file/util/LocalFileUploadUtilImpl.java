@@ -1,5 +1,6 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.adapter.out.file.util;
 
+import com.m.blog.aggregate.file.adapter.out.file.util.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
@@ -10,7 +11,7 @@ import java.io.InputStream;
 
 
 @Slf4j
-public class LocalFileUploadUtilImpl implements FileUploadUtil{
+public class LocalFileUploadUtilImpl implements FileUploadUtil {
     public void upload(String fileId, String pathName, byte[] data) throws IOException {
         File file = null;
 

@@ -1,5 +1,6 @@
 package com.m.blog.aggregate.file.adapter.out.file;
 
+import com.m.blog.aggregate.file.adapter.out.file.util.FileUploadUtil;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileUploadPort;

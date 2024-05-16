@@ -2,6 +2,7 @@ package com.m.blog.aggregate.file.adapter.out.file;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.m.blog.aggregate.file.adapter.out.file.util.*;
 import com.m.blog.global.properties.AwsProperties;
 import com.m.blog.global.properties.FileProperties;
 import org.springframework.context.annotation.Bean;

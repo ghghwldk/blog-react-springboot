@@ -33,15 +33,11 @@ public class FileController {
     public ResponseEntity<FileUploadResponse> upload(@RequestParam("file") MultipartFile multipartFile
         , @RequestParam("postingId") String postingId
     ) throws IOException {
-        FileUploadResponse response = this.upload(postingId, multipartFile);
+        File_ file = fileUploadUsecase.upload(postingId, multipartFile);
+
+        FileUploadResponse response = FileEntrypointMapper.toUploadResponse(file);
+
         return ResponseEntity.ok(response);
-    }
-
-
-    public FileUploadResponse upload(String postingId, MultipartFile multipartFile) throws IOException{
-         File_ file = fileUploadUsecase.upload(postingId, multipartFile);
-
-        return FileEntrypointMapper.toUploadResponse(file);
     }
 
     @GetMapping("/download/{id}")

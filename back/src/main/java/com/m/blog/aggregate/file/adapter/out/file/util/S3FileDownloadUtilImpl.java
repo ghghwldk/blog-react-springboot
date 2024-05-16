@@ -1,8 +1,9 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.m.blog.aggregate.file.adapter.out.file.util.FileDownloadUtil;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import java.io.InputStream;
 
 @RequiredArgsConstructor
-public class S3FileDownloadUtilImpl implements FileDownloadUtil{
+public class S3FileDownloadUtilImpl implements FileDownloadUtil {
     private final AmazonS3 amazonS3;
     private final AwsProperties awsProperties;
 

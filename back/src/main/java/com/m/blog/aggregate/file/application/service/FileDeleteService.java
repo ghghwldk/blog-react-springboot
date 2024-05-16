@@ -1,5 +1,6 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.application.service;
 
+import com.m.blog.aggregate.file.adapter.out.file.util.FileDeleteUtil;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.persistence.DeleteFilePersistencePort;
 import com.m.blog.aggregate.file.application.port.out.persistence.ReadFilePersistencePort;
@@ -14,7 +15,7 @@ import java.util.List;
 @Adapter
 @RequiredArgsConstructor
 @Slf4j
-public class FileDeleteAdapter implements FileDeleteUsecase {
+public class FileDeleteService implements FileDeleteUsecase {
     private final FileDeleteUtil fileDeleteUtil;
     private final DeleteFilePersistencePort deleteFilePersistencePort;
     private final ReadFilePersistencePort readFilePersistencePort;

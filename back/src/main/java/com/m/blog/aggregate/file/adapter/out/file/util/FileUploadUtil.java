@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import java.io.IOException;
 

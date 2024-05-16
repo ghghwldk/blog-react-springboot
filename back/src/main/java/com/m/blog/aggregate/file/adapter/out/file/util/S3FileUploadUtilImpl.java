@@ -1,8 +1,9 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.m.blog.aggregate.file.adapter.out.file.util.FileUploadUtil;
 import com.m.blog.global.exception.CustomIllegalArgumentException;
 import com.m.blog.global.properties.AwsProperties;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class S3FileUploadUtilImpl implements FileUploadUtil{
+public class S3FileUploadUtilImpl implements FileUploadUtil {
     private final AwsProperties awsProperties;
     private final AmazonS3Client amazonS3Client;
 

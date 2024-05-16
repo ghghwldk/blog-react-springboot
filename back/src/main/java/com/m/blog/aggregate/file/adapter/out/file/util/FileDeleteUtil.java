@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.adapter.out.file;
+package com.m.blog.aggregate.file.adapter.out.file.util;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.m.blog.aggregate.file.application.domain.File_;
