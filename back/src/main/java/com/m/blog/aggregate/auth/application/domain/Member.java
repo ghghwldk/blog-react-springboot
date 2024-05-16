@@ -21,15 +21,4 @@ public class Member {
         this.password = password;
         this.role = role;
     }
-
-    public static Member withIdAndPassword(MemberId memberId, String password){
-        return new Member(memberId, null, password, null);
-    }
-
-    @AllArgsConstructor
-    @Getter
-    public static class MemberId{
-        String value;
-    }
-
 }

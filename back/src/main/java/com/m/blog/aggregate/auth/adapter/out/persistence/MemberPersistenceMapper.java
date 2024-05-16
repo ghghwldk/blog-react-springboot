@@ -6,13 +6,7 @@ import com.m.blog.global.customAnnotation.Mapper;
 
 @Mapper
 class MemberPersistenceMapper {
-    public static Member of(MemberEntity entity){
+    static Member of(MemberEntity entity){
         return new Member(entity.getId(), entity.getName(), entity.getPassword(), entity.getRole());
-    }
-
-    public static SigninResponse of(Member loginMember){
-        return SigninResponse.builder()
-                .role(loginMember.getRole())
-                .build();
     }
 }

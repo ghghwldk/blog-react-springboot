@@ -9,13 +9,13 @@ import java.util.Optional;
 
 @Adapter
 @RequiredArgsConstructor
-public class FindMemberPersistenceAdapter implements FindMemberPersistencePort {
+class FindMemberPersistenceAdapter implements FindMemberPersistencePort {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override
-    public Optional<Member> find(Member member){
+    public Optional<Member> find(String userId){
         return memberJpaRepository
-                .findById(member.getMemberId().getValue())
+                .findById(userId)
                 .map(MemberPersistenceMapper::of);
     }
 }

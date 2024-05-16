@@ -4,7 +4,7 @@ package com.m.blog.aggregate.auth.application.service;
 import com.m.blog.global.customAnnotation.UseCase;
 import com.m.blog.aggregate.auth.application.domain.Member;
 import com.m.blog.aggregate.auth.application.port.out.FindMemberPersistencePort;
-import com.m.blog.aggregate.auth.application.usecase.AuthUsecase;
+import com.m.blog.aggregate.auth.application.port.in.AuthUsecase;
 //import com.m.blog.domain.auth.adapter.out.persistence.Member;
 import com.m.blog.global.exception.DataNotFoundException;
 import com.m.blog.global.exception.PasswordNotMatchedException;
@@ -26,22 +26,30 @@ public class AuthService implements AuthUsecase {
     }
 
     @Override
-    public Member login(Member member){
-        Member found = findMemberPersistencePort.find(member)
+    public Member login(String userId, String password){
+        Member found = findMemberPersistencePort.find(userId)
                 .orElseThrow(DataNotFoundException::new);
 
-        boolean isMatched = passwordEncoder
-                .matches(member.getPassword(), found.getPassword());
+        checkPassword(password, found.getPassword());
 
-        if(!isMatched) throw new PasswordNotMatchedException();
-
-        sessionUtil.setAttribute(SessionData.builder()
-                .memberId(found.getMemberId().getValue())
-                .role(found.getRole())
-                .build()
-        );
+        setSessionData(userId, password);
 
         return found;
     }
 
+    private void setSessionData(String userId, String password){
+        SessionData sessionData = SessionData.builder()
+                .memberId(userId)
+                .role(password)
+                .build();
+
+        sessionUtil.setAttribute(sessionData);
+    }
+
+    private void checkPassword(String password, String retrievedPassword){
+        boolean isMatched = passwordEncoder
+                .matches(password, retrievedPassword);
+
+        if(!isMatched) throw new PasswordNotMatchedException();
+    }
 }
