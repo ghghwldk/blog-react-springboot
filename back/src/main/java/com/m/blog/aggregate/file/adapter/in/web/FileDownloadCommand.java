@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class FileDownloadRequest {
+public class FileDownloadCommand {
     private String id;
 }

@@ -37,9 +37,7 @@ public class File_ {
 
     public static String getDownloadPrefix(){return downloadPrefix;}
 
-    public static FileId getDownloadCondition(String fileId){
-        return new FileId(fileId);
-    }
+
 
     public static File_ setAfterRetrievedUsingDownloadCondition
             (String fileId, String originalFileName, String directoryName, String postingId){

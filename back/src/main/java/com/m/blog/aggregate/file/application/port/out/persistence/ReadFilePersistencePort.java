@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReadFilePersistencePort {
-    Optional<File_> find(File_.FileId condition);
+    Optional<File_> find(String fileId);
     List<File_.FileId> findAll(Posting.PostingId postingId);
 }

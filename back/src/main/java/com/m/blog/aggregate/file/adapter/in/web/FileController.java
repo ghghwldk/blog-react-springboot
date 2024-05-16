@@ -1,7 +1,10 @@
 package com.m.blog.aggregate.file.adapter.in.web;
 
-import com.m.blog.aggregate.file.application.port.in.web.FileDownloadEndpointPort;
-import com.m.blog.aggregate.file.application.port.in.web.FileUploadEndpointPort;
+import com.m.blog.aggregate.file.application.domain.File_;
+import com.m.blog.aggregate.file.application.usecase.FileDownloadUsecase;
+import com.m.blog.aggregate.file.application.usecase.FileUploadUsecase;
+import com.m.blog.global.exception.GetFileNullException;
+import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -22,30 +25,30 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 @Controller
 public class FileController {
-    private final FileDownloadEndpointPort fileDownloadPort;
-    private final FileUploadEndpointPort fileUploadPort;
-
+    private final FileDownloadUsecase fileDownloadUsecase;
+    private final FileUploadUsecase fileUploadUsecase;
 
     @PostMapping(value="/upload", produces = "application/json")
     @ResponseBody
     public ResponseEntity<FileUploadResponse> upload(@RequestParam("file") MultipartFile multipartFile
         , @RequestParam("postingId") String postingId
     ) throws IOException {
-        FileUploadRequest request = FileUploadRequest.builder()
-                .postingId(postingId)
-                .multipartFile(multipartFile)
-                .build();
+        FileUploadResponse response = this.upload(postingId, multipartFile);
+        return ResponseEntity.ok(response);
+    }
 
-        return ResponseEntity.ok(fileUploadPort.upload(request));
+
+    public FileUploadResponse upload(String postingId, MultipartFile multipartFile) throws IOException{
+         File_ file = fileUploadUsecase.upload(postingId, multipartFile);
+
+        return FileEntrypointMapper.toUploadResponse(file);
     }
 
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> download(@PathVariable("id") String id) throws IOException{
-        FileDownloadRequest request = FileDownloadRequest.builder()
-                .id(id)
-                .build();
+        File_ file = fileDownloadUsecase.download(id);
 
-        return toResponseEntity(fileDownloadPort.download(request));
+        return toResponseEntity(file);
     }
 
     private String getHeaderValues(String originalFileName) throws UnsupportedEncodingException {
@@ -55,9 +58,11 @@ public class FileController {
         return "attachment; filename=\"" + encoded + "\"";
     }
 
-    private ResponseEntity<Resource> toResponseEntity(FileDownloadResponse response) throws UnsupportedEncodingException {
-        Resource resource = new InputStreamResource(new ByteArrayInputStream(response.getData()));
-        String header = getHeaderValues(response.getOriginalFileName());
+    private ResponseEntity<Resource> toResponseEntity(File_ file) throws UnsupportedEncodingException {
+        Resource resource = new InputStreamResource(new ByteArrayInputStream(file
+                .getDownloadData()
+                .orElseThrow(GetFileNullException::new)));
+        String header = getHeaderValues(file.getOriginalFileName());
 
         return get(resource, header);
     }

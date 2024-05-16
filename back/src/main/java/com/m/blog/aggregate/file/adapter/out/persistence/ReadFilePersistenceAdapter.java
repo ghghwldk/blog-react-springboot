@@ -19,9 +19,9 @@ public class ReadFilePersistenceAdapter implements ReadFilePersistencePort {
     private final FileJpaRepository fileJpaRepository;
 
     @Override
-    public Optional<File_> find(File_.FileId condition){
-        return fileJpaRepository.findById(condition.getValue())
-                .map(e-> FilePersistenceMapper.of(condition, e));
+    public Optional<File_> find(String fileId){
+        return fileJpaRepository.findById(fileId)
+                .map(e-> FilePersistenceMapper.of(fileId, e));
     }
 
     @Override

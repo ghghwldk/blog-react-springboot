@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @AllArgsConstructor
 @Builder
-public class FileUploadRequest {
+public class FileUploadCommand {
     private String postingId;
     private MultipartFile multipartFile;
 }

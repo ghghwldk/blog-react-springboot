@@ -17,8 +17,8 @@ class FilePersistenceMapper {
                 .build();
     }
 
-    public static File_ of(File_.FileId condition, FileEntity e){
+    public static File_ of(String fileId, FileEntity e){
         return File_
-                .setAfterRetrievedUsingDownloadCondition(condition.getValue(), e.getOriginalFileName(), e.getFilePath(), e.getPostingId());
+                .setAfterRetrievedUsingDownloadCondition(fileId, e.getOriginalFileName(), e.getFilePath(), e.getPostingId());
     }
 }

@@ -17,8 +17,8 @@ public class FileDownloadService implements FileDownloadUsecase {
     private final FileDownloadPort fileDownloadPort;
 
     @Override
-    public File_ download(File_.FileId condition) throws IOException {
-        File_ found = readFilePersistencePort.find(condition)
+    public File_ download(String fileId) throws IOException {
+        File_ found = readFilePersistencePort.find(fileId)
                 .orElseThrow(DataNotFoundException::new);
 
         return  fileDownloadPort.get(found);
