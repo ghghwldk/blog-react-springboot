@@ -1,8 +1,6 @@
-package com.m.blog.aggregate.file.infrastructure.file;
+package com.m.blog.aggregate.file.adapter.out.file;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.m.blog.aggregate.file.application.domain.File_;
-import com.m.blog.global.properties.AwsProperties;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;

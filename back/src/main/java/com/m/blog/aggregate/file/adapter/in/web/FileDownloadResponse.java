@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.infrastructure.web.dto;
+package com.m.blog.aggregate.file.adapter.in.web;
 
 import com.m.blog.aggregate.file.application.domain.File_;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class FileUploadResponse {
+public class FileDownloadResponse {
     private String originalFileName;
-    private String fileName;
-    private String downloadUrl;
+    private byte[] data;
+
 
 }

@@ -3,7 +3,6 @@ package com.m.blog.aggregate.file.adapter.out.file;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileDownloadPort;
-import com.m.blog.aggregate.file.infrastructure.file.FileDownloadUtil;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;

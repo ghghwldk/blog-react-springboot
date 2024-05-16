@@ -4,16 +4,12 @@ import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.persistence.DeleteFilePersistencePort;
 import com.m.blog.aggregate.file.application.port.out.persistence.ReadFilePersistencePort;
 import com.m.blog.aggregate.file.application.usecase.FileDeleteUsecase;
-import com.m.blog.aggregate.file.infrastructure.file.FileDeleteUtil;
 import com.m.blog.aggregate.posting.application.domain.Posting;
 import com.m.blog.global.customAnnotation.Adapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Adapter
 @RequiredArgsConstructor

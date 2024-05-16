@@ -1,9 +1,7 @@
 package com.m.blog.aggregate.file.application.port.in.web;
 
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadResponse;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
+import com.m.blog.aggregate.file.adapter.in.web.FileDownloadRequest;
+import com.m.blog.aggregate.file.adapter.in.web.FileDownloadResponse;
 
 import java.io.IOException;
 

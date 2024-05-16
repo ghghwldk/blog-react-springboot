@@ -1,10 +1,5 @@
-package com.m.blog.aggregate.file.infrastructure.web.controller;
+package com.m.blog.aggregate.file.adapter.in.web;
 
-import com.m.blog.aggregate.file.application.domain.File_;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadResponse;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadResponse;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileDownloadRequest;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadRequest;
 import com.m.blog.aggregate.file.application.port.in.web.FileDownloadEndpointPort;
 import com.m.blog.aggregate.file.application.port.in.web.FileUploadEndpointPort;
 import lombok.RequiredArgsConstructor;

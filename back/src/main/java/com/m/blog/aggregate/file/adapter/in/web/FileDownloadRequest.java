@@ -1,4 +1,4 @@
-package com.m.blog.aggregate.file.infrastructure.web.dto;
+package com.m.blog.aggregate.file.adapter.in.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

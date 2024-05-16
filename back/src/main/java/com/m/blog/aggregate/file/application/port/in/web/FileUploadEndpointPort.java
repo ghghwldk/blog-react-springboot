@@ -1,7 +1,7 @@
 package com.m.blog.aggregate.file.application.port.in.web;
 
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadRequest;
-import com.m.blog.aggregate.file.infrastructure.web.dto.FileUploadResponse;
+import com.m.blog.aggregate.file.adapter.in.web.FileUploadRequest;
+import com.m.blog.aggregate.file.adapter.in.web.FileUploadResponse;
 
 import java.io.IOException;
 

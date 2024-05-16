@@ -3,7 +3,6 @@ package com.m.blog.aggregate.file.adapter.out.file;
 import com.m.blog.global.customAnnotation.Adapter;
 import com.m.blog.aggregate.file.application.domain.File_;
 import com.m.blog.aggregate.file.application.port.out.file.FileUploadPort;
-import com.m.blog.aggregate.file.infrastructure.file.FileUploadUtil;
 import com.m.blog.global.exception.GetFileNullException;
 import com.m.blog.global.properties.FileProperties;
 import lombok.RequiredArgsConstructor;

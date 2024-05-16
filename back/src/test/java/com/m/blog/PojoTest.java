@@ -30,7 +30,7 @@ class PojoTest {
     public void test(){
 
         List<File_.FileId> previous
-                = FileCheckHelper.getFileIdsInsideContent(originalPosting.getContent(), downloadPrefix);
+                = Posting.getFileIdsInsideContent(originalPosting.getContent(), downloadPrefix);
         List<File_.FileId> updated
                 = originalPosting.update(updatedPosting, downloadPrefix);
 

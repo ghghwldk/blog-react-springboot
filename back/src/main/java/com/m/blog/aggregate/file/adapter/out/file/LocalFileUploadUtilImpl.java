@@ -1,8 +1,7 @@
-package com.m.blog.aggregate.file.infrastructure.file;
+package com.m.blog.aggregate.file.adapter.out.file;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
